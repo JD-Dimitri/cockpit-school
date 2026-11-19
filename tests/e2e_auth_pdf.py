@@ -112,7 +112,7 @@ with sync_playwright() as p:
             pg.wait_for_url('**#/simulateur/**')
             fr = pg.frame_locator('.sim iframe')
             try:
-                fr.locator(sel).first.wait_for(state='visible', timeout=10000); ok = True
+                fr.locator(sel).first.wait_for(state='visible', timeout=30000); ok = True
             except Exception:
                 ok = False
             check(f'[{tag}] cours → {act} : {label}', ok)

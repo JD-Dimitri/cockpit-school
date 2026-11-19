@@ -38,7 +38,7 @@ export function Simulator({ action }: { action?: string }) {
   const frame = useRef<HTMLIFrameElement>(null);
   const loaded = useRef(false);
 
-  /** Attend que le moteur soit prêt (≤ 8 s), puis lance l'action demandée. */
+  /** Attend que le moteur soit prêt (≤ 30 s : téléphones lents, moteur de 4,8 Mo), puis lance l'action demandée. */
   const launch = (k: string) => {
     let tries = 0;
     const tick = () => {
@@ -50,7 +50,7 @@ export function Simulator({ action }: { action?: string }) {
         console.warn('Action du cours non lancée', k, e);
         return;
       }
-      if (!done && ++tries < 40) setTimeout(tick, 200);
+      if (!done && ++tries < 150) setTimeout(tick, 200);
     };
     tick();
   };
