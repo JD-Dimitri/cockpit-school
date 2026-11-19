@@ -103,7 +103,7 @@ def main():
     if errs:
         print('Erreurs JavaScript du moteur :', errs[:5])
     OUT.mkdir(exist_ok=True)
-    index = {'source': 'legacy/plane-trajectories.html', 'engine': 'plane-trajectories-simulator V10.42.1 (main e45f229)',
+    index = {'source': 'legacy/plane-trajectories.html', 'engine': 'plane-trajectories-simulator V10.42.1 (main 36a18e3)',
              'simver': ver, 'extracted': datetime.date.today().isoformat(), 'files': {}}
     for name, val in data.items():
         if isinstance(val, dict) and '__error' in val:

@@ -17,7 +17,7 @@ backend (Symfony 7.4 LTS) : /api/data/{nom}, puis comptes, progression, PDF
 
 | Dossier | Rôle |
 |---|---|
-| `legacy/` | Copie du simulateur V10.42.1 (`plane-trajectories-simulator`, `main` = `e45f229`). Référence de comportement : le moteur Pro doit donner les mêmes résultats. |
+| `legacy/` | Copie du simulateur V10.42.1 (`plane-trajectories-simulator`, `main` = `36a18e3`, anciennement `e45f229` avant la réécriture de l'historique du 19/11/2026). Référence de comportement : le moteur Pro doit donner les mêmes résultats. |
 | `data/` | Données extraites du moteur d'origine à l'exécution (`tools/extract_data.py`). `index.json` indique la source et la date. |
 | `frontend/` | Interface React. Construction par esbuild (`build.mjs`). `src/data.ts` est le seul point d'accès aux données : passer à l'API Symfony ne change que la base d'URL. |
 | `frontend/src/engine/` | Moteur TypeScript. Chaque fonction portée est vérifiée contre l'original. |
