@@ -13,10 +13,17 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { apiAvailable } from '../auth';
+import { installRadioExt } from '../legacy-ext/radio';
 
 /** Retouches d'affichage du moteur (version autonome : posées dès le chargement, sans attendre). */
 const UI_CSS = '#intro .skip{display:none!important}#c-ac .ps-pick{outline:3px solid var(--cy);outline-offset:2px}';
 const UI_STYLE = '<style id="ps-ui">' + UI_CSS + '</style>';
+
+/** Indicatif radio propre à chaque appareil (F37) : le moteur d'origine donnait « SIMU 01 » au 777, à l'A350 et au C172.
+ *  Indicatifs fictifs [SIMULÉ], posés au chargement du moteur sans modifier le fichier d'origine. */
+const CSN_OLD = "{a320:'320',lj60:'60',s76:'76',h125:'125',r44:'44'}[ACK]||'01'";
+const CSN_NEW = "{a320:'320',b777:'777',a350:'350',c172:'172',lj60:'60',s76:'76',h125:'125',r44:'44'}[ACK]||'01'";
+const prepare = (html: string) => html.replace('</head>', UI_STYLE + '</head>').replace(CSN_OLD, CSN_NEW);
 
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free)|ac:[a-z0-9]+)$/;
 
@@ -43,7 +50,7 @@ function runAction(w: any, k: string): boolean {
     return !!w.eval(
       `(function(ac,mi,mode){ if(!AC[ac]||!MISSIONS[mi]) throw new Error('Parcours ou appareil inconnu : '+mi+' / '+ac);` +
         ` var p=document.getElementById('m-peda'), a=document.getElementById('m-auto'); if(p) p.checked=mode==='guide'; if(a) a.checked=mode==='auto';` +
-        ` var i=document.getElementById('intro'); if(i) i.hidden=true; selAC=ac; renderMenu();` +
+        ` var i=document.getElementById('intro'); if(i) i.hidden=true; try{ localStorage.setItem('sim-intro','1'); }catch(e){} selAC=ac; renderMenu();` +
         ` var full=(window.FULLOF?FULLOF(ac):null)===mi;` +
         ` var b=full?document.querySelector('#c-ac [data-ac="'+ac+'"]'):document.querySelector('.m2-mis [data-mi="'+mi+'"][data-k="'+ac+'"]');` +
         ` if(!b) return false; b.click(); return true; })(${JSON.stringify(ac)},${JSON.stringify(mi)},${JSON.stringify(mode)})`,
@@ -70,6 +77,11 @@ function runAction(w: any, k: string): boolean {
 }
 
 export function Simulator({ action }: { action?: string }) {
+  // Parcours ou action lancés depuis la version Pro : l'introduction du moteur d'origine (déjà présentée par l'accueil et
+  // la fiche du parcours) ne doit pas réapparaître par-dessus le vol. Même effet que son bouton « Passer ».
+  if (action && ACTION.test(action)) {
+    try { localStorage.setItem('sim-intro', '1'); } catch { /* stockage indisponible : runAction masque l'introduction */ }
+  }
   // Version autonome : srcdoc (même origine que la page, y compris ouverte en file://, ce qui permet de lancer les actions).
   const embedded = window.__PT_LEGACY__;
   // En ligne : moteur servi par l'API, seulement aux comptes connectés (F41) ; sans serveur : fichier statique (développement).
@@ -115,11 +127,15 @@ export function Simulator({ action }: { action?: string }) {
         <iframe
           ref={frame}
           title="Simulateur PLANE SIMULATOR (moteur d'origine PLANE SIMULATOR)"
-          srcDoc={doc.replace('</head>', UI_STYLE + '</head>')}
+          srcDoc={prepare(doc)}
           allow="fullscreen; microphone; autoplay"
           allowFullScreen
           onLoad={() => {
             loaded.current = true;
+            // F37 : boutons radio (Répéter, Standby, Radio, Mayday / Pan-Pan) ajoutés dès que le moteur est prêt (≤ 30 s)
+            let nx = 0;
+            const ext = () => { if (!installRadioExt(frame.current) && ++nx < 150) setTimeout(ext, 200); };
+            ext();
             // Introduction du moteur : bouton « Passer et aller au simulateur » du haut retiré (demande de l'auteur, 19/11 18:34) ;
             // « Plus tard : aller au simulateur » reste en bas. Style posé dès que le document du moteur est prêt (≤ 30 s).
             // Vérifié pendant 30 s : le document du moteur peut être remplacé au chargement (version autonome).
