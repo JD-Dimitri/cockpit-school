@@ -1,0 +1,17 @@
+# Service systemd : envoi automatique du trafic au démarrage du Raspberry Pi.
+# Installation : voir tools/recepteur/README.md
+[Unit]
+Description=PLANE TRAJECTORIES - envoi du trafic ADS-B capte
+After=network-online.target readsb.service
+Wants=network-online.target
+
+[Service]
+EnvironmentFile=/etc/default/envoi-trafic
+ExecStart=/usr/bin/python3 /opt/plane-trajectories/envoi_trafic.py
+Restart=always
+RestartSec=10
+User=nobody
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

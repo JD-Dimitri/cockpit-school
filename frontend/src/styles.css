@@ -185,3 +185,14 @@ a.card:hover { border-color: var(--cy); }
 /* banc d'essai du modèle de vol (page Appareils) */
 .bench { margin-top: 1rem; }
 .bench h3 { font: 600 1rem 'Barlow Condensed', sans-serif; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 .4rem; }
+
+/* trafic réel (#/trafic) */
+.traffic .srcs { list-style: none; padding: 0; margin: .6rem 0 1rem; display: flex; flex-wrap: wrap; gap: 8px; }
+.traffic .srcs li { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 13px; }
+.traffic .srcs li.ok { border-color: #3ddc84; }
+.traffic .srcs li.err { border-color: #ff3b30; }
+.traffic .srcs li.off { color: var(--mute); }
+.traffic .scroll { overflow-x: auto; }
+.traffic table.tgrid { border-collapse: collapse; width: 100%; font-size: 13px; white-space: nowrap; }
+.traffic table.tgrid th, .traffic table.tgrid td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); }
+.traffic table.tgrid th { color: var(--mute); font-weight: 500; }

@@ -7,6 +7,7 @@ import { Missions } from './pages/Missions';
 import { Courses } from './pages/Courses';
 import { PrintCourse } from './pages/PrintCourse';
 import { Login, Register, Forgot, Reset } from './pages/Account';
+import { Traffic } from './pages/Traffic';
 import { useUser } from './auth';
 
 const ROUTES = [
@@ -24,6 +25,7 @@ const HIDDEN: Record<string, (p: string[]) => JSX.Element> = {
   inscription: () => <Register />,
   'mot-de-passe-oublie': () => <Forgot />,
   reinitialiser: (p) => <Reset token={p[0]} />,
+  trafic: (p) => <Traffic apt={p[0]} />,
   imprimer: (p) => <PrintCourse part={p[0]} mod={p[1] === 'auto' ? undefined : p[1]} auto={p.includes('auto')} />,
 };
 

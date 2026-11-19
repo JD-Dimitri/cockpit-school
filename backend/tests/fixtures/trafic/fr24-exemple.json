@@ -1,0 +1,5 @@
+{"_note":"Exemple FICTIF au format de GET /api/live/flight-positions/full de Flightradar24 (pour les tests ; aucun vol réel).",
+ "data": [
+  {"fr24_id":"3a0001","hex":"AA0001","callsign":"TEST01","lat":48.9512,"lon":2.4013,"track":285,"alt":33975,"gspeed":451,"vspeed":-64,"squawk":"1000","timestamp":"2025-11-19T08:13:15Z","source":"ADSB","reg":"F-TEST","type":"A320","orig_icao":"LFPG","dest_icao":"FMEE"},
+  {"fr24_id":"3a0008","hex":"AA0008","callsign":"TEST08","lat":49.2,"lon":2.0,"track":180,"alt":5000,"gspeed":220,"vspeed":1500,"timestamp":"2025-11-19T08:13:10Z","reg":"F-TST8","type":"B77W","orig_icao":"LFPO","dest_icao":"FMEE"}
+ ]}

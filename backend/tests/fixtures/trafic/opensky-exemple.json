@@ -1,0 +1,7 @@
+{"_note":"Exemple FICTIF au format de GET /api/states/all d'OpenSky (pour les tests ; aucun vol réel).",
+ "time": 1763540000,
+ "states": [
+  ["aa0001","TEST01  ","France",1763539998,1763539999,2.401,48.951,10363.2,false,232.5,285.0,-0.33,null,10500.0,"1000",false,0,0],
+  ["aa0006","TEST06  ","France",1763539990,1763539991,2.6,49.1,null,true,5.1,45.0,null,null,null,null,false,0,0],
+  ["aa0007","TEST07  ","France",null,1763539950,null,null,3000,false,100,10,0,null,3050,null,false,0,0]
+ ]}

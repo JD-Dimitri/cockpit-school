@@ -1,0 +1,9 @@
+{"_note":"Exemple FICTIF au format aircraft.json de readsb (pour les tests ; aucun vol réel).",
+ "now": 1763540000.0, "messages": 1200,
+ "aircraft": [
+  {"hex":"aa0001","flight":"TEST01  ","alt_baro":34000,"alt_geom":34500,"gs":452.3,"track":285.1,"baro_rate":-64,"lat":48.95,"lon":2.40,"seen_pos":1.2,"seen":0.4,"squawk":"1000","r":"F-TEST","t":"A320"},
+  {"hex":"aa0002","flight":"TEST02","alt_baro":"ground","gs":12.0,"track":90,"lat":49.0097,"lon":2.5479,"seen_pos":3.0,"seen":2.0},
+  {"hex":"~aa0003","alt_geom":2500,"gs":110,"lat":48.80,"lon":2.10,"seen_pos":5.0},
+  {"hex":"aa0004","flight":"VIEUX","alt_baro":12000,"lat":48.90,"lon":2.30,"seen_pos":75.0},
+  {"hex":"aa0005","flight":"SANSPOS","alt_baro":8000,"seen":0.5}
+ ]}
