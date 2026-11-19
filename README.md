@@ -52,7 +52,7 @@ Mise en ligne (o2switch) : le dossier `backend/public/` est la racine du site ; 
 python3 tools/extract_data.py      # régénère data/*.json depuis legacy/
 python3 tests/parity_engine.py     # moteur TypeScript = moteur d'origine (14 fonctions)
 python3 tests/parity_flight.py     # physique du vol = moteur d'origine (12 vols rejoués pas à pas, données des 8 appareils)
-python3 tests/e2e_front.py         # interface React, ordinateur et téléphone (36 vérifications)
+python3 tests/e2e_front.py         # interface React, ordinateur et téléphone (40 vérifications)
 python3 tests/e2e_auth_pdf.py      # comptes, œil, PDF, boutons d'action des cours (69 vérifications)
 python3 tools/standalone.py SORTIE.html   # version autonome (un seul fichier, hors ligne)
 ```
