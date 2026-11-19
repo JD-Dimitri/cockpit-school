@@ -45,6 +45,8 @@ with sync_playwright() as p:
         check(f'[{tag}] appareils : A350 sélectionné', 'A350' in pg.inner_text('.ac h2'))
         pg.locator('.acimg').screenshot(path=str(OUT / f'pro_appareil_image_{tag}.png'))
         check(f'[{tag}] appareils : illustration de l\'appareil (image, pas de 3D)', pg.evaluate("(() => { const i = document.querySelector('.acimg img'); return !!i && i.complete && i.naturalWidth > 100; })()") and pg.locator('.ac canvas').count() == 0)
+        sim = pg.locator('.ac .actions a.btn').first
+        check(f'[{tag}] appareils : bouton « Simulateur » → parcours de l\'appareil', sim.text_content().strip() == 'Simulateur ▸' and sim.get_attribute('href') == '#/simulateur/go:a350:full-350:guide', sim.get_attribute('href'))
         bench = pg.locator('.bench').inner_text() if pg.locator('.bench').count() else ''
         check(f'[{tag}] appareils : décollage calculé par le modèle de vol (A350)', 'Passage des 35 ft' in bench and '[CALCULÉ]' in bench and 'kt' in bench, bench[:120])
         pg.click('.tabs a[href="#/appareils/s76"]'); pg.wait_for_timeout(400)

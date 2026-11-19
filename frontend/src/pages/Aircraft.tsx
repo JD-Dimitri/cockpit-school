@@ -1,6 +1,7 @@
 import { useData, type Aircraft } from '../data';
 import { AIRCRAFT_IMAGES, IMAGE_CREDIT } from '../aircraftImages';
 import { takeoffBench, type FixedWing } from '../engine';
+import { fullOf, launchAction } from '../parcours';
 
 const n = (v: number | undefined, unit: string, d = 0) =>
   v == null ? '—' : v.toLocaleString('fr-FR', { maximumFractionDigits: d }) + ' ' + unit;
@@ -51,6 +52,11 @@ export function AircraftPage({ id }: { id?: string }) {
         </figure>
         <div>
           <h2>{ac.name}</h2>
+          {/* Lance le parcours pilote complet de cet appareil (mode guidé), même suite que depuis la page Parcours */}
+          <p className="actions">
+            <a className="btn" href={'#/simulateur/' + launchAction(k, fullOf(k, ac))}>Simulateur ▸</a>
+            <a className="btn ghost" href={'#/parcours/' + fullOf(k, ac) + '/' + k}>Voir le parcours</a>
+          </p>
           <p className="sub">{ac.sub}</p>
           <table className="kv">
             <tbody>
@@ -81,7 +87,7 @@ export function AircraftPage({ id }: { id?: string }) {
           )}
           <p className="note">
             Valeurs du moteur de simulation (réglages de vol, pas des données constructeur certifiées) ; leur statut détaillé
-            reste celui affiché dans le simulateur. Silhouette 3D : [SIMULÉ], à l'échelle des dimensions ci-dessus.
+            reste celui affiché dans le simulateur.
           </p>
         </div>
       </div>
