@@ -1,0 +1,346 @@
+[
+ {
+  "id": "p0",
+  "n": "Partie 0 — Les sciences utiles à l'aéronautique",
+  "d": "Préparation : mathématiques, géométrie, unités, physique et géographie appliquées au vol. Un cours par thème et 30 exercices corrigés, du plus facile au plus difficile.",
+  "mods": [
+   {
+    "id": "m0-maths",
+    "t": "Mathématiques utiles au pilote",
+    "h": "\n<p>Un pilote calcule sans cesse : carburant, temps de vol, pente de descente, centrage, vitesse. Les calculs sont simples,\nmais ils doivent être <b>justes</b> et <b>rapides</b>, souvent de tête. Ce module reprend les outils de base, chacun avec un exemple de vol.</p>\n\n<h3>1. Ordres de grandeur et calcul mental</h3>\n<p>Avant tout calcul précis, on estime l'ordre de grandeur : il permet de repérer une erreur grossière (une virgule décalée,\nune unité oubliée). Exemple : 2 h 40 de vol à 2 600 kg/h, c'est « un peu moins de 3 × 2 600 ≈ 7 800 kg » : on attend environ 7 000 kg.\nCalcul exact : 2,667 × 2 600 = 6 933 kg.</p>\n<ul><li>Multiplier par 5 = multiplier par 10 puis diviser par 2.</li>\n<li>Multiplier par 0,9 = retirer 10 %.</li>\n<li>Diviser par 60 : 1 NM par minute = 60 kt ; 2 NM/min = 120 kt.</li></ul>\n\n<h3>2. Proportionnalité et règle de trois</h3>\n<p>Deux grandeurs sont <b>proportionnelles</b> quand leur rapport est constant : distance et temps à vitesse constante,\ncarburant et temps à débit constant. Règle de trois : si 45 min consomment 30 L, alors 1 h consomme 30 × 60 / 45 = 40 L.</p>\n<p>Attention : tout n'est pas proportionnel. La portance n'est pas proportionnelle à la vitesse mais à son <b>carré</b> ;\nla consommation d'un avion n'est pas proportionnelle à sa masse.</p>\n\n<h3>3. Pourcentages</h3>\n<p>Un pourcentage est un rapport sur 100. Une <b>pente de 5 %</b> monte de 5 m tous les 100 m parcourus.\nAugmenter de 10 % = multiplier par 1,10 ; diminuer de 10 % = multiplier par 0,90.\nDeux hausses successives de 10 % font +21 % (1,1 × 1,1 = 1,21), pas +20 %.</p>\n\n<h3>4. Puissances de 10 et notation scientifique</h3>\n<p>101 325 Pa = 1,013 25 × 10<sup>5</sup> Pa. Les préfixes : kilo (10<sup>3</sup>), méga (10<sup>6</sup>), giga (10<sup>9</sup>),\nmilli (10<sup>−3</sup>), micro (10<sup>−6</sup>). Une fréquence radio de 118,0 MHz vaut 1,18 × 10<sup>8</sup> Hz.</p>\n\n<h3>5. Équations du premier degré</h3>\n<p>Relation de base : <b>distance = vitesse × temps</b>. On en tire le temps (t = d / v) ou la vitesse (v = d / t).\nExemple : 350 NM à 140 kt → t = 350 / 140 = 2,5 h = 2 h 30.</p>\n\n<h3>6. Carrés et racines carrées</h3>\n<p>La portance et la traînée varient comme le carré de la vitesse : à vitesse doublée, ×4. Inversement, la vitesse de décrochage\nvarie comme la <b>racine carrée</b> de la masse : V<sub>S2</sub> = V<sub>S1</sub> × √(m<sub>2</sub> / m<sub>1</sub>).\nUn avion 21 % plus lourd décroche 10 % plus vite (√1,21 = 1,1).</p>\n\n<h3>7. Interpolation linéaire</h3>\n<p>Les manuels de vol donnent les performances dans des tableaux. Entre deux lignes, on <b>interpole</b> :\ny = y<sub>1</sub> + (x − x<sub>1</sub>) × (y<sub>2</sub> − y<sub>1</sub>) / (x<sub>2</sub> − x<sub>1</sub>).\nExemple : distance de décollage 300 m à 0 ft et 360 m à 2 000 ft ; à 1 500 ft : 300 + 1 500 × 60 / 2 000 = 345 m.</p>\n\n<h3>8. Moyenne pondérée : la base du centrage</h3>\n<p>Le centre de gravité d'un avion est la moyenne des positions (bras de levier) de chaque masse, pondérée par ces masses :\nX<sub>G</sub> = Σ(m<sub>i</sub> × x<sub>i</sub>) / Σm<sub>i</sub>. Le produit m × x s'appelle le <b>moment</b>.</p>\n<div class=\"box\"><b>Méthode</b> : toujours écrire l'unité de chaque nombre, estimer l'ordre de grandeur, puis vérifier que le résultat est plausible.</div>\n",
+    "quiz": [
+     {
+      "q": "Un avion vole 2 h 15 min. Combien de minutes au total ?",
+      "o": [
+       "135 min",
+       "215 min",
+       "125 min",
+       "145 min"
+      ],
+      "c": 0,
+      "why": "2 h = 120 min ; 120 + 15 = 135 min. Les heures ne se comptent pas en base 10."
+     },
+     {
+      "q": "Combien d'heures font 1,75 h, écrites en heures et minutes ?",
+      "o": [
+       "1 h 30",
+       "1 h 45",
+       "1 h 75",
+       "1 h 07"
+      ],
+      "c": 1,
+      "why": "0,75 h × 60 = 45 min. Une décimale d'heure n'est pas un nombre de minutes."
+     },
+     {
+      "q": "À 120 kt (120 NM par heure), quelle distance en 1 minute ?",
+      "o": [
+       "0,5 NM",
+       "1,2 NM",
+       "20 NM",
+       "2 NM"
+      ],
+      "c": 3,
+      "why": "120 NM / 60 min = 2 NM par minute : c'est la règle de calcul mental la plus utilisée en navigation."
+     },
+     {
+      "q": "Un réservoir de 180 L est rempli aux trois quarts. Combien de litres ?",
+      "o": [
+       "145 L",
+       "120 L",
+       "60 L",
+       "135 L"
+      ],
+      "c": 3,
+      "why": "180 × 3/4 = 135 L."
+     },
+     {
+      "q": "Une consommation de 30 L en 45 min correspond à combien de litres par heure ?",
+      "o": [
+       "40 L/h",
+       "35 L/h",
+       "45 L/h",
+       "22,5 L/h"
+      ],
+      "c": 0,
+      "why": "Règle de trois : 30 × 60 / 45 = 40 L/h."
+     },
+     {
+      "q": "Combien de temps faut-il pour parcourir 350 NM à 140 kt ?",
+      "o": [
+       "2 h 05",
+       "2 h 50",
+       "3 h 00",
+       "2 h 30"
+      ],
+      "c": 3,
+      "why": "t = d / v = 350 / 140 = 2,5 h = 2 h 30."
+     },
+     {
+      "q": "Une piste de 2 400 m monte de 36 m d'un bout à l'autre. Quelle est sa pente ?",
+      "o": [
+       "3,6 %",
+       "15 %",
+       "0,15 %",
+       "1,5 %"
+      ],
+      "c": 3,
+      "why": "Pente = 36 / 2 400 = 0,015 = 1,5 %."
+     },
+     {
+      "q": "101 325 Pa en notation scientifique :",
+      "o": [
+       "1,013 25 × 10⁶ Pa",
+       "1,013 25 × 10³ Pa",
+       "10,132 5 × 10⁵ Pa",
+       "1,013 25 × 10⁵ Pa"
+      ],
+      "c": 3,
+      "why": "On décale la virgule de 5 rangs : 101 325 = 1,013 25 × 100 000."
+     },
+     {
+      "q": "118,000 MHz en hertz :",
+      "o": [
+       "1,18 × 10⁹ Hz",
+       "1,18 × 10⁵ Hz",
+       "1,18 × 10⁶ Hz",
+       "1,18 × 10⁸ Hz"
+      ],
+      "c": 3,
+      "why": "méga = 10⁶ : 118 × 10⁶ = 1,18 × 10⁸ Hz."
+     },
+     {
+      "q": "Une masse augmente de 10 % puis encore de 10 %. Augmentation totale :",
+      "o": [
+       "19 %",
+       "20 %",
+       "21 %",
+       "11 %"
+      ],
+      "c": 2,
+      "why": "1,10 × 1,10 = 1,21 : les pourcentages successifs se multiplient, ils ne s'additionnent pas."
+     },
+     {
+      "q": "Débit carburant 2 600 kg/h pendant 2 h 40 min. Carburant consommé ?",
+      "o": [
+       "6 933 kg",
+       "7 040 kg",
+       "6 240 kg",
+       "6 760 kg"
+      ],
+      "c": 0,
+      "why": "2 h 40 = 2,667 h ; 2 600 × 2,667 = 6 933 kg. Piège : 2,40 h n'est pas 2 h 40 (2 600 × 2,4 = 6 240)."
+     },
+     {
+      "q": "À vitesse doublée, la portance (à incidence égale) est multipliée par :",
+      "o": [
+       "2",
+       "√2",
+       "8",
+       "4"
+      ],
+      "c": 3,
+      "why": "La portance varie comme V² : 2² = 4."
+     },
+     {
+      "q": "Si la vitesse augmente de 10 %, la traînée (à incidence égale) augmente d'environ :",
+      "o": [
+       "10 %",
+       "33 %",
+       "21 %",
+       "20 %"
+      ],
+      "c": 2,
+      "why": "Traînée ∝ V² : 1,1² = 1,21, soit +21 %."
+     },
+     {
+      "q": "Un avion décroche à 100 kt à 50 t. À quelle vitesse décroche-t-il à 60,5 t ?",
+      "o": [
+       "105 kt",
+       "100 kt",
+       "121 kt",
+       "110 kt"
+      ],
+      "c": 3,
+      "why": "V_S ∝ √m : 100 × √(60,5/50) = 100 × √1,21 = 110 kt."
+     },
+     {
+      "q": "Distance de décollage : 300 m à 0 ft, 360 m à 2 000 ft. Valeur interpolée à 1 500 ft ?",
+      "o": [
+       "360 m",
+       "315 m",
+       "330 m",
+       "345 m"
+      ],
+      "c": 3,
+      "why": "300 + 1 500 × (360 − 300) / 2 000 = 300 + 45 = 345 m."
+     },
+     {
+      "q": "Pilote 80 kg à 1,0 m de la référence, passager 70 kg à 1,0 m, bagages 30 kg à 2,4 m. Bras de levier moyen ?",
+      "o": [
+       "1,47 m",
+       "1,00 m",
+       "1,23 m",
+       "1,80 m"
+      ],
+      "c": 2,
+      "why": "Moments : 80 + 70 + 72 = 222 kg·m ; masse 180 kg ; 222 / 180 = 1,23 m. On pondère par les masses."
+     },
+     {
+      "q": "Une descente de 6 000 ft à 1 500 ft/min dure :",
+      "o": [
+       "6 min",
+       "2,5 min",
+       "9 min",
+       "4 min"
+      ],
+      "c": 3,
+      "why": "6 000 / 1 500 = 4 min."
+     },
+     {
+      "q": "À 180 kt, combien de NM pour descendre de 9 000 ft à 1 000 ft/min ?",
+      "o": [
+       "30 NM",
+       "9 NM",
+       "18 NM",
+       "27 NM"
+      ],
+      "c": 3,
+      "why": "9 000 ft / 1 000 ft/min = 9 min ; 180 kt = 3 NM/min ; 9 × 3 = 27 NM."
+     },
+     {
+      "q": "Pente de descente en % pour 1 000 ft/min à 120 kt (1 kt ≈ 101,3 ft/min) :",
+      "o": [
+       "≈ 0,8 %",
+       "≈ 5 %",
+       "≈ 8,2 %",
+       "≈ 12 %"
+      ],
+      "c": 2,
+      "why": "120 kt ≈ 120 × 101,3 = 12 156 ft/min ; 1 000 / 12 156 = 8,2 %."
+     },
+     {
+      "q": "Résoudre : 3x − 7 = 2x + 5",
+      "o": [
+       "x = 2",
+       "x = 12/5",
+       "x = −2",
+       "x = 12"
+      ],
+      "c": 3,
+      "why": "3x − 2x = 5 + 7 → x = 12."
+     },
+     {
+      "q": "Masse 1 000 kg, centre de gravité à 0,95 m. On ajoute 40 kg à 2,20 m. Nouveau centrage ?",
+      "o": [
+       "0,998 m",
+       "0,950 m",
+       "1,000 m",
+       "1,048 m"
+      ],
+      "c": 0,
+      "why": "Moment total : 950 + 88 = 1 038 kg·m ; masse 1 040 kg ; X = 0,998 m."
+     },
+     {
+      "q": "Masse 1 000 kg, centrage 0,95 m. Quelle masse placer à 2,20 m pour amener le centrage à 1,00 m ?",
+      "o": [
+       "41,7 kg",
+       "50,0 kg",
+       "45,5 kg",
+       "40,0 kg"
+      ],
+      "c": 0,
+      "why": "(950 + 2,2 m) / (1 000 + m) = 1 → 1,2 m = 50 → m = 41,7 kg. Piège : oublier que la masse ajoutée change aussi le dénominateur."
+     },
+     {
+      "q": "Un avion de 60 t décroche à 120 kt. Après avoir brûlé 9 t de carburant, il décroche à :",
+      "o": [
+       "138,0 kt",
+       "102,0 kt",
+       "117,0 kt",
+       "110,6 kt"
+      ],
+      "c": 3,
+      "why": "120 × √(51/60) = 120 × 0,9220 = 110,6 kt. Pas proportionnel : 120 × 51/60 = 102 kt serait faux."
+     },
+     {
+      "q": "Interpolation double : distance 400 m (0 ft, 15 °C), 460 m (2 000 ft, 15 °C), 430 m (0 ft, 25 °C). Estimation à 1 000 ft, 25 °C (effets additifs) :",
+      "o": [
+       "490 m",
+       "430 m",
+       "460 m",
+       "445 m"
+      ],
+      "c": 2,
+      "why": "Effet altitude à 1 000 ft : +30 m ; effet température +10 °C : +30 m ; 400 + 30 + 30 = 460 m."
+     },
+     {
+      "q": "Vitesse sol 150 kt, 40 NM à parcourir, heure 10:52. Heure d'arrivée ?",
+      "o": [
+       "11:04",
+       "11:12",
+       "11:08",
+       "11:18"
+      ],
+      "c": 2,
+      "why": "40 / 150 = 0,2667 h = 16 min ; 10:52 + 16 min = 11:08."
+     },
+     {
+      "q": "Pour descendre de 10 000 ft sur 30 NM à 240 kt, quelle vitesse verticale ?",
+      "o": [
+       "1 333 ft/min",
+       "1 000 ft/min",
+       "800 ft/min",
+       "2 400 ft/min"
+      ],
+      "c": 0,
+      "why": "Temps : 30 / 240 h = 0,125 h = 7,5 min ; 10 000 / 7,5 = 1 333 ft/min."
+     },
+     {
+      "q": "La traînée doit diminuer de 19 % à incidence constante. De combien réduire la vitesse ?",
+      "o": [
+       "19 %",
+       "9,5 %",
+       "10 %",
+       "4,4 %"
+      ],
+      "c": 2,
+      "why": "Traînée ∝ V² : V² × 0,81 → V × 0,9, soit −10 %."
+     },
+     {
+      "q": "Débit horaire 2 400 kg/h. Carburant pour 3 h 20 de vol + 5 % du délestage pour aléas + 30 min de réserve finale :",
+      "o": [
+       "9 800 kg",
+       "9 200 kg",
+       "9 600 kg",
+       "8 400 kg"
+      ],
+      "c": 2,
+      "why": "Délestage 2 400 × 3,333 = 8 000 kg ; aléas 5 % = 400 kg ; réserve 0,5 h = 1 200 kg ; total 9 600 kg."
+     },
+     {
+      "q": "Si y = k·x² et que y vaut 50 pour x = 10, que vaut x pour y = 72 ?",
+      "o": [
+       "12",
+       "11",
+       "14,4",
+       "13"
+      ],
+      "c": 0,
+      "why": "k = 50/100 = 0,5 ; 72 = 0,5 x² → x² = 144 → x = 12."
+     },
+     {
+      "q": "Un avion parcourt 0,8 NM en 20 s. Sa vitesse sol est :",
+      "o": [
+       "240 kt",
+       "144 kt",
+       "96 kt",
+       "160 kt"
+      ],
+      "c": 1,
+      "why": "0,8 NM / 20 s = 0,04 NM/s ; × 3 600 = 144 NM/h = 144 kt."
+     }
+    ]
+   }
+  ]
+ }
+]

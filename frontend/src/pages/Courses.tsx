@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import type React from 'react';
 import DOMPurify from 'dompurify';
-import { useData, type Part, type Quiz } from '../data';
+import { type Quiz } from '../data';
+import { useCourses, allParts } from '../courses';
 import { apiAvailable } from '../auth';
 
 /** Téléchargement PDF : généré par le serveur s'il est joignable, sinon par la fenêtre d'impression du navigateur. */
@@ -38,7 +39,7 @@ function QuizBlock({ quiz }: { quiz: Quiz[] }) {
   const ok = quiz.filter((q, i) => ans[i] === q.c).length;
   return (
     <div className="quiz">
-      <h3>QCM · {quiz.length} questions</h3>
+      <h3>Exercices · {quiz.length} questions corrigées</h3>
       {quiz.map((q, i) => (
         <fieldset key={i}>
           <legend>{i + 1}. {q.q}</legend>
@@ -60,9 +61,10 @@ function QuizBlock({ quiz }: { quiz: Quiz[] }) {
 }
 
 export function Courses({ part, mod }: { part?: string; mod?: string }) {
-  const { data, error } = useData<Part[]>('academy');
+  const { cycles, error } = useCourses();
   if (error) return <p className="page err">Données indisponibles : {error}</p>;
-  if (!data) return <p className="page">Chargement…</p>;
+  if (!cycles) return <p className="page">Chargement…</p>;
+  const data = allParts(cycles);
   const P = data.find((p) => p.id === part);
   const M = P?.mods.find((m) => m.id === mod);
   if (P && M) {
@@ -83,26 +85,33 @@ export function Courses({ part, mod }: { part?: string; mod?: string }) {
       </article>
     );
   }
+  const partBlock = (p: (typeof data)[number]) => (
+    <div key={p.id}>
+      <div className="titlebar">
+        <h3><a href={'#/cours/' + p.id}>{p.n}</a></h3>
+        <PdfButton part={p.id} label="PDF de la partie" />
+      </div>
+      <p className="sub" dangerouslySetInnerHTML={safe(p.d)} />
+      <ol className="mods">
+        {p.mods.map((m) => (
+          <li key={m.id}>
+            <a href={`#/cours/${p.id}/${m.id}`}>{m.t}</a>
+            {m.quiz?.length ? <small> · {m.quiz.length} exercices</small> : null}
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
   return (
     <section className="page">
       <h1>Cours</h1>
-      <p className="lead">Les cours de l'Académie du simulateur, repris tels quels. Chaque module et chaque partie se téléchargent en PDF, avec les QCM et leurs corrigés.</p>
-      {data.filter((p) => !P || p === P).map((p) => (
-        <div key={p.id}>
-          <div className="titlebar">
-            <h2><a href={'#/cours/' + p.id}>{p.n}</a></h2>
-            <PdfButton part={p.id} label="PDF de la partie" />
-          </div>
-          <p className="sub" dangerouslySetInnerHTML={safe(p.d)} />
-          <ol className="mods">
-            {p.mods.map((m) => (
-              <li key={m.id}>
-                <a href={`#/cours/${p.id}/${m.id}`}>{m.t}</a>
-                {m.quiz?.length ? <small> · QCM {m.quiz.length}</small> : null}
-              </li>
-            ))}
-          </ol>
-        </div>
+      <p className="lead">Trois cycles, du plus simple au plus exigeant. Chaque module et chaque partie se téléchargent en PDF, avec les exercices et leurs corrigés.</p>
+      {P ? partBlock(P) : cycles.map((c) => (
+        <section key={c.id} className="cycle" aria-labelledby={'cycle-' + c.id}>
+          <h2 id={'cycle-' + c.id}>{c.title}</h2>
+          <p className="sub">{c.d}</p>
+          {c.parts.length ? c.parts.map(partBlock) : <p className="note">En cours de rédaction.</p>}
+        </section>
       ))}
     </section>
   );

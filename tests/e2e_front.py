@@ -67,7 +67,11 @@ with sync_playwright() as p:
 
         pg.goto(URL + '#/cours'); pg.wait_for_selector('.mods li')
         n = pg.locator('.mods li').count()
-        check(f'[{tag}] cours : 76 modules listés', n == 76, str(n))
+        import json as _j
+        cnt = lambda f: sum(len(x['mods']) for x in _j.loads((ROOT / 'data' / f).read_text())) if (ROOT / 'data' / f).exists() else 0
+        want = cnt('academy-0.json') + cnt('academy.json') + cnt('academy-2.json')
+        check(f'[{tag}] cours : {want} modules listés (Cours 0, I et II ; Cours I : 76 modules inchangés)', n == want and cnt('academy.json') == 76, str(n))
+        check(f'[{tag}] cours : trois cycles', [h.strip().upper() for h in pg.locator('.cycle > h2').all_text_contents()] == ['COURS 0 · PRÉPARATION SCIENTIFIQUE', 'COURS I · INITIATION', 'COURS II · CONFIRMÉ'])
         pg.goto(URL + '#/cours/p1/avion'); pg.wait_for_selector('.quiz fieldset')
         check(f'[{tag}] cours : module « L\'avion et ses parties »', "L'avion et ses parties" in pg.inner_text('h1'))
         nq = pg.locator('.quiz fieldset').count()

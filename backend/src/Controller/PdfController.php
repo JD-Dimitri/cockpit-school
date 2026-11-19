@@ -25,7 +25,13 @@ final class PdfController extends AbstractController
     #[Route('/api/pdf/cours/{part}/{mod}', name: 'api_pdf_course', methods: ['GET'], requirements: ['part' => '[a-z0-9-]+', 'mod' => '[a-z0-9-]+'], defaults: ['mod' => null])]
     public function course(string $part, ?string $mod): Response
     {
-        $academy = json_decode((string) file_get_contents($this->dataDir.'/academy.json'), true, 512, \JSON_THROW_ON_ERROR);
+        // Cours 0 (préparation), Cours I (initiation), Cours II (confirmé) : un fichier par cycle
+        $academy = [];
+        foreach (['academy-0', 'academy', 'academy-2'] as $f) {
+            if (is_file($this->dataDir.'/'.$f.'.json')) {
+                $academy = array_merge($academy, json_decode((string) file_get_contents($this->dataDir.'/'.$f.'.json'), true, 512, \JSON_THROW_ON_ERROR));
+            }
+        }
         $p = null;
         foreach ($academy as $candidate) {
             if (($candidate['id'] ?? null) === $part) {

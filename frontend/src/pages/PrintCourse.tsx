@@ -5,6 +5,7 @@
  */
 import { useEffect } from 'react';
 import DOMPurify from 'dompurify';
+import { useCourses, allParts } from '../courses';
 import { useData, type Module, type Part } from '../data';
 
 const safe = (h: string) => ({ __html: DOMPurify.sanitize(h) });
@@ -49,7 +50,8 @@ function ModuleBlock({ m }: { m: Module }) {
 }
 
 export function PrintCourse({ part, mod, auto }: { part?: string; mod?: string; auto?: boolean }) {
-  const { data, error } = useData<Part[]>('academy');
+  const { cycles, error } = useCourses();
+  const data = cycles ? allParts(cycles) : null;
   const P = data?.find((p) => p.id === part);
   const mods = P ? (mod ? P.mods.filter((m) => m.id === mod) : P.mods) : [];
   const title = P ? (mod && mods[0] ? mods[0].t : P.n) : '';

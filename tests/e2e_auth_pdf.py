@@ -88,8 +88,22 @@ with sync_playwright() as p:
         # --- PDF
         pg.goto(URL + '#/cours/p1/avion'); pg.wait_for_selector('.titlebar .btn')
         check(f'[{tag}] cours : bouton « PDF du module »', 'PDF du module' in pg.locator('.titlebar').text_content())
-        pg.evaluate('() => { window.print = () => { window.__printed = (window.__printed || 0) + 1 } }')  # remplace la fenêtre d'impression
-        pg.click('.titlebar .btn')
+        if URL.startswith('file:'):
+            # sans serveur : le bouton ouvre la version imprimable du navigateur
+            pg.evaluate('() => { window.print = () => { window.__printed = (window.__printed || 0) + 1 } }')  # remplace la fenêtre d'impression
+            pg.click('.titlebar .btn')
+        else:
+            # en ligne : le bouton demande le PDF au serveur (dompdf, testé par PHPUnit) ; réponse simulée ici
+            asked = []
+            def pdf(r):
+                asked.append(r.request.url); r.fulfill(body=b'%PDF-1.4 essai', content_type='application/pdf', headers={'Content-Disposition': 'attachment; filename="essai.pdf"'})
+            ctx.route('**/api/pdf/**', pdf)
+            with pg.expect_download() as dl:
+                pg.click('.titlebar .btn')
+            check(f'[{tag}] PDF du module : demandé au serveur (/api/pdf/cours/p1/avion)', asked and asked[0].endswith('/api/pdf/cours/p1/avion'), str(asked))
+            # la version imprimable du navigateur (secours) reste vérifiée
+            pg.add_init_script('window.print = () => { window.__printed = (window.__printed || 0) + 1 }')
+            pg.goto(URL + '#/imprimer/p1/avion/auto'); pg.reload()
         pg.wait_for_selector('.print .pmod'); pg.wait_for_timeout(700)
         check(f'[{tag}] PDF du module : version imprimable ouverte', '#/imprimer/p1/avion/auto' in pg.url)
         check(f'[{tag}] PDF du module : impression lancée', pg.evaluate('window.__printed') == 1)
@@ -128,7 +142,7 @@ with sync_playwright() as p:
         pg.emulate_media(media='screen')
 
         pg.goto(URL + '#/cours'); pg.wait_for_selector('.titlebar .btn')
-        check(f'[{tag}] liste des cours : un bouton PDF par partie', pg.locator('.titlebar .btn').count() == 9)
+        check(f'[{tag}] liste des cours : un bouton PDF par partie (Cours 0 et Cours I)', pg.locator('.titlebar .btn').count() == 10)
         sw = pg.evaluate('document.documentElement.scrollWidth')
         check(f'[{tag}] pas de défilement horizontal', sw <= W, f'{sw}')
         check(f'[{tag}] aucune erreur JavaScript', not errs, '; '.join(errs[:3]))
