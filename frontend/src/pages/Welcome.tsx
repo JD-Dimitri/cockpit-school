@@ -26,7 +26,6 @@ export function Welcome() {
           <li key={t}><b>{t}</b><span>{d}</span></li>
         ))}
       </ul>
-      <p className="note">Simulateur pédagogique : il prépare à la formation, il ne la remplace pas. Ne pas utiliser pour la navigation réelle.</p>
     </section>
   );
 }
