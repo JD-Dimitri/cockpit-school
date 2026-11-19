@@ -1594,5 +1594,1601 @@
     ]
    }
   ]
+ },
+ {
+  "id": "q2",
+  "n": "Partie II-2 — Exploitation du transport aérien, niveau ATPL",
+  "d": "Les matières de la théorie PPL et des calculs du pilote reprises au niveau du pilote de ligne : réglementation, communications, performances de classe A, masse et centrage, préparation du vol et carburant, systèmes, procédures et sécurité. Exercices corrigés.",
+  "mods": [
+   {
+    "id": "q2-reglementation",
+    "t": "Droit aérien : OACI, libertés, espaces, règles de l'air, licences",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Droit aérien » (EASA ATPL, sujet 010). Reprend au niveau professionnel le module « Réglementation » de la théorie PPL (Cours I, partie 6).\nLes textes évoluent : la référence est toujours la version en vigueur publiée par l'OACI, l'EASA ou l'autorité nationale.</p>\n\n<h3>1. L'OACI et la convention de Chicago (1944)</h3>\n<p>L'Organisation de l'aviation civile internationale (Montréal) publie des <b>normes et pratiques recommandées</b> (SARPs) dans 19 annexes. Un État qui s'écarte d'une norme doit le notifier (« différences », publiées dans son AIP).</p>\n<table class=\"kv\"><tbody>\n<tr><th>Annexe 1</th><td>licences du personnel</td></tr>\n<tr><th>Annexe 2</th><td>règles de l'air</td></tr>\n<tr><th>Annexe 3</th><td>assistance météorologique</td></tr>\n<tr><th>Annexe 6</th><td>exploitation technique des aéronefs</td></tr>\n<tr><th>Annexe 7</th><td>marques de nationalité et d'immatriculation</td></tr>\n<tr><th>Annexe 8</th><td>navigabilité</td></tr>\n<tr><th>Annexe 10</th><td>télécommunications aéronautiques</td></tr>\n<tr><th>Annexe 11</th><td>services de la circulation aérienne</td></tr>\n<tr><th>Annexe 12</th><td>recherches et sauvetage</td></tr>\n<tr><th>Annexe 13</th><td>enquêtes sur les accidents et incidents</td></tr>\n<tr><th>Annexe 14</th><td>aérodromes</td></tr>\n<tr><th>Annexe 17</th><td>sûreté</td></tr>\n<tr><th>Annexe 18</th><td>marchandises dangereuses</td></tr>\n<tr><th>Annexe 19</th><td>gestion de la sécurité (SMS)</td></tr>\n</tbody></table>\n\n<h3>2. Les libertés de l'air</h3>\n<p>1<sup>re</sup> : survoler un État sans atterrir. 2<sup>e</sup> : y faire une escale technique (sans embarquer ni débarquer de trafic). 3<sup>e</sup> : débarquer dans un autre État du trafic venant de l'État d'immatriculation.\n4<sup>e</sup> : y embarquer du trafic à destination de l'État d'immatriculation. 5<sup>e</sup> : transporter du trafic entre deux États étrangers sur une ligne qui part ou aboutit à l'État d'immatriculation.\nLes deux premières sont échangées multilatéralement (accord de transit) ; les autres dans des accords bilatéraux.</p>\n\n<h3>3. Les espaces aériens (Annexe 11)</h3>\n<p>Classes A à G. A : IFR seul. B : IFR et VFR, tous séparés. C : IFR séparés de tous, VFR séparés des IFR. D : IFR séparés des IFR, information de trafic sur les VFR. E : IFR seuls séparés entre eux ; VFR sans clairance.\nF et G : non contrôlés. Minimums VMC en espaces B à E : sous 3 050 m (10 000 ft) AMSL, visibilité 5 km ; au-dessus, 8 km ; distances aux nuages 1 500 m horizontalement et 300 m (1 000 ft) verticalement [RÉFÉRENCÉ] SERA.5001.</p>\n\n<h3>4. Règles de l'air (priorités)</h3>\n<ul>\n<li>Deux aéronefs face à face : chacun oblique vers la <b>droite</b>.</li>\n<li>Routes convergentes à même niveau : celui qui a l'autre <b>à sa droite</b> cède le passage. Priorité, dans l'ordre : ballons, planeurs, aéronefs remorquant, dirigeables, aéronefs motorisés plus lourds que l'air.</li>\n<li>Dépassement : l'aéronef rattrapé a priorité ; le dépassant passe <b>par la droite</b>.</li>\n<li>Aéronef en détresse : priorité sur tous.</li>\n</ul>\n\n<h3>5. Licences (EASA Part-FCL)</h3>\n<p>CPL(A) : âge minimal 18 ans. ATPL(A) : 21 ans et 1 500 h de vol (dont 500 h en exploitation multipilote, 250 h comme commandant, 200 h en vol de navigation…). Certificat médical de classe 1 pour les pilotes professionnels.\nLe pilote de 60 ans et plus en transport commercial doit voler dans un équipage multipilote dont l'autre pilote a moins de 60 ans ; limite à 65 ans [RÉFÉRENCÉ] Part-FCL (FCL.065).</p>\n<div class=\"box\"><b>Pièges d'examen</b> : la 2<sup>e</sup> liberté exclut tout trafic commercial ; en dépassement on passe par la droite (et non la gauche comme sur la route) ;\nla classe E n'exige pas de clairance pour les VFR.</div>\n",
+    "quiz": [
+     {
+      "q": "Annexe OACI qui traite des enquêtes sur les accidents et incidents :",
+      "o": [
+       "Annexe 13",
+       "Annexe 6",
+       "Annexe 11",
+       "Annexe 19"
+      ],
+      "c": 0,
+      "why": "Annexe 13 ; l'Annexe 19 traite des systèmes de gestion de la sécurité."
+     },
+     {
+      "q": "Annexe OACI consacrée aux licences du personnel :",
+      "o": [
+       "Annexe 8",
+       "Annexe 1",
+       "Annexe 2",
+       "Annexe 6"
+      ],
+      "c": 1,
+      "why": "Annexe 1 (licences) ; Annexe 2 : règles de l'air ; Annexe 8 : navigabilité."
+     },
+     {
+      "q": "Une compagnie française fait escale à Dakar uniquement pour avitailler, sans passagers embarqués ni débarqués. Liberté utilisée :",
+      "o": [
+       "4e liberté",
+       "5e liberté",
+       "2e liberté",
+       "1re liberté"
+      ],
+      "c": 2,
+      "why": "Escale technique sans trafic commercial : 2e liberté."
+     },
+     {
+      "q": "Une compagnie française transporte des passagers de Dakar à Abidjan sur sa ligne Paris – Dakar – Abidjan. Liberté :",
+      "o": [
+       "4e liberté",
+       "3e liberté",
+       "5e liberté",
+       "2e liberté"
+      ],
+      "c": 2,
+      "why": "Trafic entre deux États étrangers sur une ligne partant de l'État d'immatriculation : 5e liberté."
+     },
+     {
+      "q": "Un État s'écarte d'une norme OACI. Il doit :",
+      "o": [
+       "quitter l'OACI",
+       "notifier la différence à l'OACI et la publier",
+       "rien faire",
+       "obtenir l'accord des autres États"
+      ],
+      "c": 1,
+      "why": "Article 38 de la convention de Chicago : notification des différences, publiées dans l'AIP (GEN 1.7)."
+     },
+     {
+      "q": "Espace de classe D : un vol IFR est séparé :",
+      "o": [
+       "de personne",
+       "des vols VFR seulement",
+       "des autres vols IFR seulement",
+       "de tous les vols"
+      ],
+      "c": 2,
+      "why": "En D, IFR séparés des IFR ; ils reçoivent une information de trafic sur les VFR."
+     },
+     {
+      "q": "Espace de classe E : un vol VFR :",
+      "o": [
+       "n'a pas besoin de clairance",
+       "est interdit",
+       "est séparé des IFR",
+       "doit obtenir une clairance"
+      ],
+      "c": 0,
+      "why": "En E, seuls les IFR sont contrôlés et séparés entre eux."
+     },
+     {
+      "q": "Espace de classe A :",
+      "o": [
+       "non contrôlé",
+       "VFR seulement",
+       "IFR et VFR séparés",
+       "vols IFR seulement"
+      ],
+      "c": 3,
+      "why": "La classe A n'admet que les vols IFR."
+     },
+     {
+      "q": "Minimum de visibilité en vol VFR en classe C à FL120 :",
+      "o": [
+       "8 km",
+       "10 km",
+       "5 km",
+       "1 500 m"
+      ],
+      "c": 0,
+      "why": "Au-dessus de 3 050 m (10 000 ft) AMSL : 8 km [RÉFÉRENCÉ] SERA.5001."
+     },
+     {
+      "q": "Distance verticale minimale aux nuages en VMC (classes B à E) :",
+      "o": [
+       "30 m (100 ft)",
+       "150 m (500 ft)",
+       "1 500 m",
+       "300 m (1 000 ft)"
+      ],
+      "c": 3,
+      "why": "1 500 m horizontalement et 300 m verticalement."
+     },
+     {
+      "q": "Deux avions motorisés en routes convergentes au même niveau. Lequel cède le passage ?",
+      "o": [
+       "celui qui a l'autre à sa droite",
+       "le plus haut",
+       "celui qui a l'autre à sa gauche",
+       "le plus rapide"
+      ],
+      "c": 0,
+      "why": "Règle de la priorité à droite (SERA.3210)."
+     },
+     {
+      "q": "Un avion en rattrape un autre. Il le dépasse :",
+      "o": [
+       "par la droite",
+       "par-dessous",
+       "par la gauche",
+       "par-dessus"
+      ],
+      "c": 0,
+      "why": "Le dépassant modifie sa trajectoire vers la droite ; le rattrapé garde la priorité."
+     },
+     {
+      "q": "Un avion motorisé rencontre un planeur en route convergente :",
+      "o": [
+       "priorité à droite seulement",
+       "le plus haut cède",
+       "le planeur cède le passage",
+       "l'avion motorisé cède le passage"
+      ],
+      "c": 3,
+      "why": "Les aéronefs moins manœuvrants ont la priorité : ballons, planeurs, remorqueurs, dirigeables, puis motorisés."
+     },
+     {
+      "q": "Âge minimal pour délivrer un ATPL(A) (Part-FCL) :",
+      "o": [
+       "21 ans",
+       "18 ans",
+       "23 ans",
+       "17 ans"
+      ],
+      "c": 0,
+      "why": "ATPL : 21 ans ; CPL : 18 ans ; PPL : 17 ans."
+     },
+     {
+      "q": "Expérience minimale de vol pour un ATPL(A) (Part-FCL) :",
+      "o": [
+       "1 500 h",
+       "500 h",
+       "3 000 h",
+       "250 h"
+      ],
+      "c": 0,
+      "why": "1 500 h, dont 500 h en exploitation multipilote."
+     },
+     {
+      "q": "Classe de certificat médical exigée pour un pilote de ligne :",
+      "o": [
+       "classe 3",
+       "LAPL",
+       "classe 1",
+       "classe 2"
+      ],
+      "c": 2,
+      "why": "La classe 3 concerne les contrôleurs aériens."
+     },
+     {
+      "q": "Pilote de 62 ans en transport commercial de passagers :",
+      "o": [
+       "autorisé sans condition",
+       "interdit",
+       "autorisé en équipage multipilote si l'autre pilote a moins de 60 ans",
+       "autorisé seul"
+      ],
+      "c": 2,
+      "why": "Part-FCL FCL.065 : de 60 à 64 ans, en équipage multipilote avec un pilote de moins de 60 ans ; plus de transport commercial à partir de 65 ans."
+     },
+     {
+      "q": "Marques de nationalité d'un avion immatriculé F-HXXX :",
+      "o": [
+       "Espagne",
+       "Royaume-Uni",
+       "Allemagne",
+       "France"
+      ],
+      "c": 3,
+      "why": "F : France ; D : Allemagne ; G : Royaume-Uni ; EC : Espagne (Annexe 7)."
+     },
+     {
+      "q": "Document dans lequel un État publie les informations aéronautiques permanentes (aérodromes, espaces, procédures) :",
+      "o": [
+       "le METAR",
+       "le NOTAM",
+       "l'AIP",
+       "le manuel d'exploitation"
+      ],
+      "c": 2,
+      "why": "Publication d'information aéronautique (Annexe 15) ; les NOTAM signalent les changements temporaires."
+     },
+     {
+      "q": "Organisme qui enquête sur un accident d'avion de ligne en France :",
+      "o": [
+       "la DGAC",
+       "l'EASA",
+       "le BEA",
+       "la gendarmerie seule"
+      ],
+      "c": 2,
+      "why": "Le Bureau d'enquêtes et d'analyses pour la sécurité de l'aviation civile mène l'enquête de sécurité, distincte de l'enquête judiciaire, conformément à l'Annexe 13."
+     }
+    ]
+   },
+   {
+    "id": "q2-communications",
+    "t": "Communications : phraséologie, urgence, panne radio, calages",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matières « Communications VFR et IFR » (EASA ATPL, sujet 090). Reprend le module « Communications » de la théorie PPL (Cours I, partie 6).\nLes fréquences et procédures citées ici sont des exemples d'école : en vol, seules comptent celles publiées pour le terrain (AIP, cartes en vigueur).</p>\n\n<h3>1. Collationnement obligatoire</h3>\n<p>Le pilote répète (collationne) au minimum : les clairances de route ; les clairances et instructions d'entrée, d'atterrissage, de décollage, d'alignement, de traversée ou de remontée de piste ;\nla piste en service ; le calage altimétrique ; les codes transpondeur ; les instructions de niveau, de cap et de vitesse ; les niveaux de transition [RÉFÉRENCÉ] OACI Doc 4444 et Annexe 10 vol. II.\nIl termine par son indicatif. Une clairance non comprise n'est jamais exécutée : on demande « Répétez » (« Say again »).</p>\n\n<h3>2. Les mots clés</h3>\n<table class=\"kv\"><tbody>\n<tr><th>« Roger »</th><td>j'ai reçu tout votre message (ce n'est ni un accord ni un collationnement)</td></tr>\n<tr><th>« Wilco »</th><td>compris, je me conformerai</td></tr>\n<tr><th>« Affirm » / « Negative »</th><td>oui / non (on évite « yes » et « no »)</td></tr>\n<tr><th>« Standby »</th><td>attendez, je vous rappelle ; ce n'est pas une autorisation</td></tr>\n<tr><th>« Cleared »</th><td>réservé aux clairances ; « take-off » n'est prononcé que dans la clairance de décollage ou son annulation (sinon « departure »)</td></tr>\n</tbody></table>\n<p>La catastrophe de Tenerife (1977) a imposé cette discipline : une phrase ambiguë (« we are now at take-off ») a été comprise différemment par l'équipage et la tour.</p>\n\n<h3>3. Détresse, urgence, transpondeur</h3>\n<ul>\n<li><b>MAYDAY</b> (trois fois) : danger grave et imminent, assistance immédiate nécessaire. <b>PAN PAN</b> (trois fois) : urgence, sans danger immédiat.</li>\n<li>Message : indicatif de la station, MAYDAY ×3, indicatif, nature de la détresse, intentions, position, niveau, cap, autres informations (personnes à bord, carburant en heures).</li>\n<li>Codes : <b>7700</b> urgence, <b>7600</b> panne radio, <b>7500</b> intervention illicite. 2000 : IFR sans code assigné en Europe ; 7000 : VFR (selon l'État).</li>\n<li>« MAYDAY FUEL » : le carburant restant à l'atterrissage sera inférieur à la réserve finale ; « MINIMUM FUEL » : plus de marge pour un retard [RÉFÉRENCÉ] AMC1 CAT.OP.MPA.281.</li>\n</ul>\n\n<h3>4. Panne radio en IFR (règle générale OACI, à vérifier dans l'AIP)</h3>\n<p>Afficher 7600 ; en conditions VMC, continuer en VMC et atterrir sur le terrain approprié le plus proche ; en IMC, garder le dernier niveau assigné (ou l'altitude minimale si plus haute) pendant 7 min\n(en espace où le radar est utilisé), puis suivre le plan de vol ; commencer la descente le plus près possible de l'heure prévue d'arrivée [RÉFÉRENCÉ] OACI Doc 4444 § 15.3, Annexe 2 § 3.6.5.2.</p>\n\n<h3>5. Calages altimétriques</h3>\n<p>Sous l'altitude de transition : QNH (altitudes). Au-dessus du niveau de transition : 1 013,25 hPa (niveaux de vol). La couche de transition est entre les deux.\nQFE : hauteur au-dessus du terrain. On passe en 1013 en montée à l'altitude de transition ; on affiche le QNH en descente au niveau de transition.</p>\n<div class=\"box\"><b>Pièges d'examen</b> : « Roger » ne vaut pas collationnement ; le mot « take-off » est réservé ; 7500 est pour l'intervention illicite (et non l'urgence).</div>\n",
+    "quiz": [
+     {
+      "q": "Code transpondeur en cas d'intervention illicite :",
+      "o": [
+       "7600",
+       "2000",
+       "7700",
+       "7500"
+      ],
+      "c": 3,
+      "why": "7500 : intervention illicite ; 7600 : panne radio ; 7700 : urgence."
+     },
+     {
+      "q": "Code transpondeur en panne radio :",
+      "o": [
+       "7500",
+       "7000",
+       "7600",
+       "7700"
+      ],
+      "c": 2,
+      "why": "7600."
+     },
+     {
+      "q": "Le contrôleur dit « Descend FL120 ». Réponse correcte :",
+      "o": [
+       "« Roger, [indicatif] »",
+       "« Affirm »",
+       "« Descend FL120, [indicatif] »",
+       "« Wilco »"
+      ],
+      "c": 2,
+      "why": "Les instructions de niveau doivent être collationnées ; « Roger » n'est pas un collationnement."
+     },
+     {
+      "q": "Lequel n'est PAS obligatoirement collationné ?",
+      "o": [
+       "la clairance d'atterrissage",
+       "le calage altimétrique",
+       "le code transpondeur",
+       "une information de trafic"
+      ],
+      "c": 3,
+      "why": "Les informations (trafic, météo générale) ne sont pas à collationner ; on accuse réception."
+     },
+     {
+      "q": "Signification de « Wilco » :",
+      "o": [
+       "répétez",
+       "attendez",
+       "j'ai reçu votre message",
+       "compris, je me conformerai"
+      ],
+      "c": 3,
+      "why": "Will comply."
+     },
+     {
+      "q": "Signification de « Standby » :",
+      "o": [
+       "annulez",
+       "attendez, je vous rappelle",
+       "vous êtes autorisé",
+       "je me conforme"
+      ],
+      "c": 1,
+      "why": "Ce n'est jamais une autorisation."
+     },
+     {
+      "q": "Avant d'être autorisé, l'équipage veut signaler qu'il est prêt au décollage. Formulation correcte :",
+      "o": [
+       "« Ready for take-off »",
+       "« Ready for departure »",
+       "« Cleared for take-off »",
+       "« We are now at take-off »"
+      ],
+      "c": 1,
+      "why": "Le mot « take-off » est réservé à la clairance de décollage (ou à son annulation) depuis Tenerife (1977)."
+     },
+     {
+      "q": "Panne moteur sur un bimoteur, l'autre fonctionne, aucun danger immédiat, mais besoin de priorité. Message :",
+      "o": [
+       "MAYDAY ×3",
+       "SECURITE ×3",
+       "aucun message",
+       "PAN PAN ×3"
+      ],
+      "c": 3,
+      "why": "Urgence sans danger grave et imminent. Beaucoup d'exploitants demandent MAYDAY pour une panne moteur : l'équipage juge selon ses procédures."
+     },
+     {
+      "q": "Feu moteur non maîtrisé après décollage :",
+      "o": [
+       "MINIMUM FUEL",
+       "PAN PAN ×3",
+       "MAYDAY ×3",
+       "7600"
+      ],
+      "c": 2,
+      "why": "Danger grave et imminent : détresse."
+     },
+     {
+      "q": "L'équipage calcule que le carburant à l'atterrissage sera inférieur à la réserve finale. Il annonce :",
+      "o": [
+       "rien tant que le carburant n'est pas nul",
+       "« MINIMUM FUEL »",
+       "« MAYDAY MAYDAY MAYDAY FUEL »",
+       "« PAN PAN »"
+      ],
+      "c": 2,
+      "why": "AMC1 CAT.OP.MPA.281 : MAYDAY FUEL si le carburant prévu à l'atterrissage est sous la réserve finale ; MINIMUM FUEL quand tout retard supplémentaire l'y amènerait."
+     },
+     {
+      "q": "Panne radio en IFR, en IMC, dans un espace où le radar est utilisé. D'abord :",
+      "o": [
+       "garder le dernier niveau assigné 7 minutes, puis suivre le plan de vol",
+       "monter au niveau maximal",
+       "faire demi-tour",
+       "descendre immédiatement"
+      ],
+      "c": 0,
+      "why": "Règle générale OACI (Doc 4444 § 15.3) ; les États peuvent publier des procédures particulières dans l'AIP."
+     },
+     {
+      "q": "En montée, à quel moment affiche-t-on 1013 hPa ?",
+      "o": [
+       "à l'altitude de transition",
+       "au niveau de transition",
+       "au décollage",
+       "au FL100"
+      ],
+      "c": 0,
+      "why": "En montée : altitude de transition ; en descente : niveau de transition (affichage du QNH)."
+     },
+     {
+      "q": "Altitude de transition 5 000 ft, QNH 993 hPa (≈ 27 ft/hPa). Plus bas niveau de vol utilisable en gardant au moins 1 000 ft au-dessus de l'altitude de transition ?",
+      "o": [
+       "FL070",
+       "FL060",
+       "FL050",
+       "FL080"
+      ],
+      "c": 0,
+      "why": "QNH 993 : FL060 correspond à 6 000 − 20 × 27 = 5 460 ft d'altitude, soit 460 ft au-dessus de l'altitude de transition (insuffisant) ; FL070 : 6 460 ft d'altitude, soit 1 460 ft au-dessus → FL070."
+     },
+     {
+      "q": "QNH 1 030 hPa, terrain à 400 ft. QFE approximatif (≈ 27 ft/hPa) ?",
+      "o": [
+       "≈ 1 045 hPa",
+       "≈ 990 hPa",
+       "≈ 1 015 hPa",
+       "≈ 1 030 hPa"
+      ],
+      "c": 2,
+      "why": "QFE = QNH − 400 / 27 ≈ 1 030 − 15 = 1 015 hPa."
+     },
+     {
+      "q": "Indicatif d'urgence prononcé pour une évacuation médicale (MEDEVAC), message de priorité :",
+      "o": [
+       "MAYDAY MEDICAL",
+       "PAN PAN suivi de MEDICAL",
+       "aucun",
+       "SECURITE"
+      ],
+      "c": 1,
+      "why": "Les transports sanitaires utilisent le signal d'urgence PAN PAN suivi de MEDICAL (Annexe 10 vol. II)."
+     },
+     {
+      "q": "Lors d'un message MAYDAY, l'équipage doit indiquer en particulier :",
+      "o": [
+       "la météo de destination",
+       "le nom du commandant",
+       "le code de la compagnie",
+       "la nature de la détresse et ses intentions"
+      ],
+      "c": 3,
+      "why": "Nature de la détresse, intentions, position, niveau, cap, autonomie, personnes à bord."
+     },
+     {
+      "q": "Le contrôle dit « Report 10 miles final ». Le pilote répond :",
+      "o": [
+       "« Report 10 miles final »",
+       "« Wilco, [indicatif] »",
+       "« Negative »",
+       "« Roger »"
+      ],
+      "c": 1,
+      "why": "Une demande de compte rendu future se reçoit par « Wilco » : on s'y conformera."
+     },
+     {
+      "q": "Phraséologie pour dire « oui » en radiotéléphonie :",
+      "o": [
+       "« Yes »",
+       "« Correct »",
+       "« Affirm »",
+       "« Roger »"
+      ],
+      "c": 2,
+      "why": "« Affirm » (ou « Affirmatif »), « Negative » pour non. « Correct » signifie « exact » après un contrôle de lecture."
+     },
+     {
+      "q": "Lettre de l'alphabet OACI correspondant à « Lima » :",
+      "o": [
+       "L",
+       "K",
+       "I",
+       "M"
+      ],
+      "c": 0,
+      "why": "Alphabet OACI : Kilo, Lima, Mike."
+     },
+     {
+      "q": "Prononciation OACI du chiffre 9 :",
+      "o": [
+       "« Nueve »",
+       "« Nain »",
+       "« Nine »",
+       "« Niner »"
+      ],
+      "c": 3,
+      "why": "Pour éviter la confusion avec l'allemand « nein »."
+     }
+    ]
+   },
+   {
+    "id": "q2-performances",
+    "t": "Performances de classe A : vitesses, distances, segments, atterrissage",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Performances » (EASA ATPL, sujet 032). Reprend au niveau du pilote de ligne les modules « Performances » du Cours I (parties 6, 7 et 9).\nLes chiffres d'un avion donné viennent toujours de son manuel de vol (AFM) ou de son logiciel de performances : ici, on apprend les règles qui les fondent.</p>\n\n<h3>1. Les vitesses de décollage (CS 25.107)</h3>\n<ul>\n<li><b>V<sub>MCG</sub></b> ≤ <b>V<sub>1</sub></b> ≤ <b>V<sub>R</sub></b> ; V<sub>1</sub> ≤ V<sub>MBE</sub> (énergie maximale de freinage).</li>\n<li>V<sub>R</sub> ≥ 1,05 V<sub>MCA</sub> ; V<sub>2</sub> ≥ 1,10 V<sub>MCA</sub> et V<sub>2</sub> ≥ 1,13 V<sub>SR</sub> (vitesse de décrochage de référence à 1 g).</li>\n<li>V<sub>1</sub> est la vitesse de décision : la panne reconnue avant V<sub>1</sub> impose l'arrêt ; après, on décolle.</li>\n</ul>\n\n<h3>2. Les distances (CS 25.109 et 25.113)</h3>\n<p><b>Distance de décollage</b> = la plus grande de : distance jusqu'à 35 ft avec panne d'un moteur à V<sub>EF</sub> ; 115 % de la distance tous moteurs jusqu'à 35 ft.\n<b>Distance accélération-arrêt</b> : accélération, panne, reconnaissance, freinage, plus une marge de 2 s à V<sub>1</sub>. Le terrain impose TODR ≤ TODA, TORR ≤ TORA, ASDR ≤ ASDA.\nQuand TODR = ASDR, la V<sub>1</sub> est dite « équilibrée ».</p>\n\n<h3>3. La montée avec un moteur en panne (CS 25.121)</h3>\n<table class=\"kv\"><tbody>\n<tr><th>Segment</th><th>Pente brute minimale, biréacteur / triréacteur / quadriréacteur</th></tr>\n<tr><th>1<sup>er</sup> (train sorti, V<sub>LOF</sub> → rentrée du train)</th><td>positive / 0,3 % / 0,5 %</td></tr>\n<tr><th>2<sup>e</sup> (train rentré, V<sub>2</sub>, jusqu'à 400 ft minimum)</th><td><b>2,4 %</b> / 2,7 % / 3,0 %</td></tr>\n<tr><th>Final (lisse, V<sub>FTO</sub>)</th><td>1,2 % / 1,5 % / 1,7 %</td></tr>\n</tbody></table>\n<p><b>Trajectoire nette</b> = trajectoire brute diminuée de 0,8 % (bi), 0,9 % (tri) ou 1,0 % (quadri) ; elle doit franchir tous les obstacles de la trouée d'envol avec <b>35 ft</b> de marge [RÉFÉRENCÉ] CS 25.115, CAT.POL.A.210.</p>\n\n<h3>4. L'atterrissage (CAT.POL.A.230 et 235)</h3>\n<p>Piste sèche : la distance d'atterrissage certifiée ne doit pas dépasser <b>60 %</b> de la distance disponible (LDA) pour un avion à réaction, 70 % pour un turbopropulseur.\nPiste mouillée : 115 % de la distance requise sur piste sèche. Pente de montée en approche interrompue (un moteur en panne) ≥ 2,1 % pour un biréacteur ; en remise de gaz tous moteurs, configuration atterrissage, ≥ 3,2 % [RÉFÉRENCÉ] CS 25.119 et 25.121(d).</p>\n\n<h3>5. Le vent et la piste</h3>\n<p>Dans les données de performances, on ne compte que <b>50 %</b> du vent de face et au moins <b>150 %</b> du vent arrière [RÉFÉRENCÉ] CS 25.105(d). Une piste montante allonge le décollage et raccourcit l'atterrissage.\nLa poussée réduite (température fictive) ne peut pas réduire la poussée de plus de 25 % [RÉFÉRENCÉ] AMC 25-13.</p>\n<div class=\"box\"><b>Pièges d'examen</b> : V<sub>1</sub> ne peut pas être inférieure à V<sub>MCG</sub> ; la pente nette est plus faible que la pente brute ;\nle facteur 60 % porte sur la distance disponible (LDA requise = distance certifiée / 0,6).</div>\n",
+    "quiz": [
+     {
+      "q": "Distance d'atterrissage certifiée sur piste sèche : 1 500 m (biréacteur). Distance disponible minimale requise ?",
+      "o": [
+       "1 800 m",
+       "2 143 m",
+       "2 500 m",
+       "900 m"
+      ],
+      "c": 2,
+      "why": "LDA ≥ 1 500 / 0,6 = 2 500 m. Piège : 1 500 × 1,2 = 1 800 m ou 1 500 / 0,7 = 2 143 m (turbopropulseur)."
+     },
+     {
+      "q": "Même avion, piste annoncée mouillée. Distance disponible minimale ?",
+      "o": [
+       "2 500 m",
+       "2 875 m",
+       "1 725 m",
+       "3 000 m"
+      ],
+      "c": 1,
+      "why": "115 % de la distance requise sur sec : 2 500 × 1,15 = 2 875 m."
+     },
+     {
+      "q": "LDA = 2 400 m, piste sèche, biréacteur. Distance d'atterrissage certifiée maximale admissible ?",
+      "o": [
+       "2 400 m",
+       "1 680 m",
+       "1 252 m",
+       "1 440 m"
+      ],
+      "c": 3,
+      "why": "2 400 × 0,6 = 1 440 m."
+     },
+     {
+      "q": "Distance tous moteurs jusqu'à 35 ft : 2 000 m. Distance avec panne à V_EF jusqu'à 35 ft : 2 250 m. Distance de décollage retenue ?",
+      "o": [
+       "2 250 m",
+       "2 000 m",
+       "2 588 m",
+       "2 300 m"
+      ],
+      "c": 3,
+      "why": "1,15 × 2 000 = 2 300 m > 2 250 m : on retient 2 300 m."
+     },
+     {
+      "q": "Quelle relation est toujours vraie (CS 25.107) ?",
+      "o": [
+       "V_MCG ≤ V1 ≤ VR",
+       "V2 ≤ V_MCA",
+       "V1 ≤ V_MCG",
+       "VR ≤ V1"
+      ],
+      "c": 0,
+      "why": "V1 doit permettre de continuer avec contrôle au sol : V1 ≥ V_MCG ; V1 ≤ VR."
+     },
+     {
+      "q": "V_SR = 120 kt, V_MCA = 115 kt. V2 minimale ?",
+      "o": [
+       "126,5 kt",
+       "135,6 kt",
+       "144,0 kt",
+       "120,0 kt"
+      ],
+      "c": 1,
+      "why": "max(1,13 × 120 ; 1,10 × 115) = max(135,6 ; 126,5) = 135,6 kt."
+     },
+     {
+      "q": "Pente brute minimale du 2e segment pour un biréacteur :",
+      "o": [
+       "3,0 %",
+       "0 %",
+       "1,2 %",
+       "2,4 %"
+      ],
+      "c": 3,
+      "why": "CS 25.121(b) : 2,4 % (bi), 2,7 % (tri), 3,0 % (quadri)."
+     },
+     {
+      "q": "Pente brute du 2e segment d'un biréacteur : 3,1 %. Pente nette ?",
+      "o": [
+       "2,3 %",
+       "2,1 %",
+       "3,1 %",
+       "3,9 %"
+      ],
+      "c": 0,
+      "why": "Biréacteur : nette = brute − 0,8 % = 2,3 %."
+     },
+     {
+      "q": "Pente nette 2,3 % (trajectoire partant de 35 ft en fin de distance de décollage). Obstacle de 250 ft à 3 000 m de ce point. Conclusion ?",
+      "o": [
+       "trajectoire nette à ≈ 261 ft : marge de 11 ft, insuffisante",
+       "trajectoire nette à ≈ 261 ft : conforme",
+       "≈ 104 ft : l'obstacle est percuté",
+       "≈ 295 ft : conforme avec 45 ft de marge"
+      ],
+      "c": 0,
+      "why": "0,023 × 3 000 m = 69 m = 226 ft ; + 35 ft = 261 ft. La trajectoire nette doit passer au moins 35 ft au-dessus de l'obstacle (CAT.POL.A.210) : 11 ft &lt; 35 ft → masse à réduire ou procédure de dégagement à modifier. Piège : 104 ft = 69 + 35 sans convertir les mètres."
+     },
+     {
+      "q": "Vent annoncé : 20 kt de face. Vent à utiliser dans le calcul de décollage :",
+      "o": [
+       "30 kt de face",
+       "20 kt de face",
+       "0 kt",
+       "10 kt de face"
+      ],
+      "c": 3,
+      "why": "CS 25.105(d) : 50 % du vent de face."
+     },
+     {
+      "q": "Vent annoncé : 6 kt arrière. Vent à utiliser :",
+      "o": [
+       "12 kt arrière",
+       "3 kt arrière",
+       "6 kt arrière",
+       "9 kt arrière"
+      ],
+      "c": 3,
+      "why": "Au moins 150 % du vent arrière : 6 × 1,5 = 9 kt."
+     },
+     {
+      "q": "Panne moteur reconnue à V1 − 5 kt, piste sèche :",
+      "o": [
+       "on attend VR pour décider",
+       "on interrompt le décollage",
+       "on décolle",
+       "on réduit l'autre moteur et on continue"
+      ],
+      "c": 1,
+      "why": "Avant V1 : arrêt. Après V1 : décollage (la distance d'arrêt n'est plus garantie)."
+     },
+     {
+      "q": "Pourquoi la V1 ne doit-elle pas être inférieure à V_MCG ?",
+      "o": [
+       "pour ne pas dépasser la vitesse des pneus",
+       "pour réduire la distance d'arrêt",
+       "sinon on ne pourrait pas tenir l'axe en continuant avec un moteur en panne",
+       "parce que la portance est insuffisante"
+      ],
+      "c": 2,
+      "why": "V_MCG : vitesse minimale de contrôle au sol, avec la gouverne de direction seule."
+     },
+     {
+      "q": "Pente de 2,4 % à 150 kt de vitesse sol. Vitesse verticale ?",
+      "o": [
+       "240 ft/min",
+       "36 ft/min",
+       "365 ft/min",
+       "3 645 ft/min"
+      ],
+      "c": 2,
+      "why": "0,024 × 150 × 101,27 = 365 ft/min."
+     },
+     {
+      "q": "Atterrissage manqué un moteur en panne (biréacteur, configuration d'approche). Pente minimale certifiée :",
+      "o": [
+       "2,1 %",
+       "1,2 %",
+       "3,2 %",
+       "2,4 %"
+      ],
+      "c": 0,
+      "why": "CS 25.121(d) : 2,1 % pour un biréacteur ; 3,2 % tous moteurs en configuration d'atterrissage (CS 25.119)."
+     },
+     {
+      "q": "Réduction de poussée maximale admise par la méthode de la température fictive :",
+      "o": [
+       "10 %",
+       "50 %",
+       "25 %",
+       "aucune limite"
+      ],
+      "c": 2,
+      "why": "AMC 25-13 : la poussée réduite reste au moins à 75 % de la poussée nominale."
+     },
+     {
+      "q": "Effet d'une température plus élevée sur la masse maximale au décollage limitée par la piste :",
+      "o": [
+       "elle ne change pas",
+       "elle diminue",
+       "elle augmente",
+       "elle double"
+      ],
+      "c": 1,
+      "why": "Air moins dense → poussée plus faible et vitesses vraies plus élevées → distances plus longues."
+     },
+     {
+      "q": "Effet d'une piste montante sur la distance de décollage :",
+      "o": [
+       "elle augmente",
+       "elle diminue",
+       "aucun effet",
+       "elle diminue seulement en vent arrière"
+      ],
+      "c": 0,
+      "why": "Une composante du poids s'oppose à l'accélération."
+     },
+     {
+      "q": "V1 limitée par V_MBE (énergie de freinage). Conséquence :",
+      "o": [
+       "la distance d'arrêt diminue",
+       "V1 peut dépasser VR",
+       "on peut ignorer la limite par vent de face",
+       "la masse au décollage peut devoir être réduite"
+      ],
+      "c": 3,
+      "why": "Au-delà de V_MBE, les freins ne pourraient pas absorber l'énergie d'un arrêt : on réduit la masse ou l'on choisit d'autres volets."
+     },
+     {
+      "q": "On augmente V1 (VR et masse inchangées). Effet sur les distances requises :",
+      "o": [
+       "les deux diminuent",
+       "les deux augmentent",
+       "la distance accélération-arrêt augmente, la distance de décollage diminue",
+       "la distance accélération-arrêt diminue, la distance de décollage augmente"
+      ],
+      "c": 2,
+      "why": "Plus V1 est haute, plus on freine tard (ASDR ↑) mais moins on accélère sur un moteur (TODR ↓). Le croisement des deux courbes donne la V1 équilibrée."
+     }
+    ]
+   },
+   {
+    "id": "q2-masse",
+    "t": "Masse et centrage : limites de structure, charge offerte, moments, indices",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Masse et centrage » (EASA ATPL, sujet 031). Reprend les formules 7 et 8 des calculs du pilote de ligne (Cours I, partie 9) avec des cas complets.\nLes masses d'un avion réel viennent de sa fiche de pesée et de son manuel ; celles des exercices sont des valeurs d'école.</p>\n\n<h3>1. Les masses</h3>\n<table class=\"kv\"><tbody>\n<tr><th>DOM (masse de base opérationnelle)</th><td>avion vide + équipage, équipement d'exploitation, restauration, eau</td></tr>\n<tr><th>ZFW (masse sans carburant)</th><td>DOM + charge marchande (passagers, bagages, fret)</td></tr>\n<tr><th>TOW (masse au décollage)</th><td>ZFW + carburant au décollage (sans le carburant de roulage)</td></tr>\n<tr><th>LW (masse à l'atterrissage)</th><td>TOW − carburant d'étape (trip fuel)</td></tr>\n</tbody></table>\n<p>Limites de structure : <b>MZFW</b> (le carburant des ailes soulage la flexion de l'emplanture : au-delà de MZFW, la charge dans le fuselage serait trop grande),\n<b>MTOW</b> et <b>MLW</b> (train et structure à l'impact). La masse au décollage utilisable est la plus petite de :\nMTOW (structure ou performances) ; MLW + carburant d'étape ; MZFW + carburant au décollage.\n<b>Charge offerte</b> = masse au décollage utilisable − DOM − carburant au décollage.</p>\n\n<h3>2. Masses forfaitaires des passagers</h3>\n<p>Pour un avion de 20 sièges et plus, la masse forfaitaire d'un adulte est 84 kg (bagage à main compris), d'un enfant 35 kg [RÉFÉRENCÉ] CAT.POL.MAB.100, tableau 1.\nL'exploitant peut aussi utiliser les masses réelles ou des masses issues de ses propres pesées.</p>\n\n<h3>3. Le centrage</h3>\n<p>Moment = masse × bras de levier. X<sub>CG</sub> = Σ moments / Σ masses. Pour éviter les grands nombres, on utilise un <b>indice</b> : I = m (x − x<sub>réf</sub>) / C + K.\nDéplacer une masse m de d mètres : Δx<sub>CG</sub> = m d / M. Ajouter une masse m au bras x : nouveau CG = (M X + m x) / (M + m).\nLe carburant consommé déplace le centre de gravité ; le devis de masse et centrage vérifie le CG à ZFW, TOW et LW (et souvent pendant tout le vol).</p>\n<div class=\"box\"><b>Pièges d'examen</b> : la masse maximale utilisable est le <b>minimum</b> des trois limites ; le carburant de roulage n'entre pas dans la TOW ;\nun CG hors limites à la ZFW reste un problème même si celui de la TOW est correct (cas d'un vol où l'on brûlerait tout le carburant).</div>\n",
+    "quiz": [
+     {
+      "q": "DOM 43 000 kg ; 150 passagers à 84 kg ; 2 600 kg de bagages et fret. ZFW ?",
+      "o": [
+       "58 200 kg",
+       "55 600 kg",
+       "45 600 kg",
+       "57 000 kg"
+      ],
+      "c": 0,
+      "why": "43 000 + 12 600 + 2 600 = 58 200 kg."
+     },
+     {
+      "q": "Même ZFW, carburant au décollage 14 500 kg (roulage 300 kg en plus). TOW ?",
+      "o": [
+       "72 900 kg",
+       "58 500 kg",
+       "72 700 kg",
+       "72 400 kg"
+      ],
+      "c": 2,
+      "why": "58 200 + 14 500 = 72 700 kg : le roulage est consommé avant le lâcher des freins."
+     },
+     {
+      "q": "MTOW 78 000 kg, MLW 66 000 kg, MZFW 61 000 kg ; carburant au décollage 14 500 kg dont étape 11 000 kg. Masse au décollage utilisable ?",
+      "o": [
+       "77 000 kg",
+       "78 000 kg",
+       "63 500 kg",
+       "75 500 kg"
+      ],
+      "c": 3,
+      "why": "min(78 000 ; 66 000 + 11 000 = 77 000 ; 61 000 + 14 500 = 75 500) = 75 500 kg."
+     },
+     {
+      "q": "Dans ce cas, quelle limite est contraignante ?",
+      "o": [
+       "la MTOW",
+       "la MLW",
+       "aucune",
+       "la MZFW"
+      ],
+      "c": 3,
+      "why": "MZFW + carburant = 75 500 kg est la plus petite des trois."
+     },
+     {
+      "q": "Même cas : charge offerte maximale (DOM 43 000 kg) ?",
+      "o": [
+       "18 000 kg",
+       "20 500 kg",
+       "61 000 kg",
+       "32 500 kg"
+      ],
+      "c": 0,
+      "why": "75 500 − 43 000 − 14 500 = 18 000 kg (soit exactement MZFW − DOM)."
+     },
+     {
+      "q": "Vol court : carburant au décollage 8 000 kg dont étape 2 500 kg. Masse au décollage utilisable ?",
+      "o": [
+       "66 000 kg",
+       "68 500 kg",
+       "69 000 kg",
+       "78 000 kg"
+      ],
+      "c": 1,
+      "why": "min(78 000 ; 68 500 ; 69 000) = 68 500 kg : sur une étape courte, c'est souvent la MLW qui limite."
+     },
+     {
+      "q": "Pourquoi existe-t-il une masse maximale sans carburant (MZFW) ?",
+      "o": [
+       "pour limiter la consommation",
+       "pour limiter la vitesse de décrochage",
+       "le carburant dans les ailes réduit la flexion à l'emplanture",
+       "pour protéger le train"
+      ],
+      "c": 2,
+      "why": "La charge dans le fuselage fait fléchir les ailes vers le haut en vol ; le poids du carburant dans les ailes s'y oppose. Sans carburant, la charge de fuselage admissible est plus faible."
+     },
+     {
+      "q": "Masse forfaitaire d'un passager adulte (avion de 20 sièges et plus, EASA) :",
+      "o": [
+       "84 kg",
+       "75 kg",
+       "100 kg",
+       "90 kg"
+      ],
+      "c": 0,
+      "why": "CAT.POL.MAB.100, tableau 1 : 84 kg, bagage à main compris."
+     },
+     {
+      "q": "Avion 60 000 kg, CG à 17,80 m. On charge 1 500 kg de fret à 25,00 m. Nouveau CG ?",
+      "o": [
+       "17,976 m",
+       "17,620 m",
+       "18,000 m",
+       "18,100 m"
+      ],
+      "c": 0,
+      "why": "(60 000 × 17,80 + 1 500 × 25,00) / 61 500 = 1 105 500 / 61 500 = 17,976 m."
+     },
+     {
+      "q": "Avion 60 000 kg : 20 passagers (84 kg) passent de la rangée à 14 m à la rangée à 26 m. Déplacement du CG ?",
+      "o": [
+       "0,336 m vers l'avant",
+       "3,360 m vers l'arrière",
+       "0,028 m vers l'arrière",
+       "0,336 m vers l'arrière"
+      ],
+      "c": 3,
+      "why": "Δx = m d / M = 1 680 × 12 / 60 000 = 0,336 m vers l'arrière."
+     },
+     {
+      "q": "LEMAC 16,20 m, MAC 4,20 m. Limites 18 % à 34 % MAC. CG à 16,85 m :",
+      "o": [
+       "hors limites (trop arrière)",
+       "dans les limites",
+       "hors limites (trop avant)",
+       "exactement en limite avant"
+      ],
+      "c": 2,
+      "why": "(16,85 − 16,20) / 4,20 = 15,5 % MAC &lt; 18 % : centrage trop avant."
+     },
+     {
+      "q": "Avion 60 000 kg, CG 16,85 m (LEMAC 16,20 m, MAC 4,20 m). Quelle masse de fret déplacer de la soute avant (8 m) vers la soute arrière (25 m) pour atteindre 18 % MAC ?",
+      "o": [
+       "795 kg",
+       "2 668 kg",
+       "374 kg",
+       "780 kg"
+      ],
+      "c": 2,
+      "why": "CG visé : 16,20 + 0,18 × 4,20 = 16,956 m ; Δx = 0,106 m ; m = M Δx / d = 60 000 × 0,106 / 17 = 374 kg."
+     },
+     {
+      "q": "Indice : I = m (x − 18) / 1 000 + 50. Masse de 1 200 kg à x = 28 m. Indice partiel (sans la constante K) ?",
+      "o": [
+       "1,2",
+       "12,0",
+       "33,6",
+       "62,0"
+      ],
+      "c": 1,
+      "why": "1 200 × (28 − 18) / 1 000 = 12,0 ; la constante K = 50 ne s'ajoute qu'une fois, pour l'avion de base."
+     },
+     {
+      "q": "Avion de base : masse 40 000 kg, indice 45. Charge : indices partiels +12,0 (fret) et −4,5 (passagers avant), masse ajoutée 8 000 kg. Indice total ?",
+      "o": [
+       "45,0",
+       "57,0",
+       "61,5",
+       "52,5"
+      ],
+      "c": 3,
+      "why": "45 + 12,0 − 4,5 = 52,5. On additionne les indices, puis on lit le CG sur le graphique de l'exploitant."
+     },
+     {
+      "q": "Le carburant des réservoirs d'aile, situé en avant du CG, est consommé pendant le vol. Le CG :",
+      "o": [
+       "monte seulement",
+       "ne bouge pas",
+       "recule",
+       "avance"
+      ],
+      "c": 2,
+      "why": "On retire une masse placée en avant : le CG se déplace vers l'arrière. Il faut donc vérifier la limite arrière à l'atterrissage et à la ZFW."
+     },
+     {
+      "q": "Masse 70 000 kg, CG 18,40 m. On consomme 9 000 kg de carburant situé à 17,20 m. Nouveau CG ?",
+      "o": [
+       "18,577 m",
+       "18,246 m",
+       "18,400 m",
+       "17,200 m"
+      ],
+      "c": 0,
+      "why": "(70 000 × 18,40 − 9 000 × 17,20) / 61 000 = 18,577 m."
+     },
+     {
+      "q": "Le carburant de roulage (300 kg) est-il compté dans la masse au décollage ?",
+      "o": [
+       "non, il est consommé avant le lâcher des freins",
+       "oui, toujours",
+       "seulement en été",
+       "oui, s'il reste dans les réservoirs"
+      ],
+      "c": 0,
+      "why": "La masse maximale de roulage (MRW, ou MTW) est un peu supérieure à la MTOW pour cette raison."
+     },
+     {
+      "q": "Masse au décollage limitée par les performances de piste à 74 000 kg ; MTOW structurale 78 000 kg ; autres limites plus élevées. Masse maximale au décollage à retenir :",
+      "o": [
+       "78 000 kg",
+       "152 000 kg",
+       "76 000 kg",
+       "74 000 kg"
+      ],
+      "c": 3,
+      "why": "On prend toujours la plus restrictive des limites : structure, piste, montée, obstacles, freins, pneus, atterrissage."
+     },
+     {
+      "q": "Un CG trop avant entraîne :",
+      "o": [
+       "une vitesse de rotation plus élevée et des efforts au manche plus grands",
+       "une consommation plus faible",
+       "une instabilité en tangage",
+       "une vitesse de décrochage plus faible"
+      ],
+      "c": 0,
+      "why": "La gouverne de profondeur doit fournir plus de déportance : décrochage plus haut, rotation plus difficile, traînée plus forte."
+     },
+     {
+      "q": "Charge offerte 15 000 kg ; charge prévue 13 200 kg. Le chef d'escale peut-il accepter 1 500 kg de fret de dernière minute ?",
+      "o": [
+       "oui, il reste 1 500 kg",
+       "non, il manque 300 kg",
+       "non, la charge offerte est dépassée de 1 500 kg",
+       "oui, il reste 1 800 kg de sous-charge"
+      ],
+      "c": 3,
+      "why": "Sous-charge (underload) = 15 000 − 13 200 = 1 800 kg ≥ 1 500 kg ; le centrage doit ensuite être revérifié (modification de dernière minute, LMC)."
+     }
+    ]
+   },
+   {
+    "id": "q2-planification",
+    "t": "Préparation du vol : carburant, dégagements, plan de vol, coûts",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Préparation et suivi du vol » (EASA ATPL, sujet 033). Reprend la formule 6 (bilan carburant) et le cas complet Paris → La Réunion des calculs du pilote de ligne (Cours I, partie 9).\nLes règles citées sont celles du schéma de base européen ; chaque exploitant les détaille dans son manuel d'exploitation, approuvé par l'autorité.</p>\n\n<h3>1. Le carburant minimal au départ (schéma de base, CAT.OP.MPA.181 et AMC)</h3>\n<table class=\"kv\"><tbody>\n<tr><th>Roulage (taxi)</th><td>mise en route, roulage, APU</td></tr>\n<tr><th>Étape (trip)</th><td>décollage, montée, croisière, descente, approche et atterrissage à destination</td></tr>\n<tr><th>Réserve de route (contingency)</th><td>la plus grande de : 5 % du carburant d'étape ; 5 min d'attente à 1 500 ft au-dessus de la destination</td></tr>\n<tr><th>Dégagement (alternate)</th><td>remise de gaz à destination, montée, croisière, descente et atterrissage au dégagement</td></tr>\n<tr><th>Réserve finale (final reserve)</th><td>avion à turbines : <b>30 min</b> d'attente à 1 500 ft au-dessus du dégagement (ISA) ; avion à pistons : 45 min</td></tr>\n<tr><th>Complémentaire (additional)</th><td>si nécessaire (aérodrome isolé, panne de pressurisation ou de moteur au point le plus critique)</td></tr>\n<tr><th>Supplémentaire (extra / discretionary)</th><td>à la décision du commandant</td></tr>\n</tbody></table>\n<p>Aérodrome isolé (pas de dégagement possible) : carburant pour <b>2 h</b> de croisière normale au-dessus de la destination, réserve finale comprise (avion à turbines).\nLa Réunion est l'exemple type : le dégagement le plus proche (Maurice) est à environ 125 NM, et les cyclones peuvent fermer les deux terrains à la fois.</p>\n\n<h3>2. Le plan de vol OACI (Doc 4444, appendice 2)</h3>\n<p>Case 7 : identification ; case 8 : règles de vol (I, V, Y = IFR puis VFR, Z = VFR puis IFR) et type de vol ; case 9 : type d'aéronef et catégorie de turbulence de sillage\n(L, M, H, J pour l'A380) ; case 10 : équipements ; case 15 : vitesse, niveau, route ; case 16 : destination, durée estimée, dégagements ; case 18 : autres renseignements.\nDépôt d'un plan de vol IFR au moins 60 min avant l'heure de départ (en Europe, 3 h recommandées pour les vols soumis à la régulation des flux).</p>\n\n<h3>3. Économie du vol</h3>\n<ul>\n<li><b>Indice de coût</b> (cost index) = coût du temps / coût du carburant. CI = 0 : consommation minimale (vitesse de distance maximale) ; CI maximal : vitesse maximale.</li>\n<li><b>Emport</b> (tankering) : on emporte du carburant moins cher pour l'étape suivante ; mais transporter du carburant coûte du carburant (de l'ordre de 2,5 à 4 % de la masse emportée par heure de vol).</li>\n<li><b>Montées par paliers</b> : l'altitude optimale croît quand la masse baisse ; en RVSM, paliers de 2 000 ft (ou 4 000 ft selon le sens du vol et la règle semi-circulaire).</li>\n</ul>\n<div class=\"box\"><b>Pièges d'examen</b> : la réserve de route est un pourcentage du carburant d'<b>étape</b> (pas du total) ; la réserve finale se calcule à la masse prévue à l'arrivée au dégagement ;\nle carburant de roulage ne fait pas partie du carburant au décollage.</div>\n",
+    "quiz": [
+     {
+      "q": "Étape 52 000 kg ; débit d'attente à 1 500 ft : 2 400 kg/h. Réserve de route (schéma de base) ?",
+      "o": [
+       "5 200 kg",
+       "2 600 kg",
+       "1 560 kg",
+       "200 kg"
+      ],
+      "c": 1,
+      "why": "max(5 % × 52 000 = 2 600 ; 5 min × 2 400/60 = 200) = 2 600 kg."
+     },
+     {
+      "q": "Débit d'attente au dégagement : 2 400 kg/h. Réserve finale (avion à turbines) ?",
+      "o": [
+       "2 400 kg",
+       "1 800 kg",
+       "1 200 kg",
+       "400 kg"
+      ],
+      "c": 2,
+      "why": "30 min : 2 400 × 0,5 = 1 200 kg. Piège : 45 min s'applique aux avions à pistons."
+     },
+     {
+      "q": "Roulage 300 kg, étape 52 000 kg, réserve de route 2 600 kg, dégagement 6 200 kg, réserve finale 1 200 kg. Carburant minimal au bloc ?",
+      "o": [
+       "62 300 kg",
+       "62 000 kg",
+       "58 200 kg",
+       "59 700 kg"
+      ],
+      "c": 0,
+      "why": "Somme : 62 300 kg ; au décollage : 62 000 kg."
+     },
+     {
+      "q": "Étape courte : 2 400 kg ; débit d'attente 2 100 kg/h. Réserve de route ?",
+      "o": [
+       "240 kg",
+       "120 kg",
+       "1 050 kg",
+       "175 kg"
+      ],
+      "c": 3,
+      "why": "5 % × 2 400 = 120 kg mais 5 min d'attente = 175 kg : on retient 175 kg."
+     },
+     {
+      "q": "Destination isolée, avion à turbines, consommation de croisière 6 500 kg/h. Carburant minimal au-dessus de la destination (complémentaire + réserve finale) ?",
+      "o": [
+       "6 500 kg",
+       "9 750 kg",
+       "13 000 kg",
+       "3 250 kg"
+      ],
+      "c": 2,
+      "why": "2 h de croisière normale au-dessus de la destination, réserve finale comprise : 2 × 6 500 = 13 000 kg."
+     },
+     {
+      "q": "Pourquoi Saint-Denis de La Réunion (FMEE) est-il souvent traité comme un aérodrome isolé ?",
+      "o": [
+       "parce qu'il n'y a qu'une piste",
+       "parce que la piste est trop courte",
+       "parce que le terrain n'a pas d'ILS",
+       "aucun dégagement proche ne garantit un atterrissage, les deux îles pouvant être touchées par le même phénomène"
+      ],
+      "c": 3,
+      "why": "Le dégagement le plus proche, Maurice (FIMP), est à environ 125 NM ; un cyclone peut affecter les deux. L'exploitant applique alors la règle de l'aérodrome isolé ou des dégagements éloignés."
+     },
+     {
+      "q": "Case 9 du plan de vol pour un A380 : catégorie de turbulence de sillage :",
+      "o": [
+       "J",
+       "S",
+       "M",
+       "H"
+      ],
+      "c": 0,
+      "why": "J (« Super ») est réservée à l'A380 ; H pour les avions de 136 t et plus ; M de 7 à 136 t ; L sous 7 t."
+     },
+     {
+      "q": "Case 8 « Y » signifie :",
+      "o": [
+       "IFR d'abord, puis VFR",
+       "vol militaire",
+       "IFR seulement",
+       "VFR d'abord, puis IFR"
+      ],
+      "c": 0,
+      "why": "Y : IFR puis VFR ; Z : VFR puis IFR."
+     },
+     {
+      "q": "Indice de coût 0 :",
+      "o": [
+       "vitesse maximale",
+       "altitude minimale",
+       "consommation minimale de carburant, vol plus long",
+       "coût horaire nul donc vol gratuit"
+      ],
+      "c": 2,
+      "why": "CI = coût du temps / coût du carburant : à 0, seul le carburant compte (vitesse de distance franchissable maximale)."
+     },
+     {
+      "q": "Coût du temps 30 €/min, prix du carburant 0,90 €/kg. Indice de coût (en kg/min) ?",
+      "o": [
+       "300,0",
+       "27,0",
+       "0,03",
+       "33,3"
+      ],
+      "c": 3,
+      "why": "CI = 30 / 0,90 = 33,3 kg/min (unité Airbus : kg/min ; Boeing : 100 lb/h)."
+     },
+     {
+      "q": "Emport de 5 000 kg pour une étape de 3 h ; pénalité de 3,5 % de la masse emportée par heure. Carburant supplémentaire brûlé ?",
+      "o": [
+       "175 kg",
+       "1 050 kg",
+       "525 kg",
+       "35 kg"
+      ],
+      "c": 2,
+      "why": "5 000 × 0,035 × 3 = 525 kg (approximation linéaire)."
+     },
+     {
+      "q": "Même cas : carburant 0,80 €/kg au départ, 1,05 €/kg à l'arrivée. Gain de l'emport ?",
+      "o": [
+       "830 €",
+       "−420 €",
+       "4 000 €",
+       "1 250 €"
+      ],
+      "c": 0,
+      "why": "On achète 5 525 kg à 0,80 € = 4 420 € au lieu de 5 000 kg à 1,05 € = 5 250 € : gain 830 € (sans compter l'usure et le CO₂ supplémentaire)."
+     },
+     {
+      "q": "Délai minimal recommandé (Doc 4444) pour déposer un plan de vol IFR avant le départ :",
+      "o": [
+       "24 h",
+       "30 min",
+       "10 min",
+       "60 min"
+      ],
+      "c": 3,
+      "why": "Au moins 60 minutes avant l'heure estimée de départ du poste de stationnement."
+     },
+     {
+      "q": "Masse à l'atterrissage prévue au dégagement 58 t. Pour calculer la réserve finale, on prend le débit d'attente :",
+      "o": [
+       "à la masse à vide",
+       "à la masse maximale au décollage",
+       "à 58 t environ (masse prévue à l'arrivée au dégagement)",
+       "au débit de croisière"
+      ],
+      "c": 2,
+      "why": "Le débit d'attente dépend de la masse : on le lit à la masse prévue à l'arrivée au dégagement."
+     },
+     {
+      "q": "Carburant au bloc 19 000 kg ; roulage 300 kg ; étape 14 200 kg. Carburant restant prévu à l'atterrissage ?",
+      "o": [
+       "4 800 kg",
+       "18 700 kg",
+       "5 100 kg",
+       "4 500 kg"
+      ],
+      "c": 3,
+      "why": "19 000 − 300 − 14 200 = 4 500 kg."
+     },
+     {
+      "q": "En croisière, l'écart entre carburant prévu et réel au point de report atteint −900 kg (plus consommé que prévu). Bonne pratique :",
+      "o": [
+       "l'ignorer",
+       "recalculer le carburant à l'arrivée et réévaluer le plan (niveau, vitesse, dégagement)",
+       "remonter au niveau maximal sans calcul",
+       "accélérer pour arriver plus tôt"
+      ],
+      "c": 1,
+      "why": "Le suivi carburant (en route) permet de détecter une fuite ou une erreur de prévision avant qu'elle ne touche la réserve finale."
+     },
+     {
+      "q": "Pourquoi monte-t-on par paliers au cours d'un long vol ?",
+      "o": [
+       "parce que la tropopause monte",
+       "l'altitude optimale augmente quand la masse diminue",
+       "pour réduire la vitesse",
+       "pour éviter le givrage"
+      ],
+      "c": 1,
+      "why": "À C_L optimal, W/σ est constant : moins de masse → densité plus faible → plus haut."
+     },
+     {
+      "q": "Paris-CDG → La Réunion ≈ 5 100 NM, vitesse sol moyenne 470 kt. Temps de vol estimé ?",
+      "o": [
+       "10 h 85",
+       "10 h 51",
+       "9 h 50",
+       "11 h 30"
+      ],
+      "c": 1,
+      "why": "5 100 / 470 = 10,85 h = 10 h 51 min [CALCULÉ, distance approchée]. Piège : 10,85 h ne s'écrit pas 10 h 85."
+     },
+     {
+      "q": "Départ 22 h 40 heure de Paris (UTC+1) ; durée de vol 10 h 51. Heure d'arrivée à La Réunion (UTC+4) ?",
+      "o": [
+       "09 h 31 le lendemain",
+       "12 h 31 le lendemain",
+       "10 h 31 le lendemain",
+       "13 h 31 le lendemain"
+      ],
+      "c": 1,
+      "why": "22 h 40 Paris = 21 h 40 UTC ; + 10 h 51 = 08 h 31 UTC le lendemain ; + 4 h = 12 h 31 à La Réunion."
+     },
+     {
+      "q": "Le commandant ajoute 1 200 kg de carburant parce que des orages sont prévus à l'arrivée. Ce carburant est :",
+      "o": [
+       "du carburant de roulage",
+       "de la réserve finale",
+       "du carburant supplémentaire (discrétionnaire)",
+       "de la réserve de route"
+      ],
+      "c": 2,
+      "why": "Extra ou discretionary fuel : à la décision du commandant de bord, au-delà du minimum réglementaire."
+     }
+    ]
+   },
+   {
+    "id": "q2-systemes",
+    "t": "Systèmes : hydraulique, électricité, pressurisation, carburant, protections",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Connaissance générale de l'aéronef : cellule, systèmes, électricité » (EASA ATPL, sujet 021). Prolonge la partie 5 du Cours I (structures, moteurs, systèmes).\nLes valeurs données sont des ordres de grandeur d'école ; celles d'un type d'avion se lisent dans son manuel (FCOM).</p>\n\n<h3>1. Hydraulique</h3>\n<p>Principe de Pascal : la pression se transmet intégralement ; force = pression × surface. Pression usuelle 3 000 psi (≈ 207 bar) ; 5 000 psi (≈ 345 bar) sur les avions récents de grande taille (A380, A350, B787),\nce qui allège tuyauteries et vérins. Fluide ininflammable à base d'esters phosphates. Plusieurs circuits indépendants (redondance), pompes entraînées par les moteurs,\npompes électriques, éolienne de secours (RAT) et accumulateurs.</p>\n\n<h3>2. Électricité</h3>\n<p>Courant alternatif triphasé 115/200 V à <b>400 Hz</b> (transformateurs et moteurs plus légers qu'à 50 Hz) ; courant continu 28 V par transformateurs-redresseurs (TR) et batteries.\nLes générateurs sont entraînés à vitesse constante (IDG) ou produisent une fréquence variable (avions récents). P = U × I (continu) ; en triphasé équilibré P = √3 U I cos φ.</p>\n\n<h3>3. Pressurisation et climatisation</h3>\n<p>L'air est prélevé sur les compresseurs des moteurs (prélèvement d'air), refroidi par les groupes de conditionnement (packs), puis réglé en pression par la vanne de sortie (outflow valve).\nPression différentielle Δp = P<sub>cabine</sub> − P<sub>extérieure</sub>, limitée à environ 8 à 9 psi sur la plupart des avions de ligne ; altitude cabine maximale 8 000 ft en exploitation normale.\nDes soupapes protègent contre la surpression et la dépression (pression extérieure supérieure à la cabine, par exemple en descente rapide).</p>\n\n<h3>4. Carburant</h3>\n<p>Jet A-1 : point de congélation maximal −47 °C (Jet A : −40 °C) [RÉFÉRENCÉ] spécification ASTM D1655 / DEF STAN 91-091. En croisière très froide, on surveille la température du carburant (marge de 3 °C au-dessus du point de congélation en règle constructeur).\nIntercommunication (crossfeed) : alimenter un moteur depuis le réservoir opposé ; on détecte une fuite par la comparaison carburant à bord + consommé / carburant au départ.</p>\n\n<h3>5. Givre, feu, train, avertisseurs</h3>\n<ul>\n<li>Antigivrage <b>thermique</b> (air chaud prélevé) des becs et entrées d'air ; <b>électrique</b> des sondes et pare-brise. Dégivrage pneumatique (boudins) sur les turbopropulseurs.</li>\n<li>Feu moteur : détection par boucles doubles, deux extincteurs par moteur ; soutes : détecteurs de fumée et extincteurs au halon (ou substitut).</li>\n<li>Pneus gonflés à l'<b>azote</b> : gaz inerte et sec (pas d'humidité qui gèle, pas de combustion au contact de freins très chauds). Antipatinage et freinage automatique.</li>\n<li><b>TCAS II</b> : avis de trafic (TA) puis avis de résolution (RA) verticaux ; le pilote suit le RA même contre une instruction du contrôle (collision d'Überlingen, 2002).\n<b>GPWS / TAWS</b> : modes 1 (taux de descente excessif), 2 (rapprochement du relief), 3 (perte d'altitude après décollage), 4 (proximité du relief hors configuration d'atterrissage), 5 (sous le plan de descente), plus alertes de cisaillement et fonction prédictive.</li>\n</ul>\n<div class=\"box\"><b>Pièges d'examen</b> : un RA TCAS prime sur la clairance ; une dépression cabine (P<sub>ext</sub> &gt; P<sub>cab</sub>) est aussi dangereuse qu'une surpression ; 400 Hz n'est pas choisi pour la puissance mais pour la masse.</div>\n",
+    "quiz": [
+     {
+      "q": "Vérin de 50 mm de diamètre sous 3 000 psi (206,8 bar). Force ?",
+      "o": [
+       "162,4 kN",
+       "10,3 kN",
+       "40,6 kN",
+       "4,1 kN"
+      ],
+      "c": 2,
+      "why": "S = π × 0,05² / 4 = 19,63 cm² ; F = 206,8·10⁵ Pa × 0,001963 m² = 40,6 kN. Piège : 162,4 kN prend le diamètre pour le rayon."
+     },
+     {
+      "q": "Même force avec un circuit à 5 000 psi : diamètre du vérin ?",
+      "o": [
+       "38,7 mm",
+       "83,3 mm",
+       "50,0 mm",
+       "30,0 mm"
+      ],
+      "c": 0,
+      "why": "S ∝ 1/p : d = 50 × √(3 000/5 000) = 38,7 mm. D'où l'intérêt des 5 000 psi : vérins et tuyauteries plus petits et plus légers."
+     },
+     {
+      "q": "Pourquoi le réseau alternatif des avions est-il à 400 Hz ?",
+      "o": [
+       "pour éviter les interférences radio",
+       "pour transporter plus de puissance",
+       "parce que les batteries l'exigent",
+       "transformateurs et moteurs plus légers"
+      ],
+      "c": 3,
+      "why": "À puissance égale, le circuit magnétique d'un transformateur est d'autant plus petit que la fréquence est élevée."
+     },
+     {
+      "q": "Barre continue 28 V, consommation 4,2 kW. Intensité ?",
+      "o": [
+       "150 A",
+       "118 800 A",
+       "15 A",
+       "1 500 A"
+      ],
+      "c": 0,
+      "why": "I = P / U = 4 200 / 28 = 150 A."
+     },
+     {
+      "q": "Batterie 24 V, 37 A·h, utilisable à 80 %. Autonomie sous 45 A ?",
+      "o": [
+       "20 min",
+       "1 h 30",
+       "49 min",
+       "39 min"
+      ],
+      "c": 3,
+      "why": "37 × 0,8 / 45 = 0,658 h = 39 min."
+     },
+     {
+      "q": "Altitude cabine 8 000 ft à FL410 (ISA). Pression différentielle ?",
+      "o": [
+       "2,6 psi",
+       "8,3 psi",
+       "10,9 psi",
+       "14,7 psi"
+      ],
+      "c": 1,
+      "why": "P(8 000 ft) = 753 hPa ; P(FL410) = 179 hPa ; Δp = 574 hPa = 8,3 psi."
+     },
+     {
+      "q": "Altitude cabine 6 000 ft à FL430 (ISA). Pression différentielle ?",
+      "o": [
+       "6,0 psi",
+       "9,4 psi",
+       "11,6 psi",
+       "8,3 psi"
+      ],
+      "c": 1,
+      "why": "812 − 162 = 650 hPa = 9,4 psi : une cabine plus basse exige un fuselage plus résistant."
+     },
+     {
+      "q": "Taux de variation de l'altitude cabine confortable en montée (ordre de grandeur) :",
+      "o": [
+       "≈ 500 ft/min",
+       "≈ 50 ft/min",
+       "≈ 5 000 ft/min",
+       "≈ 2 000 ft/min"
+      ],
+      "c": 0,
+      "why": "Environ 300 à 500 ft/min en montée et 300 ft/min en descente, pour le confort des oreilles."
+     },
+     {
+      "q": "Pendant une descente très rapide, la pression extérieure dépasse la pression cabine. Ce qui protège la structure :",
+      "o": [
+       "la soupape de dépression (negative relief valve)",
+       "l'APU",
+       "les packs",
+       "la vanne de sortie fermée"
+      ],
+      "c": 0,
+      "why": "Le fuselage est conçu pour résister à la surpression intérieure, pas à une dépression importante."
+     },
+     {
+      "q": "Point de congélation maximal du Jet A-1 :",
+      "o": [
+       "−47 °C",
+       "0 °C",
+       "−40 °C",
+       "−60 °C"
+      ],
+      "c": 0,
+      "why": "Jet A-1 : −47 °C ; Jet A (Amérique du Nord) : −40 °C."
+     },
+     {
+      "q": "Température totale de l'air −45 °C, température du carburant −43 °C, carburant Jet A-1 (−47 °C) avec marge constructeur de 3 °C. Action ?",
+      "o": [
+       "aucune",
+       "réduire la vitesse",
+       "augmenter la vitesse ou descendre vers un air plus chaud",
+       "monter"
+      ],
+      "c": 2,
+      "why": "Il ne reste que 4 °C au-dessus du point de congélation, proche de la marge de 3 °C : accélérer augmente l'échauffement cinétique ; descendre trouve un air plus chaud."
+     },
+     {
+      "q": "Carburant au départ 18 000 kg ; consommé (débitmètres) 9 600 kg ; carburant à bord (jauges) 7 600 kg. Conclusion ?",
+      "o": [
+       "écart de 1 600 kg",
+       "les débitmètres surestiment",
+       "écart de 800 kg : possibilité de fuite",
+       "tout est normal"
+      ],
+      "c": 2,
+      "why": "18 000 − 9 600 = 8 400 kg attendus contre 7 600 kg : 800 kg manquent. On applique la procédure de fuite carburant (vol Air Transat 236, 2001)."
+     },
+     {
+      "q": "Pourquoi gonfle-t-on les pneus à l'azote ?",
+      "o": [
+       "parce que c'est moins cher",
+       "l'azote est plus léger que l'air",
+       "gaz inerte et sec : pas de combustion ni de glace",
+       "pour réduire la pression"
+      ],
+      "c": 2,
+      "why": "Avec de l'air, l'oxygène peut entretenir un incendie au contact des freins chauds, et l'humidité peut geler en altitude."
+     },
+     {
+      "q": "Antigivrage des becs de bord d'attaque d'un avion de ligne à réaction :",
+      "o": [
+       "par boudins pneumatiques",
+       "aucun",
+       "par liquide",
+       "thermique, par air chaud prélevé"
+      ],
+      "c": 3,
+      "why": "Les boudins (dégivrage) équipent surtout les turbopropulseurs ; les réacteurs fournissent de l'air chaud en abondance."
+     },
+     {
+      "q": "Avis de résolution TCAS « CLIMB » alors que le contrôleur demande de descendre :",
+      "o": [
+       "on vire à droite",
+       "on ne fait rien",
+       "on suit le contrôleur",
+       "on suit le RA et l'on informe le contrôle"
+      ],
+      "c": 3,
+      "why": "Collision d'Überlingen (2002) : un équipage a suivi le contrôleur contre son RA. Le RA prime [RÉFÉRENCÉ] OACI Doc 8168 et rapport BFU AX001-1-2/02."
+     },
+     {
+      "q": "Alerte GPWS « SINK RATE » : mode concerné ?",
+      "o": [
+       "mode 5",
+       "mode 1 (taux de descente excessif)",
+       "mode 2",
+       "mode 3"
+      ],
+      "c": 1,
+      "why": "Mode 1 : taux de descente excessif par rapport à la hauteur radio."
+     },
+     {
+      "q": "Alerte « DON'T SINK » juste après le décollage : mode concerné ?",
+      "o": [
+       "mode 4",
+       "mode 1",
+       "mode 5",
+       "mode 3 (perte d'altitude après décollage)"
+      ],
+      "c": 3,
+      "why": "Mode 3 : perte d'altitude en montée initiale ou après remise de gaz."
+     },
+     {
+      "q": "Alerte « GLIDESLOPE » : mode concerné ?",
+      "o": [
+       "mode 2",
+       "mode 3",
+       "mode 5 (sous le plan de descente)",
+       "mode 4"
+      ],
+      "c": 2,
+      "why": "Mode 5 : écart sous l'alignement de descente ILS."
+     },
+     {
+      "q": "Panne totale des générateurs moteurs en vol sur un avion de ligne. Source de secours qui se déploie automatiquement :",
+      "o": [
+       "l'APU seul",
+       "l'éolienne de secours (RAT)",
+       "aucune",
+       "la batterie seule pour tout le vol"
+      ],
+      "c": 1,
+      "why": "La RAT fournit puissance hydraulique et/ou électrique de secours (vol US Airways 1549, 2009 ; vol Air Transat 236, 2001)."
+     },
+     {
+      "q": "Pourquoi le moteur d'un avion de ligne a-t-il deux boucles de détection incendie ?",
+      "o": [
+       "pour chauffer le moteur",
+       "pour le dégivrage",
+       "pour éteindre deux feux",
+       "pour éviter les fausses alarmes et garder la détection si une boucle tombe en panne"
+      ],
+      "c": 3,
+      "why": "Logique « ET » (les deux boucles) pour l'alarme, basculement sur une seule boucle en cas de panne de l'autre."
+     }
+    ]
+   },
+   {
+    "id": "q2-procedures",
+    "t": "Procédures et sécurité : approche stabilisée, sillage, contaminants, situations anormales",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Procédures opérationnelles » (EASA ATPL, sujet 070), reliée à la partie 8 du Cours I (« Sécurité des vols : ce que les accidents nous ont appris »).\nLes procédures d'un type d'avion se lisent dans son manuel (FCOM, QRH) ; celles décrites ici sont les principes communs enseignés en école.</p>\n\n<h3>1. L'approche stabilisée</h3>\n<p>Critères usuels (Flight Safety Foundation, ALAR) : à <b>1 000 ft</b> au-dessus du terrain en IMC (<b>500 ft</b> en VMC), l'avion est sur la bonne trajectoire, en configuration d'atterrissage, à une vitesse entre V<sub>REF</sub> et V<sub>REF</sub> + 20 kt,\navec un taux de descente ≤ 1 000 ft/min et la poussée stabilisée. Sinon : <b>remise de gaz</b>. Les approches non stabilisées sont un facteur majeur des sorties de piste.</p>\n\n<h3>2. Turbulence de sillage (OACI Doc 4444)</h3>\n<p>Les tourbillons de bout d'aile descendent (≈ 300 à 500 ft/min) et dérivent avec le vent ; ils sont les plus forts derrière un avion <b>lourd, lent et lisse</b>.\nEspacements radar en approche : J → H 6 NM, J → M 7 NM, J → L 8 NM ; H → H 4 NM, H → M 5 NM, H → L 6 NM ; M → L 5 NM. Au décollage, 2 min derrière un avion lourd pour un avion moyen ou léger.</p>\n\n<h3>3. Pistes contaminées et dégivrage</h3>\n<ul>\n<li>État de piste rapporté par un code de 0 à 6 (6 : sèche ; 0 : freinage nul) dans le format mondial (GRF, OACI, en vigueur depuis novembre 2021) [RÉFÉRENCÉ] OACI Doc 9981 et circulaire 355.</li>\n<li>Dégivrage (fluide de type I chaud) puis antigivrage (type II ou IV épaissi). Le <b>temps de protection</b> (holdover time) commence au début de la dernière application ; dépassé, on refait l'inspection ou le traitement.\nLe principe « avion propre » : aucun décollage avec du givre, de la neige ou de la glace adhérant aux surfaces critiques.</li>\n</ul>\n\n<h3>4. Situations anormales</h3>\n<ul>\n<li><b>Décrochage</b> : réduire d'abord l'<b>incidence</b> (pousser), même si cela fait perdre de l'altitude ; puis gérer la poussée et les ailes à plat. Vol Air France 447 (2009) et Colgan 3407 (2009).</li>\n<li><b>Assiette inusuelle, nez bas</b> : réduire la poussée si besoin, remettre les ailes à plat (roulis), puis ressource. Nez haut : pousser (et éventuellement incliner), poussée adaptée.</li>\n<li><b>Vitesse douteuse</b> (unreliable airspeed) : afficher l'assiette et la poussée mémorisées, puis lire les tables du QRH.</li>\n<li><b>Cisaillement / micro-rafale</b> : pleine poussée, ailes à plat, suivre la barre d'assiette jusqu'à l'avertisseur de décrochage ; ne rien changer à la configuration.</li>\n<li><b>Évacuation</b> : démonstration de certification en 90 s avec la moitié des issues utilisables [RÉFÉRENCÉ] CS 25.803 et appendice J.</li>\n</ul>\n\n<h3>5. Liste minimale d'équipements (MEL)</h3>\n<p>La MMEL du constructeur, approuvée par l'autorité, donne les équipements dont l'avion peut être temporairement privé ; la MEL de l'exploitant ne peut être que plus restrictive.\nChaque élément porte une catégorie de délai de réparation (A à D) et des procédures (O : opérationnelle, M : maintenance).</p>\n<div class=\"box\"><b>Pièges d'examen</b> : face au décrochage, la priorité est l'incidence, pas la poussée ; le temps de protection part de la dernière application de fluide ;\nla MEL ne peut pas être moins restrictive que la MMEL.</div>\n",
+    "quiz": [
+     {
+      "q": "Approche IMC : à 1 000 ft, vitesse V_REF + 25 kt et taux de descente 1 400 ft/min. Décision :",
+      "o": [
+       "continuer et corriger avant 500 ft",
+       "continuer, la piste est longue",
+       "sortir les aérofreins",
+       "remise de gaz"
+      ],
+      "c": 3,
+      "why": "Deux critères de stabilisation ne sont pas tenus à la porte des 1 000 ft en IMC : remise de gaz obligatoire selon la politique de l'exploitant."
+     },
+     {
+      "q": "Porte de stabilisation usuelle en VMC :",
+      "o": [
+       "1 000 ft",
+       "500 ft",
+       "50 ft",
+       "200 ft"
+      ],
+      "c": 1,
+      "why": "Critères Flight Safety Foundation (ALAR) : 1 000 ft en IMC, 500 ft en VMC."
+     },
+     {
+      "q": "Espacement radar minimal en approche : un avion de catégorie M derrière un H :",
+      "o": [
+       "5 NM",
+       "6 NM",
+       "3 NM",
+       "4 NM"
+      ],
+      "c": 0,
+      "why": "H → M : 5 NM (Doc 4444)."
+     },
+     {
+      "q": "Un avion de catégorie L derrière un A380 (J) :",
+      "o": [
+       "8 NM",
+       "10 NM",
+       "5 NM",
+       "6 NM"
+      ],
+      "c": 0,
+      "why": "J → L : 8 NM ; J → M : 7 NM ; J → H : 6 NM."
+     },
+     {
+      "q": "Les tourbillons de sillage sont les plus forts derrière un avion :",
+      "o": [
+       "lourd, rapide, train sorti",
+       "léger, rapide, volets sortis",
+       "léger, lent",
+       "lourd, lent, en configuration lisse"
+      ],
+      "c": 3,
+      "why": "L'intensité croît avec la masse et décroît avec la vitesse ; les volets et le train dispersent un peu les tourbillons."
+     },
+     {
+      "q": "Décollage après un gros porteur sur la même piste, vent traversier nul. Précaution :",
+      "o": [
+       "quitter le sol avant son point de rotation et monter au-dessus de sa trajectoire",
+       "rester sous sa trajectoire",
+       "aucune",
+       "décoller après son point de rotation"
+      ],
+      "c": 0,
+      "why": "Les tourbillons commencent à la rotation de l'avion qui précède et descendent : on reste au-dessus et au vent de sa trajectoire."
+     },
+     {
+      "q": "Code d'état de piste (RWYCC) 6 :",
+      "o": [
+       "piste sèche",
+       "freinage nul",
+       "neige mouillée",
+       "glace"
+      ],
+      "c": 0,
+      "why": "Matrice GRF : 6 = sec ; 0 = freinage nul (glace mouillée, par exemple)."
+     },
+     {
+      "q": "Antigivrage terminé à 08 h 10 (début de la dernière application), temps de protection 25 min. Le décollage doit avoir lieu avant :",
+      "o": [
+       "08 h 45",
+       "08 h 35",
+       "08 h 10",
+       "08 h 25"
+      ],
+      "c": 1,
+      "why": "Le temps de protection court à partir du début de la dernière application : 08 h 10 + 25 min = 08 h 35. Au-delà, inspection ou nouveau traitement."
+     },
+     {
+      "q": "Fluide d'antigivrage offrant la plus longue protection :",
+      "o": [
+       "type IV",
+       "type I",
+       "eau chaude",
+       "type II dilué"
+      ],
+      "c": 0,
+      "why": "Le type IV est un fluide épaissi qui reste sur l'aile jusqu'à la rotation."
+     },
+     {
+      "q": "Alarme de décrochage en croisière, assiette 10° à cabrer, vitesse qui baisse. Première action :",
+      "o": [
+       "réduire l'incidence en poussant sur le manche",
+       "afficher la poussée maximale en gardant l'assiette",
+       "tirer pour éviter de perdre de l'altitude",
+       "sortir les volets"
+      ],
+      "c": 0,
+      "why": "Seule la diminution de l'incidence supprime le décrochage. Vol Air France 447 (2009) : action à cabrer maintenue [RÉFÉRENCÉ] BEA, rapport final 2012."
+     },
+     {
+      "q": "Assiette inusuelle nez bas, inclinaison 110°. Ordre des actions :",
+      "o": [
+       "réduire la poussée si nécessaire, mettre les ailes à plat, puis ressource",
+       "sortir le train",
+       "tirer d'abord sur le manche",
+       "pleine poussée et tirer"
+      ],
+      "c": 0,
+      "why": "Tirer en grande inclinaison resserre le virage et accélère la descente ; on remet d'abord les ailes à plat."
+     },
+     {
+      "q": "Indications de vitesse contradictoires après le décollage. Première action (principe général) :",
+      "o": [
+       "monter au plafond",
+       "afficher l'assiette et la poussée de mémoire, puis consulter les tables",
+       "réduire la poussée",
+       "suivre le directeur de vol"
+      ],
+      "c": 1,
+      "why": "Le directeur de vol et l'automatisme peuvent être faussés par les vitesses erronées ; l'assiette et la poussée donnent une trajectoire sûre."
+     },
+     {
+      "q": "Cisaillement en finale : la manœuvre de sortie comprend :",
+      "o": [
+       "pleine poussée, ailes à plat, assiette jusqu'à l'avertisseur de décrochage, pas de changement de configuration",
+       "sortir les aérofreins",
+       "rentrer les volets immédiatement",
+       "réduire la poussée"
+      ],
+      "c": 0,
+      "why": "Rentrer volets ou train ferait perdre de la portance au plus mauvais moment."
+     },
+     {
+      "q": "Démonstration d'évacuation pour certifier un avion de ligne :",
+      "o": [
+       "en 90 s avec la moitié des issues",
+       "en 3 min avec toutes les issues",
+       "en 30 s",
+       "en 90 s avec toutes les issues"
+      ],
+      "c": 0,
+      "why": "CS 25.803 et appendice J : 90 s, de nuit simulée, la moitié des issues utilisables."
+     },
+     {
+      "q": "La MEL d'un exploitant peut-elle être moins restrictive que la MMEL du constructeur ?",
+      "o": [
+       "oui, pour un seul vol",
+       "non",
+       "oui, si la météo est bonne",
+       "oui, avec l'accord du commandant"
+      ],
+      "c": 1,
+      "why": "La MEL est dérivée de la MMEL et ne peut être qu'au moins aussi restrictive."
+     },
+     {
+      "q": "Lettre « O » dans une rubrique de MEL :",
+      "o": [
+       "une opération de maintenance",
+       "le vol est interdit",
+       "une procédure opérationnelle est à appliquer par l'équipage",
+       "l'équipement est optionnel"
+      ],
+      "c": 2,
+      "why": "O : procédure opérationnelle (équipage) ; M : procédure de maintenance."
+     },
+     {
+      "q": "Accident Colgan 3407 (2009) : action de l'équipage à l'alarme de décrochage :",
+      "o": [
+       "sortir les volets",
+       "réduire la poussée",
+       "tirer sur le manche contre le pousseur de manche",
+       "pousser"
+      ],
+      "c": 2,
+      "why": "Le commandant a tiré contre le « stick pusher » ; la formation au décrochage a été revue depuis [RÉFÉRENCÉ] NTSB AAR-10/01."
+     },
+     {
+      "q": "Fumée en cabine d'origine inconnue. Priorité absolue de l'équipage de conduite :",
+      "o": [
+       "chercher la source",
+       "descendre sans masque",
+       "mettre les masques à oxygène et établir la communication",
+       "couper toute l'électricité sans procédure"
+      ],
+      "c": 2,
+      "why": "Protéger d'abord l'équipage (masques à 100 %), puis appliquer la check-list et préparer un déroutement rapide."
+     },
+     {
+      "q": "Composante de vent traversier : piste 09, vent 140°/30 kt. Valeur ?",
+      "o": [
+       "23,0 kt",
+       "15,0 kt",
+       "30,0 kt",
+       "19,3 kt"
+      ],
+      "c": 0,
+      "why": "30 × sin 50° = 23,0 kt, à comparer à la limite démontrée de l'avion (dépendante de l'état de la piste)."
+     },
+     {
+      "q": "Vol long-courrier biréacteur avec une autorisation EDTO (ETOPS) 180 min : signification ?",
+      "o": [
+       "le carburant couvre 180 min de réserve",
+       "le vol dure au maximum 180 min",
+       "l'équipage se relaie toutes les 180 min",
+       "l'avion peut s'éloigner jusqu'à 180 min de vol (un moteur en panne) d'un aérodrome adéquat"
+      ],
+      "c": 3,
+      "why": "Temps de déroutement maximal à la vitesse un moteur en panne, en air calme, approuvé pour l'exploitant et le type."
+     }
+    ]
+   }
+  ]
  }
 ]
