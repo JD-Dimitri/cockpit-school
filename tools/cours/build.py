@@ -17,12 +17,17 @@ write('academy-0', [{
     'mods': mods,
 }])
 
-# Cours II · Confirmé : modules ajoutés au fil de la rédaction (fichier vide tant qu'aucun n'est prêt)
-C2 = []
-parts2 = []
+# Cours II · Confirmé : mêmes thèmes que le Cours I, niveau très difficile (théorie de niveau ATPL)
+C2 = ['c2_cellule', 'c2_aero', 'c2_propulsion', 'c2_instruments', 'c2_meteo', 'c2_navigation', 'c2_humain']
+mods2 = []
 for name in C2:
     try:
-        parts2.append(importlib.import_module(name).PART)
+        mods2.append(importlib.import_module(name).MOD)
     except ModuleNotFoundError:
-        pass
-write('academy-2', parts2)
+        pass   # module pas encore rédigé
+write('academy-2', [{
+    'id': 'q1', 'n': 'Partie II-1 — Fondamentaux de l\'avion et du vol, niveau ATPL',
+    'd': 'Les thèmes du cours débutant (l\'avion, le vol, le moteur, les instruments, la météo, la navigation, le pilote) au niveau '
+         'de la théorie du pilote de ligne (ATPL). Niveau très difficile : calculs, cas limites, pièges d\'examen. Exercices corrigés.',
+    'mods': mods2,
+}] if mods2 else [])
