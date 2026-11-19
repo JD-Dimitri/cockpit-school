@@ -50,7 +50,14 @@ export interface DataIndex { source: string; engine: string; simver: string; ext
 
 const cache = new Map<string, Promise<unknown>>();
 
+/** Version autonome (un seul fichier HTML) : les données y sont intégrées dans window.__PT_DATA__. */
+declare global {
+  interface Window { __PT_DATA__?: Record<string, unknown>; __PT_LEGACY__?: string }
+}
+
 export function load<T>(name: string): Promise<T> {
+  const embedded = window.__PT_DATA__?.[name];
+  if (embedded !== undefined) return Promise.resolve(embedded as T);
   if (!cache.has(name)) {
     cache.set(
       name,

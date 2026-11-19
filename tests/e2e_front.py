@@ -20,8 +20,9 @@ def check(name, cond, detail=''):
     print(('✔ ' if cond else '✘ ') + name + (f' — {detail}' if detail and not cond else ''))
 
 with sync_playwright() as p:
-    b = p.chromium.launch(args=['--use-gl=swiftshader', '--enable-unsafe-swiftshader'])
     for W, H, tag in ((1280, 800, 'pc'), (390, 844, 'tel')):
+        # Un navigateur neuf par largeur : le rendu logiciel (swiftshader) garde sinon l'état WebGL du passage précédent.
+        b = p.chromium.launch(args=['--use-gl=swiftshader', '--enable-unsafe-swiftshader'])
         ctx = b.new_context(viewport={'width': W, 'height': H})
         ctx.route(CDN, lambda r: r.fulfill(path=THREE, content_type='application/javascript'))
         ctx.route('https://fonts.googleapis.com/**', lambda r: r.fulfill(body='', content_type='text/css'))
@@ -75,7 +76,7 @@ with sync_playwright() as p:
         fr = pg.frame_locator('.sim iframe')
         fr.locator('body').wait_for()
         pg.wait_for_timeout(2500)
-        frame = next(f for f in pg.frames if f.url.endswith('legacy/plane-trajectories.html'))
+        frame = next(f for f in pg.frames if f.url.endswith('legacy/plane-trajectories.html') or f.url.startswith('blob:'))
         ver = frame.evaluate('typeof AC==="object" ? Object.keys(AC).length : 0')
         check(f'[{tag}] simulateur : moteur d\'origine chargé (8 appareils)', ver == 8, str(ver))
         box = pg.locator('.sim iframe').bounding_box()
@@ -90,7 +91,7 @@ with sync_playwright() as p:
         check(f'[{tag}] aucune ressource interne manquante', not other, '; '.join(other[:3]))
         check(f'[{tag}] aucune erreur JavaScript', not real, '; '.join(real[:3]))
         ctx.close()
-    b.close()
+        b.close()
 
 print(f'{sum(checks)}/{len(checks)} vérifications')
 sys.exit(0 if all(checks) else 1)
