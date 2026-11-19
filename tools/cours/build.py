@@ -18,16 +18,24 @@ write('academy-0', [{
 }])
 
 # Cours II · Confirmé : mêmes thèmes que le Cours I, niveau très difficile (théorie de niveau ATPL)
-C2 = ['c2_cellule', 'c2_aero', 'c2_propulsion', 'c2_instruments', 'c2_meteo', 'c2_navigation', 'c2_humain']
-mods2 = []
-for name in C2:
-    try:
-        mods2.append(importlib.import_module(name).MOD)
-    except ModuleNotFoundError:
-        pass   # module pas encore rédigé
-write('academy-2', [{
-    'id': 'q1', 'n': 'Partie II-1 — Fondamentaux de l\'avion et du vol, niveau ATPL',
-    'd': 'Les thèmes du cours débutant (l\'avion, le vol, le moteur, les instruments, la météo, la navigation, le pilote) au niveau '
-         'de la théorie du pilote de ligne (ATPL). Niveau très difficile : calculs, cas limites, pièges d\'examen. Exercices corrigés.',
-    'mods': mods2,
-}] if mods2 else [])
+PARTS2 = [
+    ('q1', 'Partie II-1 — Fondamentaux de l\'avion et du vol, niveau ATPL',
+     'Les thèmes du cours débutant (l\'avion, le vol, le moteur, les instruments, la météo, la navigation, le pilote) au niveau '
+     'de la théorie du pilote de ligne (ATPL). Niveau très difficile : calculs, cas limites, pièges d\'examen. Exercices corrigés.',
+     ['c2_cellule', 'c2_aero', 'c2_propulsion', 'c2_instruments', 'c2_meteo', 'c2_navigation', 'c2_humain']),
+    ('q2', 'Partie II-2 — Exploitation du transport aérien, niveau ATPL',
+     'Les matières de la théorie PPL et des calculs du pilote reprises au niveau du pilote de ligne : réglementation, communications, '
+     'performances de classe A, masse et centrage, préparation du vol et carburant, systèmes, procédures et sécurité. Exercices corrigés.',
+     ['c2_reglementation', 'c2_communications', 'c2_performances', 'c2_masse', 'c2_planification', 'c2_systemes', 'c2_procedures']),
+]
+parts2 = []
+for pid, n, d, names in PARTS2:
+    mods = []
+    for name in names:
+        try:
+            mods.append(importlib.import_module(name).MOD)
+        except ModuleNotFoundError:
+            pass   # module pas encore rédigé
+    if mods:
+        parts2.append({'id': pid, 'n': n, 'd': d, 'mods': mods})
+write('academy-2', parts2)
