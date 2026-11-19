@@ -4,6 +4,8 @@ Ordinateur et téléphone ; version servie ou autonome (FRONT_URL=file://…).
 """
 import os, pathlib, sys
 from playwright.sync_api import sync_playwright
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from serveur_simule import serveur
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 URL = os.environ.get('FRONT_URL', 'http://localhost:8766/')
@@ -25,6 +27,7 @@ def ctx_for(p, W, H):
     c.route(CDN, lambda r: r.fulfill(path=THREE, content_type='application/javascript'))
     c.route('https://fonts.googleapis.com/**', lambda r: r.fulfill(body='', content_type='text/css'))
     c.route('https://aviationweather.gov/**', lambda r: r.abort())
+    serveur(c)   # élève connecté (F41)
     return b, c
 
 with sync_playwright() as p:

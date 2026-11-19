@@ -6,6 +6,8 @@ three.js r128 (même fichier que le CDN) est servi localement si le réseau n'at
 """
 import os, pathlib, sys
 from playwright.sync_api import sync_playwright
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from serveur_simule import serveur
 from PIL import Image
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -26,6 +28,7 @@ with sync_playwright() as p:
         ctx = b.new_context(viewport={'width': W, 'height': H})
         ctx.route(CDN, lambda r: r.fulfill(path=THREE, content_type='application/javascript'))
         ctx.route('https://fonts.googleapis.com/**', lambda r: r.fulfill(body='', content_type='text/css'))
+        serveur(ctx)   # élève connecté (F41)
         pg = ctx.new_page()
         errs, failed = [], []
         pg.on('pageerror', lambda e: errs.append(str(e)))

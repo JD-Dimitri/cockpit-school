@@ -8,7 +8,8 @@
  * #/simulateur/go:<appareil>:<parcours>:<mode> lance un parcours validé sur la page Parcours, par les boutons du menu
  * d'origine (même suite qu'aujourd'hui : dossier de vol, puis parcours dans le mode choisi).
  */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { apiAvailable } from '../auth';
 
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free))$/;
 
@@ -51,6 +52,11 @@ function runAction(w: any, k: string): boolean {
 export function Simulator({ action }: { action?: string }) {
   // Version autonome : srcdoc (même origine que la page, y compris ouverte en file://, ce qui permet de lancer les actions).
   const embedded = window.__PT_LEGACY__;
+  // En ligne : moteur servi par l'API, seulement aux comptes connectés (F41) ; sans serveur : fichier statique (développement).
+  const [src, setSrc] = useState<string | null>(embedded ? null : '');
+  useEffect(() => {
+    if (!embedded) apiAvailable().then((up) => setSrc(up ? 'api/moteur' : 'legacy/plane-trajectories.html'));
+  }, []);
   const frame = useRef<HTMLIFrameElement>(null);
   const loaded = useRef(false);
 
@@ -77,11 +83,11 @@ export function Simulator({ action }: { action?: string }) {
 
   return (
     <section className="sim">
-      {(
+      {(embedded || src) && (
         <iframe
           ref={frame}
           title="Simulateur PLANE SIMULATOR (moteur d'origine PLANE SIMULATOR)"
-          {...(embedded ? { srcDoc: embedded } : { src: 'legacy/plane-trajectories.html' })}
+          {...(embedded ? { srcDoc: embedded } : { src: src! })}
           allow="fullscreen; microphone; autoplay"
           allowFullScreen
           onLoad={() => {

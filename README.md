@@ -42,8 +42,14 @@ php -S localhost:8000 -t public          # ou symfony serve
 vendor/bin/phpunit                       # tests de l'API (comptes, mot de passe, PDF, données)
 ```
 
-Mise en ligne (o2switch) : le dossier `backend/public/` est la racine du site ; on y copie le contenu de `frontend/dist/`
-(`index.html`, `app.js`, `app.css`, `legacy/`, `data/`). L'interface appelle l'API sur le même domaine (`/api/...`).
+Mise en ligne (o2switch) : le dossier `backend/public/` est la racine du site ; on y copie **seulement** `index.html`,
+`app.js` et `app.css` de `frontend/dist/`. **Ne pas copier `legacy/` ni `data/`** : en ligne, le moteur du simulateur et
+les données sont servis par l'API (`/api/moteur`, `/api/data/…`) aux seuls comptes connectés (F41). L'interface appelle
+l'API sur le même domaine (`/api/...`). La version autonome (`tools/standalone.py`) est une démonstration hors ligne
+pour les essais : elle contient tout, sans connexion, et ne doit pas être publiée sur le site.
+
+Accès (F41) : sans compte, seuls l'accueil public, la connexion, l'inscription et « Mot de passe oublié ? » sont ouverts ;
+le contrôle est fait par Symfony (`config/packages/security.yaml`, `access_control`), pas seulement par l'interface.
 
 > L'API a été écrite dans un environnement sans accès à Packagist : `composer install` et ses tests n'y ont pas été
 > exécutés. Ils doivent l'être une première fois sur un poste ou un hébergement connecté.
@@ -56,6 +62,7 @@ python3 tests/parity_engine.py     # moteur TypeScript = moteur d'origine (14 fo
 python3 tests/parity_flight.py     # physique du vol = moteur d'origine (12 vols rejoués pas à pas, données des 8 appareils)
 python3 tests/e2e_front.py         # interface React, ordinateur et téléphone (40 vérifications)
 python3 tests/e2e_auth_pdf.py      # comptes, œil, PDF, boutons d'action des cours (69 vérifications)
+python3 tests/e2e_acces.py         # accès : public hors connexion, tout après connexion (24 vérifications)
 python3 tests/e2e_parcours.py      # parcours, choix de l'appareil, fiche, validation, lancement (32 vérifications)
 python3 tests/e2e_trafic.py        # page Trafic réel (22 vérifications ; 8 en version autonome)
 php tests/traffic_normalize.php    # trafic réel : conversion et fusion des sources, sans composer (27 vérifications)

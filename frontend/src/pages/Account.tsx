@@ -1,6 +1,6 @@
 /** Pages de compte : connexion, inscription, mot de passe oublié, réinitialisation. */
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
-import { apiAvailable, auth, passwordProblem, setUser, useUser } from '../auth';
+import { apiAvailable, auth, goAfterLogin, passwordProblem, setUser, useUser } from '../auth';
 import { PasswordField } from '../components/PasswordField';
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,11 +42,11 @@ export function Login() {
   const [pw, setPw] = useState('');
   const [err, setErr] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  if (user) {
+  if (user && !user.demo) {
     return (
       <Shell title="Connexion" up={up}>
         <p>Connecté en tant que <b>{user.name || user.email}</b>.</p>
-        <button className="btn" onClick={() => auth.logout().then(() => setUser(null))}>Se déconnecter</button>
+        <button className="btn" onClick={() => auth.logout().then(() => { setUser(null); location.hash = '#/'; })}>Se déconnecter</button>
       </Shell>
     );
   }
@@ -60,7 +60,7 @@ export function Login() {
     setBusy(false);
     if (r.ok) {
       setUser(r.data);
-      location.hash = '#/cours';
+      goAfterLogin();
     } else setErr(r.status === 401 ? 'E-mail ou mot de passe incorrect.' : r.message);
   };
   return (
@@ -102,7 +102,7 @@ export function Register() {
     setBusy(false);
     if (r.ok) {
       setUser(r.data);
-      location.hash = '#/cours';
+      goAfterLogin();
     } else setErr(r.message);
   };
   return (

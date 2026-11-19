@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 const API = 'api/';
 
-export interface User { email: string; name: string }
+export interface User { email: string; name: string; demo?: boolean }
 export type ApiResult<T = unknown> = { ok: true; data: T } | { ok: false; status: number; message: string };
 
 async function call<T>(path: string, body?: unknown): Promise<ApiResult<T>> {
@@ -62,7 +62,27 @@ export function passwordProblem(p: string): string | null {
 
 type Listener = (u: User | null) => void;
 const listeners = new Set<Listener>();
-let current: User | null | undefined;
+declare global {
+  interface Window { __PT_DEMO__?: boolean }
+}
+/**
+ * Version autonome (fichier unique, sans serveur) : aucune connexion possible. Elle est construite en
+ * « démonstration hors ligne » (window.__PT_DEMO__) pour les essais de l'auteur : tout y est ouvert, avec un bandeau.
+ * Le site en ligne, lui, n'ouvre le simulateur et les contenus qu'après connexion (contrôle fait par le serveur).
+ */
+const DEMO: User = { email: '', name: 'Démonstration hors ligne', demo: true };
+let current: User | null | undefined = window.__PT_DEMO__ ? DEMO : undefined;
+
+/** Page demandée avant la connexion : on y revient une fois connecté. */
+const NEXT_KEY = 'ps-apres-connexion';
+export function rememberNext(hash: string) {
+  try { sessionStorage.setItem(NEXT_KEY, hash); } catch { /* stockage indisponible */ }
+}
+export function goAfterLogin() {
+  let h: string | null = null;
+  try { h = sessionStorage.getItem(NEXT_KEY); sessionStorage.removeItem(NEXT_KEY); } catch { /* stockage indisponible */ }
+  location.hash = h && /^#\/[a-z]/.test(h) && !/^#\/(connexion|inscription|mot-de-passe-oublie|reinitialiser)/.test(h) ? h : '#/parcours';
+}
 
 export function setUser(u: User | null) {
   current = u;

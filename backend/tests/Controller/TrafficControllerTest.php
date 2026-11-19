@@ -2,16 +2,20 @@
 
 namespace App\Tests\Controller;
 
+use App\Tests\LoggedInTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /** Trafic réel : zone, sources non configurées, envoi du récepteur (jeton, format, compression). */
 final class TrafficControllerTest extends WebTestCase
 {
+    use LoggedInTrait;
+
     private const TOKEN = 'jeton-de-test-0123456789abcdef';   // phpunit.xml.dist
 
     public function testZoneIsRequiredAndLimited(): void
     {
         $client = static::createClient();
+        self::loggedIn($client);
         $client->request('GET', '/api/trafic');
         self::assertResponseStatusCodeSame(400);
         $client->request('GET', '/api/trafic?latmin=0&lonmin=0&latmax=30&lonmax=30');
@@ -22,6 +26,7 @@ final class TrafficControllerTest extends WebTestCase
     public function testUnconfiguredSourcesAreReportedNotCalled(): void
     {
         $client = static::createClient();
+        self::loggedIn($client);
         $client->request('GET', '/api/trafic?latmin=48&lonmin=1.5&latmax=49.5&lonmax=3.5&sources=opensky,fr24');
         self::assertResponseIsSuccessful();
         $j = json_decode((string) $client->getResponse()->getContent(), true);
@@ -33,6 +38,7 @@ final class TrafficControllerTest extends WebTestCase
     public function testReceiverPushThenList(): void
     {
         $client = static::createClient();
+        self::loggedIn($client);
         $body = (string) file_get_contents(__DIR__.'/../fixtures/trafic/readsb-exemple.json');
         $client->request('POST', '/api/trafic/recepteur', [], [], ['CONTENT_TYPE' => 'application/json', 'HTTP_X_RECEPTEUR_JETON' => 'mauvais'], $body);
         self::assertResponseStatusCodeSame(401);

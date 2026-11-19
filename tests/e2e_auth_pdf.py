@@ -9,6 +9,8 @@ Les échanges réels avec Symfony sont testés côté serveur (backend/tests, PH
 """
 import io, os, pathlib, sys
 from playwright.sync_api import sync_playwright
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from serveur_simule import serveur
 from pypdf import PdfReader
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -34,7 +36,8 @@ with sync_playwright() as p:
 
         # --- Connexion et œil
         pg.goto(URL + '#/connexion'); pg.wait_for_selector('form')
-        check(f'[{tag}] lien « Connexion » dans le menu', pg.locator('nav a.acct').text_content().strip() == 'Connexion')
+        acct = pg.locator('nav a.acct').text_content().strip()
+        check(f'[{tag}] lien « Connexion » dans le menu', acct == 'Connexion' or (URL.startswith('file:') and 'Démonstration' in acct), acct)
         pg.wait_for_selector('.notice')
         check(f'[{tag}] serveur absent : message clair et bouton désactivé',
               'pas joignable' in pg.inner_text('.notice') and pg.locator('button[type=submit]').is_disabled())
@@ -80,6 +83,8 @@ with sync_playwright() as p:
         pg.goto(URL + '#/reinitialiser/abc123'); pg.wait_for_selector('input[name=password]')
         check(f'[{tag}] réinitialisation avec jeton : formulaire', pg.locator('input[name=password]').count() == 1)
 
+        # --- PDF et cours : réservés aux comptes connectés (F41) → serveur simulé, élève connecté
+        serveur(ctx); pg.close(); pg = ctx.new_page(); pg.on('pageerror', lambda e: errs.append(str(e)))
         # --- PDF
         pg.goto(URL + '#/cours/p1/avion'); pg.wait_for_selector('.titlebar .btn')
         check(f'[{tag}] cours : bouton « PDF du module »', 'PDF du module' in pg.locator('.titlebar').text_content())

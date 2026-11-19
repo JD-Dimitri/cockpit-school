@@ -105,6 +105,7 @@ final class AuthControllerTest extends WebTestCase
 
     public function testCoursePdf(): void
     {
+        $this->post('/api/register', ['name' => 'Élève', 'email' => 'pdf@example.org', 'password' => 'decollage2026']);
         $this->client->request('GET', '/api/pdf/cours/p1/avion');
         self::assertResponseIsSuccessful();
         self::assertResponseHeaderSame('Content-Type', 'application/pdf');

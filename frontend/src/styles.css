@@ -226,3 +226,11 @@ a.card:hover { border-color: var(--cy); }
 .parcours.started { max-width: 560px; margin: 0 auto; text-align: center; }
 .parcours.started .aclogo.lg { max-width: 360px; margin: 10px auto; }
 @media (max-width: 760px) { .parcours .sheet { grid-template-columns: 1fr; } }
+
+/* accueil public (F41) */
+.welcome .cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 22px; }
+.btn.ghost { background: transparent; border: 1px solid var(--cy); color: var(--cy); }
+.welcome .points { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 10px; }
+.welcome .points li { border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+.welcome .points span { color: var(--mute); }
+.demo { margin: 0; padding: 6px 16px; background: rgba(255, 176, 32, .12); color: #ffb020; font-size: 13px; text-align: center; }

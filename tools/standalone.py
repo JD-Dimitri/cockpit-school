@@ -3,7 +3,9 @@
 Intègre dans frontend/dist/index.html :
 - la feuille de style et le code (app.css, app.js, three.js compris) ;
 - les données data/*.json (window.__PT_DATA__) ;
-- le moteur d'origine legacy/plane-trajectories.html, avec three.js r128 intégré à la place du CDN (window.__PT_LEGACY__).
+- le moteur d'origine legacy/plane-trajectories.html, avec three.js r128 intégré à la place du CDN (window.__PT_LEGACY__) ;
+- le mode « démonstration hors ligne » (window.__PT_DEMO__) : sans serveur, aucune connexion n'est possible ;
+  ce fichier sert aux essais de l'auteur et ne doit pas être publié sur le site (en ligne, tout passe par la connexion).
 
 Usage : python3 tools/standalone.py SORTIE.html [--three CHEMIN_three.min.js]
 À lancer après « node frontend/build.mjs ».
@@ -37,7 +39,9 @@ def main():
     html = html.replace('<link rel="stylesheet" href="app.css">', '<style>\n' + css + '\n</style>')
     boot = ('<script>window.__PT_DATA__=' + js_string(json.dumps(data, ensure_ascii=False)) + ';'
             'window.__PT_DATA__=JSON.parse(window.__PT_DATA__);'
-            'window.__PT_LEGACY__=' + js_string(legacy) + ';</script>\n')
+            'window.__PT_LEGACY__=' + js_string(legacy) + ';'
+            # pas de serveur, donc pas de connexion possible : version de démonstration (bandeau), pour les essais de l'auteur
+            'window.__PT_DEMO__=true;</script>\n')
     html = html.replace('<script type="module" src="app.js"></script>',
                         boot + '<script type="module">' + app.replace('</script', '<\\/script') + '</script>')
     out.write_text(html, encoding='utf-8')

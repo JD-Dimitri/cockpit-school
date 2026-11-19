@@ -1,6 +1,7 @@
+import { apiAvailable } from './auth';
 /**
  * Accès aux données. Aujourd'hui : fichiers JSON statiques (data/*.json, extraits du moteur d'origine).
- * Demain : API Symfony (/api/...), avec la même forme de données — seul BASE change.
+ * En ligne : API Symfony (/api/data/...), même forme de données ; voir load().
  */
 import { useEffect, useState } from 'react';
 
@@ -62,17 +63,27 @@ declare global {
   interface Window { __PT_DATA__?: Record<string, unknown>; __PT_LEGACY__?: string }
 }
 
+/**
+ * Site en ligne : données servies par l'API Symfony (/api/data/<nom>), réservées aux comptes connectés (F41).
+ * Développement et tests sans serveur : fichiers statiques data/<nom>.json (absents du site publié).
+ */
 export function load<T>(name: string): Promise<T> {
   const embedded = window.__PT_DATA__?.[name];
   if (embedded !== undefined) return Promise.resolve(embedded as T);
   if (!cache.has(name)) {
-    cache.set(
-      name,
-      fetch(BASE + name + '.json').then((r) => {
-        if (!r.ok) throw new Error(`${name}.json : ${r.status}`);
-        return r.json();
-      }),
+    const json = (r: Response) => {
+      if (!r.ok) throw new Error(`${name} : ${r.status === 401 ? 'connexion requise' : r.status}`);
+      return r.json();
+    };
+    const p = apiAvailable().then((up) =>
+      up
+        ? fetch('api/data/' + name, { credentials: 'same-origin', headers: { Accept: 'application/json' } }).then((r) =>
+            r.status === 404 ? fetch(BASE + name + '.json').then(json) : json(r),
+          )
+        : fetch(BASE + name + '.json').then(json),
     );
+    p.catch(() => cache.delete(name));   // nouvel essai après connexion
+    cache.set(name, p);
   }
   return cache.get(name) as Promise<T>;
 }

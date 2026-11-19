@@ -6,6 +6,8 @@ par tests/traffic_normalize.php. Version autonome (FRONT_URL=file://…) : messa
 """
 import json, os, pathlib, sys, time
 from playwright.sync_api import sync_playwright
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from serveur_simule import serveur
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 URL = os.environ.get('FRONT_URL', 'http://localhost:8766/')
@@ -29,13 +31,12 @@ with sync_playwright() as p:
         ctx.route('https://fonts.googleapis.com/**', lambda r: r.fulfill(body='', content_type='text/css'))
         calls = []
         if served:
-            ctx.route('**/api/health', lambda r: r.fulfill(json={'status': 'ok'}))
+            serveur(ctx)   # élève connecté (F41)
             def trafic(r):
                 from urllib.parse import urlparse, parse_qs
                 q = {k: float(v[0]) for k, v in parse_qs(urlparse(r.request.url).query).items()}
                 calls.append(q); r.fulfill(json=reponse(q))
             ctx.route('**/api/trafic?**', trafic)
-            ctx.route('**/api/me', lambda r: r.fulfill(status=401, json={'erreur': 'non connecté'}))
         pg = ctx.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
         pg.goto(URL + '#/trafic'); pg.wait_for_selector('h1')
         check(f'[{tag}] page « Trafic réel »', pg.inner_text('h1') == 'Trafic réel')
