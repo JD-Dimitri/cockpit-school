@@ -39,6 +39,7 @@ réseaux de roulage, textures du globe.
 | rendu 3D (terrain, aéroports, appareils, poste) | `three/` | à faire (visionneuse d'appareils seulement) |
 | instruments (PFD, ND, ECAM) | `instruments/` | à faire |
 | parcours guidés, check-lists, examens | `pages/` + `engine/` | à faire |
+| actions des cours (`act()` de `acad.js`) | `pages/Simulator.tsx` (`runAction`) | ✔ reprises : atelier, modes, dossier de vol, documents |
 
 ## Chantiers reportés au GO PRO (décision du 18/11/2026)
 

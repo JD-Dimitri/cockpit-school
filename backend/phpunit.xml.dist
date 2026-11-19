@@ -7,6 +7,9 @@
         <server name="APP_ENV" value="test" force="true"/>
         <server name="KERNEL_CLASS" value="App\Kernel"/>
         <server name="APP_SECRET" value="test"/>
+        <server name="MAILER_DSN" value="null://null"/>
+        <server name="FRONT_URL" value="http://localhost/"/>
+        <server name="MAILER_FROM" value="test@example.org"/>
     </php>
     <testsuites>
         <testsuite name="API">

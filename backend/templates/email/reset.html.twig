@@ -1,0 +1,5 @@
+<p>Bonjour {{ name }},</p>
+<p>Vous avez demandé à changer le mot de passe de votre compte PLANE TRAJECTORIES.</p>
+<p><a href="{{ link }}">Choisir un nouveau mot de passe</a></p>
+<p>Ce lien ne sert qu'une fois et expire {{ expires|trans(expiresData, 'ResetPasswordBundle') }}.</p>
+<p>Si vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail : votre mot de passe actuel reste valable.</p>

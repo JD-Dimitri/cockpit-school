@@ -1,6 +1,33 @@
 import { useState } from 'react';
+import type React from 'react';
 import DOMPurify from 'dompurify';
 import { useData, type Part, type Quiz } from '../data';
+import { apiAvailable } from '../auth';
+
+/** Téléchargement PDF : généré par le serveur s'il est joignable, sinon par la fenêtre d'impression du navigateur. */
+function PdfButton({ part, mod, label }: { part: string; mod?: string; label: string }) {
+  const go = async () => {
+    if (await apiAvailable()) location.href = `api/pdf/cours/${part}` + (mod ? '/' + mod : '');
+    else location.hash = `#/imprimer/${part}` + (mod ? '/' + mod : '') + '/auto';
+  };
+  return (
+    <button type="button" className="btn ghost" onClick={go}>
+      ⬇ {label}
+    </button>
+  );
+}
+
+/**
+ * Boutons d'action des cours (ouvrir l'atelier, lancer un mode, ouvrir un document) :
+ * ils ouvrent le simulateur directement sur l'action, comme dans l'Académie d'origine.
+ */
+function courseAction(e: React.MouseEvent<HTMLDivElement>) {
+  const b = (e.target as HTMLElement).closest<HTMLElement>('[data-act],[data-docopen]');
+  if (!b) return;
+  e.preventDefault();
+  const k = b.dataset.act ?? 'doc:' + b.dataset.docopen;
+  location.hash = '#/simulateur/' + encodeURIComponent(k);
+}
 
 /** Le contenu des cours est du HTML rédigé dans le projet ; il est tout de même nettoyé avant affichage. */
 const safe = (h: string) => ({ __html: DOMPurify.sanitize(h, { ADD_ATTR: ['target'] }) });
@@ -43,8 +70,11 @@ export function Courses({ part, mod }: { part?: string; mod?: string }) {
     return (
       <article className="page course">
         <p className="crumb"><a href="#/cours">Cours</a> › <a href={'#/cours/' + P.id}>{P.n}</a></p>
-        <h1>{M.t}</h1>
-        <div className="body" dangerouslySetInnerHTML={safe(M.h)} />
+        <div className="titlebar">
+          <h1>{M.t}</h1>
+          <PdfButton part={P.id} mod={M.id} label="PDF du module" />
+        </div>
+        <div className="body" onClick={courseAction} dangerouslySetInnerHTML={safe(M.h)} />
         {M.quiz && M.quiz.length > 0 && <QuizBlock key={M.id} quiz={M.quiz} />}
         <nav className="pager" aria-label="Modules">
           {prev ? <a href={`#/cours/${P.id}/${prev.id}`}>← {prev.t}</a> : <span />}
@@ -56,10 +86,13 @@ export function Courses({ part, mod }: { part?: string; mod?: string }) {
   return (
     <section className="page">
       <h1>Cours</h1>
-      <p className="lead">Les cours de l'Académie du simulateur, repris tels quels. Le téléchargement PDF arrive avec le serveur Symfony.</p>
+      <p className="lead">Les cours de l'Académie du simulateur, repris tels quels. Chaque module et chaque partie se téléchargent en PDF, avec les QCM et leurs corrigés.</p>
       {data.filter((p) => !P || p === P).map((p) => (
         <div key={p.id}>
-          <h2><a href={'#/cours/' + p.id}>{p.n}</a></h2>
+          <div className="titlebar">
+            <h2><a href={'#/cours/' + p.id}>{p.n}</a></h2>
+            <PdfButton part={p.id} label="PDF de la partie" />
+          </div>
           <p className="sub" dangerouslySetInnerHTML={safe(p.d)} />
           <ol className="mods">
             {p.mods.map((m) => (

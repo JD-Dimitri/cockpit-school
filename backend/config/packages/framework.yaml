@@ -2,9 +2,25 @@ framework:
     secret: '%env(APP_SECRET)%'
     http_method_override: false
     handle_all_throwables: true
+    session:
+        cookie_secure: auto
+        cookie_samesite: lax
+        cookie_httponly: true
     php_errors:
         log: true
+    rate_limiter:
+        password_forgot:
+            policy: sliding_window
+            limit: 5
+            interval: '15 minutes'
+    mailer:
+        dsn: '%env(MAILER_DSN)%'
 
 when@test:
     framework:
         test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file
+        validation:
+            not_compromised_password:
+                enabled: false   # pas d'appel réseau pendant les tests

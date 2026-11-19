@@ -1,0 +1,7 @@
+Bonjour {{ name }},
+
+Vous avez demandé à changer le mot de passe de votre compte PLANE TRAJECTORIES.
+Choisir un nouveau mot de passe : {{ link }}
+
+Ce lien ne sert qu'une fois et expire {{ expires|trans(expiresData, 'ResetPasswordBundle') }}.
+Si vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail : votre mot de passe actuel reste valable.

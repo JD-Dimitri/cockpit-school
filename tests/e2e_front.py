@@ -76,7 +76,7 @@ with sync_playwright() as p:
         fr = pg.frame_locator('.sim iframe')
         fr.locator('body').wait_for()
         pg.wait_for_timeout(2500)
-        frame = next(f for f in pg.frames if f.url.endswith('legacy/plane-trajectories.html') or f.url.startswith('blob:'))
+        frame = next(f for f in pg.frames if f.url.endswith('legacy/plane-trajectories.html') or f.url.startswith('blob:') or f.url == 'about:srcdoc')
         ver = frame.evaluate('typeof AC==="object" ? Object.keys(AC).length : 0')
         check(f'[{tag}] simulateur : moteur d\'origine chargé (8 appareils)', ver == 8, str(ver))
         box = pg.locator('.sim iframe').bounding_box()
