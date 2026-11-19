@@ -67,18 +67,30 @@ with sync_playwright() as p:
         n0 = len(log(fr)); fr.click('#atc [data-x=again]') if not fr.locator('#atc [data-x=again]').is_disabled() else None
         # l'ATIS écoutée (passée), le premier échange « à vous d'appeler » arrive ; l'élève règle la station avec Radio ▾ puis appelle
         fr.evaluate("(() => { const x = curX(); if (x && x.type === 'atis') xDone(x, true); })()")
-        ready = False
-        for _ in range(60):
-            if fr.evaluate("ATC.state === 'ready' && !!curX()"): ready = True; break
-            pg.wait_for_timeout(250)
-        k = fr.evaluate("curX() ? curX().st : null")
-        fr.evaluate("atcRender(true)"); fr.click('#atc [data-x=radio]'); fr.click(f'#atc [data-st="{k}"]')
-        fr.evaluate("atcRender(true)")
-        if ready: fr.click('#atc [data-a=call]')
-        got_rb = False
-        for _ in range(40):
-            if fr.evaluate("ATC.state") == 'rb': got_rb = True; break
-            pg.wait_for_timeout(250)
+        # Appeler jusqu'au premier échange avec réponse du contrôle : les auto-annonces sur fréquence de trafic (hélistation,
+        # terrain non contrôlé) et l'ATIS n'attendent pas de collationnement ; l'élève règle chaque fois la station avec Radio ▾
+        ready = got_rb = False; k = None
+        for _ in range(8):
+            for i_ in range(60):
+                fr.evaluate("(() => { const x = curX(); if (x && x.type === 'atis') xDone(x, true); })()")
+                if fr.evaluate("ATC.state === 'rb'"): got_rb = True; break
+                if fr.evaluate("ATC.state === 'ready' && !!curX()"): ready = True; break
+                # échange déclenché par la position en vol (hélicoptère après l'auto-annonce) : on simule seulement l'arrivée
+                # au point de déclenchement ; l'échange lui-même reste celui du moteur
+                if i_ == 12: fr.evaluate("(() => { const x = curX(); if (x && ATC.state === 'idle') x.trig = () => true; })()")
+                pg.wait_for_timeout(250)
+            if got_rb: break
+            if not ready: break
+            k = fr.evaluate("curX() ? curX().st : null")
+            fr.evaluate("atcRender(true)"); fr.click('#atc [data-x=radio]'); fr.click(f'#atc [data-st="{k}"]')
+            fr.evaluate("atcRender(true)"); fr.click('#atc [data-a=call]')
+            for _ in range(40):
+                st_ = fr.evaluate("ATC.state")
+                if st_ == 'rb': got_rb = True; break
+                if st_ == 'ready': break
+                pg.wait_for_timeout(250)
+            if got_rb: break
+            ready = False
         L = log(fr)
         check(f'{tag} : Appeler → réponse du contrôle, collationnement attendu', got_rb and any(x.startswith('ATC|') for x in L), f'ready={ready} state={fr.evaluate("ATC.state")} k={k} pw={fr.evaluate("radioPowered()")} ' + str(L[-3:]))
         cs = fr.evaluate("CSN()")

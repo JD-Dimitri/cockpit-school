@@ -24,7 +24,11 @@ function reasons(){
   if (ACK === 'c172' || ACK === 'r44') p.push(['pan','rough running engine','moteur qui tourne mal']);
   return m.concat(p);
 }
-function stKey(name){ for (var k in STN) if (STN[k].n === name) return k; return null; }
+/* Station d'un message du journal (qui garde le nom) : plusieurs stations portent le même nom (Kennedy Tower 123.9 et 119.1,
+   selon les pistes) ; on retient celle qui est réglée, sinon celle de l'échange en cours, sinon la première. */
+function stKey(name){ var c = [], x = curX(); for (var k in STN) if (STN[k].n === name) c.push(k); if (!c.length) return null;
+  for (var i = 0; i < c.length; i++) if (Math.abs(tunedF() - STN[c[i]].f) < 0.004) return c[i];
+  return (x && c.indexOf(x.st) >= 0) ? x.st : c[0]; }
 function lastAtc(){ for (var i = ATC.log.length - 1; i >= 0; i--) if (ATC.log[i].who === 'ATC') return ATC.log[i]; return null; }
 /* Stations du parcours en cours, dans l'ordre de la route (sol → tour → départ → centres → approche → tour) */
 function routeStations(){
