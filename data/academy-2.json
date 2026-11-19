@@ -1,1 +1,1598 @@
-[]
+[
+ {
+  "id": "q1",
+  "n": "Partie II-1 — Fondamentaux de l'avion et du vol, niveau ATPL",
+  "d": "Les thèmes du cours débutant (l'avion, le vol, le moteur, les instruments, la météo, la navigation, le pilote) au niveau de la théorie du pilote de ligne (ATPL). Niveau très difficile : calculs, cas limites, pièges d'examen. Exercices corrigés.",
+  "mods": [
+   {
+    "id": "q1-cellule",
+    "t": "Cellule : facteur de charge, domaine de vol, centrage",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Ce module suppose acquis le Cours I (« L'avion et ses parties ») et le Cours 0 (mécanique, trigonométrie).\nIl correspond aux matières « Principes du vol » et « Connaissance générale de l'aéronef : cellule » de la théorie ATPL.</p>\n\n<h3>1. Le facteur de charge</h3>\n<p>n = L / W (portance sur poids). En vol rectiligne stabilisé n = 1 ; en virage coordonné stabilisé n = 1 / cos φ ;\nen ressource (bas d'une trajectoire circulaire verticale de rayon R) n = 1 + V² / (g R). La vitesse de décrochage croît comme √n :\nV<sub>S,n</sub> = V<sub>S,1g</sub> × √n. À 60° d'inclinaison : +41 % ; à 75° (n ≈ 3,86) : +97 %.</p>\n\n<h3>2. Charges limites et extrêmes</h3>\n<ul>\n<li><b>Charge limite</b> : la plus grande charge attendue en service ; la structure la supporte sans déformation permanente gênante.</li>\n<li><b>Charge extrême</b> = charge limite × <b>facteur de sécurité 1,5</b> ; la structure la supporte au moins 3 secondes sans rupture. [RÉFÉRENCÉ] EASA CS 25.303 et 25.305.</li>\n<li><b>Avions de transport (CS-25)</b> : facteur de charge de manœuvre limite positif n = 2,1 + 24 000 / (W + 10 000), W en livres,\nsans être inférieur à 2,5 ni obligatoirement supérieur à 3,8 ; négatif −1,0 jusqu'à V<sub>C</sub>. Volets sortis : +2,0. [RÉFÉRENCÉ] CS 25.337 et 25.345.</li>\n<li><b>Avions légers (anciennes catégories CS-23 / FAR 23)</b> : normale +3,8 / −1,52 ; utilitaire +4,4 / −1,76 ; acrobatique +6,0 / −3,0.</li>\n</ul>\n\n<h3>3. Le diagramme V-n (domaine de manœuvre)</h3>\n<p>En abscisse la vitesse (EAS), en ordonnée le facteur de charge. La courbe de décrochage n = (V / V<sub>S1</sub>)² limite le facteur de charge\ndisponible à basse vitesse ; elle coupe la limite structurale n<sub>max</sub> à la <b>vitesse de manœuvre</b> V<sub>A</sub> = V<sub>S1</sub> √n<sub>max</sub>.\nSous V<sub>A</sub>, l'aile décroche avant que la structure n'atteigne sa limite (d'où la protection « naturelle ») ; au-dessus, une manœuvre brutale peut dépasser la charge limite.\nAttention : V<sub>A</sub> <b>diminue quand la masse diminue</b> (V<sub>A</sub> ∝ √m) et elle ne protège pas contre des débattements alternés (accident de l'Airbus A300 du vol American 587, 2001, NTSB AAR-04/04).</p>\n\n<h3>4. Rafales</h3>\n<p>Une rafale verticale U modifie l'incidence de Δα ≈ U / V. Facteur de charge supplémentaire :\nΔn = ρ V a U S / (2 W) (a : pente de la courbe de portance par radian). L'avion le plus <b>léger</b>, le plus <b>rapide</b>, à la plus grande <b>surface</b>\net à forte pente de portance (aile peu flèche, grand allongement) est le plus sensible. D'où la vitesse de pénétration en turbulence (V<sub>B</sub> ou V<sub>RA</sub>).</p>\n\n<h3>5. Centrage en % de corde aérodynamique moyenne (MAC)</h3>\n<p>CG (% MAC) = (X<sub>CG</sub> − X<sub>LEMAC</sub>) / MAC × 100. Un centrage <b>avant</b> augmente la stabilité, la vitesse de décrochage et la consommation\n(plus de déportance de l'empennage) ; un centrage <b>arrière</b> réduit la marge de stabilité et les efforts au manche, jusqu'au point neutre\nau-delà duquel l'avion devient instable. Déplacer une masse m d'une distance d déplace le centre de gravité de Δx = m d / M (M : masse totale).</p>\n<div class=\"box\"><b>Pièges d'examen</b> : V<sub>A</sub> varie avec la masse ; le facteur de charge en virage ne dépend pas de la masse ni de la vitesse,\nseulement de l'inclinaison ; la vitesse de décrochage en virage dépend de √n, pas de n.</div>\n",
+    "quiz": [
+     {
+      "q": "Facteur de charge en virage coordonné stabilisé à 75° d'inclinaison :",
+      "o": [
+       "3,86",
+       "1,04",
+       "3,73",
+       "2,00"
+      ],
+      "c": 0,
+      "why": "n = 1 / cos 75° = 1 / 0,2588 = 3,86. Piège : 3,73 est tan 75°."
+     },
+     {
+      "q": "V_S1g = 110 kt. Vitesse de décrochage en virage stabilisé à 50° d'inclinaison ?",
+      "o": [
+       "143,0 kt",
+       "110,0 kt",
+       "171,1 kt",
+       "137,2 kt"
+      ],
+      "c": 3,
+      "why": "n = 1 / cos 50° = 1,556 ; V_S = 110 × √n = 137,2 kt. Piège : 171,1 kt = 110 × n (sans racine)."
+     },
+     {
+      "q": "Inclinaison maximale en virage stabilisé si l'on veut garder 30 % de marge au décrochage (V = 1,3 V_S1g) :",
+      "o": [
+       "39,7°",
+       "60,0°",
+       "53,7°",
+       "30,0°"
+      ],
+      "c": 2,
+      "why": "n_max = (V / V_S)² = 1,3² = 1,69 ; cos φ = 1 / 1,69 → φ = 53,7°."
+     },
+     {
+      "q": "Ressource en bas de piqué : V = 250 kt (128,6 m/s), rayon 2 000 m. Facteur de charge ?",
+      "o": [
+       "0,16",
+       "0,84",
+       "1,84",
+       "2,00"
+      ],
+      "c": 2,
+      "why": "n = 1 + V² / (g R) = 1 + 16 541 / 19 620 = 1,84."
+     },
+     {
+      "q": "Avion de transport de 300 000 lb (CS 25.337) : facteur de charge de manœuvre limite positif ?",
+      "o": [
+       "2,18",
+       "3,80",
+       "2,10",
+       "2,50"
+      ],
+      "c": 3,
+      "why": "2,1 + 24 000 / 310 000 = 2,177 < 2,5 → on retient le minimum réglementaire : 2,5."
+     },
+     {
+      "q": "Avion de 20 000 lb (CS-25) : facteur de charge limite positif ?",
+      "o": [
+       "3,80",
+       "2,50",
+       "2,10",
+       "2,90"
+      ],
+      "c": 3,
+      "why": "2,1 + 24 000 / 30 000 = 2,90, compris entre 2,5 et 3,8."
+     },
+     {
+      "q": "Charge limite 2,5 g. Charge extrême que la structure doit supporter sans rupture :",
+      "o": [
+       "3,75 g",
+       "3,0 g",
+       "5,0 g",
+       "2,5 g"
+      ],
+      "c": 0,
+      "why": "Facteur de sécurité 1,5 (CS 25.303) : 2,5 × 1,5 = 3,75 g."
+     },
+     {
+      "q": "V_S1 = 120 kt à masse maximale, n_max = 2,5. Vitesse de manœuvre V_A ?",
+      "o": [
+       "150,0 kt",
+       "300,0 kt",
+       "120,0 kt",
+       "189,7 kt"
+      ],
+      "c": 3,
+      "why": "V_A = V_S1 √n_max = 120 × 1,581 = 189,7 kt."
+     },
+     {
+      "q": "Même avion, masse réduite de 25 %. Nouvelle V_A ?",
+      "o": [
+       "219,1 kt",
+       "142,3 kt",
+       "164,3 kt",
+       "189,7 kt"
+      ],
+      "c": 2,
+      "why": "V_A ∝ √m : 189,7 × √0,75 = 164,3 kt. Piège : V_A ne reste pas constante, elle diminue avec la masse."
+     },
+     {
+      "q": "Pourquoi un avion léger est-il plus secoué qu'un avion lourd dans la même rafale (même vitesse, même aile) ?",
+      "o": [
+       "Δn est inversement proportionnel au poids",
+       "Δn est proportionnel au poids",
+       "la rafale agit sur la masse et non sur l'aile",
+       "la portance augmente avec la masse"
+      ],
+      "c": 0,
+      "why": "Δn = ρ V a U S / (2 W) : la même variation de portance ΔL produit un facteur de charge ΔL / W plus grand si W est petit."
+     },
+     {
+      "q": "Rafale verticale de 15 m/s, V = 150 m/s, ρ = 0,736 kg/m³ (FL200), a = 4,5 /rad, S = 122 m², m = 60 t. Δn ?",
+      "o": [
+       "0,23",
+       "2,45",
+       "1,00",
+       "0,77"
+      ],
+      "c": 3,
+      "why": "Δn = ρ V a U S / (2 W) = 0,736 × 150 × 4,5 × 15 × 122 / (2 × 588 600) = 0,77."
+     },
+     {
+      "q": "Avec Δn précédent, le facteur de charge maximal subi en rafale montante est :",
+      "o": [
+       "2,50",
+       "0,23",
+       "1,77",
+       "1,00"
+      ],
+      "c": 2,
+      "why": "n = 1 + Δn = 1,77 ; en rafale descendante, n = 1 − Δn."
+     },
+     {
+      "q": "LEMAC à 16,2 m, MAC = 4,2 m, centre de gravité à 18,5 m de la référence. Centrage ?",
+      "o": [
+       "18,5 % MAC",
+       "54,8 % MAC",
+       "61,0 % MAC",
+       "25,9 % MAC"
+      ],
+      "c": 1,
+      "why": "(18,5 − 16,2) / 4,2 × 100 = 54,8 % MAC."
+     },
+     {
+      "q": "Masse 62 000 kg, centrage 25 % MAC (MAC 4,2 m). On déplace 1 200 kg de fret de 9 m vers l'arrière. Nouveau centrage ?",
+      "o": [
+       "25,4 % MAC",
+       "20,9 % MAC",
+       "29,1 % MAC",
+       "27,6 % MAC"
+      ],
+      "c": 2,
+      "why": "Δx = m d / M = 1 200 × 9 / 62 000 = 0,174 m = 4,1 % de MAC → 29,1 % MAC."
+     },
+     {
+      "q": "Masse 62 000 kg ; quelle masse faut-il déplacer de 12 m vers l'avant pour avancer le centrage de 2 % MAC (MAC 4,2 m) ?",
+      "o": [
+       "434 kg",
+       "868 kg",
+       "1 033 kg",
+       "217 kg"
+      ],
+      "c": 0,
+      "why": "Δx = 0,02 × 4,2 = 0,084 m ; m = M Δx / d = 62 000 × 0,084 / 12 = 434 kg."
+     },
+     {
+      "q": "Effet d'un centrage arrière (dans les limites) en croisière :",
+      "o": [
+       "efforts au manche plus élevés",
+       "plus de traînée et plus de stabilité",
+       "vitesse de décrochage plus élevée",
+       "moins de traînée et de consommation, moins de stabilité"
+      ],
+      "c": 3,
+      "why": "Moins de déportance de l'empennage → portance de l'aile plus faible → moins de traînée induite ; mais marge statique réduite."
+     },
+     {
+      "q": "Pourquoi la vitesse de décrochage est-elle plus élevée en centrage avant ?",
+      "o": [
+       "la surface alaire diminue",
+       "l'incidence critique diminue",
+       "le poids augmente",
+       "l'aile doit porter aussi la déportance de l'empennage"
+      ],
+      "c": 3,
+      "why": "La déportance de l'empennage s'ajoute au poids : l'aile doit fournir L = W + déportance, donc un C_L plus grand à vitesse égale."
+     },
+     {
+      "q": "Un pilote fait des débattements alternés pleins de la gouverne de direction sous V_A. La structure est-elle protégée ?",
+      "o": [
+       "oui, si les volets sont rentrés",
+       "oui, toujours sous V_A",
+       "oui, si la masse est maximale",
+       "non : V_A ne couvre pas les débattements alternés"
+      ],
+      "c": 3,
+      "why": "La protection de V_A ne vaut que pour un débattement unique dans un axe. Vol American 587 (2001) : rupture de la dérive après des débattements alternés (NTSB AAR-04/04)."
+     },
+     {
+      "q": "Facteur de charge maximal disponible à 1,2 V_S1g (aile au C_Lmax) :",
+      "o": [
+       "1,44",
+       "1,10",
+       "2,40",
+       "1,20"
+      ],
+      "c": 0,
+      "why": "n = (V / V_S)² = 1,2² = 1,44 : au-delà, l'aile décroche avant la structure."
+     },
+     {
+      "q": "Virage stabilisé à 30° d'inclinaison, TAS 250 kt (128,6 m/s). Rayon ?",
+      "o": [
+       "1,58 NM",
+       "0,91 NM",
+       "5,41 NM",
+       "2,74 NM"
+      ],
+      "c": 0,
+      "why": "R = V² / (g tan φ) = 16 541 / (9,81 × 0,577) = 2 920 m = 1,58 NM."
+     }
+    ]
+   },
+   {
+    "id": "q1-aero",
+    "t": "Aérodynamique : polaire, finesse, haute vitesse",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Principes du vol » (EASA ATPL, sujet 081). Suppose acquis le module « Comment l'avion vole » du Cours I.</p>\n\n<h3>1. La polaire parabolique</h3>\n<p>C<sub>D</sub> = C<sub>D0</sub> + k C<sub>L</sub>², avec k = 1 / (π A e) (A : allongement = b² / S ; e : facteur d'Oswald, 0,7 à 0,85).\nLa traînée de profil (C<sub>D0</sub>) croît comme V² ; la traînée induite décroît comme 1 / V². Leur somme est minimale quand elles sont <b>égales</b>.</p>\n<ul>\n<li><b>Finesse maximale</b> : (L/D)<sub>max</sub> = 1 / (2 √(k C<sub>D0</sub>)), obtenue à C<sub>L</sub>* = √(C<sub>D0</sub> / k).</li>\n<li><b>V<sub>MD</sub></b> (traînée minimale) : vitesse de meilleure finesse, donc de plus grande distance en plané et d'autonomie maximale pour un réacteur.</li>\n<li><b>V<sub>MP</sub></b> (puissance minimale) : V<sub>MP</sub> = V<sub>MD</sub> / 3<sup>1/4</sup> ≈ 0,76 V<sub>MD</sub>. Taux de chute minimal en plané ; autonomie maximale pour une hélice.</li>\n<li>Distance franchissable maximale d'un réacteur : vers 3<sup>1/4</sup> V<sub>MD</sub> ≈ 1,32 V<sub>MD</sub> (maximum de V / D) ; en pratique on vole un peu moins vite (99 % de la distance maximale, « long range cruise »).</li>\n</ul>\n\n<h3>2. Effet de la masse et de l'altitude</h3>\n<p>À C<sub>L</sub> constant (même incidence), V ∝ √(W / ρ). La finesse maximale <b>ne dépend pas de la masse</b> : un planeur lesté\ndescend plus vite mais va aussi loin. En EAS, V<sub>MD</sub> ne dépend que de la masse ; en TAS, elle augmente avec l'altitude.\nPente de plané : tan γ = 1 / (L/D) ; distance plané = hauteur × (L/D).</p>\n\n<h3>3. Montée</h3>\n<p>Pente de montée : sin γ = (T − D) / W. Vitesse verticale : V<sub>z</sub> = V (T − D) / W = (P<sub>dispo</sub> − P<sub>nécessaire</sub>) / W.\nV<sub>X</sub> (meilleure pente) maximise T − D ; V<sub>Y</sub> (meilleur taux) maximise l'excès de puissance. Moteur en panne sur un bimoteur, la poussée disponible est divisée par deux\nmais l'excès de poussée l'est bien davantage.</p>\n\n<h3>4. Haute vitesse</h3>\n<p>M = V / a, a = 38,94 √T (kt, T en K). <b>Mach critique</b> M<sub>crit</sub> : premier point de l'écoulement à Mach 1 ; au-delà apparaissent une onde de choc,\nle décollement, la traînée d'onde et le buffeting. La <b>flèche</b> φ retarde ces effets : seule la composante normale M cos φ compte (théorie de la flèche simple).\nEn montant à masse donnée, la vitesse de décrochage en Mach augmente et la limite de buffeting haute vitesse diminue : les deux se rejoignent au <b>coin du cercueil</b> (coffin corner).\nLa marge de buffeting est exigée à 1,3 g (soit ±40° d'inclinaison environ) [RÉFÉRENCÉ] CS 25.251 et pratique des exploitants.</p>\n<div class=\"box\"><b>Pièges d'examen</b> : V<sub>MP</sub> &lt; V<sub>MD</sub> ; la finesse ne dépend pas de la masse ; le vent change la distance plané au sol mais pas la finesse air ;\nen vent de face on plane plus vite que V<sub>MD</sub> pour aller plus loin, en vent arrière un peu moins vite.</div>\n",
+    "quiz": [
+     {
+      "q": "Allongement 9,5 ; facteur d'Oswald 0,80. Coefficient de traînée induite k = 1/(πAe) ?",
+      "o": [
+       "0,1316",
+       "0,0419",
+       "0,0524",
+       "0,0335"
+      ],
+      "c": 1,
+      "why": "k = 1 / (π × 9,5 × 0,80) = 1 / 23,88 = 0,0419."
+     },
+     {
+      "q": "Même avion, C_D0 = 0,018. Finesse maximale ?",
+      "o": [
+       "18,2",
+       "13,8",
+       "36,4",
+       "10,4"
+      ],
+      "c": 0,
+      "why": "(L/D)max = 1 / (2 √(k C_D0)) = 1 / (2 √(0,0419 × 0,018)) = 18,2. Piège : 36,4 oublie le facteur 2."
+     },
+     {
+      "q": "C_L de finesse maximale pour cet avion ?",
+      "o": [
+       "0,269",
+       "0,656",
+       "0,018",
+       "1,200"
+      ],
+      "c": 1,
+      "why": "C_L* = √(C_D0 / k) = √(0,018 / 0,0419) = 0,656."
+     },
+     {
+      "q": "À la vitesse de finesse maximale, la traînée induite représente quelle part de la traînée totale ?",
+      "o": [
+       "75 %",
+       "25 %",
+       "50 %",
+       "100 %"
+      ],
+      "c": 2,
+      "why": "À V_MD les deux traînées sont égales : k C_L*² = C_D0."
+     },
+     {
+      "q": "Planeur de finesse 40, à 1 200 m sol, air calme. Distance de plané ?",
+      "o": [
+       "48 km",
+       "40 km",
+       "30 km",
+       "4,8 km"
+      ],
+      "c": 0,
+      "why": "1 200 m × 40 = 48 000 m."
+     },
+     {
+      "q": "Biréacteur, finesse 17, panne totale de poussée à FL350 (10 668 m), terrain à 0 m, air calme. Distance de plané ?",
+      "o": [
+       "35 NM",
+       "98 NM",
+       "57 NM",
+       "178 NM"
+      ],
+      "c": 1,
+      "why": "10 668 × 17 = 181 356 m = 98 NM. (Vol Air Transat 236, 2001 : plané d'environ 65 NM depuis FL345.)"
+     },
+     {
+      "q": "Même avion : 20 % de masse en moins. Distance de plané (même finesse max) ?",
+      "o": [
+       "20 % plus grande",
+       "10 % plus courte",
+       "20 % plus courte",
+       "inchangée"
+      ],
+      "c": 3,
+      "why": "La finesse maximale ne dépend pas de la masse ; seule la vitesse de plané change (√0,8 ≈ 0,89 fois)."
+     },
+     {
+      "q": "V_MD = 220 kt EAS à 70 t. V_MD à 56 t ?",
+      "o": [
+       "220 kt EAS",
+       "197 kt EAS",
+       "176 kt EAS",
+       "246 kt EAS"
+      ],
+      "c": 1,
+      "why": "V ∝ √W : 220 × √(56/70) = 220 × 0,894 = 197 kt. Piège : 176 kt suppose V ∝ W."
+     },
+     {
+      "q": "V_MD = 220 kt. Vitesse de puissance minimale V_MP (polaire parabolique) ?",
+      "o": [
+       "167 kt",
+       "220 kt",
+       "110 kt",
+       "290 kt"
+      ],
+      "c": 0,
+      "why": "V_MP = V_MD / 3^(1/4) = 220 / 1,316 = 167 kt."
+     },
+     {
+      "q": "Planeur : quelle vitesse donne le taux de chute minimal ?",
+      "o": [
+       "V_MD",
+       "V_NE",
+       "V_A",
+       "V_MP"
+      ],
+      "c": 3,
+      "why": "Taux de chute = P_nécessaire / W : minimal à la puissance minimale V_MP."
+     },
+     {
+      "q": "Vitesse de plané pour franchir la plus grande distance par vent de face de 40 kt :",
+      "o": [
+       "égale à V_MP",
+       "supérieure à V_MD",
+       "égale à V_MD",
+       "inférieure à V_MD"
+      ],
+      "c": 1,
+      "why": "On réduit le temps passé dans le vent : la finesse sol est maximale à une vitesse air supérieure à V_MD."
+     },
+     {
+      "q": "Biréacteur 70 t ; poussée 2 × 110 kN ; finesse en montée 16. Pente de montée ?",
+      "o": [
+       "14,9°",
+       "11,6°",
+       "18,7°",
+       "3,6°"
+      ],
+      "c": 0,
+      "why": "D = W / 16 = 42,9 kN ; sin γ = (220 − 42,9) / 686,7 = 0,258 → γ = 14,9°."
+     },
+     {
+      "q": "Même avion, un moteur en panne (110 kN, traînée de dissymétrie négligée). Pente ?",
+      "o": [
+       "3,6°",
+       "6,9°",
+       "5,6°",
+       "0,0°"
+      ],
+      "c": 2,
+      "why": "sin γ = (110 − 42,9) / 686,7 = 0,0977 → 5,6°. La poussée est divisée par 2, l'excès de poussée par ≈ 2,6."
+     },
+     {
+      "q": "Pente de montée de 3 % à 160 kt de vitesse sol. Vitesse verticale ?",
+      "o": [
+       "300 ft/min",
+       "4 860 ft/min",
+       "960 ft/min",
+       "486 ft/min"
+      ],
+      "c": 3,
+      "why": "V_z = 0,03 × 160 kt × 101,27 (ft/min par kt) = 486 ft/min."
+     },
+     {
+      "q": "Vitesse du son à −56,5 °C (tropopause ISA) ?",
+      "o": [
+       "539 kt",
+       "573 kt",
+       "661 kt",
+       "600 kt"
+      ],
+      "c": 1,
+      "why": "a = 38,94 √T = 38,94 × √216,65 = 573 kt."
+     },
+     {
+      "q": "Aile en flèche de 30°, M = 0,82. Mach « vu » par le profil (théorie de la flèche simple) ?",
+      "o": [
+       "0,95",
+       "0,82",
+       "0,71",
+       "0,41"
+      ],
+      "c": 2,
+      "why": "M_n = M cos φ = 0,82 × 0,866 = 0,71."
+     },
+     {
+      "q": "En montant à masse et Mach constants, la marge entre décrochage et buffeting haute vitesse :",
+      "o": [
+       "diminue jusqu'au coin du cercueil",
+       "augmente",
+       "ne dépend que du centrage",
+       "reste constante"
+      ],
+      "c": 0,
+      "why": "Le C_L requis augmente quand ρ diminue (L = ½ ρ V² S C_L) : le décrochage se rapproche du Mach de buffeting."
+     },
+     {
+      "q": "Marge de buffeting à 1,3 g : à quelle inclinaison en virage stabilisé correspond-elle ?",
+      "o": [
+       "39,7°",
+       "45,0°",
+       "30,0°",
+       "60,0°"
+      ],
+      "c": 0,
+      "why": "cos φ = 1 / 1,3 → φ = 39,7°."
+     },
+     {
+      "q": "65 t, S = 122,6 m², FL360 (ρ = 0,3796 kg/m³, ISA), M 0,78. C_L de croisière ?",
+      "o": [
+       "1,20",
+       "0,92",
+       "0,52",
+       "0,23"
+      ],
+      "c": 2,
+      "why": "TAS = 0,78 × 573 kt = 230,0 m/s ; C_L = 2W / (ρ V² S) = 0,52."
+     },
+     {
+      "q": "Effet de la sortie des volets sur la finesse maximale :",
+      "o": [
+       "elle ne change pas",
+       "elle diminue",
+       "elle augmente",
+       "elle double"
+      ],
+      "c": 1,
+      "why": "Les volets augmentent C_Lmax mais encore plus C_D0 : la finesse chute (de ≈ 17 lisse à ≈ 8 à 10 volets et train sortis sur un avion de ligne)."
+     }
+    ]
+   },
+   {
+    "id": "q1-propulsion",
+    "t": "Propulsion : réacteurs, pistons, hélices",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Connaissance générale de l'aéronef : moteurs » (EASA ATPL, sujet 021). Suppose acquis le module « Le moteur » du Cours I.</p>\n\n<h3>1. Poussée et rendement propulsif</h3>\n<p>Poussée nette : F = ṁ (V<sub>j</sub> − V<sub>0</sub>) (+ poussée de pression si la tuyère n'est pas adaptée).\nRendement propulsif (Froude) : η<sub>p</sub> = 2 / (1 + V<sub>j</sub> / V<sub>0</sub>). Pour une même poussée, accélérer <b>beaucoup d'air un peu</b>\nest plus efficace qu'accélérer peu d'air beaucoup : c'est la raison du double flux à grand taux de dilution (BPR = débit secondaire / débit primaire, 8 à 12 sur les moteurs récents).</p>\n\n<h3>2. Cycle et limites</h3>\n<ul>\n<li>Le paramètre de poussée affiché est l'<b>EPR</b> (rapport de pression de tuyère) ou le <b>N1</b> (régime de la soufflante).</li>\n<li>La limite principale est la <b>température des gaz</b> (EGT / TIT). Par temps chaud, l'air est moins dense : pour une même poussée il faut plus de carburant et plus de température.</li>\n<li><b>Flat rating</b> : la poussée de décollage est garantie constante jusqu'à une température de référence (souvent ISA + 15 °C) ; au-delà, elle diminue car la limite d'EGT est atteinte.</li>\n<li><b>Poussée réduite</b> (température fictive, « FLEX » ou « assumed temperature ») : on annonce au calculateur une température plus élevée que la réelle pour décoller avec moins de poussée et préserver le moteur ; interdite sur piste contaminée [RÉFÉRENCÉ] pratiques Airbus/Boeing.</li>\n</ul>\n\n<h3>3. Consommation spécifique</h3>\n<p>TSFC (réacteur) = débit carburant / poussée (kg/(daN·h) ou lb/(lbf·h)) ; SFC (piston, turbopropulseur) = débit / puissance (g/(kW·h)).\nLa consommation par heure baisse avec l'altitude jusqu'à l'optimum ; la distance franchissable par kilogramme (« specific range » = TAS / débit) croît avec l'altitude\njusqu'à l'altitude optimale, qui elle-même croît quand la masse diminue (montées par paliers).</p>\n\n<h3>4. Moteurs à pistons</h3>\n<p>Sans suralimentation, la puissance décroît avec la densité. Formule de Gagg-Farrar : P / P<sub>0</sub> = 1,132 σ − 0,132 (σ = ρ / ρ<sub>0</sub>).\nLe mélange doit être appauvri en altitude ; le <b>givrage carburateur</b> est le plus probable entre −10 °C et +25 °C par humidité élevée, même par beau temps.\nUn turbocompresseur maintient la pression d'admission jusqu'à l'altitude de rétablissement.</p>\n\n<h3>5. Hélices</h3>\n<p>Rendement maximal ≈ 0,8 à 0,85. Avance par tour J = V / (n D). Le calage variable (vitesse constante) garde l'hélice près de son incidence optimale ;\nen panne, la mise en drapeau réduit considérablement la traînée. Bout de pale : vitesse résultante √(V² + (π n D)²) qui doit rester sous Mach ≈ 0,9.</p>\n<div class=\"box\"><b>Pièges d'examen</b> : le rendement propulsif augmente quand V<sub>j</sub> se rapproche de V<sub>0</sub>, mais la poussée diminue alors (il faut plus de débit) ;\nle flat rating protège la poussée, pas la température ; la consommation horaire n'est pas la distance franchissable.</div>\n",
+    "quiz": [
+     {
+      "q": "Réacteur : débit d'air 200 kg/s, V0 = 0 (point fixe), Vj = 400 m/s. Poussée ?",
+      "o": [
+       "8 kN",
+       "40 kN",
+       "80 kN",
+       "800 kN"
+      ],
+      "c": 2,
+      "why": "F = ṁ (Vj − V0) = 200 × 400 = 80 000 N."
+     },
+     {
+      "q": "Même moteur à V0 = 250 m/s (Vj inchangée). Poussée ?",
+      "o": [
+       "30 kN",
+       "130 kN",
+       "80 kN",
+       "50 kN"
+      ],
+      "c": 0,
+      "why": "F = 200 × (400 − 250) = 30 000 N : la poussée nette chute avec la vitesse si Vj est fixe."
+     },
+     {
+      "q": "Rendement propulsif pour V0 = 250 m/s, Vj = 400 m/s ?",
+      "o": [
+       "38,5 %",
+       "76,9 %",
+       "100,0 %",
+       "62,5 %"
+      ],
+      "c": 1,
+      "why": "ηp = 2 / (1 + 400/250) = 2 / 2,6 = 76,9 %. Piège : 62,5 % = V0 / Vj."
+     },
+     {
+      "q": "Double flux : V0 = 250 m/s, Vj = 300 m/s. Rendement propulsif ?",
+      "o": [
+       "90,9 %",
+       "76,9 %",
+       "50,0 %",
+       "83,3 %"
+      ],
+      "c": 0,
+      "why": "ηp = 2 / (1 + 1,2) = 90,9 %."
+     },
+     {
+      "q": "Pour produire la même poussée avec Vj − V0 = 50 m/s au lieu de 150 m/s, le débit d'air doit être multiplié par :",
+      "o": [
+       "9",
+       "√3",
+       "1/3",
+       "3"
+      ],
+      "c": 3,
+      "why": "F = ṁ ΔV : pour F constant, ṁ est inversement proportionnel à ΔV, soit 150 / 50 = 3."
+     },
+     {
+      "q": "Débit total 1 100 kg/s, taux de dilution 10. Débit du flux primaire (chaud) ?",
+      "o": [
+       "91 kg/s",
+       "110 kg/s",
+       "100 kg/s",
+       "1 000 kg/s"
+      ],
+      "c": 2,
+      "why": "BPR = ṁs / ṁp = 10 ; ṁp + 10 ṁp = 1 100 → ṁp = 100 kg/s."
+     },
+     {
+      "q": "Poussée de décollage « flat rated » à ISA + 15 °C. Terrain au niveau de la mer à 35 °C. La poussée maximale disponible est :",
+      "o": [
+       "supérieure à la poussée nominale",
+       "égale à la poussée nominale",
+       "inférieure à la poussée nominale",
+       "nulle"
+      ],
+      "c": 2,
+      "why": "ISA + 15 = 30 °C au niveau de la mer ; à 35 °C on est au-delà du point de flat rating : la limite d'EGT réduit la poussée."
+     },
+     {
+      "q": "Pourquoi la poussée réduite par température fictive est-elle interdite sur piste contaminée (règle générale des constructeurs) ?",
+      "o": [
+       "l'EGT dépasse sa limite",
+       "le moteur risque de givrer",
+       "la vitesse V1 devient nulle",
+       "les performances d'accélération-arrêt ne sont plus garanties"
+      ],
+      "c": 3,
+      "why": "La méthode suppose une piste sèche ou mouillée ; sur contaminant, la traînée et le freinage changent et les calculs de poussée réduite ne sont plus valables."
+     },
+     {
+      "q": "Débit carburant 2 × 1 250 kg/h ; poussée totale 2 × 28 kN. TSFC en kg/(daN·h) ?",
+      "o": [
+       "4,464",
+       "0,045",
+       "0,446",
+       "0,893"
+      ],
+      "c": 2,
+      "why": "TSFC = 2 500 / 5 600 daN = 0,446 kg/(daN·h)."
+     },
+     {
+      "q": "TAS 470 kt, débit total 2 500 kg/h. Distance franchissable spécifique ?",
+      "o": [
+       "470 NM pour 1 000 kg",
+       "188 NM pour 1 000 kg",
+       "2 500 NM pour 1 000 kg",
+       "5 319 NM pour 1 000 kg"
+      ],
+      "c": 1,
+      "why": "SR = TAS / débit = 470 / 2 500 = 0,188 NM/kg = 188 NM pour 1 000 kg."
+     },
+     {
+      "q": "Vent de face de 60 kt dans la question précédente. Distance sol pour 1 000 kg ?",
+      "o": [
+       "24 NM",
+       "212 NM",
+       "164 NM",
+       "188 NM"
+      ],
+      "c": 2,
+      "why": "(470 − 60) / 2 500 × 1 000 = 164 NM sol."
+     },
+     {
+      "q": "Pourquoi l'altitude optimale augmente-t-elle au cours du vol ?",
+      "o": [
+       "la poussée augmente",
+       "la tropopause s'abaisse",
+       "la température augmente",
+       "la masse diminue"
+      ],
+      "c": 3,
+      "why": "À C_L optimal, W / σ doit rester constant : quand W diminue, σ (densité) peut diminuer → on monte (montées par paliers)."
+     },
+     {
+      "q": "Moteur à pistons atmosphérique, σ = 0,786 (≈ 8 000 ft ISA). Puissance disponible (Gagg-Farrar) en % de la puissance au niveau de la mer ?",
+      "o": [
+       "75,8 %",
+       "65,4 %",
+       "78,6 %",
+       "100,0 %"
+      ],
+      "c": 0,
+      "why": "P / P0 = 1,132 × 0,786 − 0,132 = 0,758. Piège : 78,6 % suppose P ∝ σ."
+     },
+     {
+      "q": "À quelle densité relative σ un moteur atmosphérique ne fournit-il plus que 50 % de sa puissance ?",
+      "o": [
+       "0,707",
+       "0,500",
+       "0,442",
+       "0,558"
+      ],
+      "c": 3,
+      "why": "σ = (0,5 + 0,132) / 1,132 = 0,558 (vers 18 000 ft en ISA)."
+     },
+     {
+      "q": "Givrage carburateur : situation la plus favorable ?",
+      "o": [
+       "+15 °C, humidité relative 80 %, réduction de puissance",
+       "−20 °C, air sec, plein gaz",
+       "+35 °C, air sec, plein gaz",
+       "−30 °C, nuage, plein gaz"
+      ],
+      "c": 0,
+      "why": "La détente et l'évaporation refroidissent l'air de 20 à 30 °C dans le venturi : le givrage est le plus probable entre −10 et +25 °C avec humidité élevée, surtout à puissance réduite (papillon presque fermé)."
+     },
+     {
+      "q": "SFC 230 g/(kW·h), puissance 120 kW. Débit carburant ?",
+      "o": [
+       "27,6 kg/h",
+       "1,9 kg/h",
+       "52,2 kg/h",
+       "230,0 kg/h"
+      ],
+      "c": 0,
+      "why": "0,230 × 120 = 27,6 kg/h."
+     },
+     {
+      "q": "Hélice Ø 1,90 m à 2 700 tr/min, V = 60 m/s. Vitesse résultante en bout de pale ?",
+      "o": [
+       "269 m/s",
+       "275 m/s",
+       "60 m/s",
+       "329 m/s"
+      ],
+      "c": 1,
+      "why": "Vitesse de rotation π n D = π × 45 × 1,90 = 269 m/s ; résultante √(60² + 269²) = 275 m/s, soit Mach ≈ 0,81 au sol."
+     },
+     {
+      "q": "Avance par tour J = V / (nD) dans la question précédente (n en tr/s) ?",
+      "o": [
+       "0,03",
+       "0,23",
+       "0,70",
+       "1,42"
+      ],
+      "c": 2,
+      "why": "J = 60 / (45 × 1,90) = 0,70."
+     },
+     {
+      "q": "Hélice à vitesse constante en descente, manette des gaz réduite : que fait le régulateur ?",
+      "o": [
+       "il met l'hélice en drapeau",
+       "il diminue le pas pour garder le régime",
+       "il augmente le pas",
+       "il ne fait rien"
+      ],
+      "c": 1,
+      "why": "Moins de couple moteur → le régime tend à baisser → le régulateur réduit le calage (petit pas) pour maintenir le régime affiché."
+     },
+     {
+      "q": "Bimoteur à hélices, panne d'un moteur : pourquoi mettre l'hélice en drapeau ?",
+      "o": [
+       "pour redémarrer le moteur",
+       "pour réduire fortement la traînée du moteur arrêté",
+       "pour augmenter la portance",
+       "pour refroidir le moteur"
+      ],
+      "c": 1,
+      "why": "Une hélice en moulinet au petit pas crée une traînée très importante ; en drapeau, les pales sont alignées avec l'écoulement."
+     }
+    ]
+   },
+   {
+    "id": "q1-instruments",
+    "t": "Instruments : vitesses compressibles, altimétrie, pannes, gyroscopes",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Instrumentation » (EASA ATPL, sujet 022). Suppose acquis le module « Les instruments de bord » du Cours I.</p>\n\n<h3>1. Les vitesses</h3>\n<table class=\"kv\"><tbody>\n<tr><th>IAS</th><td>lecture brute de l'anémomètre</td></tr>\n<tr><th>CAS</th><td>IAS corrigée des erreurs d'installation et d'instrument (position de la prise statique)</td></tr>\n<tr><th>EAS</th><td>CAS corrigée de la compressibilité ; EAS ≤ CAS (écart notable au-dessus de 200 kt et en altitude)</td></tr>\n<tr><th>TAS</th><td>EAS / √σ : vitesse par rapport à la masse d'air</td></tr>\n<tr><th>Mach</th><td>TAS / a ; a = 38,94 √T (kt, T en K) ; a<sub>0</sub> = 661,5 kt</td></tr>\n</tbody></table>\n<p>En écoulement compressible (formule de Saint-Venant, normalisée OACI) : la pression dynamique « mesurée »\nq<sub>c</sub> = P [(1 + 0,2 M²)<sup>3,5</sup> − 1], et la CAS est la vitesse qui donnerait ce même q<sub>c</sub> au niveau de la mer en atmosphère standard.</p>\n<p><b>Montée à CAS constante</b> : la TAS et le Mach augmentent. <b>Montée à Mach constant</b> : la CAS diminue (la TAS aussi jusqu'à la tropopause, puis elle reste constante).\nL'<b>altitude de transition</b> (crossover) est celle où la CAS de montée et le Mach de montée donnent la même vitesse : au-dessous on tient la CAS, au-dessus le Mach.</p>\n\n<h3>2. L'altimètre</h3>\n<ul>\n<li>Il mesure la pression statique et l'affiche selon l'atmosphère standard. <b>Du chaud vers le froid, du haut vers le bas</b> (et de la haute vers la basse pression) : on est plus bas que l'indication.</li>\n<li>Erreur de température : environ <b>4 % de la hauteur au-dessus de la source du calage par tranche de 10 °C d'écart à l'ISA</b>. Les corrections par temps froid sont publiées [RÉFÉRENCÉ] OACI PANS-OPS Doc 8168, vol. I.</li>\n<li>Un hectopascal vaut ≈ 27 ft près du sol (≈ 30 ft en règle pratique), davantage en altitude.</li>\n</ul>\n\n<h3>3. Pannes du circuit anémobarométrique</h3>\n<table class=\"kv\"><tbody>\n<tr><th>Pitot bouché (prise statique libre, purge bouchée)</th><td>l'anémomètre se comporte comme un altimètre : la vitesse augmente en montée et diminue en descente.\nC'est le scénario du vol Birgenair 301 (1996).</td></tr>\n<tr><th>Prise statique bouchée</th><td>altimètre figé, variomètre à zéro ; l'anémomètre sous-estime en montée et surestime en descente (vol Aeroperú 603, 1996).</td></tr>\n<tr><th>Prise statique de secours en cabine (pression plus faible)</th><td>altitude et vitesse indiquées légèrement trop fortes ; variomètre bref saut en montée.</td></tr>\n</tbody></table>\n\n<h3>4. Gyroscopes et compas</h3>\n<p>Dérive apparente d'un gyroscope « libre » due à la rotation de la Terre : 15° × sin(latitude) par heure (maximale aux pôles, nulle à l'équateur).\nCompas magnétique, hémisphère Nord : <b>accélération vers le Nord</b> sur un cap Est ou Ouest (ANDS : Accelerate North, Decelerate South) ;\nen virage, le compas <b>retarde</b> en sortie vers le Nord et <b>avance</b> vers le Sud (UNOS : Undershoot North, Overshoot South).\nVirage au taux standard (3°/s) : inclinaison ≈ TAS/10 + 7 (en degrés, TAS en kt).</p>\n<div class=\"box\"><b>Pièges d'examen</b> : EAS ≤ CAS ; la CAS diminue en montée à Mach constant ; une prise statique bouchée ne fige pas l'anémomètre ;\nl'erreur de température de l'altimètre est proportionnelle à la hauteur au-dessus de la station, pas à l'altitude.</div>\n",
+    "quiz": [
+     {
+      "q": "CAS 300 kt à FL350 (ISA). Mach ?",
+      "o": [
+       "0,733",
+       "0,874",
+       "0,454",
+       "0,980"
+      ],
+      "c": 1,
+      "why": "q_c(300 kt) = 15 355 Pa ; P(FL350) = 23 842 Pa ; M = √(5 [(q_c/P + 1)^(2/7) − 1]) = 0,874. (Calcul exact compressible.)"
+     },
+     {
+      "q": "Même cas : TAS ?",
+      "o": [
+       "573 kt",
+       "504 kt",
+       "300 kt",
+       "447 kt"
+      ],
+      "c": 1,
+      "why": "TAS = M × a = 0,874 × 576 kt = 504 kt."
+     },
+     {
+      "q": "Si l'on calcule la TAS « incompressible » (TAS = CAS / √σ) pour 300 kt à FL350, on obtient :",
+      "o": [
+       "357 kt",
+       "300 kt",
+       "504 kt",
+       "539 kt"
+      ],
+      "c": 3,
+      "why": "σ = 0,310 ; 300 / √σ = 539 kt, trop élevé de 35 kt : la formule simple ignore la compressibilité (EAS < CAS). On doit passer par l'EAS."
+     },
+     {
+      "q": "Profil de montée 300 kt / Mach 0,78 (ISA). Altitude de transition (crossover) ?",
+      "o": [
+       "≈ 29 300 ft",
+       "≈ 35 000 ft",
+       "≈ 36 089 ft",
+       "≈ 22 000 ft"
+      ],
+      "c": 0,
+      "why": "Recherche numérique : M(300 kt CAS) = 0,78 à ≈ 29 300 ft. Au-dessous on tient 300 kt, au-dessus Mach 0,78."
+     },
+     {
+      "q": "Croisière Mach 0,78 à FL370 (ISA). CAS ?",
+      "o": [
+       "196 kt",
+       "252 kt",
+       "447 kt",
+       "300 kt"
+      ],
+      "c": 1,
+      "why": "Calcul inverse : q_c = P(FL370) [(1 + 0,2 × 0,78²)^3,5 − 1] → CAS = 252 kt."
+     },
+     {
+      "q": "En montée à Mach constant sous la tropopause, la CAS :",
+      "o": [
+       "diminue",
+       "diminue puis augmente",
+       "augmente",
+       "reste constante"
+      ],
+      "c": 0,
+      "why": "P diminue plus vite que a² : la pression dynamique et donc la CAS diminuent."
+     },
+     {
+      "q": "Au-dessus de la tropopause (ISA), en montée à Mach constant, la TAS :",
+      "o": [
+       "reste constante",
+       "augmente",
+       "diminue",
+       "devient nulle"
+      ],
+      "c": 0,
+      "why": "La température est constante (−56,5 °C) donc a est constante et TAS = M a ne change pas."
+     },
+     {
+      "q": "Hauteur indiquée 3 000 ft au-dessus d'un terrain (calage QNH), température ISA − 20 °C. Hauteur vraie approximative ?",
+      "o": [
+       "3 240 ft",
+       "3 000 ft",
+       "2 760 ft",
+       "2 880 ft"
+      ],
+      "c": 2,
+      "why": "4 % par 10 °C : 3 000 × 8 % = 240 ft ; par temps froid on est plus bas : 2 760 ft."
+     },
+     {
+      "q": "Altitude minimale de franchissement d'obstacles d'approche 2 000 ft au-dessus du terrain. Température au sol −30 °C (terrain à 0 ft). Hauteur à ajouter (règle des 4 %) ?",
+      "o": [
+       "≈ 80 ft",
+       "≈ 1 800 ft",
+       "≈ 240 ft",
+       "≈ 360 ft"
+      ],
+      "c": 3,
+      "why": "ISA au sol 15 °C : écart 45 °C = 4,5 tranches ; 2 000 × 4 % × 4,5 = 360 ft. (Les tables PANS-OPS donnent un ordre de grandeur voisin.)"
+     },
+     {
+      "q": "Vol de A (QNH 1 020) vers B (QNH 1 002) sans changer le calage (1 020). Au-dessus de B, l'avion est :",
+      "o": [
+       "≈ 18 ft plus bas qu'indiqué",
+       "≈ 486 ft plus haut qu'indiqué",
+       "≈ 486 ft plus bas qu'indiqué",
+       "à l'altitude indiquée"
+      ],
+      "c": 2,
+      "why": "Calage trop fort de 18 hPa → l'altimètre surestime d'environ 18 × 27 = 486 ft (« de la haute vers la basse, regarde en bas »)."
+     },
+     {
+      "q": "Pitot bouché par du givre, purge bouchée, prise statique libre. En montée, l'anémomètre :",
+      "o": [
+       "indique une vitesse décroissante",
+       "indique zéro",
+       "reste figé",
+       "indique une vitesse croissante"
+      ],
+      "c": 3,
+      "why": "La pression totale est piégée ; la statique baisse : la différence augmente. Risque : cabrer pour « réduire » une survitesse fictive (Birgenair 301)."
+     },
+     {
+      "q": "Prise statique bouchée en croisière, puis descente. Variomètre et altimètre :",
+      "o": [
+       "variomètre à zéro, altimètre figé",
+       "variomètre correct, altimètre figé",
+       "les deux corrects",
+       "altimètre qui augmente"
+      ],
+      "c": 0,
+      "why": "Les deux n'utilisent que la pression statique piégée."
+     },
+     {
+      "q": "Même panne (statique bouchée), en descente : l'anémomètre :",
+      "o": [
+       "est exact",
+       "indique zéro",
+       "sous-estime la vitesse",
+       "surestime la vitesse"
+      ],
+      "c": 3,
+      "why": "La statique piégée est plus faible que la vraie (l'air est plus dense en bas) : Pt − Ps piégée est trop grand → vitesse surestimée."
+     },
+     {
+      "q": "Dérive apparente d'un gyroscope directionnel non corrigé à 48° N ?",
+      "o": [
+       "7,5°/h",
+       "15,0°/h",
+       "11,1°/h",
+       "10,0°/h"
+      ],
+      "c": 2,
+      "why": "15 × sin 48° = 15 × 0,743 = 11,1°/h."
+     },
+     {
+      "q": "Hémisphère Nord, cap 270°, accélération. Le compas magnétique indique un virage vers :",
+      "o": [
+       "aucun virage",
+       "l'Est",
+       "le Nord",
+       "le Sud"
+      ],
+      "c": 2,
+      "why": "ANDS : Accelerate North."
+     },
+     {
+      "q": "Hémisphère Nord, virage pour prendre le cap 360°. On arrête le virage :",
+      "o": [
+       "après qu'il a dépassé 360°",
+       "au cap 180°",
+       "quand il indique 360°",
+       "avant que le compas indique 360°"
+      ],
+      "c": 3,
+      "why": "UNOS : Undershoot North — le compas retarde vers le Nord, on sort du virage avant (de l'ordre de la latitude, moins la moitié de l'inclinaison en règle pratique)."
+     },
+     {
+      "q": "Virage au taux standard à TAS 140 kt. Inclinaison approximative ?",
+      "o": [
+       "30°",
+       "14°",
+       "45°",
+       "21°"
+      ],
+      "c": 3,
+      "why": "TAS / 10 + 7 = 14 + 7 = 21°."
+     },
+     {
+      "q": "Inclinaison exacte pour un taux de 3°/s à TAS 250 kt ?",
+      "o": [
+       "45,0°",
+       "25,0°",
+       "32,0°",
+       "34,5°"
+      ],
+      "c": 3,
+      "why": "tan φ = V ω / g = 128,6 × 0,05236 / 9,81 → φ = 34,5° (la règle TAS/10 + 7 donne 32°, valable surtout aux basses vitesses ; en pratique on limite à 25°)."
+     },
+     {
+      "q": "Utilisation de la prise statique de secours dans une cabine non pressurisée (pression cabine plus faible que l'extérieur) :",
+      "o": [
+       "altitude et vitesse trop faibles",
+       "altitude trop faible, vitesse trop forte",
+       "altitude et vitesse indiquées un peu trop fortes",
+       "aucune erreur"
+      ],
+      "c": 2,
+      "why": "Pression statique trop faible → altitude plus haute et différence Pt − Ps plus grande."
+     },
+     {
+      "q": "EAS par rapport à CAS à 300 kt, FL350 :",
+      "o": [
+       "EAS supérieure à la CAS",
+       "EAS égale à la TAS",
+       "EAS égale à la CAS",
+       "EAS légèrement inférieure à la CAS"
+      ],
+      "c": 3,
+      "why": "Correction de compressibilité : EAS = TAS √σ = 280 kt pour 300 kt CAS."
+     }
+    ]
+   },
+   {
+    "id": "q1-meteo",
+    "t": "Météorologie : stabilité, vent, givrage, phénomènes dangereux",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Météorologie » (EASA ATPL, sujet 050). Suppose acquis le module « La météo » du Cours I.</p>\n\n<h3>1. Atmosphère standard (ISA, OACI Doc 7488)</h3>\n<p>Niveau de la mer : 15 °C, 1 013,25 hPa, 1,225 kg/m³. Gradient −6,5 °C/km (≈ −1,98 °C/1 000 ft) jusqu'à la tropopause (11 km, 36 089 ft, −56,5 °C), puis isotherme.\nÉcart à l'ISA : ISA ± Δ ; à FL300, T<sub>ISA</sub> = 15 − 1,98 × 30 = −44,4 °C.</p>\n\n<h3>2. Stabilité</h3>\n<ul>\n<li>Gradient adiabatique sec : 9,8 °C/km (≈ 3 °C/1 000 ft) ; saturé : ≈ 6 °C/km en basses couches (4 à 7 selon la température).</li>\n<li>Air <b>absolument stable</b> si le gradient réel &lt; saturé ; <b>absolument instable</b> si &gt; sec ; <b>conditionnellement instable</b> entre les deux.</li>\n<li>Base des cumulus (point de condensation) ≈ 125 m × (T − T<sub>d</sub>) ≈ 400 ft par °C d'écart (formule d'Espy, approximative).</li>\n<li>Inversion : la température augmente avec l'altitude ; très stable, piège brume et polluants, cisaillement possible à son sommet.</li>\n</ul>\n\n<h3>3. Le vent</h3>\n<p>Au-dessus de la couche de frottement (≈ 2 000 ft), le vent est sensiblement <b>géostrophique</b> : parallèle aux isobares, d'autant plus fort que les isobares sont serrées\net que la latitude est basse (V<sub>g</sub> = ΔP / (ρ f Δn), f = 2 Ω sin φ). <b>Buys-Ballot</b>, hémisphère Nord : dos au vent, la dépression est à gauche.\nPrès du sol, le frottement réduit le vent et le fait tourner vers les basses pressions (≈ 30° sur terre, 10 à 15° sur mer) : en descendant, le vent <b>recule</b> (tourne à gauche) et faiblit.</p>\n\n<h3>4. Givrage et phénomènes dangereux</h3>\n<ul>\n<li>Givrage le plus sévère entre 0 et −15 °C en nuage cumuliforme (grosses gouttelettes surfondues : <b>givre transparent</b> / verglas) ; givre blanc par petites gouttelettes plus froides.</li>\n<li>Pluie verglaçante : pluie tombant d'une couche chaude au-dessus d'une couche froide (inversion) ; danger extrême.</li>\n<li>Orage : trois stades (cumulus, maturité, dissipation) ; la micro-rafale (downburst) produit d'abord un gain de vent de face (augmentation de vitesse) puis un fort vent arrière et un courant descendant.</li>\n<li>Contournement des cumulonimbus : à au moins 20 NM en croisière (règle des exploitants), du côté au vent.</li>\n</ul>\n\n<h3>5. Messages</h3>\n<p>METAR (observation), TAF (prévision d'aérodrome : BECMG, TEMPO, PROB30/40), SIGMET (phénomènes dangereux en route). CAVOK : visibilité ≥ 10 km, pas de nuage sous 5 000 ft\nou sous l'altitude minimale de secteur la plus élevée, pas de CB ni TCU, pas de temps significatif [RÉFÉRENCÉ] OACI Annexe 3.</p>\n<div class=\"box\"><b>Pièges d'examen</b> : la tropopause est plus haute à l'équateur (≈ 16 km) qu'aux pôles (≈ 8 km) ; dans la micro-rafale, le premier signe est un gain de vitesse ;\nle vent géostrophique augmente quand la latitude diminue, à gradient égal.</div>\n",
+    "quiz": [
+     {
+      "q": "Température ISA à FL250 ?",
+      "o": [
+       "−34,5 °C",
+       "−50,0 °C",
+       "−25,0 °C",
+       "−47,5 °C"
+      ],
+      "c": 0,
+      "why": "15 − 1,98 × 25 = −34,5 °C."
+     },
+     {
+      "q": "À FL330, on mesure −41 °C. Écart à l'ISA ?",
+      "o": [
+       "ISA + 9",
+       "ISA + 0",
+       "ISA − 4",
+       "ISA − 10"
+      ],
+      "c": 0,
+      "why": "T_ISA = 15 − 1,98 × 33 = −50,3 °C ; écart = −41 − (−50,3) = 9,3 °C."
+     },
+     {
+      "q": "Température au sol 26 °C, point de rosée 18 °C. Base approximative des cumulus ?",
+      "o": [
+       "≈ 800 ft",
+       "≈ 3 200 ft",
+       "≈ 2 400 ft",
+       "≈ 8 000 ft"
+      ],
+      "c": 1,
+      "why": "400 ft par °C d'écart : 8 × 400 = 3 200 ft (≈ 1 000 m)."
+     },
+     {
+      "q": "Une particule d'air non saturée monte de 1 500 m à partir de 22 °C. Température d'arrivée (adiabatique sèche) ?",
+      "o": [
+       "7,3 °C",
+       "12,3 °C",
+       "13,0 °C",
+       "17,5 °C"
+      ],
+      "c": 0,
+      "why": "22 − 9,8 × 1,5 = 7,3 °C."
+     },
+     {
+      "q": "Gradient réel 8 °C/km. L'air est :",
+      "o": [
+       "absolument instable",
+       "conditionnellement instable",
+       "neutre",
+       "absolument stable"
+      ],
+      "c": 1,
+      "why": "Entre le gradient saturé (≈ 6) et le sec (9,8) : stable pour l'air sec, instable une fois saturé."
+     },
+     {
+      "q": "Föhn : air à 10 °C au pied au vent (800 m), condensation dès 800 m, sommet 2 800 m (saturé, 6 °C/km), descente sèche jusqu'à 800 m de l'autre côté. Température finale ?",
+      "o": [
+       "17,6 °C",
+       "−2,0 °C",
+       "22,0 °C",
+       "10,0 °C"
+      ],
+      "c": 0,
+      "why": "Montée saturée : 10 − 6 × 2 = −2 °C ; descente sèche : −2 + 9,8 × 2 = 17,6 °C : l'air est plus chaud et plus sec sous le vent."
+     },
+     {
+      "q": "Hémisphère Nord, dos au vent : la dépression est :",
+      "o": [
+       "derrière",
+       "devant",
+       "à droite",
+       "à gauche"
+      ],
+      "c": 3,
+      "why": "Loi de Buys-Ballot."
+     },
+     {
+      "q": "Vent à 2 000 ft : 270°/30 kt. Vent probable au sol (sur terre, hémisphère Nord) ?",
+      "o": [
+       "240°/45 kt",
+       "300°/15 kt",
+       "240°/15 kt",
+       "270°/30 kt"
+      ],
+      "c": 2,
+      "why": "Le frottement réduit le vent de moitié environ et le fait reculer d'environ 30° (vers la gauche) : 240°/15 kt."
+     },
+     {
+      "q": "Gradient de 4 hPa sur 300 km, ρ = 1,2 kg/m³, latitude 50°. Vent géostrophique ?",
+      "o": [
+       "3,3 m/s",
+       "9,9 m/s",
+       "1,1 m/s",
+       "30,0 m/s"
+      ],
+      "c": 1,
+      "why": "f = 2Ω sin 50° = 1,117·10⁻⁴ s⁻¹ ; Vg = ΔP / (ρ f Δn) = 400 / (1,2 × 0,0001117 × 300 000) = 9,9 m/s ≈ 19 kt."
+     },
+     {
+      "q": "Même gradient de pression à 25° de latitude : vent géostrophique ?",
+      "o": [
+       "9,9 m/s",
+       "18,0 m/s",
+       "5,5 m/s",
+       "0,0 m/s"
+      ],
+      "c": 1,
+      "why": "Vg ∝ 1 / sin φ : 9,9 × sin 50° / sin 25° = 18,0 m/s."
+     },
+     {
+      "q": "Givrage le plus dangereux (accrétion rapide de givre transparent) :",
+      "o": [
+       "nuage cumuliforme entre 0 et −15 °C",
+       "cirrus à −45 °C",
+       "ciel clair à +5 °C",
+       "stratus à −30 °C"
+      ],
+      "c": 0,
+      "why": "Grosses gouttelettes surfondues abondantes : elles s'étalent avant de geler (glace claire, dense, adhérente)."
+     },
+     {
+      "q": "Pluie verglaçante (FZRA) à l'arrivée : quelle structure verticale l'explique ?",
+      "o": [
+       "forte instabilité convective",
+       "couche froide au-dessus d'une couche chaude",
+       "couche chaude (> 0 °C) au-dessus d'une couche froide au sol",
+       "atmosphère isotherme à 0 °C"
+      ],
+      "c": 2,
+      "why": "La neige fond dans la couche chaude, la pluie se surfond en traversant la couche froide et gèle à l'impact."
+     },
+     {
+      "q": "En approche, entrée dans une micro-rafale. Premier effet ressenti :",
+      "o": [
+       "diminution de la vitesse",
+       "augmentation de la vitesse indiquée et tendance à passer au-dessus du plan",
+       "aucun effet",
+       "virage incontrôlé"
+      ],
+      "c": 1,
+      "why": "Vent de face croissant à l'entrée, puis courant descendant et vent arrière : la vitesse chute. Ne pas réduire la poussée sur le premier gain (vol Delta 191, 1985, NTSB AAR-86/05)."
+     },
+     {
+      "q": "Micro-rafale : on passe d'un vent de face de 25 kt à un vent arrière de 25 kt en 40 s. Perte de vitesse air instantanée ?",
+      "o": [
+       "12,5 kt",
+       "0 kt",
+       "50 kt",
+       "25 kt"
+      ],
+      "c": 2,
+      "why": "L'inertie conserve la vitesse sol : la vitesse air chute de l'écart total (25 + 25 = 50 kt) si l'avion ne réagit pas."
+     },
+     {
+      "q": "Hauteur de la tropopause la plus élevée :",
+      "o": [
+       "aux moyennes latitudes",
+       "à l'équateur",
+       "identique partout",
+       "aux pôles"
+      ],
+      "c": 1,
+      "why": "≈ 16-18 km à l'équateur contre ≈ 8 km aux pôles."
+     },
+     {
+      "q": "Pourquoi le courant-jet de la tropopause polaire est-il plus fort en hiver ?",
+      "o": [
+       "le contraste de température pôle-équateur est plus grand",
+       "la Terre tourne plus vite",
+       "la tropopause est plus haute",
+       "il y a moins de nuages"
+      ],
+      "c": 0,
+      "why": "Vent thermique : le cisaillement vertical de vent est proportionnel au gradient horizontal de température."
+     },
+     {
+      "q": "TAF : « TEMPO 1418 4000 TSRA BKN015CB ». Signification :",
+      "o": [
+       "fluctuations temporaires de 14 h à 18 h UTC, chacune de moins d'une heure",
+       "orages observés",
+       "changement définitif à 14 h",
+       "probabilité de 40 %"
+      ],
+      "c": 0,
+      "why": "TEMPO : fluctuations temporaires, chacune < 1 h et au total < la moitié de la période [RÉFÉRENCÉ] OACI Annexe 3."
+     },
+     {
+      "q": "METAR « 24015G28KT ». Écart de rafale ?",
+      "o": [
+       "43 kt",
+       "28 kt",
+       "15 kt",
+       "13 kt"
+      ],
+      "c": 3,
+      "why": "Vent moyen 15 kt, rafales 28 kt : 13 kt d'écart ; on ajoute souvent la moitié de l'écart à la vitesse d'approche (règle constructeur)."
+     },
+     {
+      "q": "Composante de vent traversier : piste 27, vent 310°/24 kt ?",
+      "o": [
+       "12,0 kt",
+       "24,0 kt",
+       "15,4 kt",
+       "18,4 kt"
+      ],
+      "c": 2,
+      "why": "24 × sin 40° = 15,4 kt ; composante de face 24 × cos 40° = 18,4 kt (piège : inverser sin et cos)."
+     },
+     {
+      "q": "Distance minimale recommandée pour contourner un cumulonimbus en croisière (pratique des exploitants) :",
+      "o": [
+       "20 NM",
+       "100 NM",
+       "2 NM",
+       "5 NM"
+      ],
+      "c": 0,
+      "why": "Grêle, turbulence et foudre peuvent s'étendre loin de l'enclume ; on contourne du côté au vent."
+     }
+    ]
+   },
+   {
+    "id": "q1-navigation",
+    "t": "Navigation : triangle des vitesses, ETP, PNR, orthodromie, radionavigation",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matières « Navigation générale » et « Radionavigation » (EASA ATPL, sujets 061 et 062). Suppose acquis le module « Naviguer » du Cours I et la géographie du Cours 0.</p>\n\n<h3>1. Le triangle des vitesses</h3>\n<p>Vecteur vitesse air (cap vrai, TAS) + vecteur vent = vecteur vitesse sol (route, GS). Dérive : sin X = W sin(angle vent/route) / TAS ;\nGS ≈ TAS × cos X − W cos(angle vent/route) (vent d'où il vient). On résout par composantes ou au calculateur de navigation.</p>\n\n<h3>2. Orthodromie, loxodromie, convergence</h3>\n<ul>\n<li>L'<b>orthodromie</b> (grand cercle) est le chemin le plus court ; son angle de route change le long du trajet (sauf sur l'équateur ou un méridien).</li>\n<li>La <b>loxodromie</b> coupe tous les méridiens sous le même angle ; plus longue, sauf le long de l'équateur ou d'un méridien.</li>\n<li><b>Convergence</b> des méridiens entre deux points : Δλ × sin(latitude moyenne). Correction de conversion (orthodromie → loxodromie) = ½ convergence.</li>\n<li>Distance sur un parallèle : départ (NM) = Δλ (minutes d'arc) × cos(latitude).</li>\n</ul>\n\n<h3>3. Point équitemps et point de non-retour</h3>\n<p>Avec D la distance totale, O la vitesse sol aller (out), H la vitesse sol retour (home) :\n<b>ETP</b> (temps égal pour continuer ou revenir) à la distance D × H / (O + H) du départ ;\n<b>PNR</b> (point le plus éloigné d'où l'on peut revenir avec le carburant disponible, endurance E) à E × O × H / (O + H) en distance, ou E × H / (O + H) en temps.\nEn panne moteur, l'ETP se recalcule avec les vitesses en configuration dégradée (règles ETOPS / EDTO).</p>\n\n<h3>4. Radionavigation</h3>\n<ul>\n<li>VOR : radial = relèvement magnétique <b>depuis</b> la station. Erreur de 1° ≈ 1 NM à 60 NM (règle du 1 sur 60).</li>\n<li>DME : distance oblique ; au-dessus de la station à FL360, il indique ≈ 6 NM.</li>\n<li>ILS : plan de descente standard 3° ; taux de descente ≈ GS × 5 (ft/min, GS en kt) ; hauteur ≈ 318 ft par NM (≈ 300 ft/NM en règle pratique).</li>\n<li>RNP : performance de navigation requise ; RNP 1 = erreur totale ≤ 1 NM pendant au moins 95 % du temps de vol [RÉFÉRENCÉ] OACI Doc 9613 (manuel PBN).</li>\n</ul>\n\n<h3>5. Planification de la descente</h3>\n<p>Règle des 3 : distance de descente (NM) ≈ 3 × hauteur à perdre (milliers de ft), plus 1 NM par 10 kt de vitesse à réduire. Ajuster selon le vent (≈ 2 NM par 10 kt de vent arrière).</p>\n<div class=\"box\"><b>Pièges d'examen</b> : l'ETP ne dépend pas du carburant ; le PNR ne dépend pas de la distance à la destination ; le vent déplace l'ETP <b>vers le vent</b> (du côté d'où il vient).</div>\n",
+    "quiz": [
+     {
+      "q": "TAS 450 kt, route vraie 090°, vent 030°/60 kt. Cap vrai à prendre ?",
+      "o": [
+       "097°",
+       "090°",
+       "083°",
+       "077°"
+      ],
+      "c": 2,
+      "why": "sin X = 60 × sin(030° − 090°) / 450 = −0,1155 → correction 6,6° : le vent de nord-est pousse l'avion vers la droite (dérive droite), on corrige à gauche, face au vent : cap 083°."
+     },
+     {
+      "q": "Même cas : vitesse sol ?",
+      "o": [
+       "450 kt",
+       "390 kt",
+       "417 kt",
+       "480 kt"
+      ],
+      "c": 2,
+      "why": "GS = 450 × cos X − 60 × cos(−60°) = 447,0 − 30 = 417 kt."
+     },
+     {
+      "q": "TAS 150 kt, route 360°, vent 270°/30 kt (plein travers). Vitesse sol ?",
+      "o": [
+       "147,0 kt",
+       "150,0 kt",
+       "120,0 kt",
+       "153,0 kt"
+      ],
+      "c": 0,
+      "why": "X = asin(30/150) = 11,5° ; GS = 150 cos X = 147,0 kt : même un vent de travers pur réduit la vitesse sol."
+     },
+     {
+      "q": "Traversée 1 800 NM ; GS aller 480 kt, GS retour 400 kt. Distance du point équitemps depuis le départ ?",
+      "o": [
+       "982 NM",
+       "900 NM",
+       "1 636 NM",
+       "818 NM"
+      ],
+      "c": 3,
+      "why": "ETP = D × H / (O + H) = 1 800 × 400 / 880 = 818 NM : l'ETP est décalé vers le vent (côté départ ici, car le vent est arrière à l'aller)."
+     },
+     {
+      "q": "Même avion : endurance utilisable 5 h 30 (hors réserves). Temps jusqu'au PNR ?",
+      "o": [
+       "165 min",
+       "150 min",
+       "180 min",
+       "135 min"
+      ],
+      "c": 1,
+      "why": "T = E × H / (O + H) = 5,5 × 400 / 880 = 2,500 h = 150 min (2 h 30)."
+     },
+     {
+      "q": "Distance du PNR depuis le départ ?",
+      "o": [
+       "1 320 NM",
+       "1 200 NM",
+       "1 100 NM",
+       "1 800 NM"
+      ],
+      "c": 1,
+      "why": "2,5 h × 480 kt = 1 200 NM."
+     },
+     {
+      "q": "Si le vent change, le PNR (vent nul → vent régulier quelconque, même endurance) :",
+      "o": [
+       "se rapproche de la destination",
+       "s'éloigne du départ",
+       "se rapproche du départ",
+       "ne change pas"
+      ],
+      "c": 2,
+      "why": "O H / (O + H) est maximal sans vent (moyenne harmonique ≤ moyenne arithmétique) : tout vent régulier réduit le rayon d'action."
+     },
+     {
+      "q": "Convergence des méridiens entre 10° W et 30° E à la latitude moyenne de 50° N ?",
+      "o": [
+       "15,3°",
+       "25,7°",
+       "30,6°",
+       "40,0°"
+      ],
+      "c": 2,
+      "why": "Δλ × sin(lat) = 40 × sin 50° = 30,6°. Piège : 25,7° = 40 × cos 50°."
+     },
+     {
+      "q": "Correction de conversion (orthodromie / loxodromie) dans le même cas :",
+      "o": [
+       "7,7°",
+       "15,3°",
+       "30,6°",
+       "40,0°"
+      ],
+      "c": 1,
+      "why": "½ convergence = 15,3°."
+     },
+     {
+      "q": "Vol le long du parallèle 60° N sur 10° de longitude. Distance ?",
+      "o": [
+       "600 NM",
+       "520 NM",
+       "300 NM",
+       "1 200 NM"
+      ],
+      "c": 2,
+      "why": "10° = 600′ ; départ = 600 × cos 60° = 300 NM."
+     },
+     {
+      "q": "Distance orthodromique Paris-CDG (49,00° N, 2,55° E) → New York-JFK (40,64° N, 73,78° W) ?",
+      "o": [
+       "≈ 4 580 NM",
+       "≈ 3 980 NM",
+       "≈ 3 148 NM",
+       "≈ 2 750 NM"
+      ],
+      "c": 2,
+      "why": "cos d = sin φ1 sin φ2 + cos φ1 cos φ2 cos Δλ → d = 52,47° = 3 148 NM [CALCULÉ]."
+     },
+     {
+      "q": "Route vraie initiale de l'orthodromie CDG → JFK ?",
+      "o": [
+       "≈ 240°",
+       "≈ 260°",
+       "≈ 292°",
+       "≈ 270°"
+      ],
+      "c": 2,
+      "why": "tan R = sin Δλ cos φ2 / (cos φ1 sin φ2 − sin φ1 cos φ2 cos Δλ) → 292° : on part vers le Nord-Ouest, la route s'incurve vers le Sud-Ouest à l'arrivée."
+     },
+     {
+      "q": "Écart latéral : à 45 NM d'un VOR, l'indicateur montre 4° d'écart. Distance latérale ?",
+      "o": [
+       "0,3 NM",
+       "45 NM",
+       "3 NM",
+       "4 NM"
+      ],
+      "c": 2,
+      "why": "Règle du 1 sur 60 : 45 × 4 / 60 = 3 NM."
+     },
+     {
+      "q": "DME lu à la verticale d'une station à FL360 ?",
+      "o": [
+       "0,0 NM",
+       "3,6 NM",
+       "36,0 NM",
+       "≈ 5,9 NM"
+      ],
+      "c": 3,
+      "why": "Distance oblique = hauteur : 36 000 ft / 6 076 ft = 5,9 NM."
+     },
+     {
+      "q": "ILS 3°, GS 140 kt. Taux de descente ?",
+      "o": [
+       "≈ 300 ft/min",
+       "≈ 743 ft/min",
+       "≈ 420 ft/min",
+       "≈ 1 400 ft/min"
+      ],
+      "c": 1,
+      "why": "V_z = GS × tan 3° = 140 × 101,27 × 0,0524 = 743 ft/min (règle pratique : GS × 5 = 700)."
+     },
+     {
+      "q": "ILS 3° : hauteur théorique à 4 NM du seuil (point de référence à 50 ft) ?",
+      "o": [
+       "≈ 1 200 ft",
+       "≈ 1 600 ft",
+       "≈ 1 324 ft",
+       "≈ 1 000 ft"
+      ],
+      "c": 2,
+      "why": "4 × 6 076 × tan 3° = 1 274 ft + 50 ft = 1 324 ft."
+     },
+     {
+      "q": "Descente de FL370 vers 3 000 ft, en réduisant de 280 à 250 kt. Distance de début de descente (règle des 3) ?",
+      "o": [
+       "≈ 90 NM",
+       "≈ 34 NM",
+       "≈ 111 NM",
+       "≈ 105 NM"
+      ],
+      "c": 3,
+      "why": "34 000 ft × 3 = 102 NM + 3 NM pour réduire de 30 kt = 105 NM (sans vent)."
+     },
+     {
+      "q": "Même descente avec 40 kt de vent arrière moyen :",
+      "o": [
+       "≈ 97 NM",
+       "≈ 113 NM",
+       "≈ 145 NM",
+       "≈ 105 NM"
+      ],
+      "c": 1,
+      "why": "On ajoute ≈ 2 NM par 10 kt de vent arrière : 105 + 8 = 113 NM."
+     },
+     {
+      "q": "Avion sur le radial 090 d'un VOR, en rapprochement vers la station. Route magnétique ?",
+      "o": [
+       "270°",
+       "180°",
+       "360°",
+       "090°"
+      ],
+      "c": 0,
+      "why": "Le radial est le relèvement magnétique depuis la station : sur le radial 090 on est à l'est ; pour rejoindre la station on vole au 270°."
+     },
+     {
+      "q": "RNP 1 signifie :",
+      "o": [
+       "erreur ≤ 0,1 NM",
+       "erreur totale ≤ 1 NM pendant au moins 95 % du temps",
+       "erreur ≤ 1 NM en permanence",
+       "un seul récepteur GNSS"
+      ],
+      "c": 1,
+      "why": "Définition de la navigation fondée sur les performances [RÉFÉRENCÉ] OACI Doc 9613."
+     }
+    ]
+   },
+   {
+    "id": "q1-humain",
+    "t": "Performances humaines : hypoxie, illusions, vision, alcool, modèles d'erreur",
+    "h": "\n<p class=\"lead\"><b>Niveau confirmé.</b> Matière « Performances et limites humaines » (EASA ATPL, sujet 040). Suppose acquis le module « Le pilote et son corps » du Cours I.</p>\n\n<h3>1. Pression et oxygène</h3>\n<p>La fraction d'oxygène reste 20,95 % à toute altitude, mais sa <b>pression partielle</b> baisse avec la pression totale (loi de Dalton) : c'est elle qui fait passer l'oxygène dans le sang.\nLoi de Boyle-Mariotte : à température constante, un volume de gaz piégé (intestins, sinus, oreille moyenne, dent) augmente comme 1 / P ; il double vers 18 000 ft.\nAltitude cabine maximale en exploitation normale : 8 000 ft [RÉFÉRENCÉ] CS 25.841.</p>\n<table class=\"kv\"><tbody>\n<tr><th>Temps de conscience utile (TUC)</th><td>FL250 : 3 à 5 min · FL300 : 1 à 2 min · FL350 : 30 à 60 s · FL400 : 15 à 20 s · FL430 et au-dessus : 9 à 12 s.\nDivisé par deux environ en décompression rapide [RÉFÉRENCÉ] FAA AC 61-107B.</td></tr>\n<tr><th>Types d'hypoxie</th><td>hypoxique (altitude) · anémique ou hypémique (monoxyde de carbone, anémie) · stagnante (circulation : facteur de charge, froid) · histotoxique (alcool, toxiques)</td></tr>\n<tr><th>Oxygène (règle FAA 91.211)</th><td>équipage : au-delà de 30 min entre 12 500 et 14 000 ft, en permanence au-dessus de 14 000 ft ; passagers : fourni au-dessus de 15 000 ft</td></tr>\n</tbody></table>\n<p>Plongée sous-marine : attendre au moins <b>12 h</b> après une plongée sans palier et <b>24 h</b> après une plongée avec paliers avant de voler jusqu'à 8 000 ft d'altitude cabine [RÉFÉRENCÉ] FAA AIM 8-1-2.</p>\n\n<h3>2. Illusions sensorielles</h3>\n<ul>\n<li><b>Somatogravique</b> : une accélération longitudinale donne la sensation de cabrer ; sans référence visuelle, le pilote pousse sur le manche. Une décélération donne l'illusion inverse.</li>\n<li><b>Inclinaison résiduelle (« leans »)</b> : après un virage lent non perçu (sous le seuil des canaux semi-circulaires, ≈ 2°/s), le retour à plat est ressenti comme une inclinaison.</li>\n<li><b>Approche « trou noir »</b> (nuit, terrain sans éclairage autour) : impression d'être trop haut → approche trop basse.</li>\n<li>Piste <b>montante</b> ou <b>étroite</b> : impression d'être trop haut → approche trop basse. Piste descendante ou large : l'inverse.</li>\n</ul>\n\n<h3>3. Vision et anticollision</h3>\n<p>Il faut environ <b>12,5 s</b> entre la détection d'un autre avion et la fin de la manœuvre d'évitement [RÉFÉRENCÉ] FAA AC 90-48D (tableau du temps de reconnaissance et de réaction).\nUn avion en route de collision reste <b>immobile</b> dans le champ visuel et grossit brusquement à la fin. Myopie d'espace vide : sans objet à fixer, l'œil accommode à 1 ou 2 m.</p>\n\n<h3>4. Alcool, fatigue</h3>\n<p>FAA 14 CFR 91.17 : rien dans les 8 h avant le vol et une alcoolémie inférieure à 0,04 %. L'élimination est d'environ 0,10 à 0,15 g/L par heure et ne s'accélère pas (café, douche).\nCreux circadien (WOCL) entre 2 h et 6 h du matin, heure du corps.</p>\n\n<h3>5. Modèles de sécurité</h3>\n<ul>\n<li><b>Reason</b> (« fromage suisse ») : un accident survient quand des défaillances latentes (organisation, conception) et des erreurs actives s'alignent à travers les barrières.</li>\n<li><b>SHELL</b> : Software, Hardware, Environment, Liveware (l'humain au centre et ses interfaces avec les autres humains).</li>\n<li><b>TEM</b> (Threat and Error Management) : menaces → erreurs → états indésirables de l'avion ; on cherche à les détecter et à les corriger avant qu'ils ne deviennent un incident.</li>\n<li><b>CRM</b> : communication, conscience de la situation, prise de décision, leadership, gestion de la charge de travail. Né après Tenerife (1977) et le United 173 (1978).</li>\n</ul>\n<div class=\"box\"><b>Pièges d'examen</b> : l'hypoxie est insidieuse (euphorie, jugement altéré) ; le taux d'oxygène dans l'air ne change pas avec l'altitude ; l'illusion somatogravique au décollage de nuit pousse à piquer.</div>\n",
+    "quiz": [
+     {
+      "q": "Proportion d'oxygène dans l'air à FL350 :",
+      "o": [
+       "5,0 %",
+       "10,0 %",
+       "0,0 %",
+       "20,95 %"
+      ],
+      "c": 3,
+      "why": "La composition ne change pas ; seule la pression partielle diminue (≈ 50 hPa contre 212 au niveau de la mer)."
+     },
+     {
+      "q": "Pression partielle de l'oxygène à 10 000 ft (ISA) ?",
+      "o": [
+       "100 hPa",
+       "146 hPa",
+       "212 hPa",
+       "697 hPa"
+      ],
+      "c": 1,
+      "why": "P(10 000 ft) = 697 hPa ; 0,2095 × 697 = 146 hPa."
+     },
+     {
+      "q": "Volume d'un gaz piégé dans l'intestin, 1 L au sol, à une altitude cabine de 18 000 ft (ISA) ?",
+      "o": [
+       "3,0 L",
+       "2,0 L",
+       "1,0 L",
+       "0,5 L"
+      ],
+      "c": 1,
+      "why": "Boyle : V = 1 × 1 013 / 506 = 2,0 L."
+     },
+     {
+      "q": "Temps de conscience utile à FL350 (ordre de grandeur, FAA AC 61-107B) ?",
+      "o": [
+       "30 à 60 s",
+       "9 à 12 s",
+       "10 à 20 min",
+       "3 à 5 min"
+      ],
+      "c": 0,
+      "why": "FL350 : 30 à 60 s ; divisé par deux environ en décompression rapide."
+     },
+     {
+      "q": "Décompression rapide à FL400. Temps de conscience utile probable ?",
+      "o": [
+       "≈ 3 à 5 min",
+       "≈ 8 à 10 s",
+       "≈ 1 à 2 min",
+       "≈ 15 à 20 s"
+      ],
+      "c": 1,
+      "why": "TUC FL400 ≈ 15 à 20 s, réduit de moitié environ en décompression rapide : masque à oxygène immédiatement, avant toute autre action."
+     },
+     {
+      "q": "Intoxication au monoxyde de carbone (chauffage cabine défectueux) : type d'hypoxie ?",
+      "o": [
+       "stagnante",
+       "hypoxique",
+       "anémique (hypémique)",
+       "histotoxique"
+      ],
+      "c": 2,
+      "why": "Le CO se fixe sur l'hémoglobine environ 200 à 250 fois plus que l'oxygène : le sang ne peut plus transporter l'oxygène."
+     },
+     {
+      "q": "Plongée avec paliers de décompression le matin. Délai minimal avant de voler (AIM 8-1-2) ?",
+      "o": [
+       "48 h",
+       "24 h",
+       "6 h",
+       "12 h"
+      ],
+      "c": 1,
+      "why": "Plongée avec ascension contrôlée : 24 h ; sans palier : 12 h."
+     },
+     {
+      "q": "Règle FAA (14 CFR 91.17) : délai entre la dernière boisson alcoolisée et le vol ?",
+      "o": [
+       "8 h",
+       "24 h",
+       "12 h",
+       "4 h"
+      ],
+      "c": 0,
+      "why": "Et alcoolémie inférieure à 0,04 %. Beaucoup d'exploitants imposent davantage (souvent 12 h)."
+     },
+     {
+      "q": "Alcoolémie 0,8 g/L à minuit ; élimination 0,12 g/L/h. Heure où elle retombe sous 0,2 g/L ?",
+      "o": [
+       "≈ 8 h du matin",
+       "≈ 5 h du matin",
+       "≈ 7 h du matin",
+       "≈ 2 h du matin"
+      ],
+      "c": 1,
+      "why": "(0,8 − 0,2) / 0,12 = 5 h : vers 5 h. Le café ou le sommeil n'accélèrent pas l'élimination."
+     },
+     {
+      "q": "Décollage de nuit au-dessus de la mer, forte accélération, aucune référence visuelle. Illusion probable :",
+      "o": [
+       "sensation de cabrer excessivement",
+       "sensation d'inclinaison à droite",
+       "aucune illusion",
+       "sensation de piquer"
+      ],
+      "c": 0,
+      "why": "Illusion somatogravique : le pilote risque de pousser sur le manche et de percuter la mer. Seul remède : les instruments."
+     },
+     {
+      "q": "Approche de nuit vers une piste isolée sans éclairage autour (trou noir). Tendance :",
+      "o": [
+       "approche trop haute",
+       "aucune",
+       "approche trop basse",
+       "approche trop rapide"
+      ],
+      "c": 2,
+      "why": "Le pilote se croit trop haut et réduit la pente : risque d'impact avant la piste."
+     },
+     {
+      "q": "Piste plus large que d'habitude. Impression et tendance :",
+      "o": [
+       "impression d'être trop haut → approche trop basse",
+       "impression d'être trop rapide",
+       "impression d'être trop bas → approche trop haute",
+       "aucune illusion"
+      ],
+      "c": 2,
+      "why": "Une piste large paraît plus proche : on se croit bas et l'on remonte la pente (arrondi haut, atterrissage long)."
+     },
+     {
+      "q": "Virage lent à 1°/s pendant 30 s en IMC, puis remise à plat rapide. Le pilote ressent :",
+      "o": [
+       "rien",
+       "une inclinaison dans le sens du virage",
+       "une inclinaison dans le sens opposé au virage",
+       "une montée"
+      ],
+      "c": 2,
+      "why": "Le virage lent est sous le seuil des canaux semi-circulaires (≈ 2°/s) ; la remise à plat est perçue comme un virage inverse : illusion de l'inclinaison résiduelle (« leans »)."
+     },
+     {
+      "q": "Deux avions face à face à 250 kt chacun. Distance parcourue pendant les 12,5 s nécessaires pour voir et éviter ?",
+      "o": [
+       "3,47 NM",
+       "0,87 NM",
+       "0,35 NM",
+       "1,74 NM"
+      ],
+      "c": 3,
+      "why": "Vitesse de rapprochement 500 kt ; 500 × 12,5 / 3 600 = 1,74 NM : si l'autre avion est vu à moins de cette distance, l'évitement est déjà trop tard."
+     },
+     {
+      "q": "Avion en route de collision : comment apparaît-il dans le champ visuel ?",
+      "o": [
+       "immobile, puis grossissant brusquement",
+       "défilant rapidement",
+       "descendant vers l'horizon",
+       "clignotant"
+      ],
+      "c": 0,
+      "why": "Relèvement constant : aucun mouvement relatif pour attirer l'œil ; d'où le balayage par secteurs de 10° environ."
+     },
+     {
+      "q": "Modèle de Reason : une « défaillance latente » est par exemple :",
+      "o": [
+       "une procédure mal conçue par l'organisation",
+       "une erreur de saisie du pilote",
+       "une panne moteur imprévisible",
+       "une rafale"
+      ],
+      "c": 0,
+      "why": "Les conditions latentes sont introduites loin du poste de pilotage (conception, formation, organisation) et attendent une erreur active."
+     },
+     {
+      "q": "Dans le modèle TEM, un orage sur l'aéroport de destination est :",
+      "o": [
+       "une violation",
+       "une menace",
+       "une erreur",
+       "un état indésirable de l'avion"
+      ],
+      "c": 1,
+      "why": "Menace : événement extérieur à l'équipage qui augmente la complexité ; l'erreur est une action ou inaction de l'équipage."
+     },
+     {
+      "q": "Dans le modèle TEM, un avion 15 kt au-dessus de la vitesse d'approche à 500 ft est :",
+      "o": [
+       "une menace",
+       "un incident",
+       "une erreur latente",
+       "un état indésirable de l'avion"
+      ],
+      "c": 3,
+      "why": "C'est la conséquence d'une menace ou d'une erreur non gérée ; la bonne réponse est souvent la remise de gaz (approche non stabilisée)."
+     },
+     {
+      "q": "L'accident du United 173 (Portland, 1978 : panne sèche en attente pour un problème de train) a surtout mis en évidence :",
+      "o": [
+       "le manque de communication et de gestion des ressources de l'équipage",
+       "une erreur de contrôle aérien",
+       "une panne de moteur",
+       "un givrage sévère"
+      ],
+      "c": 0,
+      "why": "Le commandant, absorbé par le train, n'a pas tenu compte des alertes carburant des autres membres : point de départ des programmes CRM [RÉFÉRENCÉ] NTSB AAR-79-07."
+     },
+     {
+      "q": "Période où la vigilance est la plus faible (creux circadien) :",
+      "o": [
+       "entre 18 h et 20 h",
+       "au réveil",
+       "entre 14 h et 16 h seulement",
+       "entre 2 h et 6 h du matin (heure du corps)"
+      ],
+      "c": 3,
+      "why": "Fenêtre du creux circadien (WOCL) ; un second creux, moins marqué, existe en début d'après-midi."
+     }
+    ]
+   }
+  ]
+ }
+]

@@ -7,6 +7,8 @@ Vérifie, sur ordinateur et téléphone :
 - le PDF d'un module et d'une partie entière (QCM et corrigés, sans menu), produit par le moteur d'impression de Chromium.
 Les échanges réels avec Symfony sont testés côté serveur (backend/tests, PHPUnit).
 """
+import json, os
+ROOT_DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data') + '/'
 import io, os, pathlib, sys
 from playwright.sync_api import sync_playwright
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -142,7 +144,8 @@ with sync_playwright() as p:
         pg.emulate_media(media='screen')
 
         pg.goto(URL + '#/cours'); pg.wait_for_selector('.titlebar .btn')
-        check(f'[{tag}] liste des cours : un bouton PDF par partie (Cours 0 et Cours I)', pg.locator('.titlebar .btn').count() == 10)
+        nparts = sum(len(json.load(open(ROOT_DATA + f))) for f in ('academy-0.json', 'academy.json', 'academy-2.json'))
+        check(f'[{tag}] liste des cours : un bouton PDF par partie (Cours 0, I et II : {nparts})', pg.locator('.titlebar .btn').count() == nparts)
         sw = pg.evaluate('document.documentElement.scrollWidth')
         check(f'[{tag}] pas de défilement horizontal', sw <= W, f'{sw}')
         check(f'[{tag}] aucune erreur JavaScript', not errs, '; '.join(errs[:3]))
