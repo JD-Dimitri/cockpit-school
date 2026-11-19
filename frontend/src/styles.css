@@ -234,3 +234,8 @@ a.card:hover { border-color: var(--cy); }
 .welcome .points li { border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
 .welcome .points span { color: var(--mute); }
 .demo { margin: 0; padding: 6px 16px; background: rgba(255, 176, 32, .12); color: #ffb020; font-size: 13px; text-align: center; }
+
+/* page Appareils : illustration de l'appareil */
+.acimg { margin: 0; }
+.acimg img, .acimg > span { display: grid; place-items: center; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #eef1f4; border-radius: 10px; padding: 12px; font-size: 64px; color: #04121c; }
+.acimg figcaption { color: var(--mute); font-size: 12px; margin-top: 6px; }

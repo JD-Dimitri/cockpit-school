@@ -1,7 +1,7 @@
 """Parcours de bout en bout de l'interface React (dist/ servi sur http://localhost:8766).
 
 Pour chaque largeur (ordinateur 1280, téléphone 390) : chaque page s'affiche sans erreur JavaScript,
-la 3D se dessine, un cours et son QCM fonctionnent, et le simulateur d'origine démarre dans son cadre.
+l'illustration de l'appareil s'affiche, un cours et son QCM fonctionnent, et le simulateur d'origine démarre dans son cadre.
 three.js r128 (même fichier que le CDN) est servi localement si le réseau n'atteint pas cdnjs.
 """
 import os, pathlib, sys
@@ -40,14 +40,11 @@ with sync_playwright() as p:
         check(f'[{tag}] accueil : origine des données affichée', 'V10.42.1' in pg.inner_text('.meta'))
         pg.screenshot(path=str(OUT / f'pro_accueil_{tag}.png'))
 
-        pg.goto(URL + '#/appareils/a350'); pg.wait_for_selector('.viewer canvas'); pg.wait_for_timeout(600)
+        pg.goto(URL + '#/appareils/a350'); pg.wait_for_selector('.acimg img'); pg.wait_for_timeout(300)
         check(f'[{tag}] appareils : 8 onglets', pg.locator('.tabs a').count() == 8)
         check(f'[{tag}] appareils : A350 sélectionné', 'A350' in pg.inner_text('.ac h2'))
-        shot = OUT / f'pro_viewer_{tag}.png'
-        pg.locator('.viewer').screenshot(path=str(shot))
-        img = Image.open(shot).convert('RGB')
-        raw = img.tobytes(); lit = sum(1 for i in range(0, len(raw), 3) if raw[i] + raw[i + 1] + raw[i + 2] > 560)   # fuselage clair sur fond sombre
-        check(f'[{tag}] appareils : silhouette 3D dessinée', lit > 50, f'{lit} pixels clairs')
+        pg.locator('.acimg').screenshot(path=str(OUT / f'pro_appareil_image_{tag}.png'))
+        check(f'[{tag}] appareils : illustration de l\'appareil (image, pas de 3D)', pg.evaluate("(() => { const i = document.querySelector('.acimg img'); return !!i && i.complete && i.naturalWidth > 100; })()") and pg.locator('.ac canvas').count() == 0)
         bench = pg.locator('.bench').inner_text() if pg.locator('.bench').count() else ''
         check(f'[{tag}] appareils : décollage calculé par le modèle de vol (A350)', 'Passage des 35 ft' in bench and '[CALCULÉ]' in bench and 'kt' in bench, bench[:120])
         pg.click('.tabs a[href="#/appareils/s76"]'); pg.wait_for_timeout(400)
@@ -82,8 +79,12 @@ with sync_playwright() as p:
         fr = pg.frame_locator('.sim iframe')
         fr.locator('body').wait_for()
         pg.wait_for_timeout(2500)
-        frame = next(f for f in pg.frames if f.url.endswith('legacy/plane-trajectories.html') or f.url.startswith('blob:') or f.url == 'about:srcdoc')
-        ver = frame.evaluate('typeof AC==="object" ? Object.keys(AC).length : 0')
+        frame = next(f for f in pg.frames if f.url.endswith('legacy/plane-trajectories.html') or f.url.endswith('api/moteur') or f.url.startswith('blob:') or f.url == 'about:srcdoc')
+        ver = 0
+        for _ in range(50):   # les modules du moteur ajoutent leurs appareils au fil du chargement
+            ver = frame.evaluate('typeof AC==="object" ? Object.keys(AC).length : 0')
+            if ver == 8: break
+            pg.wait_for_timeout(200)
         check(f'[{tag}] simulateur : moteur d\'origine chargé (8 appareils)', ver == 8, str(ver))
         box = pg.locator('.sim iframe').bounding_box()
         check(f'[{tag}] simulateur : cadre plein écran', box and box['width'] >= W - 1 and box['height'] > H * 0.8, str(box))

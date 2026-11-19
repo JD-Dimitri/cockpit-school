@@ -1,5 +1,5 @@
 import { useData, type Aircraft } from '../data';
-import { AircraftViewer } from '../three/AircraftViewer';
+import { AIRCRAFT_IMAGES, IMAGE_CREDIT } from '../aircraftImages';
 import { takeoffBench, type FixedWing } from '../engine';
 
 const n = (v: number | undefined, unit: string, d = 0) =>
@@ -44,7 +44,11 @@ export function AircraftPage({ id }: { id?: string }) {
         ))}
       </div>
       <div className="ac">
-        <AircraftViewer ac={ac} />
+        {/* Illustration de l'appareil (demande de l'auteur, 19/11 : une image, pas de 3D sur cette page) */}
+        <figure className="acimg">
+          {AIRCRAFT_IMAGES[k] ? <img src={AIRCRAFT_IMAGES[k]} alt={`${ac.name} (${IMAGE_CREDIT.toLowerCase()})`} /> : <span aria-hidden="true">{ac.kind === 'fw' ? '✈' : '🚁'}</span>}
+          <figcaption>{IMAGE_CREDIT}</figcaption>
+        </figure>
         <div>
           <h2>{ac.name}</h2>
           <p className="sub">{ac.sub}</p>
