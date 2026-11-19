@@ -9,13 +9,14 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 def fr(x, d=0):
     """Nombre au format français : espace fine pour les milliers, virgule décimale."""
-    s = f'{x:,.{d}f}'.replace(',', ' ').replace('.', ',')
+    s = f'{x:,.{d}f}'.replace(',', ' ').replace('.', ',').replace('-', '−')
     return s
 
 def ex(q, good, wrongs, why, seed=None):
     """Exercice à choix : la bonne réponse est placée à une position stable mais variée."""
     opts = [good] + list(wrongs)
-    assert len(set(opts)) == len(opts), ('options en double', q, opts)
+    norm = [o.replace('\u202f', ' ').replace('\u00a0', ' ').replace('-', '−') for o in opts]
+    assert len(set(norm)) == len(norm), ('options en double', q, opts)
     rnd = random.Random(seed if seed is not None else q)
     order = list(range(len(opts))); rnd.shuffle(order)
     o = [opts[i] for i in order]

@@ -122,13 +122,13 @@
      {
       "q": "Débit carburant 2 600 kg/h pendant 2 h 40 min. Carburant consommé ?",
       "o": [
-       "6 933 kg",
+       "6 933 kg",
        "7 040 kg",
        "6 240 kg",
        "6 760 kg"
       ],
       "c": 0,
-      "why": "2 h 40 = 2,667 h ; 2 600 × 2,667 = 6 933 kg. Piège : 2,40 h n'est pas 2 h 40 (2 600 × 2,4 = 6 240)."
+      "why": "2 h 40 = 2,667 h ; 2 600 × 2,667 = 6 933 kg. Piège : 2,40 h n'est pas 2 h 40 (2 600 × 2,4 = 6 240)."
      },
      {
       "q": "À vitesse doublée, la portance (à incidence égale) est multipliée par :",
@@ -338,6 +338,2028 @@
       ],
       "c": 1,
       "why": "0,8 NM / 20 s = 0,04 NM/s ; × 3 600 = 144 NM/h = 144 kt."
+     }
+    ]
+   },
+   {
+    "id": "m0-trigo",
+    "t": "Géométrie et trigonométrie du vol",
+    "h": "\n<p>Le pilote raisonne en angles : cap, route, dérive, pente, inclinaison. Ce module donne les outils de géométrie\nqui servent tous les jours en vol, sans démonstration inutile.</p>\n\n<h3>1. Angles et directions</h3>\n<p>Les directions se comptent en degrés, de 000° à 359°, dans le sens des aiguilles d'une montre à partir du nord.\nL'<b>inverse</b> d'une direction s'obtient en ajoutant ou en retirant 180° : l'inverse de 070° est 250°.\nUne piste « 27 » est orientée vers 270° environ (on arrondit à la dizaine et on retire le zéro).</p>\n\n<h3>2. Le triangle rectangle et Pythagore</h3>\n<p>Dans un triangle rectangle, c² = a² + b² (c = hypoténuse). Une balise à 4 NM au nord et 3 NM à l'est est à 5 NM.</p>\n\n<h3>3. Sinus, cosinus, tangente</h3>\n<p>Pour un angle α d'un triangle rectangle : sin α = opposé / hypoténuse, cos α = adjacent / hypoténuse,\ntan α = opposé / adjacent. Valeurs à connaître : sin 30° = 0,5 ; cos 60° = 0,5 ; sin 45° = cos 45° ≈ 0,707 ;\ncos 30° = sin 60° ≈ 0,866 ; tan 45° = 1 ; tan 3° ≈ 0,052.</p>\n\n<h3>4. Le vent : composantes de face et de travers</h3>\n<p>Un vent de vitesse W faisant l'angle α avec l'axe de piste se décompose en :\n<b>vent de face</b> = W × cos α et <b>vent de travers</b> = W × sin α.\nExemple : vent 20 kt à 30° de l'axe → face 17 kt, travers 10 kt.</p>\n\n<h3>5. La règle du 1 sur 60</h3>\n<p>Pour les petits angles, <b>1° d'écart à 60 NM correspond à 1 NM</b> de côté. D'où : écart (NM) = angle (°) × distance (NM) / 60.\nUne erreur de cap de 5° sur 60 NM écarte de 5 NM. La règle vient de l'approximation tan α ≈ α en radians (1 rad ≈ 57,3°, arrondi à 60).</p>\n\n<h3>6. La pente de descente</h3>\n<p>Une pente de 3° signifie tan 3° ≈ 0,052, soit environ <b>318 ft par NM</b> (6 076 ft × 0,052). Règle pratique :\n<b>hauteur ≈ 300 ft × distance (NM)</b> sur un plan de 3°. Vitesse verticale ≈ vitesse sol (kt) × 5 (en ft/min) pour 3°.</p>\n\n<h3>7. Le virage</h3>\n<p>En virage stabilisé à inclinaison φ, le facteur de charge vaut n = 1 / cos φ (à 60° : n = 2). Rayon de virage :\nR = V² / (g × tan φ). Le virage au <b>taux standard</b> (3°/s) fait un tour en 2 minutes ; inclinaison approchée = vitesse vraie (kt) / 10 + 7.</p>\n<div class=\"box\"><b>Astuce</b> : vérifiez qu'un sinus ou un cosinus reste entre 0 et 1, et qu'un vent de travers n'est jamais supérieur au vent total.</div>\n",
+    "quiz": [
+     {
+      "q": "Quel est l'inverse de la direction 070° ?",
+      "o": [
+       "110°",
+       "340°",
+       "290°",
+       "250°"
+      ],
+      "c": 3,
+      "why": "070 + 180 = 250°."
+     },
+     {
+      "q": "Quel est l'inverse de 300° ?",
+      "o": [
+       "060°",
+       "120°",
+       "210°",
+       "180°"
+      ],
+      "c": 1,
+      "why": "300 − 180 = 120°."
+     },
+     {
+      "q": "Une piste orientée à 238° magnétique porte le numéro :",
+      "o": [
+       "238",
+       "06",
+       "23",
+       "24"
+      ],
+      "c": 3,
+      "why": "On arrondit à la dizaine (240°) et on garde deux chiffres : 24."
+     },
+     {
+      "q": "Balise à 6 NM au nord et 8 NM à l'est. Distance directe ?",
+      "o": [
+       "10 NM",
+       "9 NM",
+       "14 NM",
+       "12 NM"
+      ],
+      "c": 0,
+      "why": "√(6² + 8²) = √100 = 10 NM."
+     },
+     {
+      "q": "sin 30° vaut :",
+      "o": [
+       "1",
+       "0,707",
+       "0,5",
+       "0,866"
+      ],
+      "c": 2,
+      "why": "Valeur à connaître : sin 30° = 0,5."
+     },
+     {
+      "q": "cos 60° vaut :",
+      "o": [
+       "0,866",
+       "0",
+       "0,5",
+       "0,707"
+      ],
+      "c": 2,
+      "why": "cos 60° = sin 30° = 0,5."
+     },
+     {
+      "q": "Vent 20 kt à 30° de l'axe de piste. Vent de travers ?",
+      "o": [
+       "14 kt",
+       "20 kt",
+       "17 kt",
+       "10 kt"
+      ],
+      "c": 3,
+      "why": "Travers = 20 × sin 30° = 10 kt."
+     },
+     {
+      "q": "Même vent (20 kt à 30°). Vent de face ?",
+      "o": [
+       "14 kt",
+       "20 kt",
+       "10 kt",
+       "17 kt"
+      ],
+      "c": 3,
+      "why": "Face = 20 × cos 30° = 17,3 kt ≈ 17 kt."
+     },
+     {
+      "q": "Vent 25 kt perpendiculaire à la piste (90°). Vent de face ?",
+      "o": [
+       "25 kt",
+       "17,7 kt",
+       "12,5 kt",
+       "0 kt"
+      ],
+      "c": 3,
+      "why": "cos 90° = 0 : tout le vent est de travers."
+     },
+     {
+      "q": "Règle du 1 sur 60 : 4° d'erreur de route sur 90 NM écartent de :",
+      "o": [
+       "1,5 NM",
+       "6 NM",
+       "4 NM",
+       "9 NM"
+      ],
+      "c": 1,
+      "why": "Écart = 4 × 90 / 60 = 6 NM."
+     },
+     {
+      "q": "Vent 30 kt à 45° de l'axe. Vent de travers ?",
+      "o": [
+       "21 kt",
+       "30 kt",
+       "26 kt",
+       "15 kt"
+      ],
+      "c": 0,
+      "why": "30 × sin 45° = 30 × 0,707 = 21,2 kt."
+     },
+     {
+      "q": "Piste 27 (270°), vent du 300° pour 24 kt. Vent de travers ?",
+      "o": [
+       "21 kt",
+       "24 kt",
+       "18 kt",
+       "12 kt"
+      ],
+      "c": 3,
+      "why": "Angle = 300 − 270 = 30° ; 24 × sin 30° = 12 kt."
+     },
+     {
+      "q": "Piste 09, vent du 130° pour 20 kt. Vent de face (arrondi) ?",
+      "o": [
+       "10 kt",
+       "20 kt",
+       "15 kt",
+       "13 kt"
+      ],
+      "c": 2,
+      "why": "Angle = 40° ; 20 × cos 40° = 15,3 kt."
+     },
+     {
+      "q": "Après 30 NM, on constate un écart de 2 NM à droite de la route. Erreur angulaire ?",
+      "o": [
+       "15°",
+       "4°",
+       "2°",
+       "6°"
+      ],
+      "c": 1,
+      "why": "1 sur 60 : angle = 2 × 60 / 30 = 4°."
+     },
+     {
+      "q": "Hauteur sur un plan de descente de 3° à 5 NM du seuil (règle pratique) :",
+      "o": [
+       "1 000 ft",
+       "3 000 ft",
+       "500 ft",
+       "1 500 ft"
+      ],
+      "c": 3,
+      "why": "300 ft par NM : 5 × 300 = 1 500 ft."
+     },
+     {
+      "q": "Hauteur exacte à 5 NM sur un plan de 3° (1 NM = 6 076 ft) :",
+      "o": [
+       "1 500 ft",
+       "1 592 ft",
+       "1 800 ft",
+       "1 520 ft"
+      ],
+      "c": 1,
+      "why": "5 × 6 076 × tan 3° = 30 380 × 0,0524 = 1 592 ft. La règle des 300 ft/NM arrondit légèrement."
+     },
+     {
+      "q": "Vitesse verticale sur un plan de 3° à 140 kt de vitesse sol (règle pratique) :",
+      "o": [
+       "700 ft/min",
+       "1 400 ft/min",
+       "420 ft/min",
+       "300 ft/min"
+      ],
+      "c": 0,
+      "why": "Vz ≈ Vs × 5 = 140 × 5 = 700 ft/min."
+     },
+     {
+      "q": "Facteur de charge en virage stabilisé à 60° d'inclinaison :",
+      "o": [
+       "1,5",
+       "3",
+       "1,15",
+       "2"
+      ],
+      "c": 3,
+      "why": "n = 1 / cos 60° = 1 / 0,5 = 2."
+     },
+     {
+      "q": "Facteur de charge à 45° d'inclinaison :",
+      "o": [
+       "1,00",
+       "1,41",
+       "1,15",
+       "2,00"
+      ],
+      "c": 1,
+      "why": "n = 1 / cos 45° = 1,414."
+     },
+     {
+      "q": "Inclinaison approchée pour un virage au taux standard à 120 kt (vitesse vraie) :",
+      "o": [
+       "12°",
+       "30°",
+       "25°",
+       "19°"
+      ],
+      "c": 3,
+      "why": "Règle : 120 / 10 + 7 = 19°."
+     },
+     {
+      "q": "Vitesse vraie 120 kt, vent de travers pur 30 kt. Angle de correction de dérive ?",
+      "o": [
+       "30,0°",
+       "14,5°",
+       "15,0°",
+       "25,0°"
+      ],
+      "c": 1,
+      "why": "sin(dérive) = 30 / 120 = 0,25 → dérive = 14,5°. Approximation 1 sur 60 : 30 × 60 / 120 = 15° (moins précise)."
+     },
+     {
+      "q": "Même cas (120 kt, travers pur 30 kt). Vitesse sol ?",
+      "o": [
+       "120,0 kt",
+       "123,7 kt",
+       "116,2 kt",
+       "90,0 kt"
+      ],
+      "c": 2,
+      "why": "Vs = 120 × cos(14,5°) = 116,2 kt : un vent de travers réduit aussi la vitesse sol."
+     },
+     {
+      "q": "Rayon d'un virage à 30° d'inclinaison à 100 m/s (g = 9,81 m/s²) :",
+      "o": [
+       "1 766 m",
+       "2 038 m",
+       "588 m",
+       "1 019 m"
+      ],
+      "c": 0,
+      "why": "R = V² / (g tan φ) = 10 000 / (9,81 × 0,577) = 1 766 m."
+     },
+     {
+      "q": "Taux de virage à 30° d'inclinaison et 100 m/s (ω = g tan φ / V) :",
+      "o": [
+       "3,0 °/s",
+       "1,5 °/s",
+       "5,7 °/s",
+       "3,2 °/s"
+      ],
+      "c": 3,
+      "why": "ω = 9,81 × 0,577 / 100 = 0,0566 rad/s = 3,25 °/s."
+     },
+     {
+      "q": "Pour revenir sur la route en arrivant à destination à 60 NM, après un écart de 3 NM constaté à mi-parcours (30 NM) : correction de cap totale ?",
+      "o": [
+       "6°",
+       "3°",
+       "12°",
+       "9°"
+      ],
+      "c": 2,
+      "why": "Erreur angulaire : 3 × 60 / 30 = 6° ; angle pour rejoindre en 30 NM : 3 × 60 / 30 = 6° ; total 6 + 6 = 12°."
+     },
+     {
+      "q": "Plan de descente de 3°. À quelle distance du seuil doit-on être à 2 400 ft (règle pratique) ?",
+      "o": [
+       "8 NM",
+       "7,2 NM",
+       "12 NM",
+       "6 NM"
+      ],
+      "c": 0,
+      "why": "2 400 / 300 = 8 NM."
+     },
+     {
+      "q": "Vitesse de décrochage 60 kt en ligne droite. En virage à 60° d'inclinaison :",
+      "o": [
+       "60,0 kt",
+       "69,3 kt",
+       "120,0 kt",
+       "84,9 kt"
+      ],
+      "c": 3,
+      "why": "V_S virage = V_S × √n = 60 × √2 = 84,9 kt : le facteur de charge 2 augmente la vitesse de décrochage de 41 %."
+     },
+     {
+      "q": "Piste 33, vent du 030° pour 30 kt. Composantes (face ; travers) ?",
+      "o": [
+       "30 kt ; 0 kt",
+       "26 kt ; 15 kt",
+       "15 kt ; 26 kt",
+       "21 kt ; 21 kt"
+      ],
+      "c": 2,
+      "why": "Piste 33 ≈ 330° ; angle 030 − 330 = 60° ; face 30 × cos 60° = 15 kt ; travers 30 × sin 60° = 26,0 kt."
+     },
+     {
+      "q": "Pente de montée de 7 % à 100 kt de vitesse sol. Vitesse verticale (1 kt ≈ 101,3 ft/min) ?",
+      "o": [
+       "709 ft/min",
+       "1 000 ft/min",
+       "500 ft/min",
+       "700 ft/min"
+      ],
+      "c": 0,
+      "why": "Vz = 7 % × 100 × 101,3 = 709 ft/min."
+     },
+     {
+      "q": "Un avion monte à 1 200 ft/min à 150 kt de vitesse sol. Pente en degrés ?",
+      "o": [
+       "7,9°",
+       "8,0°",
+       "1,2°",
+       "4,5°"
+      ],
+      "c": 3,
+      "why": "tan γ = 1 200 / (150 × 101,3) = 0,0790 → γ = 4,5°."
+     }
+    ]
+   },
+   {
+    "id": "m0-unites",
+    "t": "Unités et conversions de l'aéronautique",
+    "h": "\n<p>L'aéronautique mélange les unités : altitudes en pieds, distances en milles nautiques, vitesses en nœuds, pressions en\nhectopascals ou en pouces de mercure, masses en kilogrammes ou en livres. Une erreur de conversion peut être grave :\nle Boeing 767 d'Air Canada (vol 143, 1983) a manqué de carburant à la suite d'une confusion entre livres et kilogrammes.</p>\n\n<h3>Les conversions à connaître</h3>\n<table class=\"kv\"><tbody>\n<tr><th>1 pied (ft)</th><td>0,3048 m (exact) · 1 m ≈ 3,28 ft</td></tr>\n<tr><th>1 mille nautique (NM)</th><td>1 852 m (exact) · ≈ 6 076 ft · 1 minute d'arc de latitude</td></tr>\n<tr><th>1 nœud (kt)</th><td>1 NM/h = 1,852 km/h ≈ 0,514 m/s ≈ 101,3 ft/min</td></tr>\n<tr><th>1 mile terrestre (SM)</th><td>1 609,344 m (utilisé pour la visibilité aux États-Unis)</td></tr>\n<tr><th>Pression</th><td>1 013,25 hPa = 29,92 inHg · 1 inHg ≈ 33,86 hPa · 1 hPa = 100 Pa</td></tr>\n<tr><th>Température</th><td>°F = °C × 9/5 + 32 · K = °C + 273,15</td></tr>\n<tr><th>Masse</th><td>1 lb = 0,453 6 kg · 1 kg ≈ 2,205 lb</td></tr>\n<tr><th>Volume</th><td>1 gallon US = 3,785 L</td></tr>\n<tr><th>Carburant</th><td>masse = volume × masse volumique ; Jet A-1 ≈ 0,80 kg/L (de 0,775 à 0,840 selon la température) ; AVGAS 100LL ≈ 0,72 kg/L</td></tr>\n</tbody></table>\n\n<h3>Méthode</h3>\n<ol><li>Écrire la valeur avec son unité.</li>\n<li>Multiplier par un facteur égal à 1 (par exemple 1 852 m / 1 NM) pour faire disparaître l'unité de départ.</li>\n<li>Vérifier l'ordre de grandeur : des pieds donnent un nombre ~3 fois plus grand que des mètres ; des livres ~2 fois plus grand que des kilos.</li></ol>\n<p>Ordres de grandeur utiles : FL350 ≈ 10 700 m ; 250 kt ≈ 463 km/h ; une différence de 1 hPa ≈ 27 ft d'altitude près du sol (≈ 30 ft en règle pratique).</p>\n<div class=\"box\"><b>Les valeurs exactes</b> (1 ft = 0,3048 m ; 1 NM = 1 852 m ; 1 lb = 0,453 592 37 kg) sont des définitions internationales.\nLa masse volumique du carburant, elle, varie : on utilise la valeur mesurée le jour du vol.</div>\n",
+    "quiz": [
+     {
+      "q": "1 000 ft en mètres :",
+      "o": [
+       "305 m",
+       "328 m",
+       "1 000 m",
+       "3 280 m"
+      ],
+      "c": 0,
+      "why": "1 000 × 0,3048 = 304,8 m."
+     },
+     {
+      "q": "3 000 m en pieds (arrondi) :",
+      "o": [
+       "9 843 ft",
+       "9 000 ft",
+       "914 ft",
+       "10 000 ft"
+      ],
+      "c": 0,
+      "why": "3 000 / 0,3048 = 9 843 ft."
+     },
+     {
+      "q": "1 NM en mètres :",
+      "o": [
+       "1 609 m",
+       "1 000 m",
+       "1 852 m",
+       "6 076 m"
+      ],
+      "c": 2,
+      "why": "Le mille nautique vaut exactement 1 852 m."
+     },
+     {
+      "q": "120 kt en km/h :",
+      "o": [
+       "120 km/h",
+       "222 km/h",
+       "193 km/h",
+       "62 km/h"
+      ],
+      "c": 1,
+      "why": "120 × 1,852 = 222,2 km/h."
+     },
+     {
+      "q": "20 °C en kelvins :",
+      "o": [
+       "68 K",
+       "20 K",
+       "293,15 K",
+       "253,15 K"
+      ],
+      "c": 2,
+      "why": "K = °C + 273,15."
+     },
+     {
+      "q": "0 °C en degrés Fahrenheit :",
+      "o": [
+       "273 °F",
+       "32 °F",
+       "−32 °F",
+       "0 °F"
+      ],
+      "c": 1,
+      "why": "0 × 9/5 + 32 = 32 °F."
+     },
+     {
+      "q": "1 013,25 hPa en pouces de mercure :",
+      "o": [
+       "1,013 inHg",
+       "29,92 inHg",
+       "30,12 inHg",
+       "760 inHg"
+      ],
+      "c": 1,
+      "why": "C'est la pression standard au niveau de la mer : 29,92 inHg."
+     },
+     {
+      "q": "100 lb en kilogrammes :",
+      "o": [
+       "220,5 kg",
+       "100 kg",
+       "45,4 kg",
+       "50 kg"
+      ],
+      "c": 2,
+      "why": "100 × 0,4536 = 45,4 kg."
+     },
+     {
+      "q": "10 gallons US en litres :",
+      "o": [
+       "45,5 L",
+       "37,9 L",
+       "10 L",
+       "26,4 L"
+      ],
+      "c": 1,
+      "why": "10 × 3,785 = 37,9 L (le gallon impérial, 4,546 L, ne sert pas en aviation)."
+     },
+     {
+      "q": "FL350 correspond à une altitude-pression de :",
+      "o": [
+       "35 000 m",
+       "3 500 ft",
+       "350 ft",
+       "35 000 ft"
+      ],
+      "c": 3,
+      "why": "Le niveau de vol est exprimé en centaines de pieds."
+     },
+     {
+      "q": "25 °C en °F :",
+      "o": [
+       "77 °F",
+       "45 °F",
+       "98 °F",
+       "57 °F"
+      ],
+      "c": 0,
+      "why": "25 × 9/5 + 32 = 45 + 32 = 77 °F."
+     },
+     {
+      "q": "−40 °C en °F :",
+      "o": [
+       "40 °F",
+       "−40 °F",
+       "−8 °F",
+       "−72 °F"
+      ],
+      "c": 1,
+      "why": "−40 × 9/5 + 32 = −72 + 32 = −40 : c'est la seule température identique dans les deux échelles."
+     },
+     {
+      "q": "98,6 °F en °C :",
+      "o": [
+       "37 °C",
+       "33 °C",
+       "66,6 °C",
+       "42 °C"
+      ],
+      "c": 0,
+      "why": "(98,6 − 32) × 5/9 = 37 °C."
+     },
+     {
+      "q": "29,72 inHg en hPa (1 inHg = 33,864 hPa) :",
+      "o": [
+       "1 000 hPa",
+       "1 013 hPa",
+       "1 006 hPa",
+       "1 017 hPa"
+      ],
+      "c": 2,
+      "why": "29,72 × 33,864 = 1 006,4 hPa."
+     },
+     {
+      "q": "250 kt en m/s :",
+      "o": [
+       "250,0 m/s",
+       "463,0 m/s",
+       "128,6 m/s",
+       "69,4 m/s"
+      ],
+      "c": 2,
+      "why": "250 × 1 852 / 3 600 = 128,6 m/s."
+     },
+     {
+      "q": "Un vent de 10 m/s vaut environ :",
+      "o": [
+       "10 kt",
+       "19 kt",
+       "5 kt",
+       "36 kt"
+      ],
+      "c": 1,
+      "why": "10 / 0,5144 = 19,4 kt."
+     },
+     {
+      "q": "Vitesse verticale 5 m/s en ft/min :",
+      "o": [
+       "1 640 ft/min",
+       "984 ft/min",
+       "300 ft/min",
+       "500 ft/min"
+      ],
+      "c": 1,
+      "why": "5 m/s × 60 = 300 m/min ; 300 / 0,3048 = 984 ft/min."
+     },
+     {
+      "q": "Visibilité 5 SM (milles terrestres) en mètres :",
+      "o": [
+       "6 000 m",
+       "5 000 m",
+       "9 260 m",
+       "8 047 m"
+      ],
+      "c": 3,
+      "why": "5 × 1 609 = 8 047 m. Piège : le mille terrestre n'est pas le mille nautique."
+     },
+     {
+      "q": "2 000 L de Jet A-1 à 0,80 kg/L pèsent :",
+      "o": [
+       "1 600 kg",
+       "2 000 kg",
+       "2 500 kg",
+       "1 440 kg"
+      ],
+      "c": 0,
+      "why": "2 000 × 0,80 = 1 600 kg."
+     },
+     {
+      "q": "120 L d'AVGAS à 0,72 kg/L pèsent :",
+      "o": [
+       "166,7 kg",
+       "120,0 kg",
+       "86,4 kg",
+       "96,0 kg"
+      ],
+      "c": 2,
+      "why": "120 × 0,72 = 86,4 kg."
+     },
+     {
+      "q": "On demande 9 000 kg de Jet A-1 ; masse volumique 0,79 kg/L. Volume à avitailler ?",
+      "o": [
+       "11 250 L",
+       "7 110 L",
+       "11 392 L",
+       "9 000 L"
+      ],
+      "c": 2,
+      "why": "V = m / ρ = 9 000 / 0,79 = 11 392 L. Piège : multiplier au lieu de diviser (7 110 L)."
+     },
+     {
+      "q": "Il reste 3 200 kg à bord ; on veut 12 000 kg au départ. Densité 0,80. Litres à ajouter ?",
+      "o": [
+       "11 000 L",
+       "8 800 L",
+       "7 040 L",
+       "15 000 L"
+      ],
+      "c": 0,
+      "why": "(12 000 − 3 200) / 0,80 = 8 800 / 0,80 = 11 000 L."
+     },
+     {
+      "q": "Le jaugeur indique 22 300 lb. Masse en kg ?",
+      "o": [
+       "49 163 kg",
+       "11 150 kg",
+       "22 300 kg",
+       "10 115 kg"
+      ],
+      "c": 3,
+      "why": "22 300 × 0,4536 = 10 115 kg."
+     },
+     {
+      "q": "Air Canada 143 (1983) : le plein a été calculé avec 1,77 « kg » par litre au lieu de 0,803 kg/L (1,77 était un facteur en lb/L). Quelle fraction du carburant voulu y avait-il réellement à bord ?",
+      "o": [
+       "≈ 80 %",
+       "≈ 45 %",
+       "≈ 100 %",
+       "≈ 221 %"
+      ],
+      "c": 1,
+      "why": "Les volumes ont été calculés avec 1,77 au lieu de 0,803 : la masse réelle valait 0,803 / 1,77 ≈ 0,45 fois la masse visée, soit moins de la moitié. [RÉFÉRENCÉ] Rapport de la commission d'enquête du Canada sur l'incident de Gimli (1985)."
+     },
+     {
+      "q": "Vitesse 0,82 Mach à FL350 (vitesse du son 576 kt). Vitesse vraie ?",
+      "o": [
+       "472 kt",
+       "576 kt",
+       "410 kt",
+       "702 kt"
+      ],
+      "c": 0,
+      "why": "0,82 × 576 = 472 kt."
+     },
+     {
+      "q": "Différence entre deux calages de 1 003 et 1 013 hPa : écart d'altitude affichée (≈ 27 ft/hPa) ?",
+      "o": [
+       "≈ 10 ft",
+       "≈ 270 ft",
+       "≈ 27 ft",
+       "≈ 1 000 ft"
+      ],
+      "c": 1,
+      "why": "10 hPa × 27 ft/hPa ≈ 270 ft près du sol (l'écart par hPa augmente avec l'altitude)."
+     },
+     {
+      "q": "Température ISA à FL350 : −54,3 °C. En kelvins ?",
+      "o": [
+       "−54,3 K",
+       "327,45 K",
+       "218,85 K",
+       "273,15 K"
+      ],
+      "c": 2,
+      "why": "−54,3 + 273,15 = 218,85 K."
+     },
+     {
+      "q": "Masse de carburant 6 000 kg ; débit 2 400 kg/h. Autonomie en heures et minutes ?",
+      "o": [
+       "2 h 05",
+       "2 h 24",
+       "2 h 30",
+       "2 h 50"
+      ],
+      "c": 2,
+      "why": "6 000 / 2 400 = 2,5 h = 2 h 30."
+     },
+     {
+      "q": "Débit 25 gal US/h d'AVGAS (0,72 kg/L). Débit en kg/h ?",
+      "o": [
+       "18,0 kg/h",
+       "94,6 kg/h",
+       "131,4 kg/h",
+       "68,1 kg/h"
+      ],
+      "c": 3,
+      "why": "25 × 3,785 = 94,6 L/h ; × 0,72 = 68,1 kg/h."
+     },
+     {
+      "q": "Une piste de 8 000 ft fait combien de mètres ?",
+      "o": [
+       "24 384 m",
+       "2 640 m",
+       "2 438 m",
+       "8 000 m"
+      ],
+      "c": 2,
+      "why": "8 000 × 0,3048 = 2 438 m."
+     }
+    ]
+   },
+   {
+    "id": "m0-meca",
+    "t": "Mécanique : forces, mouvement, énergie",
+    "h": "\n<p>Un avion obéit aux lois de la mécanique de Newton, comme une voiture ou une balle. Ce module en donne l'essentiel :\nce qui fait accélérer, ralentir, monter ou tourner un avion.</p>\n\n<h3>1. Masse et poids</h3>\n<p>La <b>masse</b> m (kg) est la quantité de matière ; le <b>poids</b> P = m × g est une force (N), avec g ≈ 9,81 m/s².\nUn avion de 70 t pèse 70 000 × 9,81 ≈ 687 kN. En aviation on parle souvent de « masse » (devis de masse) : c'est bien la masse en kg.</p>\n\n<h3>2. Vitesse et accélération</h3>\n<p>Accélération a = Δv / Δt. Mouvement uniformément accéléré depuis l'arrêt : v = a t et d = ½ a t² = v² / (2a).\nC'est la base des distances de décollage et de freinage : <b>la distance varie comme le carré de la vitesse</b>.</p>\n\n<h3>3. Les trois lois de Newton</h3>\n<ul><li><b>Inertie</b> : sans force résultante, un corps garde sa vitesse (vol rectiligne uniforme : forces équilibrées).</li>\n<li><b>Principe fondamental</b> : ΣF = m × a. Au décollage : a = (poussée − traînée − frottement) / m.</li>\n<li><b>Actions réciproques</b> : le réacteur projette l'air vers l'arrière, l'air pousse le réacteur vers l'avant ; l'aile dévie l'air vers le bas, l'air pousse l'aile vers le haut.</li></ul>\n\n<h3>4. Travail, énergie, puissance</h3>\n<p>Énergie cinétique E<sub>c</sub> = ½ m v² ; énergie potentielle E<sub>p</sub> = m g h. Un avion qui descend sans moteur échange\nde l'altitude contre de la vitesse (ou l'inverse) : c'est la <b>gestion de l'énergie</b>. Puissance P = F × v (W).\nLes freins doivent absorber l'énergie cinétique : à vitesse doublée, quatre fois plus d'énergie.</p>\n\n<h3>5. Moments et équilibre</h3>\n<p>Moment d'une force = force × bras de levier (N·m). L'avion est en équilibre quand la somme des moments autour du centre de gravité est nulle :\nc'est le rôle de la gouverne de profondeur (plan horizontal).</p>\n\n<h3>6. Le mouvement circulaire</h3>\n<p>Pour tourner, il faut une force dirigée vers le centre : F = m v² / R. En virage, c'est la portance inclinée qui la fournit ;\nd'où le facteur de charge n = 1 / cos φ.</p>\n<div class=\"box\"><b>Unités SI</b> : travaillez en kg, m, s, N, J, W, puis convertissez à la fin (kt, ft…).</div>\n",
+    "quiz": [
+     {
+      "q": "Le poids d'un avion de 1 000 kg (g = 9,81 m/s²) :",
+      "o": [
+       "981 N",
+       "1 000 N",
+       "9 810 N",
+       "98 100 N"
+      ],
+      "c": 2,
+      "why": "P = m g = 1 000 × 9,81 = 9 810 N."
+     },
+     {
+      "q": "La masse d'un avion sur la Lune serait :",
+      "o": [
+       "six fois plus petite",
+       "nulle",
+       "six fois plus grande",
+       "la même que sur la Terre"
+      ],
+      "c": 3,
+      "why": "La masse ne dépend pas du lieu ; seul le poids change (g lunaire ≈ 1,62 m/s²)."
+     },
+     {
+      "q": "Un avion passe de 0 à 60 m/s en 30 s. Accélération moyenne :",
+      "o": [
+       "2 m/s²",
+       "1 800 m/s²",
+       "30 m/s²",
+       "0,5 m/s²"
+      ],
+      "c": 0,
+      "why": "a = 60 / 30 = 2 m/s²."
+     },
+     {
+      "q": "En vol rectiligne à vitesse constante, la somme des forces est :",
+      "o": [
+       "dirigée vers l'avant",
+       "nulle",
+       "égale au poids",
+       "égale à la poussée"
+      ],
+      "c": 1,
+      "why": "Première loi de Newton : vitesse constante ⇔ forces équilibrées (portance = poids, poussée = traînée)."
+     },
+     {
+      "q": "Un réacteur pousse l'avion vers l'avant parce que :",
+      "o": [
+       "les gaz poussent sur l'air extérieur",
+       "il est plus léger que l'air",
+       "il projette une masse d'air vers l'arrière",
+       "il aspire l'air devant l'avion"
+      ],
+      "c": 2,
+      "why": "Troisième loi de Newton : l'action sur l'air (vers l'arrière) entraîne une réaction égale et opposée sur le moteur."
+     },
+     {
+      "q": "Énergie cinétique d'un avion de 2 000 kg à 50 m/s :",
+      "o": [
+       "5 MJ",
+       "100 kJ",
+       "50 kJ",
+       "2,5 MJ"
+      ],
+      "c": 3,
+      "why": "½ × 2 000 × 50² = 2 500 000 J = 2,5 MJ."
+     },
+     {
+      "q": "Énergie potentielle de 1 000 kg élevés de 100 m :",
+      "o": [
+       "100 kJ",
+       "9,81 kJ",
+       "981 kJ",
+       "1 000 kJ"
+      ],
+      "c": 2,
+      "why": "m g h = 1 000 × 9,81 × 100 = 981 000 J = 981 kJ."
+     },
+     {
+      "q": "Si la vitesse double, l'énergie que les freins doivent absorber est multipliée par :",
+      "o": [
+       "4",
+       "8",
+       "2",
+       "√2"
+      ],
+      "c": 0,
+      "why": "E_c = ½ m v² : (2v)² = 4 v²."
+     },
+     {
+      "q": "Moment d'une force de 200 N à 1,5 m de l'axe :",
+      "o": [
+       "201,5 N·m",
+       "133 N·m",
+       "30 N·m",
+       "300 N·m"
+      ],
+      "c": 3,
+      "why": "200 × 1,5 = 300 N·m."
+     },
+     {
+      "q": "La puissance nécessaire pour vaincre une traînée de 1 000 N à 50 m/s :",
+      "o": [
+       "50 kW",
+       "1 050 W",
+       "500 kW",
+       "20 kW"
+      ],
+      "c": 0,
+      "why": "P = F v = 1 000 × 50 = 50 000 W."
+     },
+     {
+      "q": "Accélération 2 m/s² depuis l'arrêt. Distance pour atteindre 60 m/s ?",
+      "o": [
+       "900 m",
+       "1 800 m",
+       "30 m",
+       "450 m"
+      ],
+      "c": 0,
+      "why": "d = v² / (2a) = 3 600 / 4 = 900 m."
+     },
+     {
+      "q": "Même accélération : distance pour atteindre 70 m/s ?",
+      "o": [
+       "1 400 m",
+       "1 225 m",
+       "900 m",
+       "1 050 m"
+      ],
+      "c": 1,
+      "why": "d = 4 900 / 4 = 1 225 m : +17 % de vitesse demande +36 % de distance."
+     },
+     {
+      "q": "Avion de 2 000 kg, poussée nette (poussée − traînée − frottement) 3 000 N. Accélération ?",
+      "o": [
+       "0,67 m/s²",
+       "1,5 m/s²",
+       "15 m/s²",
+       "6 m/s²"
+      ],
+      "c": 1,
+      "why": "a = F / m = 3 000 / 2 000 = 1,5 m/s²."
+     },
+     {
+      "q": "Décélération au freinage 3 m/s² depuis 60 m/s. Distance d'arrêt ?",
+      "o": [
+       "20 m",
+       "1 200 m",
+       "180 m",
+       "600 m"
+      ],
+      "c": 3,
+      "why": "d = v² / (2a) = 3 600 / 6 = 600 m."
+     },
+     {
+      "q": "Planeur de 400 kg descendant de 1 000 m sans gain de vitesse : énergie dissipée par la traînée ?",
+      "o": [
+       "3,92 MJ",
+       "4,00 MJ",
+       "39,24 MJ",
+       "0,40 MJ"
+      ],
+      "c": 0,
+      "why": "m g h = 400 × 9,81 × 1 000 = 3,92 MJ."
+     },
+     {
+      "q": "Si un avion de 70 t vole à 70 m/s et tire sur le manche pour convertir 20 m/s de vitesse en altitude (sans moteur ni traînée), il gagne :",
+      "o": [
+       "20 m",
+       "61 m",
+       "250 m",
+       "122 m"
+      ],
+      "c": 3,
+      "why": "½(v₁² − v₂²) = g Δh → Δh = (4 900 − 2 500) / (2 × 9,81) = 122 m. La masse s'élimine."
+     },
+     {
+      "q": "Force centripète sur 1 000 kg à 50 m/s sur un rayon de 500 m :",
+      "o": [
+       "100 N",
+       "5 000 N",
+       "25 000 N",
+       "50 000 N"
+      ],
+      "c": 1,
+      "why": "F = m v² / R = 1 000 × 2 500 / 500 = 5 000 N."
+     },
+     {
+      "q": "Puissance pour monter 1 000 kg à 5 m/s verticalement (sans traînée) :",
+      "o": [
+       "5,00 kW",
+       "49,05 W",
+       "49,05 kW",
+       "0,49 kW"
+      ],
+      "c": 2,
+      "why": "P = m g Vz = 1 000 × 9,81 × 5 = 49 050 W."
+     },
+     {
+      "q": "Deux masses : 60 kg à 2 m et 40 kg à 4,5 m d'une référence. Position du centre de gravité ?",
+      "o": [
+       "3,25 m",
+       "2,5 m",
+       "3,5 m",
+       "3 m"
+      ],
+      "c": 3,
+      "why": "(120 + 180) / 100 = 3 m."
+     },
+     {
+      "q": "Un avion de 50 t en montée à vitesse constante sur une pente de 5° : composante du poids qui s'oppose à l'avancement ?",
+      "o": [
+       "0 kN",
+       "490 kN",
+       "25 kN",
+       "43 kN"
+      ],
+      "c": 3,
+      "why": "P sin γ = 50 000 × 9,81 × sin 5° = 42,7 kN : la poussée doit compenser traînée + P sin γ."
+     },
+     {
+      "q": "Pente de montée maximale : (T − D) / P = sin γ. T = 240 kN, D = 120 kN, m = 70 t. Pente ?",
+      "o": [
+       "17,5°",
+       "10,1°",
+       "10,0°",
+       "5,0°"
+      ],
+      "c": 1,
+      "why": "sin γ = 120 000 / 686 700 = 0,175 → γ = 10,1°."
+     },
+     {
+      "q": "Même avion après panne d'un moteur (T = 120 kN, D = 132 kN avec la dérive de compensation) :",
+      "o": [
+       "il monte à 1°",
+       "il monte à 10°",
+       "il ne peut pas monter",
+       "il monte à 5°"
+      ],
+      "c": 2,
+      "why": "T − D = −12 kN < 0 : l'avion ne peut que descendre à cette vitesse. D'où les exigences de pente minimale en cas de panne moteur."
+     },
+     {
+      "q": "Énergie cinétique d'un avion de 60 t à 140 kt (72 m/s) au toucher :",
+      "o": [
+       "311,0 MJ",
+       "2,2 MJ",
+       "155,5 MJ",
+       "4,3 MJ"
+      ],
+      "c": 2,
+      "why": "½ × 60 000 × 72² = 155,5 MJ, à dissiper par les freins, les inverseurs et la traînée."
+     },
+     {
+      "q": "Un avion de 60 t touche à 72 m/s au lieu de 67 m/s. Énergie de freinage supplémentaire :",
+      "o": [
+       "15 %",
+       "7 %",
+       "22 %",
+       "4 %"
+      ],
+      "c": 0,
+      "why": "(72 / 67)² = 1,155 : environ +15 % pour +7 % de vitesse."
+     },
+     {
+      "q": "Accélération longitudinale lors d'un freinage à 0,4 g :",
+      "o": [
+       "3,92 m/s²",
+       "24,53 m/s²",
+       "9,81 m/s²",
+       "0,40 m/s²"
+      ],
+      "c": 0,
+      "why": "0,4 × 9,81 = 3,92 m/s²."
+     },
+     {
+      "q": "Rayon d'un virage à 2 g de facteur de charge (φ = 60°) à 60 m/s :",
+      "o": [
+       "183 m",
+       "600 m",
+       "367 m",
+       "212 m"
+      ],
+      "c": 3,
+      "why": "R = v² / (g tan φ) = 3 600 / (9,81 × 1,732) = 212 m."
+     },
+     {
+      "q": "Facteur de charge en ressource : rayon 400 m à 80 m/s en bas de la courbe :",
+      "o": [
+       "3,00",
+       "2,63",
+       "1,63",
+       "2,00"
+      ],
+      "c": 1,
+      "why": "n = 1 + v² / (R g) = 1 + 6 400 / 3 924 = 2,63."
+     },
+     {
+      "q": "Puissance de propulsion d'un avion à 230 m/s avec 2 × 60 kN de poussée en croisière :",
+      "o": [
+       "13,8 MW",
+       "27,6 MW",
+       "0,1 MW",
+       "2,8 MW"
+      ],
+      "c": 1,
+      "why": "P = T × v = 120 000 × 230 = 27,6 MW."
+     },
+     {
+      "q": "Vitesse de fin de chute libre d'un objet tombé de 20 m sans frottement :",
+      "o": [
+       "14,0 m/s",
+       "20,0 m/s",
+       "392,4 m/s",
+       "19,8 m/s"
+      ],
+      "c": 3,
+      "why": "v = √(2 g h) = √(392,4) = 19,8 m/s."
+     },
+     {
+      "q": "Couple autour du centre de gravité : 5 000 N à 10 m en arrière, à équilibrer par une force à 2 m en avant. Force nécessaire ?",
+      "o": [
+       "25 000 N",
+       "10 000 N",
+       "50 000 N",
+       "1 000 N"
+      ],
+      "c": 0,
+      "why": "Équilibre des moments : 5 000 × 10 = F × 2 → F = 25 000 N."
+     }
+    ]
+   },
+   {
+    "id": "m0-fluides",
+    "t": "Fluides et atmosphère",
+    "h": "\n<p>L'avion vit dans l'air : sa portance, sa traînée, la poussée de ses moteurs et les indications de ses instruments\ndépendent de la pression, de la température et de la masse volumique de l'air.</p>\n\n<h3>1. Pression</h3>\n<p>La pression est une force par unité de surface : p = F / S, en pascals (Pa = N/m²). Au niveau de la mer, l'atmosphère\ntype vaut <b>1 013,25 hPa</b>. La pression diminue avec l'altitude : environ <b>1 hPa par 27 ft (8,3 m)</b> près du sol,\net elle est divisée par deux vers 18 000 ft (5 500 m).</p>\n\n<h3>2. La loi des gaz parfaits</h3>\n<p>p = ρ R T, avec ρ la masse volumique (kg/m³), R = 287,05 J/(kg·K) pour l'air sec et T en <b>kelvins</b>.\nAu niveau de la mer en atmosphère type : ρ = 101 325 / (287,05 × 288,15) = 1,225 kg/m³.\nAir chaud ou altitude élevée → air moins dense → moins de portance, moins de poussée, décollage plus long.</p>\n\n<h3>3. L'atmosphère type internationale (ISA)</h3>\n<ul><li>Niveau de la mer : 15 °C, 1 013,25 hPa, 1,225 kg/m³.</li>\n<li>Décroissance de la température : 6,5 °C par km (≈ 1,98 °C par 1 000 ft) jusqu'à 11 km.</li>\n<li>Tropopause à 11 km (36 089 ft) : −56,5 °C, constante jusqu'à 20 km.</li></ul>\n<p>On parle d'« ISA +10 » quand la température réelle dépasse de 10 °C la température type à cette altitude. [RÉFÉRENCÉ] OACI, Doc 7488.</p>\n\n<h3>4. Altitude-densité</h3>\n<p>C'est l'altitude de l'atmosphère type qui aurait la même masse volumique que l'air du jour. Règle pratique :\naltitude-densité ≈ altitude-pression + 120 ft par °C d'écart à ISA. Un terrain à 5 000 ft par ISA +20 « se comporte » comme un terrain à 7 400 ft.</p>\n\n<h3>5. Bernoulli et la vitesse de l'air</h3>\n<p>Le long d'un filet d'air (fluide incompressible, sans frottement) : p + ½ ρ V² = constante. La <b>pression dynamique</b>\nq = ½ ρ V² est ce que mesure l'anémomètre (prise de Pitot moins prise statique). Là où l'air accélère (extrados), la pression baisse.</p>\n\n<h3>6. Portance et traînée</h3>\n<p>Portance L = ½ ρ V² S C<sub>L</sub> ; traînée D = ½ ρ V² S C<sub>D</sub>. À incidence donnée, elles varient comme ρ et comme V².\nL'explication complète de la portance fait intervenir la déviation de l'air vers le bas (Newton) et la répartition de pression (Bernoulli) : ce sont deux façons de décrire le même phénomène.</p>\n<div class=\"box\"><b>Toujours en kelvins</b> dans p = ρ R T. Une erreur fréquente : utiliser des degrés Celsius.</div>\n",
+    "quiz": [
+     {
+      "q": "Pression standard au niveau de la mer (ISA) :",
+      "o": [
+       "1 225 hPa",
+       "760 hPa",
+       "1 000 hPa",
+       "1 013,25 hPa"
+      ],
+      "c": 3,
+      "why": "Valeur de l'atmosphère type OACI."
+     },
+     {
+      "q": "Température ISA au niveau de la mer :",
+      "o": [
+       "20 °C",
+       "15 °C",
+       "−56,5 °C",
+       "0 °C"
+      ],
+      "c": 1,
+      "why": "15 °C (288,15 K)."
+     },
+     {
+      "q": "Masse volumique de l'air ISA au niveau de la mer :",
+      "o": [
+       "1 kg/m³",
+       "1 225 kg/m³",
+       "1,225 kg/m³",
+       "0,736 kg/m³"
+      ],
+      "c": 2,
+      "why": "ρ₀ = 1,225 kg/m³."
+     },
+     {
+      "q": "Une force de 500 N sur 0,25 m² exerce une pression de :",
+      "o": [
+       "2 000 Pa",
+       "20 Pa",
+       "125 Pa",
+       "500 Pa"
+      ],
+      "c": 0,
+      "why": "p = F / S = 500 / 0,25 = 2 000 Pa."
+     },
+     {
+      "q": "Quand l'altitude augmente, la masse volumique de l'air :",
+      "o": [
+       "diminue",
+       "augmente",
+       "double tous les 1 000 ft",
+       "reste constante"
+      ],
+      "c": 0,
+      "why": "La pression baisse plus vite que la température : l'air est moins dense en altitude."
+     },
+     {
+      "q": "Air plus chaud à pression égale : la masse volumique est",
+      "o": [
+       "plus forte",
+       "plus faible",
+       "nulle",
+       "la même"
+      ],
+      "c": 1,
+      "why": "ρ = p / (R T) : T augmente → ρ diminue."
+     },
+     {
+      "q": "Température ISA à 2 000 m :",
+      "o": [
+       "15 °C",
+       "−13 °C",
+       "−2 °C",
+       "2 °C"
+      ],
+      "c": 3,
+      "why": "15 − 6,5 × 2 = 2 °C."
+     },
+     {
+      "q": "Température ISA à la tropopause (11 km) :",
+      "o": [
+       "−50 °C",
+       "−71,5 °C",
+       "−56,5 °C",
+       "−40 °C"
+      ],
+      "c": 2,
+      "why": "15 − 6,5 × 11 = −56,5 °C."
+     },
+     {
+      "q": "Un anémomètre mesure en fait :",
+      "o": [
+       "la pression statique",
+       "la température totale",
+       "la pression dynamique ½ ρ V²",
+       "la vitesse sol"
+      ],
+      "c": 2,
+      "why": "Différence entre pression totale (Pitot) et pression statique : q = ½ ρ V²."
+     },
+     {
+      "q": "Si la vitesse double, la pression dynamique est multipliée par :",
+      "o": [
+       "4",
+       "2",
+       "1,41",
+       "8"
+      ],
+      "c": 0,
+      "why": "q ∝ V²."
+     },
+     {
+      "q": "Masse volumique de l'air à 1 013,25 hPa et 30 °C :",
+      "o": [
+       "1,225 kg/m³",
+       "1,334 kg/m³",
+       "0,103 kg/m³",
+       "1,164 kg/m³"
+      ],
+      "c": 3,
+      "why": "ρ = 101 325 / (287,05 × 303,15) = 1,164 kg/m³ : 5 % de moins qu'en ISA."
+     },
+     {
+      "q": "Température ISA à FL100 (règle 1,98 °C / 1 000 ft) :",
+      "o": [
+       "−15,0 °C",
+       "5,0 °C",
+       "−20,0 °C",
+       "−4,8 °C"
+      ],
+      "c": 3,
+      "why": "15 − 1,98 × 10 = −4,8 °C."
+     },
+     {
+      "q": "À FL100 on mesure −10 °C. Écart à ISA :",
+      "o": [
+       "ISA −5",
+       "ISA +25",
+       "ISA −10",
+       "ISA +5"
+      ],
+      "c": 0,
+      "why": "ISA à FL100 ≈ −5 °C ; −10 − (−5) = −5."
+     },
+     {
+      "q": "Altitude-densité d'un terrain à 5 000 ft (altitude-pression) par ISA +20 (règle 120 ft/°C) :",
+      "o": [
+       "2 600 ft",
+       "7 400 ft",
+       "5 000 ft",
+       "25 000 ft"
+      ],
+      "c": 1,
+      "why": "5 000 + 20 × 120 = 7 400 ft."
+     },
+     {
+      "q": "Pression ISA à 5 500 m (calcul ISA) :",
+      "o": [
+       "1 013 hPa",
+       "756 hPa",
+       "250 hPa",
+       "505 hPa"
+      ],
+      "c": 3,
+      "why": "p = 1 013,25 × (T/288,15)^5,256 = 505 hPa : environ la moitié de la pression au sol."
+     },
+     {
+      "q": "Pression dynamique à 1,225 kg/m³ et 50 m/s :",
+      "o": [
+       "61,3 Pa",
+       "2 500,0 Pa",
+       "1 531,2 Pa",
+       "3 062,5 kPa"
+      ],
+      "c": 2,
+      "why": "q = ½ × 1,225 × 2 500 = 1 531,2 Pa."
+     },
+     {
+      "q": "Portance d'une aile de 16 m² à 1,225 kg/m³, 50 m/s, C_L = 0,5 :",
+      "o": [
+       "49 000 N",
+       "1 531 N",
+       "12 250 N",
+       "24 500 N"
+      ],
+      "c": 2,
+      "why": "L = ½ ρ V² S C_L = 1 531,25 × 16 × 0,5 = 12 250 N."
+     },
+     {
+      "q": "À incidence et vitesse égales, la portance à ρ = 0,98 kg/m³ comparée à 1,225 kg/m³ :",
+      "o": [
+       "−20 %",
+       "+20 %",
+       "−2 %",
+       "−40 %"
+      ],
+      "c": 0,
+      "why": "0,98 / 1,225 = 0,80 : la portance baisse de 20 % (terrain d'altitude, journée chaude)."
+     },
+     {
+      "q": "Bernoulli : l'air passe de 0 à 60 m/s (ρ = 1,2). Chute de pression statique :",
+      "o": [
+       "36 Pa",
+       "72 Pa",
+       "2 160 Pa",
+       "4 320 Pa"
+      ],
+      "c": 2,
+      "why": "Δp = ½ ρ V² = 0,6 × 3 600 = 2 160 Pa."
+     },
+     {
+      "q": "Différence de pression entre deux altitudes séparées de 270 ft près du sol (≈ 27 ft/hPa) :",
+      "o": [
+       "≈ 27 hPa",
+       "≈ 100 hPa",
+       "≈ 1 hPa",
+       "≈ 10 hPa"
+      ],
+      "c": 3,
+      "why": "270 / 27 ≈ 10 hPa."
+     },
+     {
+      "q": "Masse volumique ISA à FL350 (calcul ISA, 10 668 m) :",
+      "o": [
+       "0,191 kg/m³",
+       "0,736 kg/m³",
+       "1,225 kg/m³",
+       "0,380 kg/m³"
+      ],
+      "c": 3,
+      "why": "T = 218,81 K, p = 238,4 hPa → ρ = 0,380 kg/m³, environ 31 % de ρ₀."
+     },
+     {
+      "q": "Rapport de densité σ à FL350 :",
+      "o": [
+       "0,738",
+       "0,310",
+       "0,500",
+       "0,100"
+      ],
+      "c": 1,
+      "why": "σ = ρ / 1,225 = 0,310."
+     },
+     {
+      "q": "Même portance qu'au niveau de la mer à FL350, à incidence égale : facteur sur la vitesse vraie ?",
+      "o": [
+       "×1,80",
+       "×3,24",
+       "×1,24",
+       "×1,00"
+      ],
+      "c": 0,
+      "why": "ρ V² constant → V ∝ 1/√σ = 1/√0,310 = 1,80."
+     },
+     {
+      "q": "Température ISA à FL450 :",
+      "o": [
+       "−74,1 °C",
+       "−34,5 °C",
+       "−65,0 °C",
+       "−56,5 °C"
+      ],
+      "c": 3,
+      "why": "Au-dessus de 11 km (36 089 ft), la température ISA reste constante à −56,5 °C jusqu'à 20 km."
+     },
+     {
+      "q": "Air à 1 013 hPa ; il passe de 15 °C à 35 °C. Variation de masse volumique :",
+      "o": [
+       "−2,0 %",
+       "−20,0 %",
+       "+6,5 %",
+       "−6,5 %"
+      ],
+      "c": 3,
+      "why": "ρ ∝ 1/T : 288,15 / 308,15 = 0,9351, soit −6,5 %."
+     },
+     {
+      "q": "Un réservoir de 10 m³ d'air à 1 000 hPa et 0 °C contient une masse de :",
+      "o": [
+       "12,75 kg",
+       "1,23 kg",
+       "127,55 kg",
+       "10,00 kg"
+      ],
+      "c": 0,
+      "why": "m = ρ V = 100 000 / (287,05 × 273,15) × 10 = 12,75 kg."
+     },
+     {
+      "q": "Vitesse lue par l'anémomètre pour q = 1 531 Pa, étalonnée sur ρ₀ = 1,225 :",
+      "o": [
+       "70 m/s",
+       "1 250 m/s",
+       "35 m/s",
+       "50 m/s"
+      ],
+      "c": 3,
+      "why": "V = √(2q / ρ₀) = √(2 × 1 531 / 1,225) = 50 m/s."
+     },
+     {
+      "q": "Même pression dynamique (1 531 Pa) à ρ = 0,6 kg/m³ : vitesse vraie ?",
+      "o": [
+       "50,0 m/s",
+       "102,1 m/s",
+       "71,4 m/s",
+       "35,0 m/s"
+      ],
+      "c": 2,
+      "why": "V = √(2 × 1 531 / 0,6) = 71,4 m/s : en altitude, la vitesse vraie dépasse la vitesse indiquée."
+     },
+     {
+      "q": "Aile de 120 m², avion de 60 t, ρ = 1,225, V = 70 m/s : C_L nécessaire en palier ?",
+      "o": [
+       "0,07",
+       "2,00",
+       "1,63",
+       "0,33"
+      ],
+      "c": 2,
+      "why": "C_L = m g / (½ ρ V² S) = 588 399 / (3 001,25 × 120) = 1,63."
+     },
+     {
+      "q": "Pression mesurée 850 hPa, température 5 °C. Masse volumique ?",
+      "o": [
+       "1,065 kg/m³",
+       "10,646 kg/m³",
+       "1,225 kg/m³",
+       "0,850 kg/m³"
+      ],
+      "c": 0,
+      "why": "ρ = 85 000 / (287,05 × 278,15) = 1,065 kg/m³."
+     }
+    ]
+   },
+   {
+    "id": "m0-elec",
+    "t": "Électricité et ondes radio",
+    "h": "\n<p>Un avion moderne est une centrale électrique volante : écrans, calculateurs, radios, pompes, dégivrage. Et toute la\nnavigation et les communications passent par des ondes radio. Ce module donne les bases nécessaires.</p>\n\n<h3>1. Tension, courant, résistance</h3>\n<p>Loi d'Ohm : <b>U = R × I</b> (volts = ohms × ampères). Puissance électrique : <b>P = U × I</b> (watts).\nUn équipement de 28 V qui consomme 10 A absorbe 280 W. Les avions légers utilisent du courant continu 14 V ou 28 V ;\nles avions de ligne du continu 28 V et de l'alternatif 115 V à 400 Hz (fréquence plus élevée qu'au sol : transformateurs et moteurs plus légers).</p>\n\n<h3>2. Batteries</h3>\n<p>La capacité s'exprime en ampères-heures (Ah) : une batterie de 24 Ah peut fournir 24 A pendant 1 h, ou 12 A pendant 2 h\n(en théorie ; en pratique moins, surtout par grand froid). Énergie stockée = U × capacité : 24 V × 24 Ah ≈ 576 Wh.</p>\n\n<h3>3. Circuits série et parallèle</h3>\n<p>En série, les résistances s'additionnent ; en parallèle, les inverses s'additionnent (1/R = 1/R₁ + 1/R₂).\nLes équipements de bord sont en parallèle sur une <b>barre</b> : chacun reçoit la même tension.\nLes disjoncteurs protègent chaque circuit contre les surintensités.</p>\n\n<h3>4. Les ondes radio</h3>\n<p>Une onde électromagnétique se propage à la vitesse de la lumière c ≈ 300 000 km/s. Longueur d'onde λ = c / f.\nBandes utilisées : LF/MF (balises NDB, 190 à 1 750 kHz), HF (3 à 30 MHz, communications à grande distance par réflexion\nsur l'ionosphère), VHF (118 à 137 MHz pour la radiotéléphonie, 108 à 118 MHz pour VOR et ILS), UHF (DME, transpondeur, GPS).</p>\n\n<h3>5. La portée VHF : la ligne de vue</h3>\n<p>La VHF ne suit pas la courbure de la Terre : la portée est limitée à l'horizon radio. Formule usuelle :\n<b>portée (NM) ≈ 1,23 × (√h₁ + √h₂)</b>, hauteurs en pieds. Un avion à 10 000 ft parle à une station au sol à environ 123 NM.</p>\n\n<h3>6. Le radar et le DME</h3>\n<p>Un radar mesure le temps aller-retour d'une impulsion : distance = c × t / 2. Un écho reçu 1 ms après l'émission vient\nd'environ 150 km. Le DME mesure de la même façon la distance oblique jusqu'à la balise.</p>\n<div class=\"box\"><b>Sécurité</b> : un disjoncteur qui saute signale un défaut ; on ne le réarme qu'une fois, et seulement si la procédure le permet.</div>\n",
+    "quiz": [
+     {
+      "q": "Loi d'Ohm : U = 28 V, R = 7 Ω. Courant ?",
+      "o": [
+       "35 A",
+       "196 A",
+       "0,25 A",
+       "4 A"
+      ],
+      "c": 3,
+      "why": "I = U / R = 28 / 7 = 4 A."
+     },
+     {
+      "q": "Puissance d'un équipement 28 V × 10 A :",
+      "o": [
+       "2 800 W",
+       "280 W",
+       "2,8 W",
+       "38 W"
+      ],
+      "c": 1,
+      "why": "P = U I = 280 W."
+     },
+     {
+      "q": "Batterie 24 Ah. Combien de temps peut-elle fournir 6 A (en théorie) ?",
+      "o": [
+       "4 h",
+       "0,25 h",
+       "18 h",
+       "144 h"
+      ],
+      "c": 0,
+      "why": "24 / 6 = 4 h."
+     },
+     {
+      "q": "Fréquence du courant alternatif des avions de ligne :",
+      "o": [
+       "50 Hz",
+       "60 Hz",
+       "400 Hz",
+       "28 Hz"
+      ],
+      "c": 2,
+      "why": "115 V 400 Hz : à puissance égale, transformateurs et moteurs plus légers."
+     },
+     {
+      "q": "Deux résistances de 10 Ω en série :",
+      "o": [
+       "100 Ω",
+       "5 Ω",
+       "10 Ω",
+       "20 Ω"
+      ],
+      "c": 3,
+      "why": "En série, elles s'additionnent."
+     },
+     {
+      "q": "Deux résistances de 10 Ω en parallèle :",
+      "o": [
+       "5 Ω",
+       "20 Ω",
+       "10 Ω",
+       "0,2 Ω"
+      ],
+      "c": 0,
+      "why": "1/R = 1/10 + 1/10 = 1/5 → R = 5 Ω."
+     },
+     {
+      "q": "Vitesse de propagation d'une onde radio :",
+      "o": [
+       "≈ 340 m/s",
+       "≈ 300 000 km/s",
+       "≈ 30 000 km/s",
+       "≈ 300 km/s"
+      ],
+      "c": 1,
+      "why": "Les ondes radio sont des ondes électromagnétiques : vitesse de la lumière."
+     },
+     {
+      "q": "La bande des communications VHF aéronautiques :",
+      "o": [
+       "88 à 108 MHz",
+       "108 à 118 MHz",
+       "118 à 137 MHz",
+       "3 à 30 MHz"
+      ],
+      "c": 2,
+      "why": "108-118 MHz : VOR et ILS ; 118-137 MHz : radiotéléphonie."
+     },
+     {
+      "q": "Pour parler à très grande distance au-dessus d'un océan, on utilise :",
+      "o": [
+       "la HF (ou le satellite)",
+       "la VHF",
+       "le NDB",
+       "le transpondeur"
+      ],
+      "c": 0,
+      "why": "La HF se réfléchit sur l'ionosphère ; la VHF est limitée à la ligne de vue."
+     },
+     {
+      "q": "Pourquoi la portée VHF augmente-t-elle avec l'altitude ?",
+      "o": [
+       "la batterie est plus chargée",
+       "l'horizon radio s'éloigne",
+       "la fréquence augmente",
+       "l'air est moins dense"
+      ],
+      "c": 1,
+      "why": "La VHF se propage en ligne de vue : plus on est haut, plus l'horizon est loin."
+     },
+     {
+      "q": "Longueur d'onde d'une émission à 120 MHz :",
+      "o": [
+       "25 m",
+       "2,50 m",
+       "120 m",
+       "0,25 m"
+      ],
+      "c": 1,
+      "why": "λ = c / f = 3 × 10⁸ / 1,2 × 10⁸ = 2,50 m."
+     },
+     {
+      "q": "Longueur d'onde d'une balise NDB à 300 kHz :",
+      "o": [
+       "1 m",
+       "1 000 m",
+       "10 000 m",
+       "100 m"
+      ],
+      "c": 1,
+      "why": "λ = 3 × 10⁸ / 3 × 10⁵ = 1 000 m : d'où les grandes antennes des NDB."
+     },
+     {
+      "q": "Portée VHF d'un avion à 10 000 ft avec une station au niveau du sol :",
+      "o": [
+       "1 230 NM",
+       "10 NM",
+       "57 NM",
+       "123 NM"
+      ],
+      "c": 3,
+      "why": "1,23 × √10 000 = 1,23 × 100 = 123 NM."
+     },
+     {
+      "q": "Portée VHF à 2 500 ft (station au sol) :",
+      "o": [
+       "30,0 NM",
+       "3,1 NM",
+       "123,0 NM",
+       "61,5 NM"
+      ],
+      "c": 3,
+      "why": "1,23 × 50 = 61,5 NM."
+     },
+     {
+      "q": "Énergie d'une batterie 24 V, 40 Ah :",
+      "o": [
+       "64 Wh",
+       "9 600 Wh",
+       "1,67 Wh",
+       "960 Wh"
+      ],
+      "c": 3,
+      "why": "24 × 40 = 960 Wh."
+     },
+     {
+      "q": "Barre 28 V : radio 5 A, transpondeur 3 A, phares 12 A. Courant total ?",
+      "o": [
+       "20 A",
+       "28 A",
+       "5,6 A",
+       "12 A"
+      ],
+      "c": 0,
+      "why": "Équipements en parallèle : les courants s'additionnent."
+     },
+     {
+      "q": "Panne d'alternateur ; batterie 24 Ah ; on réduit la consommation à 8 A. Autonomie théorique ?",
+      "o": [
+       "1 h",
+       "8 h",
+       "24 min",
+       "3 h"
+      ],
+      "c": 3,
+      "why": "24 / 8 = 3 h (en réalité moins : la batterie n'est jamais pleine à 100 % et sa capacité baisse au froid)."
+     },
+     {
+      "q": "Disjoncteur de 5 A sur un circuit 28 V : puissance maximale de l'équipement protégé :",
+      "o": [
+       "5,6 W",
+       "33 W",
+       "140 W",
+       "28 W"
+      ],
+      "c": 2,
+      "why": "P = 28 × 5 = 140 W."
+     },
+     {
+      "q": "Un écho radar revient 0,5 ms après l'émission. Distance de la cible :",
+      "o": [
+       "37 km",
+       "150 km",
+       "75 km",
+       "300 km"
+      ],
+      "c": 2,
+      "why": "d = c t / 2 = 3 × 10⁸ × 0,000 5 / 2 = 75 km."
+     },
+     {
+      "q": "Résistance d'un dégivreur de 28 V qui consomme 14 A :",
+      "o": [
+       "2 Ω",
+       "0,5 Ω",
+       "392 Ω",
+       "42 Ω"
+      ],
+      "c": 0,
+      "why": "R = U / I = 28 / 14 = 2 Ω."
+     },
+     {
+      "q": "Portée VHF entre deux avions à FL300 et FL100 :",
+      "o": [
+       "400 NM",
+       "336 NM",
+       "123 NM",
+       "213 NM"
+      ],
+      "c": 1,
+      "why": "1,23 × (√30 000 + √10 000) = 1,23 × (173,2 + 100) = 336 NM."
+     },
+     {
+      "q": "Une station VHF au sommet d'une colline à 900 ft et un avion à 3 600 ft : portée ?",
+      "o": [
+       "90 NM",
+       "111 NM",
+       "58 NM",
+       "74 NM"
+      ],
+      "c": 1,
+      "why": "1,23 × (60 + 30) = 111 NM."
+     },
+     {
+      "q": "Altitude minimale pour contacter une station au sol à 100 NM (formule 1,23 √h) :",
+      "o": [
+       "≈ 10 000 ft",
+       "≈ 6 600 ft",
+       "≈ 8 100 ft",
+       "≈ 1 230 ft"
+      ],
+      "c": 1,
+      "why": "√h = 100 / 1,23 = 81,3 → h = 6 610 ft."
+     },
+     {
+      "q": "Énergie (Wh) consommée par un équipement 115 V 400 Hz de 2 A pendant 3 h (facteur de puissance 1) :",
+      "o": [
+       "230 Wh",
+       "1 380 Wh",
+       "690 Wh",
+       "6,9 Wh"
+      ],
+      "c": 2,
+      "why": "P = 115 × 2 = 230 W ; × 3 h = 690 Wh."
+     },
+     {
+      "q": "Trois résistances de 6 Ω, 3 Ω et 2 Ω en parallèle :",
+      "o": [
+       "1 Ω",
+       "0,5 Ω",
+       "3,67 Ω",
+       "11 Ω"
+      ],
+      "c": 0,
+      "why": "1/R = 1/6 + 1/3 + 1/2 = 1 → R = 1 Ω."
+     },
+     {
+      "q": "Le DME affiche 10 NM ; l'avion est à 36 000 ft au-dessus de la balise (en altitude). Distance horizontale réelle ?",
+      "o": [
+       "≈ 4,1 NM",
+       "≈ 8,1 NM",
+       "0,0 NM",
+       "10,0 NM"
+      ],
+      "c": 1,
+      "why": "Distance oblique 10 NM ; hauteur 36 000 ft = 5,9 NM ; √(10² − 5,9²) = 8,1 NM."
+     },
+     {
+      "q": "Juste à la verticale d'une balise DME à 30 000 ft, le DME affiche environ :",
+      "o": [
+       "30,0 NM",
+       "3,0 NM",
+       "4,9 NM",
+       "0,0 NM"
+      ],
+      "c": 2,
+      "why": "Distance oblique = hauteur : 30 000 / 6 076 = 4,9 NM. Le DME n'affiche jamais 0 en vol."
+     },
+     {
+      "q": "Batterie 24 Ah à 80 % de charge, capacité réduite de 20 % par le froid, consommation 10 A. Autonomie ?",
+      "o": [
+       "144 min",
+       "92 min",
+       "115 min",
+       "77 min"
+      ],
+      "c": 1,
+      "why": "24 × 0,8 × 0,8 = 15,36 Ah ; / 10 A = 1,536 h = 92 min."
+     },
+     {
+      "q": "Courant pour une puissance de 3,45 kW sous 115 V :",
+      "o": [
+       "30 A",
+       "0,03 A",
+       "397 A",
+       "3 A"
+      ],
+      "c": 0,
+      "why": "I = P / U = 3 450 / 115 = 30 A."
+     },
+     {
+      "q": "Une onde GPS (L1) a une fréquence de 1 575,42 MHz. Longueur d'onde ?",
+      "o": [
+       "1,9 cm",
+       "190,3 cm",
+       "0,6 cm",
+       "19,0 cm"
+      ],
+      "c": 3,
+      "why": "λ = 3 × 10⁸ / 1,575 × 10⁹ = 0,1903 m = 19,0 cm."
+     }
+    ]
+   },
+   {
+    "id": "m0-geo",
+    "t": "La Terre, les coordonnées et le temps",
+    "h": "\n<p>Naviguer, c'est se situer sur une sphère qui tourne. Ce module donne les repères de géographie et de temps qui servent\nà préparer un vol : coordonnées, distances, heures UTC et locales.</p>\n\n<h3>1. Latitude et longitude</h3>\n<p>La <b>latitude</b> se mesure de 0° (équateur) à 90° nord ou sud ; la <b>longitude</b> de 0° (méridien de Greenwich) à 180° est ou ouest.\nUn degré se divise en 60 minutes d'arc. Exemple : Paris-Charles-de-Gaulle ≈ 49°00′ N, 002°33′ E ; La Réunion (Roland-Garros) ≈ 20°53′ S, 055°31′ E.</p>\n\n<h3>2. Le mille nautique</h3>\n<p>Sur un méridien, <b>1 minute de latitude = 1 NM</b> (1 852 m), donc 1° = 60 NM. Le long d'un parallèle, un degré de longitude\nvaut 60 NM × cos(latitude) : 60 NM à l'équateur, 30 NM à 60° de latitude, 0 au pôle.</p>\n\n<h3>3. Orthodromie et loxodromie</h3>\n<p>Le plus court chemin entre deux points est l'arc de <b>grand cercle</b> (orthodromie) ; son cap change le long du trajet.\nLa <b>loxodromie</b> coupe tous les méridiens sous le même angle (cap constant) mais elle est plus longue, sauf le long de l'équateur ou d'un méridien.\nDistance orthodromique : cos d = sin φ₁ sin φ₂ + cos φ₁ cos φ₂ cos Δλ, puis d (en degrés) × 60 = NM.</p>\n\n<h3>4. Le temps : UTC et heure locale</h3>\n<p>L'aviation utilise le <b>temps universel coordonné (UTC)</b>, noté « Z » : 1430Z = 14 h 30 UTC. La Terre tourne de 360° en 24 h,\nsoit <b>15° par heure</b> (1° en 4 minutes). L'heure légale dépend des pays : France UTC+1 en hiver, UTC+2 en été ; La Réunion UTC+4 toute l'année ;\nNew York UTC−5 en hiver, UTC−4 en été.</p>\n\n<h3>5. Durée de vol et changement de date</h3>\n<p>Heure d'arrivée locale = heure de départ UTC + durée de vol, puis conversion dans le fuseau d'arrivée. Franchir la ligne de changement\nde date (≈ 180°) vers l'ouest fait gagner un jour, vers l'est perdre un jour.</p>\n\n<h3>6. Jour et nuit aéronautiques</h3>\n<p>Le vol de nuit commence à la fin du crépuscule civil (centre du Soleil à 6° sous l'horizon), selon les règles européennes,\net non au coucher du Soleil. Les éphémérides sont publiées par l'autorité de chaque pays.</p>\n<div class=\"box\"><b>Rappel</b> : toujours préciser « UTC » ou « locale » sur un document de vol ; une confusion d'une heure peut annuler une réserve de carburant.</div>\n",
+    "quiz": [
+     {
+      "q": "1 minute de latitude correspond à :",
+      "o": [
+       "60 NM",
+       "1 km",
+       "1 NM",
+       "1 SM"
+      ],
+      "c": 2,
+      "why": "Par définition historique du mille nautique : 1′ de latitude ≈ 1 NM."
+     },
+     {
+      "q": "1 degré de latitude correspond à :",
+      "o": [
+       "1 NM",
+       "100 NM",
+       "111 NM",
+       "60 NM"
+      ],
+      "c": 3,
+      "why": "60 minutes × 1 NM = 60 NM (≈ 111 km)."
+     },
+     {
+      "q": "La longitude de Greenwich est :",
+      "o": [
+       "15° E",
+       "90° W",
+       "180°",
+       "0°"
+      ],
+      "c": 3,
+      "why": "Le méridien de Greenwich est l'origine des longitudes."
+     },
+     {
+      "q": "L'équateur est à la latitude :",
+      "o": [
+       "0°",
+       "180°",
+       "90°",
+       "23,5°"
+      ],
+      "c": 0,
+      "why": "Les latitudes vont de 0° à l'équateur à 90° aux pôles."
+     },
+     {
+      "q": "La Terre tourne de combien de degrés par heure ?",
+      "o": [
+       "24°",
+       "15°",
+       "360°",
+       "1°"
+      ],
+      "c": 1,
+      "why": "360° / 24 h = 15° par heure."
+     },
+     {
+      "q": "Que signifie « 1430Z » ?",
+      "o": [
+       "14 h 30 UTC",
+       "14 h 30 heure locale",
+       "2 h 30 du matin",
+       "14 h 30 à Zurich"
+      ],
+      "c": 0,
+      "why": "Z (« zulu ») désigne le temps universel coordonné."
+     },
+     {
+      "q": "Heure légale française en hiver :",
+      "o": [
+       "UTC+1",
+       "UTC",
+       "UTC−1",
+       "UTC+2"
+      ],
+      "c": 0,
+      "why": "UTC+1 en hiver, UTC+2 en été."
+     },
+     {
+      "q": "Il est 1200Z. Heure légale à Paris en été ?",
+      "o": [
+       "13 h 00",
+       "10 h 00",
+       "14 h 00",
+       "12 h 00"
+      ],
+      "c": 2,
+      "why": "Été : UTC+2 → 14 h 00."
+     },
+     {
+      "q": "Il est 08 h 00 à La Réunion (UTC+4). Heure UTC ?",
+      "o": [
+       "0300Z",
+       "1200Z",
+       "0400Z",
+       "0800Z"
+      ],
+      "c": 2,
+      "why": "08 h 00 − 4 h = 04 h 00 UTC."
+     },
+     {
+      "q": "Le plus court chemin entre deux points de la Terre suit :",
+      "o": [
+       "un arc de grand cercle",
+       "un parallèle",
+       "une ligne droite sur la carte de Mercator",
+       "une loxodromie"
+      ],
+      "c": 0,
+      "why": "L'orthodromie (grand cercle) est le chemin le plus court sur la sphère."
+     },
+     {
+      "q": "Distance entre 45° N et 47° 30′ N sur le même méridien :",
+      "o": [
+       "250 NM",
+       "90 NM",
+       "150 NM",
+       "2,5 NM"
+      ],
+      "c": 2,
+      "why": "2° 30′ = 150′ = 150 NM."
+     },
+     {
+      "q": "Longueur d'un degré de longitude à 60° de latitude :",
+      "o": [
+       "0 NM",
+       "60 NM",
+       "30 NM",
+       "52 NM"
+      ],
+      "c": 2,
+      "why": "60 × cos 60° = 30 NM."
+     },
+     {
+      "q": "Longueur d'un degré de longitude à 49° N (Paris) :",
+      "o": [
+       "60,0 NM",
+       "30,0 NM",
+       "39,4 NM",
+       "45,3 NM"
+      ],
+      "c": 2,
+      "why": "60 × cos 49° = 39,4 NM."
+     },
+     {
+      "q": "Différence d'heure solaire entre deux lieux séparés de 30° de longitude :",
+      "o": [
+       "1 h",
+       "2 h",
+       "30 h",
+       "30 min"
+      ],
+      "c": 1,
+      "why": "15° par heure : 30 / 15 = 2 h."
+     },
+     {
+      "q": "1° de longitude correspond à combien de minutes de temps ?",
+      "o": [
+       "15 min",
+       "60 min",
+       "1 min",
+       "4 min"
+      ],
+      "c": 3,
+      "why": "60 min / 15° = 4 min par degré."
+     },
+     {
+      "q": "Départ de Paris 10 h 00 heure légale d'hiver (UTC+1), vol de 7 h 30. Heure UTC d'arrivée ?",
+      "o": [
+       "1730Z",
+       "1630Z",
+       "1700Z",
+       "1530Z"
+      ],
+      "c": 1,
+      "why": "10 h 00 locale = 0900Z ; + 7 h 30 = 1630Z."
+     },
+     {
+      "q": "Même vol (arrivée 1630Z) à New York en hiver (UTC−5). Heure locale d'arrivée ?",
+      "o": [
+       "11 h 30",
+       "21 h 30",
+       "10 h 30",
+       "12 h 30"
+      ],
+      "c": 0,
+      "why": "16 h 30 − 5 h = 11 h 30 locale."
+     },
+     {
+      "q": "Vol Paris-CDG → La Réunion : départ 2300Z, durée 11 h 00. Heure locale à La Réunion à l'arrivée ?",
+      "o": [
+       "22 h 00 le même jour",
+       "10 h 00 le lendemain",
+       "14 h 00 le lendemain",
+       "13 h 00 le lendemain"
+      ],
+      "c": 2,
+      "why": "Arrivée 2300Z + 11 h = 1000Z le lendemain ; UTC+4 → 14 h 00 locale."
+     },
+     {
+      "q": "Pour aller sur un cap constant de Paris à New York, on suit :",
+      "o": [
+       "le méridien de Greenwich",
+       "une loxodromie, plus longue que l'orthodromie",
+       "l'orthodromie, plus courte",
+       "l'équateur"
+      ],
+      "c": 1,
+      "why": "Cap constant = loxodromie ; elle est plus longue que le grand cercle (sauf le long d'un méridien ou de l'équateur)."
+     },
+     {
+      "q": "Un avion vole plein est le long de l'équateur sur 10° de longitude. Distance ?",
+      "o": [
+       "300 NM",
+       "1 000 NM",
+       "60 NM",
+       "600 NM"
+      ],
+      "c": 3,
+      "why": "À l'équateur, 1° de longitude = 60 NM : 10 × 60 = 600 NM."
+     },
+     {
+      "q": "Distance orthodromique Paris-CDG (49,010° N ; 2,548° E) → La Réunion (20,887° S ; 55,510° E) :",
+      "o": [
+       "4 900 NM",
+       "5 056 NM",
+       "5 000 NM",
+       "6 200 NM"
+      ],
+      "c": 1,
+      "why": "cos d = sin φ₁ sin φ₂ + cos φ₁ cos φ₂ cos Δλ → d = 84,26° × 60 = 5 056 NM ([CALCULÉ] avec les coordonnées des aérodromes du simulateur)."
+     },
+     {
+      "q": "Distance orthodromique New York-JFK (40,641° N ; 73,778° W) → Paris-CDG :",
+      "o": [
+       "2 900 NM",
+       "3 125 NM",
+       "4 500 NM",
+       "3 148 NM"
+      ],
+      "c": 3,
+      "why": "Même formule : 3 148 NM [CALCULÉ]."
+     },
+     {
+      "q": "Deux points à 60° N séparés de 20° de longitude : distance le long du parallèle (loxodromie) ?",
+      "o": [
+       "300 NM",
+       "1 200 NM",
+       "600 NM",
+       "1 039 NM"
+      ],
+      "c": 2,
+      "why": "20 × 60 × cos 60° = 600 NM."
+     },
+     {
+      "q": "Les mêmes deux points (60° N, 0° et 20° E) : distance orthodromique ?",
+      "o": [
+       "600,0 NM",
+       "597,7 NM",
+       "1 200,0 NM",
+       "300,0 NM"
+      ],
+      "c": 1,
+      "why": "Grand cercle : 597,7 NM, un peu moins que les 600 NM du parallèle : le grand cercle « monte » vers le pôle."
+     },
+     {
+      "q": "Convergence des méridiens entre 0° et 20° E à 60° N (Δλ × sin φ) :",
+      "o": [
+       "17,3°",
+       "10,0°",
+       "0,0°",
+       "20,0°"
+      ],
+      "c": 0,
+      "why": "20 × sin 60° = 17,3° : c'est la différence entre la route vraie initiale et finale du grand cercle."
+     },
+     {
+      "q": "Midi solaire à Greenwich à 12 h 00 UTC. Heure UTC du midi solaire à 55° 30′ E (La Réunion) ?",
+      "o": [
+       "15 h 42 UTC",
+       "08 h 00 UTC",
+       "12 h 00 UTC",
+       "08 h 18 UTC"
+      ],
+      "c": 3,
+      "why": "55,5° × 4 min = 222 min = 3 h 42 plus tôt : 12 h 00 − 3 h 42 = 08 h 18 UTC (on néglige l'équation du temps)."
+     },
+     {
+      "q": "Vol de Tokyo vers Honolulu (vers l'est) qui franchit la ligne de changement de date : la date locale",
+      "o": [
+       "avance d'un jour",
+       "recule d'un jour",
+       "ne change pas",
+       "avance de 12 h"
+      ],
+      "c": 1,
+      "why": "Vers l'est on recule d'un jour au franchissement de la ligne (on « regagne » la journée)."
+     },
+     {
+      "q": "Vitesse sol 480 kt vers l'ouest à 60° N : à quelle vitesse angulaire (en longitude) l'avion se déplace-t-il ?",
+      "o": [
+       "8° par heure",
+       "15° par heure",
+       "32° par heure",
+       "16° par heure"
+      ],
+      "c": 3,
+      "why": "1° de longitude = 30 NM à 60° N ; 480 / 30 = 16° par heure : plus vite que la rotation de la Terre (15°/h), le Soleil « recule » dans le ciel."
+     },
+     {
+      "q": "Un avion décolle au coucher du Soleil et vole vers l'ouest à 60° N à 480 kt. Que voit l'équipage ?",
+      "o": [
+       "le Soleil remonte lentement sur l'horizon",
+       "le Soleil se couche aussitôt",
+       "le Soleil reste fixe",
+       "la nuit tombe deux fois plus vite"
+      ],
+      "c": 0,
+      "why": "À 16° par heure vers l'ouest, l'avion va plus vite que la rotation terrestre (15°/h) : il « rattrape » le Soleil."
+     },
+     {
+      "q": "Coordonnée 48° 43,5′ N en degrés décimaux :",
+      "o": [
+       "48,725° N",
+       "48,435 5° N",
+       "48,435° N",
+       "48,705° N"
+      ],
+      "c": 0,
+      "why": "43,5′ / 60 = 0,725° → 48,725° N."
      }
     ]
    }

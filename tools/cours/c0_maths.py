@@ -117,21 +117,15 @@ Q.append(ex('Interpolation double : distance 400 m (0 ft, 15 °C), 460 m (2 000 
             'Effet altitude à 1 000 ft : +30 m ; effet température +10 °C : +30 m ; 400 + 30 + 30 = 460 m.'))
 Q.append(ex('Vitesse sol 150 kt, 40 NM à parcourir, heure 10:52. Heure d\'arrivée ?', '11:08', ['11:18', '11:12', '11:04'],
             '40 / 150 = 0,2667 h = 16 min ; 10:52 + 16 min = 11:08.'))
-Q.append(ex('Pour descendre de FL120 à 2 000 ft (10 000 ft) sur 30 NM à 240 kt, quelle vitesse verticale ?', f'{fr(10000/(30/240*60))} ft/min',
-            ['1 333 ft/min', '2 400 ft/min', '1 000 ft/min'],
-            f'Temps : 30 / 240 h = 7,5 min ; 10 000 / 7,5 = {fr(10000/7.5)} ft/min.'))
 close(10000 / 7.5, 1333.33, 1e-3)
-Q[-1] = ex('Pour descendre de 10 000 ft sur 30 NM à 240 kt, quelle vitesse verticale ?', '1 333 ft/min', ['2 400 ft/min', '1 000 ft/min', '800 ft/min'],
-           'Temps : 30 / 240 h = 0,125 h = 7,5 min ; 10 000 / 7,5 = 1 333 ft/min.')
+Q.append(ex('Pour descendre de 10 000 ft sur 30 NM à 240 kt, quelle vitesse verticale ?', '1 333 ft/min', ['2 400 ft/min', '1 000 ft/min', '800 ft/min'],
+           'Temps : 30 / 240 h = 0,125 h = 7,5 min ; 10 000 / 7,5 = 1 333 ft/min.'))
 Q.append(ex('La traînée doit diminuer de 19 % à incidence constante. De combien réduire la vitesse ?', '10 %', ['19 %', '9,5 %', '4,4 %'],
             'Traînée ∝ V² : V² × 0,81 → V × 0,9, soit −10 %.'))
-Q.append(ex('Débit horaire 2 400 kg/h. Carburant pour 3 h 20 de vol + 30 min de réserve finale + 5 % du délestage pour aléas :',
-            f'{fr(2400*(10/3)*1.05 + 2400*0.5)} kg', ['9 200 kg', '9 600 kg', '8 400 kg'],
-            f'Délestage 2 400 × 3,333 = 8 000 kg ; aléas 5 % = 400 kg ; réserve 0,5 h = 1 200 kg ; total {fr(2400*(10/3)*1.05 + 2400*0.5)} kg.'))
 close(2400 * (10/3) * 1.05 + 2400 * 0.5, 9600, 1e-6)
-Q[-1] = ex('Débit horaire 2 400 kg/h. Carburant pour 3 h 20 de vol + 5 % du délestage pour aléas + 30 min de réserve finale :',
+Q.append(ex('Débit horaire 2 400 kg/h. Carburant pour 3 h 20 de vol + 5 % du délestage pour aléas + 30 min de réserve finale :',
            '9 600 kg', ['9 200 kg', '8 400 kg', '9 800 kg'],
-           'Délestage 2 400 × 3,333 = 8 000 kg ; aléas 5 % = 400 kg ; réserve 0,5 h = 1 200 kg ; total 9 600 kg.')
+           'Délestage 2 400 × 3,333 = 8 000 kg ; aléas 5 % = 400 kg ; réserve 0,5 h = 1 200 kg ; total 9 600 kg.'))
 Q.append(ex('Si y = k·x² et que y vaut 50 pour x = 10, que vaut x pour y = 72 ?', '12', ['14,4', '11', '13'],
             'k = 50/100 = 0,5 ; 72 = 0,5 x² → x² = 144 → x = 12.'))
 Q.append(ex('Un avion parcourt 0,8 NM en 20 s. Sa vitesse sol est :', '144 kt', ['96 kt', '160 kt', '240 kt'],
