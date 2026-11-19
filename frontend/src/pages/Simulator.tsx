@@ -10,6 +10,7 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { apiAvailable } from '../auth';
+import { installRadioExt } from '../legacy-ext/radio';
 
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free))$/;
 
@@ -92,6 +93,10 @@ export function Simulator({ action }: { action?: string }) {
           allowFullScreen
           onLoad={() => {
             loaded.current = true;
+            // F37 : boutons radio (Répéter, Standby, Radio, Mayday / Pan-Pan) dès que le moteur est prêt
+            let n = 0;
+            const ext = () => { if (!installRadioExt(frame.current) && ++n < 150) setTimeout(ext, 200); };
+            ext();
             if (action && ACTION.test(action)) launch(action);
           }}
         />
