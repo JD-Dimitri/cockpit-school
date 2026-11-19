@@ -45,6 +45,7 @@ php bin/phpunit                  # tests de l'API
 python3 tools/extract_data.py      # régénère data/*.json depuis legacy/
 python3 tests/parity_engine.py     # moteur TypeScript = moteur d'origine (14 fonctions)
 python3 tests/e2e_front.py         # interface React, ordinateur et téléphone (36 vérifications)
+python3 tools/standalone.py SORTIE.html   # version autonome (un seul fichier, hors ligne)
 ```
 
 Les tests utilisent Playwright (Python) et Chromium.
