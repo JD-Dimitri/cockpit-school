@@ -12,7 +12,7 @@ de zéro jusqu'à la licence de pilote, et au-delà. La version gratuite (fichie
 | Structure du dépôt | ✔ `frontend/`, `backend/`, `data/`, `legacy/`, `tools/`, `tests/`, `docs/` |
 | Données en JSON | ✔ 14 fichiers extraits du moteur V10.42.1 par `tools/extract_data.py` (aucune saisie à la main) |
 | Interface React + Three.js | ✔ accueil, simulateur, cours (76 modules + QCM), appareils en 3D, missions, aéroports |
-| Parcours (F40) | ✔ parcours → fiches de choix de l'appareil avec vignette → fiche de présentation → « Valider le parcours avec cet appareil » → « Parcours commencé » → simulateur (même suite qu'avant) ; vignettes : illustrations générées (app.atlas.design) |
+| Parcours (F40) | ✔ parcours → fiches de choix de l'appareil avec vignette → fiche de présentation → « Valider le parcours avec cet appareil » → « Parcours commencé » → simulateur (même suite qu'avant) ; vignettes : illustrations générées fournies par l'auteur |
 | Trafic réel | ✔ accueil des sources : récepteur ADS-B Raspberry Pi (`tools/recepteur/`), OpenSky Network, Flightradar24 ; page `#/trafic` ; aucune source active par défaut |
 | Boutons d'action des cours | ✔ « Ouvrir l'atelier », « Lancer le mode… », documents : ouvrent le simulateur directement sur l'action |
 | Simulateur jouable | ✔ le moteur d'origine tourne tel quel dans l'onglet « Simulateur » ; ses modules sont portés un par un (`docs/MIGRATION.md`) |
