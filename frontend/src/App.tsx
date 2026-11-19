@@ -17,9 +17,6 @@ const ROUTES = [
   { path: 'parcours', label: 'Parcours', el: (p: string[]) => <Parcours mi={p[0]} ac={p[1]} /> },
   { path: 'simulateur', label: 'Simulateur', el: (p: string[]) => <Simulator action={p[0]} /> },
   { path: 'cours', label: 'Cours', el: (p: string[]) => <Courses part={p[0]} mod={p[1]} /> },
-  { path: 'appareils', label: 'Appareils', el: (p: string[]) => <AircraftPage id={p[0]} /> },
-  { path: 'missions', label: 'Missions', el: () => <Missions /> },
-  { path: 'aeroports', label: 'Aéroports', el: () => <Airports /> },
 ] as const;
 
 /** Pages ouvertes sans compte (F41) : accueil public et pages du compte. Tout le reste demande une connexion. */
@@ -32,6 +29,12 @@ const HIDDEN: Record<string, (p: string[]) => JSX.Element> = {
   'mot-de-passe-oublie': () => <Forgot />,
   reinitialiser: (p) => <Reset token={p[0]} />,
   trafic: (p) => <Traffic apt={p[0]} />,
+  // Appareils : retiré du menu (demande de l'auteur, 19/11 18:31 : redondant avec Parcours et l'écran de départ du simulateur) ;
+  // la page reste ouverte par son adresse pour les liens existants.
+  appareils: (p) => <AircraftPage id={p[0]} />,
+  // Missions et Aéroports : retirés du menu aussi (demande de l'auteur, 19/11 18:36) ; pages gardées par leur adresse.
+  missions: () => <Missions />,
+  aeroports: () => <Airports />,
   imprimer: (p) => <PrintCourse part={p[0]} mod={p[1] === 'auto' ? undefined : p[1]} auto={p.includes('auto')} />,
 };
 

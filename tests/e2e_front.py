@@ -46,7 +46,9 @@ with sync_playwright() as p:
         pg.locator('.acimg').screenshot(path=str(OUT / f'pro_appareil_image_{tag}.png'))
         check(f'[{tag}] appareils : illustration de l\'appareil (image, pas de 3D)', pg.evaluate("(() => { const i = document.querySelector('.acimg img'); return !!i && i.complete && i.naturalWidth > 100; })()") and pg.locator('.ac canvas').count() == 0)
         sim = pg.locator('.ac .actions a.btn').first
-        check(f'[{tag}] appareils : bouton « Simulateur » → parcours de l\'appareil', sim.text_content().strip() == 'Simulateur ▸' and sim.get_attribute('href') == '#/simulateur/go:a350:full-350:guide', sim.get_attribute('href'))
+        check(f'[{tag}] appareils : bouton « Simulateur » → écran de départ du simulateur, A350 choisi', sim.text_content().strip() == 'Simulateur ▸' and sim.get_attribute('href') == '#/simulateur/ac:a350', sim.get_attribute('href'))
+        nav = [a.strip() for a in pg.locator('header nav a:not(.acct)').all_text_contents()]
+        check(f'[{tag}] menu : Parcours, Simulateur, Cours (Appareils, Missions, Aéroports retirés)', [n.upper() for n in nav] == ['PARCOURS', 'SIMULATEUR', 'COURS'], str(nav))
         bench = pg.locator('.bench').inner_text() if pg.locator('.bench').count() else ''
         check(f'[{tag}] appareils : décollage calculé par le modèle de vol (A350)', 'Passage des 35 ft' in bench and '[CALCULÉ]' in bench and 'kt' in bench, bench[:120])
         pg.click('.tabs a[href="#/appareils/s76"]'); pg.wait_for_timeout(400)
@@ -88,6 +90,12 @@ with sync_playwright() as p:
             if ver == 8: break
             pg.wait_for_timeout(200)
         check(f'[{tag}] simulateur : moteur d\'origine chargé (8 appareils)', ver == 8, str(ver))
+        intro = {}
+        for _ in range(25):
+            intro = frame.evaluate("(() => { const i = document.getElementById('intro'); const s = i && i.querySelector('.skip'); return { shown: !!i && !i.hidden, skip: !!s && getComputedStyle(s).display !== 'none', later: !!i && /Plus tard/.test(i.textContent) }; })()")
+            if intro.get('shown'): break
+            pg.wait_for_timeout(200)
+        check(f'[{tag}] introduction : bouton « Passer et aller au simulateur » du haut retiré, « Plus tard » gardé', intro.get('shown') and not intro.get('skip') and intro.get('later'), str(intro))
         box = pg.locator('.sim iframe').bounding_box()
         check(f'[{tag}] simulateur : cadre plein écran', box and box['width'] >= W - 1 and box['height'] > H * 0.8, str(box))
         pg.screenshot(path=str(OUT / f'pro_simulateur_{tag}.png'))

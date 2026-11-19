@@ -95,8 +95,8 @@ with sync_playwright() as p:
         if errs: check(f'{mi} × {ac} : aucune erreur JavaScript', False, '; '.join(errs[:2]))
         if (mi, ac) == ('full-fw', 'a320'): pg.screenshot(path=str(OUT / 'pro_parcours_lance.png'))
         b.close()
-    # fiche de l'appareil (page Appareils) → « Simulateur ▸ » → parcours complet de cet appareil
-    for ac, mi in (('lj60', 'full-fw'), ('h125', 'full-rw')):
+    # fiche de l'appareil → « Simulateur ▸ » → directement l'écran de départ du simulateur, appareil déjà choisi, sans autre étape
+    for ac in ('lj60', 'h125'):
         b, c = ctx_for(p, 1280, 800); pg = c.new_page()
         pg.goto(URL + f'#/appareils/{ac}'); pg.wait_for_selector('.ac .actions a.btn')
         pg.click('.ac .actions a.btn >> text=Simulateur')
@@ -104,11 +104,13 @@ with sync_playwright() as p:
         for _ in range(150):
             fr = next((f for f in pg.frames if f != pg.main_frame), None)
             try:
-                st = fr.evaluate("({ack: ACK, mi: Object.keys(MISSIONS).find(k => MISSIONS[k] === MI), menu: $('menu').hidden})") if fr else {}
-                if st.get('menu') and st.get('mi'): break
+                st = fr.evaluate("({sel: selAC, menu: !$('menu').hidden, intro: !!(document.getElementById('intro') && !document.getElementById('intro').hidden), brief: !!(document.getElementById('br-skip') && document.getElementById('br-skip').offsetParent)})") if fr else {}
+                if st.get('sel') == ac and st.get('menu'): break
             except Exception: pass
             pg.wait_for_timeout(200)
-        check(f'page Appareils {ac} : « Simulateur » lance le parcours {mi} avec cet appareil', st.get('ack') == ac and st.get('mi') == mi, str(st))
+        pg.wait_for_timeout(1200)
+        st = fr.evaluate("({sel: selAC, menu: !$('menu').hidden, intro: !!(document.getElementById('intro') && !document.getElementById('intro').hidden), brief: !!(document.getElementById('br-skip') && document.getElementById('br-skip').offsetParent)})")
+        check(f'page Appareils {ac} : « Simulateur » → écran de départ, {ac} choisi, sans introduction ni dossier', st.get('sel') == ac and st.get('menu') and not st.get('intro') and not st.get('brief'), str(st))
         b.close()
 print(f'{sum(checks)}/{len(checks)} vérifications')
 sys.exit(0 if all(checks) else 1)

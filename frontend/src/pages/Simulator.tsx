@@ -5,16 +5,26 @@
  *
  * #/simulateur/<action> lance directement une action des cours (mêmes actions que l'Académie d'origine,
  * fonction act() de acad.js) : auto, guide, exam, brief, sys:<appareil>[:<scène>], doc:<document>.
+ * #/simulateur/ac:<appareil> ouvre directement l'écran de départ du simulateur (appareil, mission, heure, Démarrer),
+ * avec cet appareil déjà choisi (bouton « Simulateur » de la fiche de l'appareil), sans autre étape.
  * #/simulateur/go:<appareil>:<parcours>:<mode> lance un parcours validé sur la page Parcours, par les boutons du menu
  * d'origine (même suite qu'aujourd'hui : dossier de vol, puis parcours dans le mode choisi).
  */
 import { useEffect, useRef, useState } from 'react';
 import { apiAvailable } from '../auth';
 
-const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free))$/;
+const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free)|ac:[a-z0-9]+)$/;
 
 /** Reprend act() de l'Académie d'origine avec les fonctions publiques du moteur. */
 function runAction(w: any, k: string): boolean {
+  if (k.startsWith('ac:')) {
+    if (typeof w.renderMenu !== 'function' || !w.eval(`typeof AC==='object' && !!AC[${JSON.stringify(k.slice(3))}]`)) return false;
+    return !!w.eval(
+      `(function(ac){ var i=document.getElementById('intro'); if(i) i.hidden=true; try{ localStorage.setItem('sim-intro','1'); }catch(e){}` +
+        ` selAC=ac; renderMenu(); var m=document.getElementById('menu'); if(m){ m.hidden=false; m.scrollTop=0; }` +
+        ` [500,1200,2500].forEach(function(t){ setTimeout(function(){ var j=document.getElementById('intro'); if(j) j.hidden=true; }, t); }); return true; })(${JSON.stringify(k.slice(3))})`,
+    );
+  }
   if (k.startsWith('go:')) {
     if (!w.BR?.launchMode || typeof w.renderMenu !== 'function') return false;
     const [, ac, mi, mode] = k.split(':');
@@ -92,6 +102,17 @@ export function Simulator({ action }: { action?: string }) {
           allowFullScreen
           onLoad={() => {
             loaded.current = true;
+            // Introduction du moteur : bouton « Passer et aller au simulateur » du haut retiré (demande de l'auteur, 19/11 18:34) ;
+            // « Plus tard : aller au simulateur » reste en bas de l'introduction.
+            try {
+              const d = frame.current?.contentDocument;
+              if (d && !d.getElementById('ps-ui')) {
+                const st = d.createElement('style');
+                st.id = 'ps-ui';
+                st.textContent = '#intro .skip{display:none!important}';
+                d.head.appendChild(st);
+              }
+            } catch { /* cadre d'une autre origine : sans effet */ }
             if (action && ACTION.test(action)) launch(action);
           }}
         />

@@ -15,7 +15,7 @@ checks = []
 def check(name, cond, detail=''):
     checks.append(bool(cond)); print(('✔ ' if cond else '✘ ') + name + (f' — {detail}' if detail and not cond else ''))
 
-RESERVE = ['parcours', 'simulateur', 'cours/p1/avion', 'appareils', 'missions', 'aeroports', 'trafic', 'imprimer/p1']
+RESERVE = ['parcours', 'simulateur', 'cours/p1/avion', 'appareils/a320', 'missions', 'aeroports', 'trafic', 'imprimer/p1']
 protected_req = lambda u: '/api/data/' in u or '/api/moteur' in u or '/data/' in u or '/legacy/' in u
 
 with sync_playwright() as p:
@@ -24,7 +24,7 @@ with sync_playwright() as p:
         pg.route('https://fonts.googleapis.com/**', lambda r: r.fulfill(body='', content_type='text/css'))
         pg.goto(URL + '#/parcours'); pg.wait_for_selector('.pcard')
         check('autonome : bandeau « démonstration hors ligne »', 'démonstration hors ligne' in pg.inner_text('.demo'))
-        check('autonome : menu complet', pg.locator('header nav a').count() == 7)
+        check('autonome : menu complet', pg.locator('header nav a').count() == 4)
         b.close()
     else:
         for W, H, tag in ((1280, 800, 'pc'), (390, 844, 'tel')):
@@ -52,7 +52,7 @@ with sync_playwright() as p:
             pg.wait_for_url('**#/cours/p1/avion'); pg.wait_for_selector('.titlebar')
             check(f'[{tag}] connexion → retour à la page demandée (cours p1)', "L'avion et ses parties" in pg.inner_text('main'))
             nav = [a.strip() for a in pg.locator('header nav a').all_text_contents()]
-            check(f'[{tag}] connecté : menu complet et nom de l\'élève', len(nav) == 7 and nav[-1].endswith('Élève test'), str(nav))
+            check(f'[{tag}] connecté : menu complet et nom de l\'élève', len(nav) == 4 and nav[-1].endswith('Élève test'), str(nav))
             pg.goto(URL + '#/simulateur'); pg.wait_for_selector('.sim iframe')
             check(f'[{tag}] connecté : simulateur chargé depuis le serveur (/api/moteur)', pg.locator('.sim iframe').get_attribute('src') == 'api/moteur')
             pg.goto(URL + '#/'); pg.wait_for_selector('.page h1')
