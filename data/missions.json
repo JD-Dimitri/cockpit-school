@@ -1,0 +1,653 @@
+{
+ "jfk-cdg": {
+  "n": "Vol libre JFK → Paris-CDG",
+  "d": "Décollage piste 31L de JFK, destination LFPG (≈ 5 840 km).",
+  "fw": true,
+  "dest": "LFPG",
+  "start": {
+   "lat": 40.627994,
+   "lon": -73.771781,
+   "hdg": 300.86512298027765,
+   "elev": 4
+  }
+ },
+ "cdg-jfk": {
+  "n": "Vol libre Paris-CDG → JFK",
+  "d": "Décollage piste 27L de CDG, destination KJFK.",
+  "fw": true,
+  "dest": "KJFK",
+  "start": {
+   "lat": 49.023253,
+   "lon": 2.562117,
+   "hdg": 265.33439164008746,
+   "elev": 110
+  }
+ },
+ "heli-ny": {
+  "n": "Vol libre New York",
+  "d": "Départ de l'héliport de Downtown Manhattan, vol local libre (JFK à 21 km).",
+  "rw": true,
+  "dest": "KJFK",
+  "start": {
+   "lat": 40.7012,
+   "lon": -74.009,
+   "hdg": 200,
+   "elev": 2
+  }
+ },
+ "heli-cdg": {
+  "n": "Vol libre Paris-CDG",
+  "d": "Départ sur l'aérodrome de CDG, vol local libre.",
+  "rw": true,
+  "dest": "LFPG",
+  "start": {
+   "lat": 49.013,
+   "lon": 2.54,
+   "hdg": 265,
+   "elev": 110
+  }
+ },
+ "sc-n722": {
+  "n": "N722BD · Learjet 60",
+  "d": "Étude N722BD : document séparé, publié à part (adresse à renseigner).",
+  "soon": true
+ },
+ "sc-1549": {
+  "n": "US Airways 1549 · A320",
+  "d": "Amerrissage sur l'Hudson (2009) : reconstitution guidée sur A320 ; variante fictive (mêmes lieu et altitude) sur les autres avions.",
+  "soon": false,
+  "acs": [
+   "a320",
+   "b777",
+   "a350",
+   "lj60",
+   "c172"
+  ]
+ },
+ "sc-9525": {
+  "n": "Germanwings 9525 · Barcelone → Düsseldorf",
+  "d": "Le vrai trajet au FL380 au-dessus des Alpes, sans le crash : la partie critique devient une urgence (commandant hors du poste, dépressurisation, descente d'urgence au-dessus du relief).",
+  "soon": false,
+  "acs": [
+   "a320",
+   "b777",
+   "a350"
+  ]
+ },
+ "sc-fict": {
+  "n": "Scénario fictif · fuite carburant",
+  "d": "Croisière JFK → Paris : fuite de carburant, procédure et déroutement guidés.",
+  "soon": false,
+  "acs": [
+   "a320",
+   "b777",
+   "a350",
+   "lj60",
+   "c172"
+  ]
+ },
+ "sc-s76": {
+  "n": "S-76B · Calabasas (2020)",
+  "d": "Rapport NTSB public. Prochaine étape.",
+  "soon": true
+ },
+ "sc-heli": {
+  "n": "H125 / R44 · scénarios fictifs",
+  "d": "Prochaine étape.",
+  "soon": true
+ },
+ "full-fw": {
+  "dep": "KJFK",
+  "depRw": "31L",
+  "n": "Parcours pilote complet JFK → CDG",
+  "d": "Arrivée au parking à pied, tour avion, cockpit « cold & dark », devis de masse et carburant, mise en route, roulage, décollage 31L, croisière, approche et atterrissage 08L à CDG, roulage, parking.",
+  "fw": true,
+  "full": true,
+  "dest": "LFPG",
+  "destRw": "08L",
+  "start": {
+   "rw": {
+    "lat": 40.627994,
+    "lon": -73.771781,
+    "hdg": 300.86512298027765,
+    "elev": 4
+   },
+   "lat": 40.636736,
+   "lon": -73.781497,
+   "hdg": 82.96,
+   "elev": 4,
+   "gate": "Terminal 4 38",
+   "node": 94,
+   "gi": 94
+  }
+ },
+ "full-rw": {
+  "n": "Parcours pilote complet Manhattan → JFK",
+  "d": "Arrivée à l'héliport à pied, visite pré-vol, cold & dark, devis de masse, mise en route, vol vers JFK, approche et posé sur l'aire hélicoptères, arrêt et sécurisation.",
+  "rw": true,
+  "full": true,
+  "dest": "JFKH",
+  "start": {
+   "lat": 40.7012,
+   "lon": -74.009,
+   "hdg": 200,
+   "elev": 2
+  }
+ },
+ "af-cdg-run": {
+  "fw": true,
+  "ac": "b777",
+  "n": "Air France · Paris-CDG → La Réunion",
+  "d": "777-300ER Air France. Décollage piste 26R de CDG, croisière ≈ FL350, arrivée ILS piste 14 à Roland-Garros (≈ 9 400 km, ≈ 11 h).",
+  "livery": "af",
+  "dest": "FMEE",
+  "destRw": "14",
+  "route": [
+   [
+    45.9,
+    6.1,
+    "ALPES"
+   ],
+   [
+    41.8,
+    12.25,
+    "ROMA"
+   ],
+   [
+    32.1,
+    20.27,
+    "BENGHAZI"
+   ],
+   [
+    15.59,
+    32.55,
+    "KHARTOUM"
+   ],
+   [
+    8.98,
+    38.8,
+    "ADDIS"
+   ],
+   [
+    -1.32,
+    36.93,
+    "NAIROBI"
+   ],
+   [
+    -12.8,
+    45.28,
+    "MAYOTTE"
+   ]
+  ],
+  "start": {
+   "lat": 48.998319,
+   "lon": 2.602011,
+   "hdg": 265.361758971193,
+   "elev": 110
+  },
+  "aircraft": "b777"
+ },
+ "af-run-cdg": {
+  "fw": true,
+  "ac": "b777",
+  "n": "Air France · La Réunion → Paris-CDG",
+  "d": "777-300ER Air France. Décollage piste 12 de Roland-Garros, retour de nuit vers CDG, arrivée piste 26L.",
+  "livery": "af",
+  "dest": "LFPG",
+  "destRw": "26L",
+  "route": [
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "start": {
+   "lat": -20.885992,
+   "lon": 55.504639,
+   "hdg": 102.27505752587967,
+   "elev": 20
+  },
+  "aircraft": "b777"
+ },
+ "uu-cdg-run": {
+  "fw": true,
+  "ac": "b777",
+  "n": "Air Austral · Paris-CDG → La Réunion",
+  "d": "777-300ER Air Austral (442 sièges). Décollage piste 26R de CDG, arrivée ILS piste 14 à Roland-Garros.",
+  "livery": "uu",
+  "dest": "FMEE",
+  "destRw": "14",
+  "start": {
+   "lat": 48.998319,
+   "lon": 2.602011,
+   "hdg": 265.361758971193,
+   "elev": 110
+  },
+  "aircraft": "b777"
+ },
+ "uu-run-cdg": {
+  "fw": true,
+  "ac": "b777",
+  "n": "Air Austral · La Réunion → Paris-CDG",
+  "d": "777-300ER Air Austral. Décollage piste 12 de Roland-Garros, arrivée piste 26L à CDG.",
+  "livery": "uu",
+  "dest": "LFPG",
+  "destRw": "26L",
+  "start": {
+   "lat": -20.885992,
+   "lon": 55.504639,
+   "hdg": 102.27505752587967,
+   "elev": 20
+  },
+  "aircraft": "b777"
+ },
+ "af-ory-run": {
+  "fw": true,
+  "ac": "b777",
+  "n": "Air France · Paris-Orly → La Réunion (historique)",
+  "d": "777-300ER Air France. Décollage piste 24 d'Orly, arrivée ILS piste 14 à Roland-Garros. Vol historique : Air France a transféré ses vols Réunion d'Orly vers CDG le 29 mars 2026.",
+  "livery": "af",
+  "dest": "FMEE",
+  "destRw": "14",
+  "start": {
+   "lat": 48.7355,
+   "lon": 2.3607,
+   "hdg": 241.80387170418513,
+   "elev": 89
+  },
+  "aircraft": "b777"
+ },
+ "af-run-ory": {
+  "fw": true,
+  "ac": "b777",
+  "n": "Air France · La Réunion → Paris-Orly (historique)",
+  "d": "777-300ER Air France. Décollage piste 12 de Roland-Garros, arrivée piste 25 à Orly. Vol historique : Air France a transféré ses vols Réunion d'Orly vers CDG le 29 mars 2026.",
+  "livery": "af",
+  "dest": "LFPO",
+  "destRw": "25",
+  "start": {
+   "lat": -20.885992,
+   "lon": 55.504639,
+   "hdg": 102.27505752587967,
+   "elev": 20
+  },
+  "aircraft": "b777"
+ },
+ "full-777-af": {
+  "fw": true,
+  "ac": "b777",
+  "n": "Parcours pilote complet Paris-CDG → La Réunion · Air France 777",
+  "d": "Arrivée au parking à pied, tour avion, cockpit, dossier de vol Paris–Réunion, devis de masse et carburant (≈ 93 t), mise en route, roulage réel à CDG, décollage 26R, croisière ≈ 11 h au-dessus de l'Europe et de l'Afrique, approche ILS piste 14 à Roland-Garros, roulage simplifié, parking.",
+  "livery": "af",
+  "full": true,
+  "dep": "LFPG",
+  "depRw": "26R",
+  "dest": "FMEE",
+  "destRw": "14",
+  "start": {
+   "rw": {
+    "lat": 48.995686,
+    "lon": 2.552744,
+    "hdg": 85.32457838432344,
+    "elev": 110
+   },
+   "lat": 49.00015,
+   "lon": 2.54595,
+   "hdg": 355.7,
+   "elev": 110,
+   "gate": "M",
+   "node": 136,
+   "gi": 136
+  },
+  "aircraft": "b777"
+ },
+ "full-777-uu": {
+  "fw": true,
+  "ac": "b777",
+  "n": "Parcours pilote complet Paris-CDG → La Réunion · Air Austral 777",
+  "d": "Arrivée au parking à pied, tour avion, cockpit, dossier de vol Paris–Réunion, devis de masse et carburant (≈ 93 t), mise en route, roulage réel à CDG, décollage 26R, croisière ≈ 11 h au-dessus de l'Europe et de l'Afrique, approche ILS piste 14 à Roland-Garros, roulage simplifié, parking.",
+  "livery": "uu",
+  "full": true,
+  "dep": "LFPG",
+  "depRw": "26R",
+  "dest": "FMEE",
+  "destRw": "14",
+  "start": {
+   "rw": {
+    "lat": 48.995686,
+    "lon": 2.552744,
+    "hdg": 85.32457838432344,
+    "elev": 110
+   },
+   "lat": 49.00015,
+   "lon": 2.54595,
+   "hdg": 355.7,
+   "elev": 110,
+   "gate": "M",
+   "node": 136,
+   "gi": 136
+  },
+  "aircraft": "b777"
+ },
+ "full-777-af-ret": {
+  "fw": true,
+  "ac": "b777",
+  "n": "Parcours pilote complet La Réunion → Paris-CDG · Air France 777",
+  "d": "Départ de l'aire de trafic de Roland-Garros (roulage simplifié), décollage piste 12 (3 200 m), croisière de nuit ≈ 11 h au-dessus de l'Afrique et de l'Europe, arrivée piste 26L à CDG, roulage réel vers le poste, parking.",
+  "livery": "af",
+  "full": true,
+  "dep": "FMEE",
+  "depRw": "12",
+  "dest": "LFPG",
+  "destRw": "26L",
+  "start": {
+   "lat": -20.8917,
+   "lon": 55.5195,
+   "hdg": 282,
+   "elev": 20
+  },
+  "aircraft": "b777"
+ },
+ "full-777-uu-ret": {
+  "fw": true,
+  "ac": "b777",
+  "n": "Parcours pilote complet La Réunion → Paris-CDG · Air Austral 777",
+  "d": "Départ de l'aire de trafic de Roland-Garros (roulage simplifié), décollage piste 12 (3 200 m), croisière de nuit ≈ 11 h au-dessus de l'Afrique et de l'Europe, arrivée piste 26L à CDG, roulage réel vers le poste, parking.",
+  "livery": "uu",
+  "full": true,
+  "dep": "FMEE",
+  "depRw": "12",
+  "dest": "LFPG",
+  "destRw": "26L",
+  "start": {
+   "lat": -20.8917,
+   "lon": 55.5195,
+   "hdg": 282,
+   "elev": 20
+  },
+  "aircraft": "b777"
+ },
+ "a350-cdg-run": {
+  "fw": true,
+  "ac": "a350",
+  "livery": "pt",
+  "n": "A350-900 · Paris-CDG → La Réunion",
+  "d": "Airbus A350-900 (Trent XWB-84), compagnie fictive. Décollage piste 26R de CDG, croisière ≈ FL350 à Mach 0,85, arrivée ILS piste 14 à Roland-Garros (≈ 9 400 km, ≈ 11 h).",
+  "dest": "FMEE",
+  "destRw": "14",
+  "route": [
+   [
+    45.9,
+    6.1,
+    "ALPES"
+   ],
+   [
+    41.8,
+    12.25,
+    "ROMA"
+   ],
+   [
+    32.1,
+    20.27,
+    "BENGHAZI"
+   ],
+   [
+    15.59,
+    32.55,
+    "KHARTOUM"
+   ],
+   [
+    8.98,
+    38.8,
+    "ADDIS"
+   ],
+   [
+    -1.32,
+    36.93,
+    "NAIROBI"
+   ],
+   [
+    -12.8,
+    45.28,
+    "MAYOTTE"
+   ]
+  ],
+  "start": {
+   "lat": 48.998319,
+   "lon": 2.602011,
+   "hdg": 265.361758971193,
+   "elev": 110
+  },
+  "aircraft": "a350"
+ },
+ "a350-run-cdg": {
+  "fw": true,
+  "ac": "a350",
+  "livery": "pt",
+  "n": "A350-900 · La Réunion → Paris-CDG",
+  "d": "Airbus A350-900. Décollage piste 12 de Roland-Garros, retour de nuit vers CDG, arrivée piste 26L.",
+  "dest": "LFPG",
+  "destRw": "26L",
+  "route": [
+   null,
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "start": {
+   "lat": -20.885992,
+   "lon": 55.504639,
+   "hdg": 102.27505752587967,
+   "elev": 20
+  },
+  "aircraft": "a350"
+ },
+ "a350-ory-run": {
+  "fw": true,
+  "ac": "a350",
+  "livery": "pt",
+  "n": "A350-900 · Paris-Orly → La Réunion",
+  "d": "Airbus A350-900. Décollage piste 24 d'Orly, arrivée ILS piste 14 à Roland-Garros.",
+  "dest": "FMEE",
+  "destRw": "14",
+  "start": {
+   "lat": 48.7355,
+   "lon": 2.3607,
+   "hdg": 241.80387170418513,
+   "elev": 89
+  },
+  "aircraft": "a350"
+ },
+ "a350-run-ory": {
+  "fw": true,
+  "ac": "a350",
+  "livery": "pt",
+  "n": "A350-900 · La Réunion → Paris-Orly",
+  "d": "Airbus A350-900. Décollage piste 12 de Roland-Garros, arrivée piste 25 à Orly.",
+  "dest": "LFPO",
+  "destRw": "25",
+  "start": {
+   "lat": -20.885992,
+   "lon": 55.504639,
+   "hdg": 102.27505752587967,
+   "elev": 20
+  },
+  "aircraft": "a350"
+ },
+ "full-350": {
+  "fw": true,
+  "ac": "a350",
+  "livery": "pt",
+  "n": "Parcours pilote complet Paris-CDG → La Réunion · A350-900",
+  "d": "Arrivée au parking à pied, tour avion, cockpit, dossier de vol Paris–Réunion, devis de masse et carburant, mise en route des Trent XWB, roulage réel à CDG, décollage 26R, croisière ≈ 11 h au-dessus de l'Europe et de l'Afrique, approche ILS piste 14 à Roland-Garros, roulage simplifié, parking.",
+  "full": true,
+  "dep": "LFPG",
+  "depRw": "26R",
+  "dest": "FMEE",
+  "destRw": "14",
+  "start": {
+   "rw": {
+    "lat": 48.995686,
+    "lon": 2.552744,
+    "hdg": 85.32457838432344,
+    "elev": 110
+   },
+   "lat": 49.00015,
+   "lon": 2.54595,
+   "hdg": 355.7,
+   "elev": 110,
+   "gate": "M",
+   "node": 136,
+   "gi": 136
+  },
+  "aircraft": "a350"
+ },
+ "full-350-ret": {
+  "fw": true,
+  "ac": "a350",
+  "livery": "pt",
+  "n": "Parcours pilote complet La Réunion → Paris-CDG · A350-900",
+  "d": "Départ de l'aire de trafic de Roland-Garros (roulage simplifié), décollage piste 12 (3 200 m), croisière de nuit ≈ 11 h, arrivée piste 26L à CDG, roulage réel vers le poste, parking.",
+  "full": true,
+  "dep": "FMEE",
+  "depRw": "12",
+  "dest": "LFPG",
+  "destRw": "26L",
+  "start": {
+   "lat": -20.8917,
+   "lon": 55.5195,
+   "hdg": 282,
+   "elev": 20
+  },
+  "aircraft": "a350"
+ },
+ "full-c172": {
+  "n": "Parcours PPL · Toussus : visite, mise en route, essais moteur, tour de piste",
+  "d": "Cessna 172P de l'aéroclub. Préparation, visite prévol, mise en route au primer, roulage vers le point d'arrêt 25R, essais moteur (magnétos, réchauffage carburateur), décollage, tour de piste main gauche à 1 500 ft QNH, atterrissage complet, arrêt.",
+  "fw": true,
+  "full": true,
+  "ac": "c172",
+  "dep": "LFPN",
+  "depRw": "25R",
+  "dest": "LFPN",
+  "destRw": "25R",
+  "start": {
+   "lat": 48.7542,
+   "lon": 2.1058,
+   "hdg": 160,
+   "elev": 164
+  },
+  "aircraft": "c172"
+ },
+ "c172-local": {
+  "n": "Toussus · tours de piste (en vol)",
+  "d": "Cessna 172P aligné piste 25R, moteur tournant : décollage et tour de piste main gauche.",
+  "fw": true,
+  "ac": "c172",
+  "dest": "LFPN",
+  "destRw": "25R",
+  "start": {
+   "lat": 48.7544,
+   "lon": 2.1129,
+   "hdg": 251.13488910367383,
+   "elev": 164
+  },
+  "aircraft": "c172"
+ },
+ "c172-nav": {
+  "n": "Navigation VFR · Toussus → Rambouillet → Dourdan → Toussus",
+  "d": "Cessna 172P, première navigation PPL (≈ 36 NM) : log de navigation calculé avec le vent du jour (route vraie et magnétique, dérive, cap, vitesse sol, temps, carburant), suivi des points tournants, retour et atterrissage à Toussus.",
+  "fw": true,
+  "ac": "c172",
+  "dest": "LFPN",
+  "destRw": "25R",
+  "wps": [
+   [
+    "LFPN",
+    48.7519,
+    2.1062
+   ],
+   [
+    "RAMBOUILLET",
+    48.644,
+    1.83
+   ],
+   [
+    "DOURDAN",
+    48.529,
+    2.011
+   ],
+   [
+    "LFPN",
+    48.7519,
+    2.1062
+   ]
+  ],
+  "start": {
+   "lat": 48.7544,
+   "lon": 2.1129,
+   "hdg": 251.13488910367383,
+   "elev": 164
+  },
+  "aircraft": "c172"
+ },
+ "sc-dep": {
+  "n": "Scénario fictif · dépressurisation en croisière",
+  "d": "Perte de pressurisation en altitude : masques, descente d'urgence, MAYDAY.",
+  "soon": false,
+  "acs": [
+   "a320",
+   "b777",
+   "a350",
+   "lj60"
+  ]
+ },
+ "sc-eng": {
+  "n": "Scénario fictif · panne moteur au décollage",
+  "d": "Feu ou panne moteur juste après le décollage, sur chaque appareil : procédure propre au type (feu moteur sur avion de ligne, panne au décollage sur monomoteur, autorotation sur hélicoptère).",
+  "soon": false,
+  "acs": [
+   "lj60",
+   "c172",
+   "h125",
+   "r44",
+   "s76",
+   "b777",
+   "a350",
+   "a320"
+  ]
+ },
+ "sc-elec": {
+  "n": "Scénario fictif · panne électrique",
+  "d": "Perte de génératrice(s) ou d'alternateur : reconnaître, délester, rejoindre un terrain.",
+  "soon": false,
+  "acs": [
+   "a320",
+   "b777",
+   "a350",
+   "lj60",
+   "c172",
+   "h125",
+   "r44",
+   "s76"
+  ]
+ },
+ "sc-ice": {
+  "n": "Scénario fictif · givrage",
+  "d": "Sonde Pitot non réchauffée sur avion de ligne ; givrage du carburateur sur le Cessna 172.",
+  "soon": false,
+  "acs": [
+   "a320",
+   "b777",
+   "a350",
+   "lj60",
+   "c172"
+  ]
+ }
+}

@@ -1,0 +1,489 @@
+[
+ {
+  "id": "eng1",
+  "g": "Moteurs",
+  "n": "Extinction moteur 1",
+  "l": 2,
+  "t": "ENG 1 FAIL",
+  "a": "- THR LEVER 1 .... IDLE\n- ENG MASTER 1 .... OFF\n- ATC .......... NOTIFY\n- LAND ASAP",
+  "ac": "fw2",
+  "atc": [
+   "pan",
+   "engine one failure",
+   "panne du moteur 1"
+  ]
+ },
+ {
+  "id": "eng2",
+  "g": "Moteurs",
+  "n": "Extinction moteur 2",
+  "l": 2,
+  "t": "ENG 2 FAIL",
+  "a": "- THR LEVER 2 .... IDLE\n- ENG MASTER 2 .... OFF\n- ATC .......... NOTIFY\n- LAND ASAP",
+  "ac": "fw2",
+  "atc": [
+   "pan",
+   "engine two failure",
+   "panne du moteur 2"
+  ]
+ },
+ {
+  "id": "engH",
+  "g": "Moteurs",
+  "n": "Panne moteur (autorotation)",
+  "l": 0,
+  "ac": "rw1",
+  "atc": [
+   "mayday",
+   "engine failure, autorotation",
+   "panne moteur, autorotation"
+  ]
+ },
+ {
+  "id": "engH2",
+  "g": "Moteurs",
+  "n": "Panne d'une turbine (bimoteur)",
+  "l": 0,
+  "ac": "rw2",
+  "atc": [
+   "pan",
+   "one engine inoperative",
+   "un moteur en panne"
+  ]
+ },
+ {
+  "id": "fire1",
+  "g": "Moteurs",
+  "n": "Feu moteur 1",
+  "l": 3,
+  "t": "ENG 1 FIRE",
+  "a": "- THR LEVER 1 .... IDLE\n- ENG MASTER 1 .... OFF\n- ENG 1 FIRE P/B .. PUSH\n- AGENT 1 ....... DISCH\n- ATC .......... NOTIFY",
+  "ac": "a320",
+  "atc": [
+   "mayday",
+   "engine one fire",
+   "feu moteur 1"
+  ]
+ },
+ {
+  "id": "fire2",
+  "g": "Moteurs",
+  "n": "Feu moteur 2",
+  "l": 3,
+  "t": "ENG 2 FIRE",
+  "a": "- THR LEVER 2 .... IDLE\n- ENG MASTER 2 .... OFF\n- ENG 2 FIRE P/B .. PUSH\n- AGENT 1 ....... DISCH\n- ATC .......... NOTIFY",
+  "ac": "a320",
+  "atc": [
+   "mayday",
+   "engine two fire",
+   "feu moteur 2"
+  ]
+ },
+ {
+  "id": "oil1",
+  "g": "Moteurs",
+  "n": "Basse pression d'huile moteur 1",
+  "l": 3,
+  "t": "ENG 1 OIL LO PR",
+  "a": "- THR LEVER 1 .... IDLE\n- ENG MASTER 1 .... OFF",
+  "ac": "a320",
+  "atc": [
+   "pan",
+   "engine one shut down",
+   "moteur 1 arrêté"
+  ]
+ },
+ {
+  "id": "dualEng",
+  "g": "Moteurs",
+  "n": "Double extinction (rallumage possible)",
+  "l": 3,
+  "t": "ENG DUAL FAILURE",
+  "a": "- EMER ELEC PWR .. MAN ON\n- ENG MODE SEL .... IGN\n- OPT RELIGHT SPD .. 280 KT\n- ATC .......... MAYDAY\n- ENG MASTERS .. OFF 30S/ON",
+  "ac": "a320",
+  "atc": [
+   "mayday",
+   "dual engine failure, attempting relight",
+   "double panne moteur, tentative de rallumage"
+  ]
+ },
+ {
+  "id": "apuFire",
+  "g": "Moteurs",
+  "n": "Feu APU",
+  "l": 3,
+  "t": "APU FIRE",
+  "a": "- APU FIRE P/B ... PUSH\n- AGENT ......... DISCH\n- MASTER SW ....... OFF",
+  "ac": "a320"
+ },
+ {
+  "id": "gen1",
+  "g": "Électricité",
+  "n": "Génératrice 1 en panne",
+  "l": 2,
+  "t": "ELEC GEN 1 FAULT",
+  "a": "- GEN 1 ... OFF THEN ON\n  IF UNSUCCESSFUL :\n- GEN 1 ........... OFF\n- APU (IF AVAIL) .. START",
+  "ac": "a320"
+ },
+ {
+  "id": "gen2",
+  "g": "Électricité",
+  "n": "Génératrice 2 en panne",
+  "l": 2,
+  "t": "ELEC GEN 2 FAULT",
+  "a": "- GEN 2 ... OFF THEN ON\n  IF UNSUCCESSFUL :\n- GEN 2 ........... OFF\n- APU (IF AVAIL) .. START",
+  "ac": "a320"
+ },
+ {
+  "id": "idg1",
+  "g": "Électricité",
+  "n": "IDG 1 : basse pression d'huile",
+  "l": 2,
+  "t": "ELEC IDG 1 OIL LO PR",
+  "a": "- IDG 1 .......... DISC",
+  "ac": "a320"
+ },
+ {
+  "id": "gens",
+  "g": "Électricité",
+  "n": "Perte des 2 génératrices (ELEC EMER CONFIG)",
+  "l": 0,
+  "ac": "a320",
+  "atc": [
+   "mayday",
+   "electrical emergency",
+   "urgence électrique"
+  ]
+ },
+ {
+  "id": "bat1",
+  "g": "Électricité",
+  "n": "Batterie 1 en défaut",
+  "l": 2,
+  "t": "ELEC BAT 1 FAULT",
+  "a": "- BAT 1 ........... OFF",
+  "ac": "a320"
+ },
+ {
+  "id": "hydG",
+  "g": "Hydraulique",
+  "n": "Perte du circuit vert",
+  "l": 2,
+  "t": "HYD G SYS LO PR",
+  "a": "- GREEN ENG 1 PUMP .. OFF\n- PTU ........... CHECK\n- LDG DIST PROC ...... APPLY",
+  "ac": "a320"
+ },
+ {
+  "id": "hydY",
+  "g": "Hydraulique",
+  "n": "Perte du circuit jaune",
+  "l": 2,
+  "t": "HYD Y SYS LO PR",
+  "a": "- YELLOW ENG 2 PUMP .. OFF\n- PTU ........... CHECK\n- LDG DIST PROC ...... APPLY",
+  "ac": "a320"
+ },
+ {
+  "id": "hydB",
+  "g": "Hydraulique",
+  "n": "Perte du circuit bleu",
+  "l": 2,
+  "t": "HYD B SYS LO PR",
+  "a": "- BLUE ELEC PUMP .. OFF",
+  "ac": "a320"
+ },
+ {
+  "id": "hydGY",
+  "g": "Hydraulique",
+  "n": "Perte vert + jaune (loi alternée)",
+  "l": 3,
+  "t": "HYD G+Y SYS LO PR",
+  "a": "- PTU ............. OFF\n- MAX SPEED .... 320 KT\n- L/G ...... GRVTY EXTN\n- APPR SPD ... VREF +25",
+  "ac": "a320",
+  "extra": [
+   [
+    2,
+    "F/CTL ALTN LAW (PROT LOST)",
+    "- MAX SPEED ........ 320 KT"
+   ]
+  ],
+  "atc": [
+   "mayday",
+   "hydraulic failure",
+   "panne hydraulique"
+  ]
+ },
+ {
+  "id": "bleed1",
+  "g": "Air · pressurisation",
+  "n": "Prélèvement moteur 1 en défaut",
+  "l": 2,
+  "t": "AIR ENG 1 BLEED FAULT",
+  "a": "- ENG 1 BLEED ..... OFF\n- X BLEED ........ OPEN",
+  "ac": "a320"
+ },
+ {
+  "id": "leak",
+  "g": "Air · pressurisation",
+  "n": "Fuite d'air aile gauche",
+  "l": 2,
+  "t": "AIR L WING LEAK",
+  "a": "- ENG 1 BLEED ..... OFF\n- X BLEED ........ SHUT\n- WING ANTI ICE ... OFF\n- APU BLEED ....... OFF",
+  "ac": "a320"
+ },
+ {
+  "id": "pack1",
+  "g": "Air · pressurisation",
+  "n": "Pack 1 en défaut",
+  "l": 2,
+  "t": "AIR PACK 1 FAULT",
+  "a": "- PACK 1 .......... OFF",
+  "ac": "a320"
+ },
+ {
+  "id": "pack2",
+  "g": "Air · pressurisation",
+  "n": "Pack 2 en défaut",
+  "l": 2,
+  "t": "AIR PACK 2 FAULT",
+  "a": "- PACK 2 .......... OFF",
+  "ac": "a320"
+ },
+ {
+  "id": "depress",
+  "g": "Air · pressurisation",
+  "n": "Dépressurisation rapide",
+  "l": 2,
+  "t": "CAB PR SYS 1+2 FAULT",
+  "a": "- MODE SEL ........ MAN\n- MAN V/S CTL .. FULL DN",
+  "ac": "a320",
+  "atc": [
+   "mayday",
+   "rapid depressurisation, emergency descent",
+   "dépressurisation rapide, descente d'urgence"
+  ]
+ },
+ {
+  "id": "fuelLeak",
+  "g": "Carburant",
+  "n": "Fuite de carburant (≈ 3 t/h)",
+  "l": 2,
+  "t": "FUEL F.USED/FOB DISAGREE",
+  "a": "- FUEL LEAK PROC .. APPLY\n- FUEL X FEED .. CHECK SHUT",
+  "ac": "fw",
+  "atc": [
+   "pan",
+   "fuel leak",
+   "fuite de carburant"
+  ]
+ },
+ {
+  "id": "fpL",
+  "g": "Carburant",
+  "n": "Pompes réservoir gauche (1+2)",
+  "l": 2,
+  "t": "FUEL L TK PUMP 1+2 LO PR",
+  "a": "- FUEL X FEED ...... ON\n- FUEL IMBALANCE ... MONITOR",
+  "ac": "a320"
+ },
+ {
+  "id": "elac1",
+  "g": "Commandes · navigation",
+  "n": "ELAC 1 en défaut",
+  "l": 2,
+  "t": "F/CTL ELAC 1 FAULT",
+  "a": "- ELAC 1 .. OFF THEN ON\n  IF UNSUCCESSFUL :\n- ELAC 1 .......... OFF",
+  "ac": "a320"
+ },
+ {
+  "id": "adr1",
+  "g": "Commandes · navigation",
+  "n": "ADR 1 en défaut (drapeaux PFD 1)",
+  "l": 2,
+  "t": "NAV ADR 1 FAULT",
+  "a": "- AIR DATA SWTG .. CAPT 3\n- ADR 1 P/B ....... OFF",
+  "ac": "a320"
+ },
+ {
+  "id": "ir1",
+  "g": "Commandes · navigation",
+  "n": "IR 1 en défaut (drapeaux PFD/ND 1)",
+  "l": 2,
+  "t": "NAV IR 1 FAULT",
+  "a": "- ATT HDG SWTG .. CAPT 3\n- IR 1 MODE ....... ATT",
+  "ac": "a320"
+ },
+ {
+  "id": "pitot",
+  "g": "Commandes · navigation",
+  "n": "Réchauffage sonde Pitot CDB",
+  "l": 2,
+  "t": "ANTI ICE CAPT PITOT",
+  "a": "- AIR DATA SWTG .. CAPT 3 (IF ICING)",
+  "ac": "a320"
+ },
+ {
+  "id": "apOff",
+  "g": "Commandes · navigation",
+  "n": "Déconnexion du pilote automatique",
+  "l": 3,
+  "t": "AUTO FLT AP OFF",
+  "a": "- AP .. RE-ENGAGE / FLY MANUAL",
+  "ac": "fw"
+ },
+ {
+  "id": "tcas",
+  "g": "Commandes · navigation",
+  "n": "TCAS en panne",
+  "l": 2,
+  "t": "NAV TCAS FAULT",
+  "a": "",
+  "ac": "a320"
+ },
+ {
+  "id": "wx",
+  "g": "Commandes · navigation",
+  "n": "Radar météo en panne (ND)",
+  "l": 0,
+  "ac": "a320"
+ },
+ {
+  "id": "cargoSmk",
+  "g": "Feu · fumée",
+  "n": "Fumée soute avant",
+  "l": 3,
+  "t": "SMOKE FWD CARGO SMOKE",
+  "a": "- CARGO AGENT ... DISCH\n- ATC .......... NOTIFY\n- LAND ASAP",
+  "ac": "a320",
+  "atc": [
+   "mayday",
+   "cargo smoke",
+   "fumée en soute"
+  ]
+ },
+ {
+  "id": "avioSmk",
+  "g": "Feu · fumée",
+  "n": "Fumée avionique",
+  "l": 3,
+  "t": "AVIONICS SMOKE",
+  "a": "- CREW OXY MASKS .. USE\n- BLOWER ......... OVRD\n- EXTRACT ........ OVRD\n- ATC .......... NOTIFY\n- LAND ASAP",
+  "ac": "a320",
+  "atc": [
+   "mayday",
+   "avionics smoke",
+   "fumée avionique"
+  ]
+ },
+ {
+  "id": "lavSmk",
+  "g": "Feu · fumée",
+  "n": "Fumée toilettes",
+  "l": 2,
+  "t": "SMOKE LAVATORY SMOKE",
+  "a": "- CAB CREW ..... ADVISE",
+  "ac": "a320"
+ },
+ {
+  "id": "gear",
+  "g": "Train · freins",
+  "n": "Train non verrouillé bas",
+  "l": 3,
+  "t": "L/G GEAR NOT DOWNLOCKED",
+  "a": "- L/G LEVER .. UP THEN DOWN\n  IF UNSUCCESSFUL :\n- GRAVITY EXTN .. TURN 3 TIMES",
+  "ac": "a320"
+ },
+ {
+  "id": "brk",
+  "g": "Train · freins",
+  "n": "Frein n° 3 grippé (échauffement anormal)",
+  "l": 0,
+  "ac": "a320"
+ },
+ {
+  "id": "genGA0",
+  "g": "Électricité",
+  "n": "Panne génératrice / alternateur 1",
+  "l": 0,
+  "ac": "ga"
+ },
+ {
+  "id": "genGA1",
+  "g": "Électricité",
+  "n": "Panne génératrice 2",
+  "l": 0,
+  "ac": "ga2"
+ },
+ {
+  "id": "door",
+  "g": "Train · freins",
+  "n": "Porte de soute avant non verrouillée",
+  "l": 2,
+  "t": "DOOR FWD CARGO",
+  "a": "- CAB DIFF PR ... CHECK\n- MAX FL .. 100 (IF ABNORMAL)",
+  "ac": "a320"
+ },
+ {
+  "id": "birds",
+  "g": "Moteurs",
+  "n": "Ingestion d'oiseaux dans les deux moteurs",
+  "l": 3,
+  "t": "ENG DUAL FAILURE",
+  "a": "- EMER ELEC PWR .. MAN ON\n- APU ........... START\n- ATC .......... MAYDAY\n- OPT SPEED ....... GREEN DOT\n- DITCHING ........ IF REQUIRED",
+  "ac": "a320",
+  "atc": [
+   "mayday",
+   "hit birds, lost thrust in both engines",
+   "impact d'oiseaux, perte de poussée des deux moteurs"
+  ]
+ },
+ {
+  "id": "engC",
+  "g": "Moteurs",
+  "n": "Panne moteur (monomoteur à pistons)",
+  "l": 0,
+  "ac": "c172",
+  "atc": [
+   "mayday",
+   "engine failure, forced landing",
+   "panne moteur, atterrissage forcé"
+  ]
+ },
+ {
+  "id": "carbIce",
+  "g": "Moteurs",
+  "n": "Givrage du carburateur",
+  "l": 0,
+  "ac": "c172",
+  "atc": [
+   "pan",
+   "rough running engine",
+   "moteur qui tourne mal"
+  ]
+ },
+ {
+  "id": "ljDep",
+  "g": "Air · pressurisation",
+  "n": "Dépressurisation (Learjet 60)",
+  "l": 2,
+  "t": "CABIN ALTITUDE",
+  "ac": "lj60",
+  "atc": [
+   "mayday",
+   "rapid depressurisation, emergency descent",
+   "dépressurisation rapide, descente d'urgence"
+  ]
+ },
+ {
+  "id": "ljFire",
+  "g": "Moteurs",
+  "n": "Feu moteur gauche (Learjet 60)",
+  "l": 3,
+  "t": "L ENG FIRE",
+  "ac": "lj60",
+  "atc": [
+   "mayday",
+   "left engine fire",
+   "feu moteur gauche"
+  ]
+ }
+]

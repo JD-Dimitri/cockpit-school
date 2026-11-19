@@ -1,0 +1,46 @@
+{
+    "name": "jd-dimitri/plane-simulator-backend",
+    "description": "PLANE TRAJECTORIES Pro — API Symfony (données, comptes, PDF)",
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.2",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "symfony/console": "7.4.*",
+        "symfony/dotenv": "7.4.*",
+        "symfony/flex": "^2",
+        "symfony/framework-bundle": "7.4.*",
+        "symfony/runtime": "7.4.*",
+        "symfony/yaml": "7.4.*"
+    },
+    "require-dev": {
+        "symfony/browser-kit": "7.4.*",
+        "symfony/phpunit-bridge": "7.4.*",
+        "phpunit/phpunit": "^11.5"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": { "App\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "App\\Tests\\": "tests/" }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "7.4.*"
+        }
+    }
+}

@@ -1,0 +1,138 @@
+{
+ "a320": [
+  [
+   "EASA — TCDS A.064 (A318/A319/A320/A321) : masses et limites certifiées",
+   "https://www.easa.europa.eu/en/downloads/16507/en"
+  ],
+  [
+   "FAA — Airplane Flying Handbook FAA-H-8083-3C (tour avion, check-lists, phases de vol)",
+   "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/airplane_handbook"
+  ],
+  [
+   "EASA — masses standard passagers (AMC1 CAT.POL.MAB.100), revue 2022",
+   "https://www.easa.europa.eu/en/newsroom-and-events/news/easa-review-standard-passenger-weights-2022-shows-no-significant-change"
+  ],
+  [
+   "Airbus FCOM / QRH : documents opérateur non publics — séquence des procédures normales reformulée, valeurs [ESTIMÉ]",
+   null
+  ]
+ ],
+ "lj60": [
+  [
+   "FAA — Type Certificate Data Sheet A10CE (Learjet 60)",
+   "https://drs.faa.gov/browse/TCDSModel/doctypeDetails"
+  ],
+  [
+   "FAA — Airplane Flying Handbook FAA-H-8083-3C",
+   "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/airplane_handbook"
+  ],
+  [
+   "FAA — Weight & Balance Handbook FAA-H-8083-1B",
+   "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/weight_balance_handbook"
+  ],
+  [
+   "Learjet 60 AFM : non public — check-list reformulée, valeurs [ESTIMÉ]",
+   null
+  ]
+ ],
+ "s76": [
+  [
+   "FAA — Type Certificate Data Sheet H1NE (Sikorsky S-76)",
+   "https://drs.faa.gov/browse/TCDSModel/doctypeDetails"
+  ],
+  [
+   "FAA — Helicopter Flying Handbook FAA-H-8083-21B",
+   "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/helicopter_flying_handbook"
+  ],
+  [
+   "S-76B RFM : non public — séquence reformulée [ESTIMÉ]",
+   null
+  ]
+ ],
+ "h125": [
+  [
+   "EASA — TCDS R.008 (AS350 / H125)",
+   "https://www.easa.europa.eu/en/document-library/type-certificates"
+  ],
+  [
+   "FAA — Helicopter Flying Handbook FAA-H-8083-21B",
+   "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/helicopter_flying_handbook"
+  ],
+  [
+   "H125 Flight Manual : non public — séquence reformulée [ESTIMÉ]",
+   null
+  ]
+ ],
+ "r44": [
+  [
+   "Robinson — R44 II Pilot's Operating Handbook, section 4 « Normal Procedures » (public)",
+   "https://robinsonheli.com/wp-content/uploads/2022/01/r44ii_poh_4.pdf"
+  ],
+  [
+   "Robinson — R44 II Preflight Check (public)",
+   "https://robinsonheli.com/wp-content/uploads/2022/05/r44-ii-preflight-check.pdf"
+  ],
+  [
+   "FAA — Helicopter Flying Handbook FAA-H-8083-21B",
+   "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/helicopter_flying_handbook"
+  ]
+ ],
+ "b777": [
+  [
+   "FAA — Type Certificate Data Sheet T00001SE (Boeing 777) : masses et limites certifiées",
+   "https://drs.faa.gov/browse/TCDSModel/doctypeDetails"
+  ],
+  [
+   "Boeing — 777 Airplane Characteristics for Airport Planning (dimensions, masses)",
+   "https://www.boeing.com/commercial/airports/plan_manuals"
+  ],
+  [
+   "FAA — Airplane Flying Handbook FAA-H-8083-3C (tour avion, check-lists, phases de vol)",
+   "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/airplane_handbook"
+  ],
+  [
+   "Boeing FCOM / QRH 777 : documents opérateur non publics — séquence reformulée, valeurs [ESTIMÉ]",
+   null
+  ]
+ ],
+ "a350": [
+  [
+   "Airbus — A350 Family Facts & Figures (sept. 2022) : masses, dimensions, carburant, motorisation",
+   "https://www.airbus.com/sites/g/files/jlcbta136/files/2022-09/airbus-a350-family-facts-and-figures_sept-2022.pdf"
+  ],
+  [
+   "EASA — TCDS E.111 Rolls-Royce Trent XWB, issue 12 : poussées, régimes, températures limites",
+   "https://www.easa.europa.eu/sites/default/files/dfu/EASA%20E111%20TCDS%20issue%2012_Trent%20XWB.pdf"
+  ],
+  [
+   "FAA — Airplane Flying Handbook FAA-H-8083-3C (tour avion, check-lists, phases de vol)",
+   "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/airplane_handbook"
+  ],
+  [
+   "Airbus FCOM / QRH A350 : documents opérateur non publics — séquence reformulée, valeurs [ESTIMÉ]",
+   null
+  ]
+ ],
+ "c172": [
+  [
+   "FAA — Type Certificate Data Sheet 3A12 (Cessna 172) : masses et limites certifiées",
+   "https://drs.faa.gov/browse/TCDSModel/doctypeDetails"
+  ],
+  [
+   "FAA — Airplane Flying Handbook FAA-H-8083-3C (visite prévol, essais moteur, tour de piste)",
+   "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/airplane_handbook"
+  ],
+  [
+   "FAA — Pilot's Handbook of Aeronautical Knowledge FAA-H-8083-25C (moteur à pistons, givrage carburateur, instruments)",
+   "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/phak"
+  ],
+  [
+   "SIA — eAIP France, AD 2 LFPN (Toussus-le-Noble) et carte VAC",
+   "https://www.sia.aviation-civile.gouv.fr/"
+  ],
+  [
+   "Manuel de vol Cessna 172P (POH/AFM) : document de l'avion, non public — valeurs arrondies [ESTIMÉ]",
+   null
+  ]
+ ]
+}

@@ -1,0 +1,399 @@
+{
+ "a320": {
+  "kind": "fw",
+  "name": "Airbus A320-200",
+  "sub": "Biréacteur de ligne · commandes électriques (loi normale) · ECAM",
+  "law": "fbw",
+  "cockpit": "a320",
+  "m": 66000,
+  "S": 122.6,
+  "Tmax": 240000,
+  "CD0": 0.023,
+  "k": 0.043,
+  "CL0": 0.22,
+  "CLa": 5.4,
+  "CLmax": 1.45,
+  "gearCD": 0.018,
+  "Vr": 145,
+  "V2": 150,
+  "Vmo": 350,
+  "Mmo": 0.82,
+  "ceil": 39800,
+  "range": 6100,
+  "flaps": [
+   {
+    "n": "0",
+    "a": 0,
+    "b": 0,
+    "c": 0
+   },
+   {
+    "n": "1",
+    "a": 0.12,
+    "b": 0.3,
+    "c": 0.006
+   },
+   {
+    "n": "2",
+    "a": 0.24,
+    "b": 0.55,
+    "c": 0.013
+   },
+   {
+    "n": "3",
+    "a": 0.34,
+    "b": 1.05,
+    "c": 0.02
+   },
+   {
+    "n": "FULL",
+    "a": 0.52,
+    "b": 1.35,
+    "c": 0.045
+   }
+  ],
+  "eye": [
+   -0.55,
+   5.3,
+   -15.6
+  ],
+  "yOff": 4.1,
+  "ap": "fcu",
+  "ext": {
+   "len": 37.6,
+   "span": 35.8
+  }
+ },
+ "lj60": {
+  "kind": "fw",
+  "name": "Learjet 60",
+  "sub": "Biréacteur d'affaires · EFIS Collins Pro Line 4 · commandes classiques",
+  "law": "conv",
+  "cockpit": "lj60",
+  "m": 9000,
+  "S": 24.57,
+  "Tmax": 41000,
+  "CD0": 0.021,
+  "k": 0.05,
+  "CL0": 0.18,
+  "CLa": 5.6,
+  "CLmax": 1.3,
+  "gearCD": 0.02,
+  "Vr": 130,
+  "V2": 138,
+  "Vmo": 350,
+  "Mmo": 0.81,
+  "ceil": 51000,
+  "range": 4400,
+  "flaps": [
+   {
+    "n": "0",
+    "a": 0,
+    "b": 0,
+    "c": 0
+   },
+   {
+    "n": "8",
+    "a": 0.12,
+    "b": 0.3,
+    "c": 0.008
+   },
+   {
+    "n": "20",
+    "a": 0.25,
+    "b": 0.6,
+    "c": 0.018
+   },
+   {
+    "n": "40",
+    "a": 0.45,
+    "b": 0.95,
+    "c": 0.05
+   }
+  ],
+  "eye": [
+   -0.35,
+   2.3,
+   -6.9
+  ],
+  "yOff": 1.9,
+  "ap": "fgc",
+  "ext": {
+   "len": 17.9,
+   "span": 13.3
+  }
+ },
+ "s76": {
+  "kind": "rw",
+  "name": "Sikorsky S-76B",
+  "sub": "Hélicoptère biturbine · AFCS (maintien d'assiette / altitude)",
+  "cockpit": "s76",
+  "m": 5300,
+  "tw": 1.38,
+  "CdA": 2.6,
+  "Vne": 155,
+  "twin": true,
+  "afcs": true,
+  "eye": [
+   0.45,
+   2,
+   -3.4
+  ],
+  "yOff": 2.3,
+  "ext": {
+   "len": 16,
+   "rotor": 13.4
+  }
+ },
+ "h125": {
+  "kind": "rw",
+  "name": "Airbus H125 (AS350 B3)",
+  "sub": "Hélicoptère monoturbine · VEMD · pas de pilote automatique",
+  "cockpit": "h125",
+  "m": 2250,
+  "tw": 1.4,
+  "CdA": 1.8,
+  "Vne": 155,
+  "twin": false,
+  "afcs": false,
+  "eye": [
+   0.38,
+   1.75,
+   -2.3
+  ],
+  "yOff": 1.75,
+  "ext": {
+   "len": 12.9,
+   "rotor": 10.7
+  }
+ },
+ "r44": {
+  "kind": "rw",
+  "name": "Robinson R44 Raven II",
+  "sub": "Hélicoptère léger à pistons · instruments classiques",
+  "cockpit": "r44",
+  "m": 1100,
+  "tw": 1.3,
+  "CdA": 1.2,
+  "Vne": 130,
+  "twin": false,
+  "afcs": false,
+  "eye": [
+   0.3,
+   1.55,
+   -1.7
+  ],
+  "yOff": 1.6,
+  "ext": {
+   "len": 11.7,
+   "rotor": 10.1
+  }
+ },
+ "b777": {
+  "kind": "fw",
+  "name": "Boeing 777-300ER",
+  "sub": "Biréacteur long-courrier · Air France / Air Austral · Paris ↔ La Réunion",
+  "law": "fbw",
+  "cockpit": "a320",
+  "m": 240000,
+  "S": 436.8,
+  "Tmax": 1026000,
+  "CD0": 0.02,
+  "k": 0.045,
+  "CL0": 0.25,
+  "CLa": 5.6,
+  "CLmax": 1.5,
+  "gearCD": 0.016,
+  "Vr": 165,
+  "V2": 172,
+  "Vmo": 330,
+  "Mmo": 0.89,
+  "ceil": 43100,
+  "range": 13650,
+  "ffK": 2.6,
+  "flaps": [
+   {
+    "n": "0",
+    "a": 0,
+    "b": 0,
+    "c": 0
+   },
+   {
+    "n": "1",
+    "a": 0.1,
+    "b": 0.25,
+    "c": 0.004
+   },
+   {
+    "n": "5",
+    "a": 0.2,
+    "b": 0.45,
+    "c": 0.008
+   },
+   {
+    "n": "15",
+    "a": 0.3,
+    "b": 0.6,
+    "c": 0.013
+   },
+   {
+    "n": "20",
+    "a": 0.38,
+    "b": 0.68,
+    "c": 0.02
+   },
+   {
+    "n": "25",
+    "a": 0.46,
+    "b": 0.75,
+    "c": 0.03
+   },
+   {
+    "n": "30",
+    "a": 0.55,
+    "b": 0.82,
+    "c": 0.042
+   }
+  ],
+  "eye": [
+   -0.55,
+   7,
+   -32.3
+  ],
+  "yOff": 5.3,
+  "ap": "fcu",
+  "ext": {
+   "len": 73.9,
+   "span": 64.8
+  }
+ },
+ "a350": {
+  "kind": "fw",
+  "name": "Airbus A350-900",
+  "sub": "Biréacteur long-courrier · Rolls-Royce Trent XWB-84 · Paris ↔ La Réunion",
+  "law": "fbw",
+  "cockpit": "a320",
+  "m": 230000,
+  "S": 443,
+  "Tmax": 749000,
+  "CD0": 0.0185,
+  "k": 0.043,
+  "CL0": 0.25,
+  "CLa": 5.7,
+  "CLmax": 1.55,
+  "gearCD": 0.015,
+  "Vr": 150,
+  "V2": 158,
+  "Vmo": 340,
+  "Mmo": 0.89,
+  "ceil": 43100,
+  "range": 15000,
+  "ffK": 2.2,
+  "flaps": [
+   {
+    "n": "0",
+    "a": 0,
+    "b": 0,
+    "c": 0
+   },
+   {
+    "n": "1",
+    "a": 0.12,
+    "b": 0.3,
+    "c": 0.006
+   },
+   {
+    "n": "2",
+    "a": 0.24,
+    "b": 0.55,
+    "c": 0.013
+   },
+   {
+    "n": "3",
+    "a": 0.34,
+    "b": 1.05,
+    "c": 0.02
+   },
+   {
+    "n": "FULL",
+    "a": 0.52,
+    "b": 1.35,
+    "c": 0.045
+   }
+  ],
+  "eye": [
+   -0.55,
+   6.45,
+   -30.1
+  ],
+  "yOff": 4.9,
+  "ap": "fcu",
+  "ext": {
+   "len": 66.8,
+   "span": 64.75
+  }
+ },
+ "c172": {
+  "kind": "fw",
+  "name": "Cessna 172P Skyhawk",
+  "sub": "Avion école monomoteur à pistons · instruments classiques · formation PPL à Toussus",
+  "law": "conv",
+  "cockpit": "c172",
+  "single": true,
+  "prop": 95,
+  "fixedGear": true,
+  "sep": true,
+  "m": 1000,
+  "S": 16.2,
+  "Tmax": 3000,
+  "CD0": 0.031,
+  "k": 0.054,
+  "CL0": 0.3,
+  "CLa": 5,
+  "CLmax": 1.6,
+  "gearCD": 0,
+  "Vr": 55,
+  "V2": 62,
+  "Vmo": 158,
+  "Mmo": 0.5,
+  "ceil": 13000,
+  "range": 1100,
+  "flaps": [
+   {
+    "n": "0",
+    "a": 0,
+    "b": 0,
+    "c": 0
+   },
+   {
+    "n": "10",
+    "a": 0.1,
+    "b": 0.2,
+    "c": 0.006
+   },
+   {
+    "n": "20",
+    "a": 0.2,
+    "b": 0.36,
+    "c": 0.016
+   },
+   {
+    "n": "30",
+    "a": 0.28,
+    "b": 0.5,
+    "c": 0.028
+   }
+  ],
+  "eye": [
+   -0.3,
+   1.75,
+   -0.6
+  ],
+  "yOff": 1.2,
+  "ap": "kap140",
+  "ext": {
+   "len": 8.2,
+   "span": 11
+  }
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "JFK_ATIS": {
+  "n": "Kennedy ATIS",
+  "f": 128.725,
+  "atis": "KJFK",
+  "ref": "AirNav"
+ },
+ "JFK_DEL": {
+  "n": "Kennedy Clearance",
+  "f": 135.05,
+  "ref": "AirNav"
+ },
+ "JFK_GND": {
+  "n": "Kennedy Ground",
+  "f": 121.9,
+  "ref": "AirNav"
+ },
+ "JFK_TWR": {
+  "n": "Kennedy Tower",
+  "f": 123.9,
+  "ref": "AirNav : pistes 04L/22R et 13R/31L"
+ },
+ "JFK_TWR2": {
+  "n": "Kennedy Tower",
+  "f": 119.1,
+  "ref": "AirNav : pistes 04R/22L et 13L/31R"
+ },
+ "NY_DEP": {
+  "n": "New York Departure",
+  "f": 135.9,
+  "ref": "AirNav"
+ },
+ "NY_APP": {
+  "n": "Kennedy Approach",
+  "f": 132.4,
+  "ref": "AirNav (New York Approach)"
+ },
+ "ZNY": {
+  "n": "New York Center",
+  "f": 125.325,
+  "est": 1
+ },
+ "CZQX": {
+  "n": "Gander Oceanic",
+  "f": 0,
+  "dl": 1
+ },
+ "EGGX": {
+  "n": "Shanwick Oceanic",
+  "f": 0,
+  "dl": 1
+ },
+ "BREST": {
+  "n": "Brest Control",
+  "f": 132.865,
+  "est": 1
+ },
+ "PARIS": {
+  "n": "Paris Control",
+  "f": 128.105,
+  "est": 1
+ },
+ "CDG_ATIS": {
+  "n": "De Gaulle ATIS",
+  "f": 127.13,
+  "atis": "LFPG",
+  "ref": "AIP (anglais)"
+ },
+ "CDG_DEL": {
+  "n": "De Gaulle Delivery",
+  "f": 121.84,
+  "ref": "AIP (PRÉVOL)"
+ },
+ "CDG_GND": {
+  "n": "De Gaulle Ground",
+  "f": 121.61,
+  "ref": "AIP (SOL, une des 4 fréquences)"
+ },
+ "CDG_TWR": {
+  "n": "De Gaulle Tower",
+  "f": 120.9,
+  "ref": "AIP : pistes 08/26"
+ },
+ "CDG_TWR2": {
+  "n": "De Gaulle Tower",
+  "f": 119.25,
+  "ref": "AIP : pistes 09/27"
+ },
+ "CDG_DEP": {
+  "n": "De Gaulle Departure",
+  "f": 124.355,
+  "ref": "AIP"
+ },
+ "CDG_APP": {
+  "n": "De Gaulle Approach",
+  "f": 119.85,
+  "ref": "AIP"
+ },
+ "ORY_ATIS": {
+  "n": "Orly ATIS",
+  "f": 131.355,
+  "atis": "LFPO",
+  "ref": "SIA AD 2 LFPO COM (anglais)"
+ },
+ "ORY_DEL": {
+  "n": "Orly Delivery",
+  "f": 121.555,
+  "ref": "SIA (Prévol)"
+ },
+ "ORY_GND": {
+  "n": "Orly Ground",
+  "f": 121.705,
+  "ref": "SIA (Sol)"
+ },
+ "ORY_TWR": {
+  "n": "Orly Tower",
+  "f": 118.7,
+  "ref": "SIA (Tour)"
+ },
+ "ORY_DEP": {
+  "n": "Orly Departure",
+  "f": 127.75,
+  "ref": "SIA"
+ },
+ "ORY_APP": {
+  "n": "Orly Approach",
+  "f": 123.875,
+  "ref": "SIA"
+ },
+ "RUN_ATIS": {
+  "n": "Gillot ATIS",
+  "f": 126.8,
+  "atis": "FMEE",
+  "est": 1
+ },
+ "RUN_GND": {
+  "n": "Gillot Ground",
+  "f": 121.9,
+  "ref": "SIA / IVAO FMEE"
+ },
+ "RUN_TWR": {
+  "n": "Gillot Tower",
+  "f": 118.4,
+  "ref": "SIA / IVAO FMEE"
+ },
+ "RUN_APP": {
+  "n": "Gillot Approach",
+  "f": 119.4,
+  "est": 1
+ },
+ "MRS": {
+  "n": "Marseille Control",
+  "f": 132.29,
+  "est": 1
+ },
+ "ROMA": {
+  "n": "Roma Control",
+  "f": 132.905,
+  "est": 1
+ },
+ "HLLL": {
+  "n": "Tripoli Control",
+  "f": 0,
+  "dl": 1
+ },
+ "HSSS": {
+  "n": "Khartoum Control",
+  "f": 0,
+  "dl": 1
+ },
+ "HAAA": {
+  "n": "Addis Ababa Control",
+  "f": 0,
+  "dl": 1
+ },
+ "HKNA": {
+  "n": "Nairobi Control",
+  "f": 0,
+  "dl": 1
+ },
+ "FMMM": {
+  "n": "Antananarivo Control",
+  "f": 0,
+  "dl": 1
+ },
+ "JRB": {
+  "n": "Downtown Traffic",
+  "f": 123.075,
+  "ctaf": 1,
+  "est": 1
+ },
+ "LGA_TWR": {
+  "n": "LaGuardia Tower",
+  "f": 118.7,
+  "ref": "AirNav (actuelle)"
+ },
+ "LGA_DEP": {
+  "n": "New York Departure",
+  "f": 120.4,
+  "ref": "AirNav (LaGuardia DP, actuelle)"
+ },
+ "TNF_ATIS": {
+  "n": "Toussus ATIS",
+  "f": 127.475,
+  "ref": "SIA"
+ },
+ "TNF_GND": {
+  "n": "Toussus Sol",
+  "f": 121.85,
+  "ref": "SIA"
+ },
+ "TNF_TWR": {
+  "n": "Toussus Tour",
+  "f": 119.3,
+  "ref": "SIA"
+ }
+}

@@ -1,0 +1,70 @@
+{
+ "KJFK": {
+  "d": {
+   "del": "JFK_DEL",
+   "gnd": "JFK_GND",
+   "twr": "JFK_TWR",
+   "dp": "NY_DEP",
+   "ctr": "ZNY",
+   "atis": "JFK_ATIS"
+  },
+  "a": {
+   "gnd": "JFK_GND",
+   "twr": "JFK_TWR",
+   "app": "NY_APP",
+   "ctr": "ZNY",
+   "atis": "JFK_ATIS"
+  }
+ },
+ "LFPG": {
+  "d": {
+   "del": "CDG_DEL",
+   "gnd": "CDG_GND",
+   "twr": "CDG_TWR2",
+   "dp": "CDG_DEP",
+   "ctr": "PARIS",
+   "atis": "CDG_ATIS"
+  },
+  "a": {
+   "gnd": "CDG_GND",
+   "twr": "CDG_TWR",
+   "app": "CDG_APP",
+   "ctr": "PARIS",
+   "atis": "CDG_ATIS"
+  }
+ },
+ "LFPO": {
+  "d": {
+   "del": "ORY_DEL",
+   "gnd": "ORY_GND",
+   "twr": "ORY_TWR",
+   "dp": "ORY_DEP",
+   "ctr": "PARIS",
+   "atis": "ORY_ATIS"
+  },
+  "a": {
+   "gnd": "ORY_GND",
+   "twr": "ORY_TWR",
+   "app": "ORY_APP",
+   "ctr": "PARIS",
+   "atis": "ORY_ATIS"
+  }
+ },
+ "FMEE": {
+  "d": {
+   "del": "RUN_GND",
+   "gnd": "RUN_GND",
+   "twr": "RUN_TWR",
+   "dp": "RUN_APP",
+   "ctr": "FMMM",
+   "atis": "RUN_ATIS"
+  },
+  "a": {
+   "gnd": "RUN_GND",
+   "twr": "RUN_TWR",
+   "app": "RUN_APP",
+   "ctr": "RUN_APP",
+   "atis": "RUN_ATIS"
+  }
+ }
+}

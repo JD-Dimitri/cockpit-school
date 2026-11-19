@@ -1,0 +1,792 @@
+{
+ "IR": [
+  "Inertial Reference — centrale inertielle. Gyroscopes et accéléromètres qui calculent en permanence la position, le cap et l'assiette de l'avion, sans aide extérieure. Il faut l'aligner avion immobile avant le vol.",
+  "pfd",
+  "inertielles|ADIRS"
+ ],
+ "ADIRS": [
+  "Air Data Inertial Reference System — l'ensemble qui réunit les centrales inertielles (IR) et les calculateurs anémobarométriques (vitesse, altitude). Trois exemplaires sur l'A320.",
+  "pfd",
+  "inertielles|IR"
+ ],
+ "AHRS": [
+  "Attitude and Heading Reference System — centrale de cap et d'attitude, version simplifiée de la centrale inertielle (avions d'affaires, hélicoptères).",
+  "pfd",
+  "AHRS|inertielles"
+ ],
+ "APU": [
+  "Auxiliary Power Unit — petit réacteur placé dans la queue. Au sol, il fournit l'électricité et l'air comprimé (climatisation, démarrage des moteurs) sans faire tourner les moteurs principaux.",
+  "sd",
+  "APU"
+ ],
+ "AVAIL": [
+  "Available — « disponible ». Exemple : APU AVAIL = l'APU tourne et peut fournir électricité et air.",
+  "sd",
+  "APU"
+ ],
+ "BLEED": [
+  "Prélèvement d'air comprimé sur un moteur ou l'APU, pour la climatisation, le dégivrage et le démarrage des moteurs.",
+  "sd",
+  "BLEED|APU"
+ ],
+ "BAT": [
+  "Batterie. Premier interrupteur de la mise sous tension : elle alimente les équipements essentiels avant le groupe de parc ou l'APU.",
+  "sd",
+  "batteries|BAT"
+ ],
+ "BATT": [
+  "Batterie (abréviation Boeing / Learjet).",
+  "sd",
+  "batteries|BAT"
+ ],
+ "GEN": [
+  "Generator — alternateur entraîné par un moteur ou l'APU, qui produit l'électricité en vol.",
+  "sd",
+  "GEN|électrique"
+ ],
+ "ELEC": [
+  "Électricité : page ou panneau du circuit électrique (batteries, alternateurs, barres).",
+  "sd",
+  "électrique|ELEC"
+ ],
+ "EXT": [
+  "External — extérieur. EXT PWR : groupe électrique de parc branché au sol ; EXT LT : feux extérieurs.",
+  "sd",
+  "EXT"
+ ],
+ "ENG": [
+  "Engine — moteur. ENG MASTER : interrupteur qui ouvre le carburant et lance la séquence de démarrage.",
+  "ewd",
+  "Démarrage|ENG"
+ ],
+ "MASTER": [
+  "Interrupteur principal. ENG MASTER : carburant et allumage du moteur ; MASTER CAUTION / WARNING : voyants d'alarme.",
+  "ewd",
+  "Démarrage|MASTER"
+ ],
+ "IGN": [
+  "Ignition — allumage. Position du sélecteur de mode moteur utilisée pour le démarrage.",
+  "ewd",
+  "Démarrage|IGN"
+ ],
+ "START": [
+  "Démarrage (moteur ou APU).",
+  "ewd",
+  "Démarrage|START"
+ ],
+ "IDLE": [
+  "Ralenti : la poussée minimale des moteurs.",
+  "ewd",
+  "IDLE|ralenti"
+ ],
+ "N1": [
+  "Vitesse de rotation de la soufflante (le gros ventilateur avant) d'un réacteur, en % : c'est le principal indicateur de poussée.",
+  "ewd",
+  "N1|Démarrage"
+ ],
+ "N2": [
+  "Vitesse de rotation du compresseur haute pression d'un réacteur, en % : on la surveille au démarrage.",
+  "ewd",
+  "N2|Démarrage"
+ ],
+ "EGT": [
+  "Exhaust Gas Temperature — température des gaz en sortie de turbine. Elle ne doit pas dépasser sa limite, surtout au démarrage.",
+  "ewd",
+  "EGT|Démarrage"
+ ],
+ "ITT": [
+  "Inter-Turbine Temperature — température entre les turbines (turbines à gaz d'hélicoptères et d'avions d'affaires).",
+  "ewd",
+  "ITT|Démarrage"
+ ],
+ "FF": [
+  "Fuel Flow — débit de carburant, en kg/h.",
+  "ewd",
+  "FF|carburant"
+ ],
+ "FADEC": [
+  "Full Authority Digital Engine Control — calculateur qui gère seul le moteur (carburant, démarrage, limites).",
+  "ewd",
+  "FADEC|Démarrage"
+ ],
+ "NR": [
+  "Vitesse de rotation du rotor principal d'un hélicoptère, en %.",
+  "ewd",
+  "NR|rotor"
+ ],
+ "NAV": [
+  "Navigation. IR sur NAV : centrale en mode navigation ; NAV LT : feux de position (rouge à gauche, vert à droite).",
+  "nd",
+  "NAV"
+ ],
+ "LOGO": [
+  "Feux qui éclairent le logo de la compagnie sur la dérive.",
+  null,
+  "LOGO|Feux"
+ ],
+ "BEACON": [
+  "Feu anticollision rouge clignotant : allumé dès qu'un moteur va démarrer, il prévient le personnel au sol.",
+  null,
+  "BEACON|Before Start"
+ ],
+ "STROBE": [
+  "Feux à éclats blancs très puissants, allumés sur la piste et en vol.",
+  null,
+  "STROBE|Décollage"
+ ],
+ "SEAT": [
+  "SEAT BELTS — consigne lumineuse « attachez vos ceintures » en cabine.",
+  null,
+  "SEAT|consignes"
+ ],
+ "BELTS": [
+  "SEAT BELTS — consigne lumineuse « attachez vos ceintures » en cabine.",
+  null,
+  "SEAT|consignes"
+ ],
+ "AUTO": [
+  "Automatique : le système se règle seul.",
+  null,
+  "AUTO"
+ ],
+ "MCDU": [
+  "Multipurpose Control and Display Unit — clavier-écran du calculateur de vol (FMS) : on y entre la route, les masses et les vitesses.",
+  null,
+  "MCDU|FMS|Performances"
+ ],
+ "CDU": [
+  "Control Display Unit — clavier-écran du calculateur de vol (Boeing).",
+  null,
+  "CDU|FMS|Performances"
+ ],
+ "FMS": [
+  "Flight Management System — calculateur de gestion du vol : route, performances, carburant, guidage.",
+  "nd",
+  "FMS|Performances"
+ ],
+ "FCU": [
+  "Flight Control Unit — bandeau sous le pare-brise où l'on règle le pilote automatique (vitesse, cap, altitude, vitesse verticale).",
+  null,
+  "FCU|pilote automatique"
+ ],
+ "MCP": [
+  "Mode Control Panel — bandeau du pilote automatique (équivalent Boeing du FCU).",
+  null,
+  "MCP|pilote automatique"
+ ],
+ "AP": [
+  "Autopilot — pilote automatique.",
+  "pfd",
+  "pilote automatique|AP"
+ ],
+ "AP1": [
+  "Pilote automatique numéro 1.",
+  "pfd",
+  "pilote automatique|AP"
+ ],
+ "ECAM": [
+  "Electronic Centralized Aircraft Monitoring — les deux écrans centraux Airbus : moteurs et alarmes (E/WD) en haut, systèmes (SD) en bas.",
+  "ewd",
+  "ECAM"
+ ],
+ "PFD": [
+  "Primary Flight Display — écran de pilotage : assiette, vitesse, altitude, vitesse verticale, cap.",
+  "pfd",
+  "PFD"
+ ],
+ "ND": [
+  "Navigation Display — écran de navigation : route, carte, radar météo.",
+  "nd",
+  "ND"
+ ],
+ "SD": [
+  "System Display — écran ECAM du bas : schémas des systèmes (électricité, APU, carburant, portes…).",
+  "sd",
+  "SD"
+ ],
+ "EWD": [
+  "Engine / Warning Display — écran ECAM du haut : paramètres moteurs, volets et messages d'alarme.",
+  "ewd",
+  "EWD"
+ ],
+ "TCAS": [
+  "Traffic Collision Avoidance System — système anticollision : il affiche les avions proches et donne un ordre de montée ou de descente (RA) en cas de danger.",
+  "nd",
+  "TCAS|transpondeur"
+ ],
+ "RA": [
+  "Resolution Advisory — ordre d'évitement du TCAS ; ou Radio-Altimètre : hauteur au-dessus du sol.",
+  "pfd",
+  "TCAS|RA"
+ ],
+ "THS": [
+  "Trimmable Horizontal Stabilizer — plan horizontal réglable de la queue ; on le règle au décollage selon le centrage.",
+  null,
+  "THS|Performances"
+ ],
+ "TOGA": [
+  "Take-Off / Go-Around — poussée maximale, au décollage ou pour remettre les gaz.",
+  "ewd",
+  "TOGA|Décollage"
+ ],
+ "FLX": [
+  "Poussée de décollage réduite (« flexible »), calculée avec une température fictive pour ménager les moteurs.",
+  "ewd",
+  "FLX|FLEX|Décollage"
+ ],
+ "FLEX": [
+  "Poussée de décollage réduite, calculée avec une température fictive pour ménager les moteurs.",
+  "ewd",
+  "FLX|FLEX|Décollage"
+ ],
+ "MCT": [
+  "Maximum Continuous Thrust — poussée maximale utilisable sans limite de temps (panne d'un moteur).",
+  "ewd",
+  "MCT"
+ ],
+ "V1": [
+  "Vitesse de décision au décollage : en dessous on peut s'arrêter sur la piste, au-dessus on décolle même en cas de panne.",
+  "pfd",
+  "V1|Décollage|Performances"
+ ],
+ "VR": [
+  "Vitesse de rotation : le pilote tire sur le manche pour lever le nez.",
+  "pfd",
+  "VR|Décollage|Performances"
+ ],
+ "V2": [
+  "Vitesse de sécurité au décollage, à tenir en montée initiale si un moteur tombe en panne.",
+  "pfd",
+  "V2|Décollage|Performances"
+ ],
+ "VAPP": [
+  "Vitesse d'approche finale.",
+  "pfd",
+  "VAPP|Approche"
+ ],
+ "VREF": [
+  "Vitesse de référence à l'atterrissage (1,23 × vitesse de décrochage en configuration atterrissage).",
+  "pfd",
+  "VREF|Approche"
+ ],
+ "VLS": [
+  "Lowest Selectable Speed — vitesse minimale sélectionnable sur Airbus (marge au décrochage).",
+  "pfd",
+  "VLS|Approche"
+ ],
+ "KIAS": [
+  "Knots Indicated Air Speed — vitesse indiquée en nœuds.",
+  "pfd",
+  "KIAS|vitesse"
+ ],
+ "ALT": [
+  "Altitude.",
+  "pfd",
+  "ALT|Montée"
+ ],
+ "FL": [
+  "Flight Level — niveau de vol : altitude en centaines de pieds, calée sur 1013 hPa (FL340 = 34 000 ft).",
+  "pfd",
+  "Montée|Croisière|FL"
+ ],
+ "QNH": [
+  "Pression ramenée au niveau de la mer. Calée sur l'altimètre, elle fait afficher l'altitude au-dessus de la mer.",
+  "pfd",
+  "QNH|ATIS"
+ ],
+ "ILS": [
+  "Instrument Landing System — guidage radio d'approche : un axe (LOC) et une pente (GLIDE) jusqu'à la piste.",
+  "pfd",
+  "ILS|Approche"
+ ],
+ "LOC": [
+  "Localizer — partie de l'ILS qui donne l'axe de piste.",
+  "pfd",
+  "LOC|Approche"
+ ],
+ "APPR": [
+  "Approach — mode d'approche du pilote automatique (capture de l'ILS).",
+  "pfd",
+  "APPR|Approche"
+ ],
+ "VOR": [
+  "Balise radio au sol qui donne la direction de l'avion par rapport à elle.",
+  "nd",
+  "VOR"
+ ],
+ "DA": [
+  "Decision Altitude — altitude de décision : à ce point, sans la piste en vue, on remet les gaz.",
+  "pfd",
+  "DA|Approche"
+ ],
+ "DH": [
+  "Decision Height — hauteur de décision (mesurée au-dessus de la piste).",
+  "pfd",
+  "DH|Approche"
+ ],
+ "MDA": [
+  "Minimum Descent Altitude — altitude minimale de descente d'une approche sans guidage vertical.",
+  "pfd",
+  "MDA|Approche"
+ ],
+ "FAF": [
+  "Final Approach Fix — point d'approche finale : début de la descente finale.",
+  "nd",
+  "FAF|Approche"
+ ],
+ "IAF": [
+  "Initial Approach Fix — point de début de l'approche.",
+  "nd",
+  "IAF|Approche"
+ ],
+ "IF": [
+  "Intermediate Fix — point intermédiaire de l'approche.",
+  "nd",
+  "IF|Approche"
+ ],
+ "SID": [
+  "Standard Instrument Departure — procédure de départ normalisée, depuis la piste jusqu'à la route.",
+  "nd",
+  "SID|FMS|Décollage"
+ ],
+ "STAR": [
+  "Standard Arrival Route — procédure d'arrivée normalisée, de la route jusqu'à l'approche.",
+  "nd",
+  "STAR|Descente"
+ ],
+ "DCT": [
+  "Direct : route en ligne droite entre deux points.",
+  "nd",
+  "DCT|FMS"
+ ],
+ "NAT": [
+  "North Atlantic Tracks — routes océaniques de l'Atlantique Nord, redéfinies chaque jour selon les vents.",
+  "nd",
+  "NAT|Croisière"
+ ],
+ "RWY": [
+  "Runway — piste.",
+  "nd",
+  "roulage|piste"
+ ],
+ "TWY": [
+  "Taxiway — voie de circulation (roulage).",
+  "nd",
+  "roulage|TWY"
+ ],
+ "METAR": [
+  "Observation météo d'un aérodrome, toutes les 30 ou 60 min : vent, visibilité, nuages, température, QNH.",
+  null,
+  "Briefing|METAR"
+ ],
+ "TAF": [
+  "Prévision météo d'un aérodrome pour les heures à venir.",
+  null,
+  "Briefing|TAF"
+ ],
+ "NOTAM": [
+  "Notice to Airmen — avis aux navigants : piste fermée, balise en panne, travaux… À lire avant chaque vol.",
+  null,
+  "Briefing|NOTAM"
+ ],
+ "NOTAMN": [
+  "NOTAM nouveau (le N final signifie « new »).",
+  null,
+  "Briefing|NOTAM"
+ ],
+ "ATIS": [
+  "Message radio enregistré et répété en boucle : météo, piste en service, QNH. On l'écoute avant d'appeler la tour.",
+  null,
+  "ATIS|radio"
+ ],
+ "TEMSI": [
+  "Carte du temps significatif (fronts, nuages, givrage, turbulence) pour les vols à moyenne et basse altitude.",
+  null,
+  "Briefing"
+ ],
+ "WINTEM": [
+  "Carte des vents et températures en altitude.",
+  null,
+  "Briefing"
+ ],
+ "SIGWX": [
+  "Significant Weather — carte du temps significatif en haute altitude (jet-streams, cumulonimbus, turbulence).",
+  null,
+  "Briefing"
+ ],
+ "CAVOK": [
+  "Ceiling And Visibility OK — visibilité ≥ 10 km, pas de nuage gênant, pas de phénomène significatif.",
+  null,
+  "Briefing|METAR"
+ ],
+ "NOSIG": [
+  "No significant change — pas de changement significatif prévu dans les 2 heures.",
+  null,
+  "Briefing|METAR"
+ ],
+ "BECMG": [
+  "Becoming — évolution progressive prévue dans un TAF.",
+  null,
+  "Briefing|TAF"
+ ],
+ "TEMPO": [
+  "Temporairement : variation passagère prévue dans un TAF.",
+  null,
+  "Briefing|TAF"
+ ],
+ "FEW": [
+  "Quelques nuages (1 à 2 octas du ciel couverts).",
+  null,
+  "Briefing|METAR"
+ ],
+ "SCT": [
+  "Scattered — nuages épars (3 à 4 octas).",
+  null,
+  "Briefing|METAR"
+ ],
+ "BKN": [
+  "Broken — nuages fragmentés (5 à 7 octas) : c'est un plafond.",
+  null,
+  "Briefing|METAR"
+ ],
+ "OVC": [
+  "Overcast — ciel couvert (8 octas).",
+  null,
+  "Briefing|METAR"
+ ],
+ "CB": [
+  "Cumulonimbus — nuage d'orage, à éviter absolument (turbulence, grêle, foudre).",
+  null,
+  "Briefing|METAR"
+ ],
+ "RVR": [
+  "Runway Visual Range — portée visuelle de piste, mesurée le long de la piste.",
+  null,
+  "Briefing|METAR"
+ ],
+ "FIR": [
+  "Flight Information Region — région d'information de vol, l'espace aérien géré par un centre de contrôle.",
+  "nd",
+  "Briefing|FIR"
+ ],
+ "UTC": [
+  "Temps universel coordonné : l'heure de référence de l'aviation, la même partout dans le monde.",
+  null,
+  "Briefing"
+ ],
+ "ETD": [
+  "Estimated Time of Departure — heure de départ prévue.",
+  null,
+  "Briefing"
+ ],
+ "ETA": [
+  "Estimated Time of Arrival — heure d'arrivée prévue.",
+  null,
+  "Briefing"
+ ],
+ "EET": [
+  "Estimated Elapsed Time — durée de vol estimée.",
+  null,
+  "Briefing"
+ ],
+ "OFP": [
+  "Operational Flight Plan — plan de vol exploitation : route, carburant, temps, calculés par la compagnie.",
+  null,
+  "Briefing|carburant"
+ ],
+ "FPL": [
+  "Plan de vol déposé auprès du contrôle aérien (format OACI).",
+  null,
+  "Briefing"
+ ],
+ "ZFW": [
+  "Zero Fuel Weight — masse sans carburant : avion + équipage + passagers + bagages + fret.",
+  null,
+  "Devis|masse"
+ ],
+ "TOW": [
+  "Take-Off Weight — masse au décollage = ZFW + carburant embarqué − carburant de roulage.",
+  null,
+  "Devis|masse"
+ ],
+ "LW": [
+  "Landing Weight — masse à l'atterrissage = TOW − carburant consommé pendant le vol.",
+  null,
+  "Devis|masse"
+ ],
+ "MZFW": [
+  "Maximum Zero Fuel Weight — masse sans carburant maximale certifiée.",
+  null,
+  "Devis|masse"
+ ],
+ "MTOW": [
+  "Maximum Take-Off Weight — masse maximale au décollage certifiée.",
+  null,
+  "Devis|masse"
+ ],
+ "MLW": [
+  "Maximum Landing Weight — masse maximale à l'atterrissage certifiée.",
+  null,
+  "Devis|masse"
+ ],
+ "DOW": [
+  "Dry Operating Weight — masse de base en exploitation : avion équipé avec équipage, sans charge ni carburant.",
+  null,
+  "Devis|masse"
+ ],
+ "LMC": [
+  "Last Minute Change — modification de dernière minute du devis de masse.",
+  null,
+  "Devis|masse"
+ ],
+ "CG": [
+  "Centre de gravité : point d'équilibre de l'avion ; il doit rester entre deux limites (centrage).",
+  null,
+  "Devis|centrage"
+ ],
+ "MAC": [
+  "Mean Aerodynamic Chord — corde aérodynamique moyenne ; le centrage s'exprime en % de cette longueur.",
+  null,
+  "Devis|centrage"
+ ],
+ "CDB": [
+  "Commandant de bord : le pilote responsable du vol.",
+  null,
+  "Briefing|carburant"
+ ],
+ "OPL": [
+  "Officier pilote de ligne (copilote).",
+  null,
+  "Briefing"
+ ],
+ "CI": [
+  "Cost Index — indice de coût : réglage FMS qui arbitre entre économie de carburant et rapidité.",
+  null,
+  "FMS|Performances|CI"
+ ],
+ "CRM": [
+  "Crew Resource Management — travail en équipage : partage des tâches, annonces, vérifications croisées, droit d'intervenir.",
+  null,
+  "Briefing"
+ ],
+ "MEL": [
+  "Minimum Equipment List — liste des équipements qui peuvent être en panne sans interdire le vol.",
+  null,
+  "Briefing|technique"
+ ],
+ "NOTOC": [
+  "Notification to Captain — information du commandant sur les marchandises dangereuses à bord.",
+  null,
+  "Briefing|fret"
+ ],
+ "ATC": [
+  "Air Traffic Control — contrôle de la circulation aérienne.",
+  null,
+  "radio|ATC"
+ ],
+ "VFR": [
+  "Visual Flight Rules — vol à vue : le pilote se guide en regardant dehors.",
+  null,
+  "VFR"
+ ],
+ "IFR": [
+  "Instrument Flight Rules — vol aux instruments, suivi par le contrôle.",
+  null,
+  "IFR"
+ ],
+ "VRP": [
+  "Visual Reporting Point — point de report visuel (repère au sol) pour les vols VFR.",
+  "nd",
+  "VRP|circuit"
+ ],
+ "TA": [
+  "Transition Altitude — altitude de transition : en montée, au-dessus, on cale l'altimètre sur 1013 hPa.",
+  "pfd",
+  "Montée|TA"
+ ],
+ "MSL": [
+  "Mean Sea Level — niveau moyen de la mer.",
+  "pfd",
+  ""
+ ],
+ "SFC": [
+  "Surface — le sol.",
+  null,
+  ""
+ ],
+ "NM": [
+  "Nautical Mile — mille nautique = 1 852 m.",
+  null,
+  ""
+ ],
+ "OACI": [
+  "Organisation de l'aviation civile internationale : elle fixe les règles mondiales (codes, procédures).",
+  null,
+  ""
+ ],
+ "EASA": [
+  "Agence européenne de la sécurité aérienne : elle fixe les règles en Europe (licences, opérations).",
+  null,
+  ""
+ ],
+ "AIP": [
+  "Aeronautical Information Publication — publication officielle de chaque pays : aérodromes, cartes, règles.",
+  null,
+  "Briefing"
+ ],
+ "PPL": [
+  "Private Pilot Licence — licence de pilote privé.",
+  null,
+  ""
+ ],
+ "SEL": [
+  "Sélecteur.",
+  null,
+  ""
+ ],
+ "STBY": [
+  "Standby — veille / secours.",
+  null,
+  ""
+ ],
+ "XPDR": [
+  "Transpondeur : il répond au radar du contrôle avec un code à 4 chiffres et l'altitude.",
+  null,
+  "transpondeur|XPDR"
+ ],
+ "CUTOFF": [
+  "Étouffoir : coupe l'arrivée de carburant pour arrêter un moteur à pistons.",
+  "ewd",
+  "Arrêt|mixture"
+ ],
+ "RICH": [
+  "Mélange riche (plus de carburant) : position de la manette de mixture pour démarrer et décoller.",
+  "ewd",
+  "Démarrage|mixture"
+ ],
+ "LDG": [
+  "Landing — atterrissage.",
+  "pfd",
+  "Atterrissage"
+ ],
+ "LND": [
+  "Landing — atterrissage (feux d'atterrissage, page atterrissage).",
+  null,
+  "Atterrissage|LAND"
+ ],
+ "CONF": [
+  "Configuration des volets et becs (CONF 1, 2, 3, FULL).",
+  "ewd",
+  "volets|CONF"
+ ],
+ "THR": [
+  "Thrust — poussée (manettes de poussée).",
+  "ewd",
+  "poussée|THR"
+ ],
+ "KJFK": [
+  "Code OACI de l'aéroport John F. Kennedy, New York.",
+  "nd",
+  ""
+ ],
+ "LFPG": [
+  "Code OACI de Paris-Charles-de-Gaulle.",
+  "nd",
+  ""
+ ],
+ "LFPO": [
+  "Code OACI de Paris-Orly.",
+  "nd",
+  ""
+ ],
+ "LFPB": [
+  "Code OACI de Paris-Le Bourget.",
+  "nd",
+  ""
+ ],
+ "LFPN": [
+  "Code OACI de Toussus-le-Noble (aérodrome école, au sud-ouest de Paris).",
+  "nd",
+  ""
+ ],
+ "FMEE": [
+  "Code OACI de La Réunion Roland-Garros.",
+  "nd",
+  ""
+ ],
+ "KJRB": [
+  "Code OACI de l'héliport de Downtown Manhattan (Wall Street).",
+  "nd",
+  ""
+ ],
+ "KLGA": [
+  "Code OACI de New York LaGuardia.",
+  "nd",
+  ""
+ ],
+ "KEWR": [
+  "Code OACI de Newark.",
+  "nd",
+  ""
+ ],
+ "CYQX": [
+  "Code OACI de Gander (Terre-Neuve), aérodrome de dégagement transatlantique.",
+  "nd",
+  ""
+ ],
+ "BIKF": [
+  "Code OACI de Keflavík (Islande), aérodrome de dégagement transatlantique.",
+  "nd",
+  ""
+ ],
+ "EGPWS": [
+  "Enhanced Ground Proximity Warning System — avertisseur de proximité du sol prédictif : compare la trajectoire à une base de relief et alerte longtemps avant l'impact.",
+  "nd",
+  "EGPWS|TAWS"
+ ],
+ "TAWS": [
+  "Terrain Awareness and Warning System — nom générique de l'avertisseur de relief prédictif (EGPWS).",
+  "nd",
+  "TAWS"
+ ],
+ "GPWS": [
+  "Ground Proximity Warning System — avertisseur de proximité du sol (« TERRAIN, PULL UP »), obligatoire après des accidents contre le relief.",
+  "nd",
+  "GPWS"
+ ],
+ "UPRT": [
+  "Upset Prevention and Recovery Training — formation à la prévention et à la récupération des pertes de contrôle, obligatoire depuis AF447.",
+  null,
+  ""
+ ],
+ "VAAC": [
+  "Volcanic Ash Advisory Centre — centre qui suit les nuages de cendres volcaniques (créé après BA 9 en 1982).",
+  null,
+  ""
+ ],
+ "GADSS": [
+  "Global Aeronautical Distress and Safety System — suivi mondial des avions (position toutes les 15 min), décidé après MH370.",
+  null,
+  ""
+ ],
+ "MCAS": [
+  "Maneuvering Characteristics Augmentation System — système du 737 MAX qui pique l'avion à forte incidence ; en cause dans Lion Air 610 et Ethiopian 302.",
+  null,
+  ""
+ ],
+ "BEA": [
+  "Bureau d'enquêtes et d'analyses pour la sécurité de l'aviation civile (France).",
+  null,
+  ""
+ ],
+ "NTSB": [
+  "National Transportation Safety Board — bureau d'enquête américain.",
+  null,
+  ""
+ ],
+ "ADS-B": [
+  "Automatic Dependent Surveillance–Broadcast — l'avion diffuse en permanence sa position GPS, son altitude et sa vitesse ; contrôleurs et autres avions le voient. Rendu plus large après la collision de Washington (2025).",
+  "nd",
+  "ADS-B|transpondeur"
+ ]
+}

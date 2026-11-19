@@ -1,0 +1,22 @@
+{
+ "source": "legacy/plane-trajectories.html",
+ "engine": "plane-trajectories-simulator V10.42.1 (main e45f229)",
+ "simver": "V10.21",
+ "extracted": "2026-11-19",
+ "files": {
+  "aircraft": 8,
+  "airports": 8,
+  "missions": 35,
+  "relief": 22,
+  "stations": 42,
+  "atc-sectors": 4,
+  "metar-samples": 5,
+  "failures": 45,
+  "scenarios": 45,
+  "scenarios-not-reproduced": 2,
+  "references": 8,
+  "qcm-themes": 22,
+  "academy": 9,
+  "glossary": 158
+ }
+}
