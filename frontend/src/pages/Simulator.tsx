@@ -5,13 +5,29 @@
  *
  * #/simulateur/<action> lance directement une action des cours (mêmes actions que l'Académie d'origine,
  * fonction act() de acad.js) : auto, guide, exam, brief, sys:<appareil>[:<scène>], doc:<document>.
+ * #/simulateur/go:<appareil>:<parcours>:<mode> lance un parcours validé sur la page Parcours, par les boutons du menu
+ * d'origine (même suite qu'aujourd'hui : dossier de vol, puis parcours dans le mode choisi).
  */
 import { useEffect, useRef } from 'react';
 
-const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+)$/;
+const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free))$/;
 
 /** Reprend act() de l'Académie d'origine avec les fonctions publiques du moteur. */
 function runAction(w: any, k: string): boolean {
+  if (k.startsWith('go:')) {
+    if (!w.BR?.launchMode || typeof w.renderMenu !== 'function') return false;
+    const [, ac, mi, mode] = k.split(':');
+    // Mêmes gestes que dans le menu d'origine : mode coché, puis clic sur l'appareil (parcours complet)
+    // ou sur le bouton « ▶ appareil » de la mission ; l'appareil et la mission sont vérifiés par le moteur.
+    return !!w.eval(
+      `(function(ac,mi,mode){ if(!AC[ac]||!MISSIONS[mi]) throw new Error('Parcours ou appareil inconnu : '+mi+' / '+ac);` +
+        ` var p=document.getElementById('m-peda'), a=document.getElementById('m-auto'); if(p) p.checked=mode==='guide'; if(a) a.checked=mode==='auto';` +
+        ` var i=document.getElementById('intro'); if(i) i.hidden=true; selAC=ac; renderMenu();` +
+        ` var full=(window.FULLOF?FULLOF(ac):null)===mi;` +
+        ` var b=full?document.querySelector('#c-ac [data-ac="'+ac+'"]'):document.querySelector('.m2-mis [data-mi="'+mi+'"][data-k="'+ac+'"]');` +
+        ` if(!b) return false; b.click(); return true; })(${JSON.stringify(ac)},${JSON.stringify(mi)},${JSON.stringify(mode)})`,
+    );
+  }
   if (k.startsWith('doc:')) {
     if (!w.DOCS?.open) return false;
     w.DOCS.open(k.slice(4));

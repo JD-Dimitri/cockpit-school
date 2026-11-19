@@ -8,10 +8,12 @@ import { Courses } from './pages/Courses';
 import { PrintCourse } from './pages/PrintCourse';
 import { Login, Register, Forgot, Reset } from './pages/Account';
 import { Traffic } from './pages/Traffic';
+import { Parcours } from './pages/Parcours';
 import { useUser } from './auth';
 
 const ROUTES = [
   { path: '', label: 'Accueil', el: () => <Home /> },
+  { path: 'parcours', label: 'Parcours', el: (p: string[]) => <Parcours mi={p[0]} ac={p[1]} /> },
   { path: 'simulateur', label: 'Simulateur', el: (p: string[]) => <Simulator action={p[0]} /> },
   { path: 'cours', label: 'Cours', el: (p: string[]) => <Courses part={p[0]} mod={p[1]} /> },
   { path: 'appareils', label: 'Appareils', el: (p: string[]) => <AircraftPage id={p[0]} /> },

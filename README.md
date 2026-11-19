@@ -12,6 +12,8 @@ de zéro jusqu'à la licence de pilote, et au-delà. La version gratuite (fichie
 | Structure du dépôt | ✔ `frontend/`, `backend/`, `data/`, `legacy/`, `tools/`, `tests/`, `docs/` |
 | Données en JSON | ✔ 14 fichiers extraits du moteur V10.42.1 par `tools/extract_data.py` (aucune saisie à la main) |
 | Interface React + Three.js | ✔ accueil, simulateur, cours (76 modules + QCM), appareils en 3D, missions, aéroports |
+| Parcours (F40) | ✔ parcours → fiches de choix de l'appareil avec vignette → fiche de présentation → « Valider le parcours avec cet appareil » → « Parcours commencé » → simulateur (même suite qu'avant) ; vignettes : illustrations générées (app.atlas.design) |
+| Trafic réel | ✔ accueil des sources : récepteur ADS-B Raspberry Pi (`tools/recepteur/`), OpenSky Network, Flightradar24 ; page `#/trafic` ; aucune source active par défaut |
 | Boutons d'action des cours | ✔ « Ouvrir l'atelier », « Lancer le mode… », documents : ouvrent le simulateur directement sur l'action |
 | Simulateur jouable | ✔ le moteur d'origine tourne tel quel dans l'onglet « Simulateur » ; ses modules sont portés un par un (`docs/MIGRATION.md`) |
 | Moteur TypeScript | ✔ géographie, atmosphère et physique du vol (avions et hélicoptères) portées : résultats identiques à l'original (`tests/parity_engine.py`, `tests/parity_flight.py`) |
@@ -54,6 +56,9 @@ python3 tests/parity_engine.py     # moteur TypeScript = moteur d'origine (14 fo
 python3 tests/parity_flight.py     # physique du vol = moteur d'origine (12 vols rejoués pas à pas, données des 8 appareils)
 python3 tests/e2e_front.py         # interface React, ordinateur et téléphone (40 vérifications)
 python3 tests/e2e_auth_pdf.py      # comptes, œil, PDF, boutons d'action des cours (69 vérifications)
+python3 tests/e2e_parcours.py      # parcours, choix de l'appareil, fiche, validation, lancement (32 vérifications)
+python3 tests/e2e_trafic.py        # page Trafic réel (22 vérifications ; 8 en version autonome)
+php tests/traffic_normalize.php    # trafic réel : conversion et fusion des sources, sans composer (27 vérifications)
 python3 tools/standalone.py SORTIE.html   # version autonome (un seul fichier, hors ligne)
 ```
 

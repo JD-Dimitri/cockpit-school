@@ -25,6 +25,9 @@ export interface Aircraft {
   flaps?: Flap[];
   twin?: boolean;
   ext: { len: number; span?: number; rotor?: number };
+  /** avion école (Cessna 172) : parcours propre, hors des vols de ligne */
+  sep?: boolean;
+  afcs?: boolean;
 }
 /** Piste : [QFU 1, QFU 2, lat1, lon1, lat2, lon2, largeur?] */
 export type Runway = [string, string, number, number, number, number, number?];
@@ -39,7 +42,11 @@ export interface Mission {
   dest?: string;
   destRw?: string;
   aircraft?: string;
+  /** appareil imposé (mission propre à un appareil) */
+  ac?: string;
   acs?: string[];
+  link?: string;
+  dep?: string;
   route?: [number, number, string][];
   start?: { lat: number; lon: number; hdg: number; elev: number } | null;
 }
