@@ -88,7 +88,7 @@ with sync_playwright() as p:
         pg.wait_for_selector('.print .pmod'); pg.wait_for_timeout(700)
         check(f'[{tag}] PDF du module : version imprimable ouverte', '#/imprimer/p1/avion/auto' in pg.url)
         check(f'[{tag}] PDF du module : impression lancée', pg.evaluate('window.__printed') == 1)
-        check(f'[{tag}] PDF du module : nom de fichier proposé', pg.title() == "PLANE TRAJECTORIES - L'avion et ses parties")
+        check(f'[{tag}] PDF du module : nom de fichier proposé', pg.title() == "PLANE SIMULATOR - L'avion et ses parties")
         if tag == 'pc':
             pdf = PdfReader(io.BytesIO(pg.pdf(format='A4', print_background=True)))
             text = '\n'.join(pg_.extract_text() for pg_ in pdf.pages)

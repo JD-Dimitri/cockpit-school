@@ -80,7 +80,7 @@ export function Simulator({ action }: { action?: string }) {
       {(
         <iframe
           ref={frame}
-          title="Simulateur PLANE TRAJECTORIES"
+          title="Simulateur PLANE SIMULATOR (moteur d'origine PLANE SIMULATOR)"
           {...(embedded ? { srcDoc: embedded } : { src: 'legacy/plane-trajectories.html' })}
           allow="fullscreen; microphone; autoplay"
           allowFullScreen

@@ -1,4 +1,4 @@
-# Architecture — PLANE TRAJECTORIES Pro
+# Architecture — PLANE SIMULATOR
 
 ## Vue d'ensemble
 

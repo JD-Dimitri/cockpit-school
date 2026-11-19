@@ -57,7 +57,7 @@ export function PrintCourse({ part, mod, auto }: { part?: string; mod?: string; 
     if (!title) return;
     const before = document.title;
     // Le titre de la page devient le nom proposé pour le fichier PDF.
-    document.title = 'PLANE TRAJECTORIES - ' + title;
+    document.title = 'PLANE SIMULATOR - ' + title;
     let t = 0;
     if (auto) t = window.setTimeout(() => window.print(), 400);
     return () => {
@@ -77,7 +77,7 @@ export function PrintCourse({ part, mod, auto }: { part?: string; mod?: string; 
         <small>Dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».</small>
       </div>
       <header className="phead">
-        <p>PLANE TRAJECTORIES Pro · Académie</p>
+        <p>PLANE SIMULATOR · Académie</p>
         <h1>{title}</h1>
         {mod && <p>{P.n}</p>}
         <p className="pnote">Document pédagogique. Ne remplace pas un manuel de vol approuvé ni l'enseignement d'un instructeur.</p>

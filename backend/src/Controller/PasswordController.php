@@ -62,7 +62,7 @@ final class PasswordController extends AbstractController
             $mailer->send((new TemplatedEmail())
                 ->from($this->mailFrom)
                 ->to($user->getEmail())
-                ->subject('PLANE TRAJECTORIES — choisir un nouveau mot de passe')
+                ->subject('PLANE SIMULATOR — choisir un nouveau mot de passe')
                 ->htmlTemplate('email/reset.html.twig')
                 ->textTemplate('email/reset.txt.twig')
                 ->context(['name' => $user->getName(), 'link' => $link, 'expires' => $token->getExpirationMessageKey(), 'expiresData' => $token->getExpirationMessageData()]));

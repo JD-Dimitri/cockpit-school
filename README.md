@@ -1,4 +1,4 @@
-# plane-simulator — PLANE TRAJECTORIES Pro
+# plane-simulator — PLANE SIMULATOR
 
 FATS Pro — Flight and Trajectories Simulator | Symfony, React, TypeScript & Three.js
 

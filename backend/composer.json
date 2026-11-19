@@ -1,6 +1,6 @@
 {
     "name": "jd-dimitri/plane-simulator-backend",
-    "description": "PLANE TRAJECTORIES Pro — API Symfony (données, comptes, PDF)",
+    "description": "PLANE SIMULATOR — API Symfony (données, comptes, PDF)",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",

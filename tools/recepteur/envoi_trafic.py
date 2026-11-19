@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Envoi du trafic capté par le récepteur ADS-B personnel (Raspberry Pi + readsb) vers PLANE TRAJECTORIES Pro.
+"""Envoi du trafic capté par le récepteur ADS-B personnel (Raspberry Pi + readsb) vers PLANE SIMULATOR.
 
 Le Pi est derrière la box : c'est lui qui envoie, le serveur ne peut pas l'interroger.
 Toutes les PERIODE secondes : lecture de aircraft.json (fichier local ou adresse locale), compression gzip,
@@ -26,7 +26,7 @@ def envoyer(serveur, jeton, brut):
     json.loads(brut)  # refuse un fichier coupé en cours d'écriture
     req = urllib.request.Request(serveur.rstrip('/') + '/api/trafic/recepteur', data=gzip.compress(brut), method='POST',
                                  headers={'Content-Type': 'application/json', 'Content-Encoding': 'gzip', 'X-Recepteur-Jeton': jeton,
-                                          'User-Agent': 'plane-trajectories-recepteur/1'})
+                                          'User-Agent': 'plane-simulator-recepteur/1'})
     with urllib.request.urlopen(req, timeout=10) as r:
         return json.loads(r.read() or b'{}')
 

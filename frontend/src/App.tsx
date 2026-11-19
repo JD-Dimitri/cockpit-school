@@ -57,7 +57,7 @@ export function App() {
       <header className="top">
         <a className="brand" href="#/">
           <span className="mark" aria-hidden="true">✈</span>
-          <span>PLANE TRAJECTORIES <em>Pro</em></span>
+          <span>PLANE <em>SIMULATOR</em></span>
         </a>
         <nav aria-label="Navigation principale">
           {ROUTES.slice(1).map((x) => (
