@@ -30,7 +30,7 @@ Attention : V<sub>A</sub> <b>diminue quand la masse diminue</b> (V<sub>A</sub> �
 <h3>4. Rafales</h3>
 <p>Une rafale verticale U modifie l'incidence de Δα ≈ U / V. Facteur de charge supplémentaire :
 Δn = ρ V a U S / (2 W) (a : pente de la courbe de portance par radian). L'avion le plus <b>léger</b>, le plus <b>rapide</b>, à la plus grande <b>surface</b>
-et à forte pente de portance (aile peu flèche, grand allongement) est le plus sensible. D'où la vitesse de pénétration en turbulence (V<sub>B</sub> ou V<sub>RA</sub>).</p>
+et à forte pente de portance (aile peu ou pas en flèche, grand allongement) est le plus sensible. D'où la vitesse de pénétration en turbulence (V<sub>B</sub> ou V<sub>RA</sub>).</p>
 
 <h3>5. Centrage en % de corde aérodynamique moyenne (MAC)</h3>
 <p>CG (% MAC) = (X<sub>CG</sub> − X<sub>LEMAC</sub>) / MAC × 100. Un centrage <b>avant</b> augmente la stabilité, la vitesse de décrochage et la consommation
