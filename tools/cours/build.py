@@ -16,3 +16,13 @@ write('academy-0', [{
     'd': 'Préparation : mathématiques, géométrie, unités, physique et géographie appliquées au vol. Un cours par thème et 30 exercices corrigés, du plus facile au plus difficile.',
     'mods': mods,
 }])
+
+# Cours II · Confirmé : modules ajoutés au fil de la rédaction (fichier vide tant qu'aucun n'est prêt)
+C2 = []
+parts2 = []
+for name in C2:
+    try:
+        parts2.append(importlib.import_module(name).PART)
+    except ModuleNotFoundError:
+        pass
+write('academy-2', parts2)

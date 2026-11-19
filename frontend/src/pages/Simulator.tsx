@@ -13,6 +13,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { apiAvailable } from '../auth';
 
+/** Retouches d'affichage du moteur (version autonome : posées dès le chargement, sans attendre). */
+const UI_STYLE = '<style id="ps-ui">#intro .skip{display:none!important}</style>';
+
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free)|ac:[a-z0-9]+)$/;
 
 /** Reprend act() de l'Académie d'origine avec les fonctions publiques du moteur. */
@@ -63,9 +66,16 @@ export function Simulator({ action }: { action?: string }) {
   // Version autonome : srcdoc (même origine que la page, y compris ouverte en file://, ce qui permet de lancer les actions).
   const embedded = window.__PT_LEGACY__;
   // En ligne : moteur servi par l'API, seulement aux comptes connectés (F41) ; sans serveur : fichier statique (développement).
-  const [src, setSrc] = useState<string | null>(embedded ? null : '');
+  // Le moteur est chargé en texte puis affiché par srcdoc (même origine) : les retouches d'affichage sont posées
+  // avant son démarrage, sans course au chargement.
+  const [doc, setDoc] = useState<string | null>(embedded ?? null);
+  const [loadErr, setLoadErr] = useState<string | null>(null);
   useEffect(() => {
-    if (!embedded) apiAvailable().then((up) => setSrc(up ? 'api/moteur' : 'legacy/plane-trajectories.html'));
+    if (embedded) return;
+    apiAvailable()
+      .then((up) => fetch(up ? 'api/moteur' : 'legacy/plane-trajectories.html', { credentials: 'same-origin' }))
+      .then((r) => { if (!r.ok) throw new Error(r.status === 401 ? 'connexion requise' : 'erreur ' + r.status); return r.text(); })
+      .then(setDoc, (e: Error) => setLoadErr(e.message));
   }, []);
   const frame = useRef<HTMLIFrameElement>(null);
   const loaded = useRef(false);
@@ -93,32 +103,31 @@ export function Simulator({ action }: { action?: string }) {
 
   return (
     <section className="sim">
-      {(embedded || src) && (
+      {loadErr && <p className="page err">Simulateur indisponible : {loadErr}</p>}
+      {doc && (
         <iframe
           ref={frame}
           title="Simulateur PLANE SIMULATOR (moteur d'origine PLANE SIMULATOR)"
-          {...(embedded ? { srcDoc: embedded } : { src: src! })}
+          srcDoc={doc.replace('</head>', UI_STYLE + '</head>')}
           allow="fullscreen; microphone; autoplay"
           allowFullScreen
           onLoad={() => {
             loaded.current = true;
             // Introduction du moteur : bouton « Passer et aller au simulateur » du haut retiré (demande de l'auteur, 19/11 18:34) ;
             // « Plus tard : aller au simulateur » reste en bas. Style posé dès que le document du moteur est prêt (≤ 30 s).
+            // Vérifié pendant 30 s : le document du moteur peut être remplacé au chargement (version autonome).
             let tries = 0;
             const ui = () => {
               try {
                 const d = frame.current?.contentDocument;
-                if (d?.head && d.readyState !== 'loading' && d.URL !== 'about:blank') {
-                  if (!d.getElementById('ps-ui')) {
-                    const st = d.createElement('style');
-                    st.id = 'ps-ui';
-                    st.textContent = '#intro .skip{display:none!important}';
-                    d.head.appendChild(st);
-                  }
-                  return;
+                if (d?.head && d.URL !== 'about:blank' && !d.getElementById('ps-ui')) {
+                  const st = d.createElement('style');
+                  st.id = 'ps-ui';
+                  st.textContent = '#intro .skip{display:none!important}';
+                  d.head.appendChild(st);
                 }
               } catch { return; /* cadre d'une autre origine : sans effet */ }
-              if (++tries < 150) setTimeout(ui, 200);
+              if (++tries < 60) setTimeout(ui, 500);
             };
             ui();
             if (action && ACTION.test(action)) launch(action);

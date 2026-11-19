@@ -10,6 +10,9 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from serveur_simule import serveur
 
 URL = os.environ.get('FRONT_URL', 'http://localhost:8766/')
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+CDN = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'
+THREE = os.environ.get('THREE_PATH', str(ROOT.parent / 'plane-trajectories-simulator/tests/node_modules/three/build/three.min.js'))
 OUT = pathlib.Path(__file__).resolve().parent / 'out'; OUT.mkdir(exist_ok=True)
 checks = []
 def check(name, cond, detail=''):
@@ -30,6 +33,9 @@ with sync_playwright() as p:
         for W, H, tag in ((1280, 800, 'pc'), (390, 844, 'tel')):
             b = p.chromium.launch(); ctx = b.new_context(viewport={'width': W, 'height': H})
             ctx.route('https://fonts.googleapis.com/**', lambda r: r.fulfill(body='', content_type='text/css'))
+            # three.js r128 (même fichier que le CDN) servi localement : cdnjs n'est pas joignable d'ici
+            ctx.route(CDN, lambda r: r.fulfill(path=THREE, content_type='application/javascript'))
+            ctx.route('https://aviationweather.gov/**', lambda r: r.abort())
             etat = serveur(ctx, connecte=False)
             pg = ctx.new_page(); reqs = []; errs = []
             pg.on('request', lambda r: reqs.append(r.url)); pg.on('pageerror', lambda e: errs.append(str(e)))
@@ -53,8 +59,10 @@ with sync_playwright() as p:
             check(f'[{tag}] connexion → retour à la page demandée (cours p1)', "L'avion et ses parties" in pg.inner_text('main'))
             nav = [a.strip() for a in pg.locator('header nav a').all_text_contents()]
             check(f'[{tag}] connecté : menu complet et nom de l\'élève', len(nav) == 4 and nav[-1].endswith('Élève test'), str(nav))
+            n_moteur = len([u for u in reqs if u.endswith('/api/moteur')])
             pg.goto(URL + '#/simulateur'); pg.wait_for_selector('.sim iframe')
-            check(f'[{tag}] connecté : simulateur chargé depuis le serveur (/api/moteur)', pg.locator('.sim iframe').get_attribute('src') == 'api/moteur')
+            pg.wait_for_timeout(500)
+            check(f'[{tag}] connecté : simulateur chargé depuis le serveur (/api/moteur)', len([u for u in reqs if u.endswith('/api/moteur')]) > n_moteur and pg.locator('.sim iframe').get_attribute('srcdoc') is not None)
             pg.goto(URL + '#/'); pg.wait_for_selector('.page h1')
             check(f'[{tag}] connecté : accueil complet', pg.locator('.welcome').count() == 0)
             # déconnexion

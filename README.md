@@ -11,7 +11,8 @@ de zéro jusqu'à la licence de pilote, et au-delà. La version gratuite (fichie
 |---|---|
 | Structure du dépôt | ✔ `frontend/`, `backend/`, `data/`, `legacy/`, `tools/`, `tests/`, `docs/` |
 | Données en JSON | ✔ 14 fichiers extraits du moteur V10.42.1 par `tools/extract_data.py` (aucune saisie à la main) |
-| Interface React + Three.js | ✔ accueil, simulateur, cours (76 modules + QCM), appareils en 3D, missions, aéroports |
+| Interface React | ✔ accueil, parcours, simulateur (moteur d'origine en 3D), cours ; menu : Parcours, Simulateur, Cours (Appareils, Missions, Aéroports gardés par leur adresse) |
+| Cours en trois cycles (F42, F43) | ✔ **Cours 0 · Préparation scientifique** : 7 thèmes (mathématiques, trigonométrie, unités, mécanique, fluides et atmosphère, électricité et ondes, Terre et temps), 210 exercices corrigés, réponses recalculées par `python3 tools/cours/build.py` ; ✔ **Cours I · Initiation** : les 76 modules de l'Académie ; **Cours II · Confirmé** : à rédiger |
 | Parcours (F40) | ✔ parcours → fiches de choix de l'appareil avec vignette → fiche de présentation → « Valider le parcours avec cet appareil » → « Parcours commencé » → simulateur (même suite qu'avant) ; vignettes : illustrations générées fournies par l'auteur |
 | Trafic réel | ✔ accueil des sources : récepteur ADS-B Raspberry Pi (`tools/recepteur/`), OpenSky Network, Flightradar24 ; page `#/trafic` ; aucune source active par défaut |
 | Boutons d'action des cours | ✔ « Ouvrir l'atelier », « Lancer le mode… », documents : ouvrent le simulateur directement sur l'action |
@@ -61,9 +62,9 @@ python3 tools/extract_data.py      # régénère data/*.json depuis legacy/
 python3 tests/parity_engine.py     # moteur TypeScript = moteur d'origine (14 fonctions)
 python3 tests/parity_flight.py     # physique du vol = moteur d'origine (12 vols rejoués pas à pas, données des 8 appareils)
 python3 tests/e2e_front.py         # interface React, ordinateur et téléphone (40 vérifications)
-python3 tests/e2e_auth_pdf.py      # comptes, œil, PDF, boutons d'action des cours (69 vérifications)
+python3 tests/e2e_auth_pdf.py      # comptes, œil, PDF, boutons d'action des cours (71 vérifications ; 69 en version autonome)
 python3 tests/e2e_acces.py         # accès : public hors connexion, tout après connexion (24 vérifications)
-python3 tests/e2e_parcours.py      # parcours, choix de l'appareil, fiche, validation, lancement (32 vérifications)
+python3 tests/e2e_parcours.py      # parcours, choix de l'appareil, fiche, validation, lancement, « Simulateur » (34 vérifications)
 python3 tests/e2e_trafic.py        # page Trafic réel (22 vérifications ; 8 en version autonome)
 php tests/traffic_normalize.php    # trafic réel : conversion et fusion des sources, sans composer (27 vérifications)
 python3 tools/standalone.py SORTIE.html   # version autonome (un seul fichier, hors ligne)
