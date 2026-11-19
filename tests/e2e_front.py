@@ -36,7 +36,8 @@ with sync_playwright() as p:
         pg.on('requestfailed', lambda r: failed.append(r.url))
 
         pg.goto(URL); pg.wait_for_selector('.grid .card')
-        check(f'[{tag}] accueil : 5 entrées', pg.locator('.grid .card').count() == 5)
+        home = [pg.locator('.grid .card').nth(i).get_attribute('href') for i in range(pg.locator('.grid .card').count())]
+        check(f'[{tag}] accueil : 3 entrées, sans « Appareils » ni « Missions » (19/11 22:01)', home == ['#/simulateur', '#/cours', '#/aeroports'], str(home))
         check(f'[{tag}] accueil : origine des données affichée', 'V10.42.1' in pg.inner_text('.meta'))
         pg.screenshot(path=str(OUT / f'pro_accueil_{tag}.png'))
 

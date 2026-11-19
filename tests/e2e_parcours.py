@@ -96,8 +96,8 @@ with sync_playwright() as p:
         if (mi, ac) == ('full-fw', 'a320'): pg.screenshot(path=str(OUT / 'pro_parcours_lance.png'))
         b.close()
     # fiche de l'appareil → « Simulateur ▸ » → directement l'écran de départ du simulateur, appareil déjà choisi, sans autre étape
-    for ac in ('lj60', 'h125'):
-        b, c = ctx_for(p, 1280, 800); pg = c.new_page()
+    for ac, w, h in (('lj60', 1280, 800), ('h125', 390, 844)):
+        b, c = ctx_for(p, w, h); pg = c.new_page()
         pg.goto(URL + f'#/appareils/{ac}'); pg.wait_for_selector('.ac .actions a.btn')
         pg.click('.ac .actions a.btn >> text=Simulateur')
         st = {}
@@ -111,6 +111,11 @@ with sync_playwright() as p:
         pg.wait_for_timeout(1200)
         st = fr.evaluate("({sel: selAC, menu: !$('menu').hidden, intro: !!(document.getElementById('intro') && !document.getElementById('intro').hidden), brief: !!(document.getElementById('br-skip') && document.getElementById('br-skip').offsetParent)})")
         check(f'page Appareils {ac} : « Simulateur » → écran de départ, {ac} choisi, sans introduction ni dossier', st.get('sel') == ac and st.get('menu') and not st.get('intro') and not st.get('brief'), str(st))
+        # choix direct (19/11 21:59) : la liste des appareils est à l'écran, carte de l'appareil choisi entourée et visible
+        pk = fr.evaluate("""(ac) => { const c = document.querySelector('#c-ac [data-ac="' + ac + '"]'); if (!c) return {};
+          const r = c.getBoundingClientRect(); return {pick: c.classList.contains('ps-pick'), vis: r.top >= 0 && r.bottom <= innerHeight,
+          n: document.querySelectorAll('#c-ac .ps-pick').length}; }""", ac)
+        check(f'page Appareils {ac} ({w} px) : liste des appareils affichée, carte {ac} entourée et visible', pk.get('pick') and pk.get('vis') and pk.get('n') == 1, str(pk))
         b.close()
 print(f'{sum(checks)}/{len(checks)} vérifications')
 sys.exit(0 if all(checks) else 1)

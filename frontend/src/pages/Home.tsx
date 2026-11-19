@@ -3,8 +3,8 @@ import { useData, type DataIndex } from '../data';
 const CARDS = [
   { href: '#/simulateur', t: 'Simulateur', d: 'Le simulateur complet : 8 appareils, parcours guidés, contrôle aérien, pannes, examens.' },
   { href: '#/cours', t: 'Cours', d: "L'Académie : du premier cours au métier de pilote de ligne, avec QCM corrigés." },
-  { href: '#/appareils', t: 'Appareils', d: 'Les avions et hélicoptères du simulateur, en 3D, avec leurs données.' },
-  { href: '#/missions', t: 'Missions', d: 'Vols libres, parcours complets et scénarios tirés de cas réels.' },
+  // « Appareils » et « Missions » retirés de l'accueil (demande de l'auteur, 19/11 22:01), comme du menu (C4, C6) :
+  // le choix de l'appareil et de la mission se fait dans Parcours et dans le simulateur. Pages gardées par leur adresse.
   { href: '#/aeroports', t: 'Aéroports', d: 'Aéroports et pistes utilisés, avec leurs coordonnées.' },
 ];
 
