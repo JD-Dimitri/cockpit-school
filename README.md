@@ -14,7 +14,7 @@ de zéro jusqu'à la licence de pilote, et au-delà. La version gratuite (fichie
 | Interface React + Three.js | ✔ accueil, simulateur, cours (76 modules + QCM), appareils en 3D, missions, aéroports |
 | Boutons d'action des cours | ✔ « Ouvrir l'atelier », « Lancer le mode… », documents : ouvrent le simulateur directement sur l'action |
 | Simulateur jouable | ✔ le moteur d'origine tourne tel quel dans l'onglet « Simulateur » ; ses modules sont portés un par un (`docs/MIGRATION.md`) |
-| Moteur TypeScript | ✔ géographie et atmosphère portées : résultats identiques à l'original (`tests/parity_engine.py`) |
+| Moteur TypeScript | ✔ géographie, atmosphère et physique du vol (avions et hélicoptères) portées : résultats identiques à l'original (`tests/parity_engine.py`, `tests/parity_flight.py`) |
 | Comptes (interface) | ✔ connexion avec œil afficher / masquer, inscription, « Mot de passe oublié ? », nouveau mot de passe ; message clair si le serveur n'est pas joignable |
 | PDF des cours et exercices | ✔ chaque module et chaque partie, QCM et corrigés : par le serveur (dompdf) ou, en secours, par l'impression du navigateur |
 | API Symfony | ◐ données, comptes (hachage « auto », 5 tentatives / 15 min), réinitialisation (lien unique, 1 h), PDF ; code et tests écrits, **pas encore installés ni exécutés** (voir plus bas) |
@@ -51,6 +51,7 @@ Mise en ligne (o2switch) : le dossier `backend/public/` est la racine du site ; 
 ```bash
 python3 tools/extract_data.py      # régénère data/*.json depuis legacy/
 python3 tests/parity_engine.py     # moteur TypeScript = moteur d'origine (14 fonctions)
+python3 tests/parity_flight.py     # physique du vol = moteur d'origine (12 vols rejoués pas à pas, données des 8 appareils)
 python3 tests/e2e_front.py         # interface React, ordinateur et téléphone (36 vérifications)
 python3 tests/e2e_auth_pdf.py      # comptes, œil, PDF, boutons d'action des cours (69 vérifications)
 python3 tools/standalone.py SORTIE.html   # version autonome (un seul fichier, hors ligne)

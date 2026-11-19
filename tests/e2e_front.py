@@ -45,7 +45,10 @@ with sync_playwright() as p:
         img = Image.open(shot).convert('RGB')
         raw = img.tobytes(); lit = sum(1 for i in range(0, len(raw), 3) if raw[i] + raw[i + 1] + raw[i + 2] > 560)   # fuselage clair sur fond sombre
         check(f'[{tag}] appareils : silhouette 3D dessinée', lit > 50, f'{lit} pixels clairs')
+        bench = pg.locator('.bench').inner_text() if pg.locator('.bench').count() else ''
+        check(f'[{tag}] appareils : décollage calculé par le modèle de vol (A350)', 'Passage des 35 ft' in bench and '[CALCULÉ]' in bench and 'kt' in bench, bench[:120])
         pg.click('.tabs a[href="#/appareils/s76"]'); pg.wait_for_timeout(400)
+        check(f'[{tag}] appareils : pas de banc de décollage pour un hélicoptère', pg.locator('.bench').count() == 0)
         check(f'[{tag}] appareils : changement vers le S-76', 'S-76' in pg.inner_text('.ac h2'))
         pg.screenshot(path=str(OUT / f'pro_appareils_{tag}.png'))
 

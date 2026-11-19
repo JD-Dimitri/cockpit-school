@@ -181,3 +181,7 @@ a.card:hover { border-color: var(--cy); }
   .body svg .mg { fill: #9a1693; }
   .body .box, .body .lf, .body .lx, .body .ld { background: #fff; color: #111; }
 }
+
+/* banc d'essai du modèle de vol (page Appareils) */
+.bench { margin-top: 1rem; }
+.bench h3 { font: 600 1rem 'Barlow Condensed', sans-serif; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 .4rem; }

@@ -31,7 +31,8 @@ réseaux de roulage, textures du globe.
 |---|---|---|
 | géographie (`gcKm`, `brg`, `gcFrac`, `offsetLL`, `ecef`, `enuBasis`, `wrap360`, `wrapPi`) | `engine/geo.ts` | ✔ identique (test de parité) |
 | atmosphère et vitesses (`isaT`, `isaP`, `isaRho`, `sos`, `casFromTas`, `tasFromCas`) | `engine/atmosphere.ts` | ✔ identique (test de parité) |
-| physique du vol (`physics.js`, boucle de `base.html`) | `engine/flight.ts` | prochaine étape |
+| physique du vol (`fwStep`, `rwStep`, `move` de `base.html`, train fixe du 172 de `c172.js`) | `engine/flight.ts` | ✔ identique (test de parité : 12 vols, 20/20) ; utilisée par le banc de décollage de la page Appareils (`engine/bench.ts`) |
+| collisions avec les objets (`physics.js`) | `engine/collisions.ts` | à faire |
 | systèmes (électricité, hydraulique, carburant, APU) | `engine/systems/` | à faire |
 | pilote automatique et FMS | `engine/autopilot.ts` | à faire |
 | contrôle aérien et radio | `engine/atc.ts` | à faire (fréquences : validation de l'auteur) |
@@ -40,6 +41,16 @@ réseaux de roulage, textures du globe.
 | instruments (PFD, ND, ECAM) | `instruments/` | à faire |
 | parcours guidés, check-lists, examens | `pages/` + `engine/` | à faire |
 | actions des cours (`act()` de `acad.js`) | `pages/Simulator.tsx` (`runAction`) | ✔ reprises : atelier, modes, dossier de vol, documents |
+
+### Physique du vol : ce qui reste fourni par le moteur d'origine
+
+`flight.ts` reçoit par `FlightEnv` les fonctions pas encore portées : relief (`elevAt`), vent et rafales, givrage,
+freins, hydraulique et auto-frein, ILS, plan de vol, loi de pilotage selon l'hydraulique, crash et amerrissage, messages.
+Le test `tests/parity_flight.py` les prend dans le moteur d'origine pour les deux versions : il vérifie les équations du vol,
+pas ces modules, qui auront leur propre test de parité une fois portés. Douze vols sont rejoués pas à pas (0,02 s) :
+décollage, virage et protections de la loi normale, approche ILS automatique jusqu'à l'arrêt, croisière NAV, descente
+avec protection VMO, décrochage, décollage du Cessna 172, deux crashs, hélicoptère (décollage, AFCS et panne moteur,
+autorotation). Écart : 0 sur environ 740 000 valeurs comparées, mêmes messages.
 
 ## Chantiers reportés au GO PRO (décision du 18/11/2026)
 
