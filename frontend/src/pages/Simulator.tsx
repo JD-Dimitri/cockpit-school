@@ -103,16 +103,24 @@ export function Simulator({ action }: { action?: string }) {
           onLoad={() => {
             loaded.current = true;
             // Introduction du moteur : bouton « Passer et aller au simulateur » du haut retiré (demande de l'auteur, 19/11 18:34) ;
-            // « Plus tard : aller au simulateur » reste en bas de l'introduction.
-            try {
-              const d = frame.current?.contentDocument;
-              if (d && !d.getElementById('ps-ui')) {
-                const st = d.createElement('style');
-                st.id = 'ps-ui';
-                st.textContent = '#intro .skip{display:none!important}';
-                d.head.appendChild(st);
-              }
-            } catch { /* cadre d'une autre origine : sans effet */ }
+            // « Plus tard : aller au simulateur » reste en bas. Style posé dès que le document du moteur est prêt (≤ 30 s).
+            let tries = 0;
+            const ui = () => {
+              try {
+                const d = frame.current?.contentDocument;
+                if (d?.head && d.readyState !== 'loading' && d.URL !== 'about:blank') {
+                  if (!d.getElementById('ps-ui')) {
+                    const st = d.createElement('style');
+                    st.id = 'ps-ui';
+                    st.textContent = '#intro .skip{display:none!important}';
+                    d.head.appendChild(st);
+                  }
+                  return;
+                }
+              } catch { return; /* cadre d'une autre origine : sans effet */ }
+              if (++tries < 150) setTimeout(ui, 200);
+            };
+            ui();
             if (action && ACTION.test(action)) launch(action);
           }}
         />
