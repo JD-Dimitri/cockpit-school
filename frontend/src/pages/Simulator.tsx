@@ -24,7 +24,7 @@ function runAction(w: any, k: string): boolean {
     return !!w.eval(
       `(function(ac,mi,mode){ if(!AC[ac]||!MISSIONS[mi]) throw new Error('Parcours ou appareil inconnu : '+mi+' / '+ac);` +
         ` var p=document.getElementById('m-peda'), a=document.getElementById('m-auto'); if(p) p.checked=mode==='guide'; if(a) a.checked=mode==='auto';` +
-        ` var i=document.getElementById('intro'); if(i) i.hidden=true; selAC=ac; renderMenu();` +
+        ` var i=document.getElementById('intro'); if(i) i.hidden=true; try{ localStorage.setItem('sim-intro','1'); }catch(e){} selAC=ac; renderMenu();` +
         ` var full=(window.FULLOF?FULLOF(ac):null)===mi;` +
         ` var b=full?document.querySelector('#c-ac [data-ac="'+ac+'"]'):document.querySelector('.m2-mis [data-mi="'+mi+'"][data-k="'+ac+'"]');` +
         ` if(!b) return false; b.click(); return true; })(${JSON.stringify(ac)},${JSON.stringify(mi)},${JSON.stringify(mode)})`,
@@ -51,6 +51,11 @@ function runAction(w: any, k: string): boolean {
 }
 
 export function Simulator({ action }: { action?: string }) {
+  // Parcours ou action de cours lancés depuis la version Pro : l'introduction du moteur d'origine (déjà présentée par
+  // l'accueil et la fiche du parcours) ne doit pas recouvrir le simulateur. Même effet que son bouton « Passer ».
+  if (action && ACTION.test(action)) {
+    try { localStorage.setItem('sim-intro', '1'); } catch { /* stockage indisponible : l'introduction reste masquée par runAction */ }
+  }
   // Version autonome : srcdoc (même origine que la page, y compris ouverte en file://, ce qui permet de lancer les actions).
   const embedded = window.__PT_LEGACY__;
   // En ligne : moteur servi par l'API, seulement aux comptes connectés (F41) ; sans serveur : fichier statique (développement).

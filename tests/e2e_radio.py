@@ -46,8 +46,11 @@ with sync_playwright() as p:
         tag = f'{mi} × {ac}'
         if not fr:
             check(f'{tag} : moteur chargé', False); b.close(); continue
-        # vol libre : on ferme le dossier de vol éventuel, on donne l'alimentation radio et on ouvre le panneau radio
-        fr.evaluate("(() => { try { if (window.BR && BR.hide) BR.hide(); } catch (e) {} ; ATC.voice = false; ATC.snd = false; hasPower = () => true; if (AL()) { E320.dc = 1; } atcOpen(true); atcRender(true); })()")
+        # comme l'élève : « Passer le dossier et voler ▸ » ; puis radio alimentée (avion déjà sous tension) et panneau Radio ouvert
+        pg.wait_for_timeout(1500)
+        fr.evaluate("(() => { for (const id of ['br-skip', 'br-go']) { const b = document.getElementById(id); if (b && b.offsetParent && !b.hidden) { b.click(); return id; } } return null; })()")
+        pg.wait_for_timeout(800)
+        fr.evaluate("(() => { ATC.voice = false; ATC.snd = false; hasPower = () => true; radioPowered = () => true; paused = false; atcOpen(true); atcRender(true); })()")
         fr.wait_for_selector('#atc .abtn2', timeout=8000)
         labels = fr.locator('#atc .abtn2 button').all_text_contents()
         check(f'{tag} : boutons Répéter, Standby, Radio, Mayday / Pan-Pan', [l.strip() for l in labels] == ['Répéter', 'Standby', 'Radio ▾', 'Mayday / Pan-Pan'], str(labels))
@@ -62,21 +65,22 @@ with sync_playwright() as p:
         check(f'{tag} : station attendue réglée ({want})', fr.evaluate(f"Math.abs(tunedF() - STN['{want}'].f) < 0.004"))
         # Répéter avant tout message du contrôle
         n0 = len(log(fr)); fr.click('#atc [data-x=again]') if not fr.locator('#atc [data-x=again]').is_disabled() else None
-        # amène le premier échange à « à vous d'appeler » (ATIS passée), puis Appeler → réponse → collationnement attendu
-        ok_call = False
+        # l'ATIS écoutée (passée), le premier échange « à vous d'appeler » arrive ; l'élève règle la station avec Radio ▾ puis appelle
+        fr.evaluate("(() => { const x = curX(); if (x && x.type === 'atis') xDone(x, true); })()")
+        ready = False
         for _ in range(60):
-            st = fr.evaluate("(() => { const x = curX(); if (x && x.type === 'atis') xDone(x, true); const y = curX(); if (y && ATC.state === 'ready') return 'ready'; if (y && y.st) { atcTune(y.st); } return ATC.state; })()")
-            if st == 'ready': ok_call = True; break
-            if st == 'rb': break
+            if fr.evaluate("ATC.state === 'ready' && !!curX()"): ready = True; break
             pg.wait_for_timeout(250)
-        if ok_call:
-            fr.evaluate("atcRender(true)"); fr.click('#atc [data-a=call]')
+        k = fr.evaluate("curX() ? curX().st : null")
+        fr.evaluate("atcRender(true)"); fr.click('#atc [data-x=radio]'); fr.click(f'#atc [data-st="{k}"]')
+        fr.evaluate("atcRender(true)")
+        if ready: fr.click('#atc [data-a=call]')
         got_rb = False
         for _ in range(40):
             if fr.evaluate("ATC.state") == 'rb': got_rb = True; break
             pg.wait_for_timeout(250)
         L = log(fr)
-        check(f'{tag} : Appeler → réponse du contrôle, collationnement attendu', got_rb and any(x.startswith('ATC|') for x in L), str(L[-3:]))
+        check(f'{tag} : Appeler → réponse du contrôle, collationnement attendu', got_rb and any(x.startswith('ATC|') for x in L), f'ready={ready} state={fr.evaluate("ATC.state")} k={k} pw={fr.evaluate("radioPowered()")} ' + str(L[-3:]))
         cs = fr.evaluate("CSN()")
         check(f'{tag} : indicatif de l\'appareil dans l\'échange ({cs})', any(cs in x for x in L if x.startswith('PIL|')))
         fr.evaluate("atcRender(true)")
