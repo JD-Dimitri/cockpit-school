@@ -15,6 +15,8 @@ import { useEffect, useRef, useState } from 'react';
 import { apiAvailable } from '../auth';
 import { installRadioExt } from '../legacy-ext/radio';
 import { installMeteoExt } from '../legacy-ext/meteo';
+import { installTourExt } from '../legacy-ext/tourAvion';
+import { installEquipageExt } from '../legacy-ext/equipage';
 
 /** Retouches d'affichage du moteur (version autonome : posées dès le chargement, sans attendre). */
 const UI_CSS = '#intro .skip{display:none!important}#c-ac .ps-pick{outline:3px solid var(--cy);outline-offset:2px}';
@@ -28,7 +30,13 @@ const CSN_NEW = "{a320:'320',b777:'777',a350:'350',c172:'172',lj60:'60',s76:'76'
  *  à la position de l'avion, éclair, tonnerre. Ajout au chargement, fichier d'origine inchangé. */
 const SND_OLD = 'SND.panel=sndPanel;';
 const SND_NEW = 'SND.panel=sndPanel; SND.wxHere=wxHere; SND.lightning=lightning; SND.thunder=thunder;';
-const prepare = (html: string) => html.replace('</head>', UI_STYLE + '</head>').replace(CSN_OLD, CSN_NEW).replace(SND_OLD, SND_NEW);
+/** TA1 : plus de bip de recul de véhicule (« signal sonore ») pendant la visite à pied. TA2 : documents du dossier de vol
+ *  accessibles à la tablette (DOCS.D). Ajouts au chargement, fichier d'origine inchangé. */
+const BEEP_OLD = 'if(onApt&&walk&&t>ST.beepT){ ST.beepT=t+25+R()*40; beeper(); }';
+const DOCS_OLD = 'window.DOCS={ctx:()=>ctx(),';
+const DOCS_NEW = 'window.DOCS={D,ctx:()=>ctx(),';
+const prepare = (html: string) =>
+  html.replace('</head>', UI_STYLE + '</head>').replace(CSN_OLD, CSN_NEW).replace(SND_OLD, SND_NEW).replace(BEEP_OLD, '').replace(DOCS_OLD, DOCS_NEW);
 
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free)|ac:[a-z0-9]+)$/;
 
@@ -140,7 +148,11 @@ export function Simulator({ action }: { action?: string }) {
             // F37 : boutons radio (Répéter, Standby, Radio, Mayday / Pan-Pan) ajoutés dès que le moteur est prêt (≤ 30 s)
             let nx = 0;
             // F21 : choix de la météo et ses effets (piste, visibilité, précipitations, orage, foudre), voix du pilote
-            const ext = () => { const r = installRadioExt(frame.current), m = installMeteoExt(frame.current); if (!(r && m) && ++nx < 150) setTimeout(ext, 200); };
+            // TA1 : tour avion (arrêts, flèches rouges, bilan) ; TA2 : tablette de documents et double contrôle de l'équipage
+            const ext = () => {
+              const f = frame.current, ok = [installRadioExt(f), installMeteoExt(f), installTourExt(f), installEquipageExt(f)];
+              if (ok.includes(false) && ++nx < 150) setTimeout(ext, 200);
+            };
             ext();
             // Introduction du moteur : bouton « Passer et aller au simulateur » du haut retiré (demande de l'auteur, 19/11 18:34) ;
             // « Plus tard : aller au simulateur » reste en bas. Style posé dès que le document du moteur est prêt (≤ 30 s).

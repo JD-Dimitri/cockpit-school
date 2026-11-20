@@ -23,7 +23,7 @@ with sync_playwright() as p:
         check('le texte de la documentation n\'est pas dans le code de l\'interface (servi par l\'API seulement)', 'Le volet entrepreneurial' not in app)
         c = b.new_context(viewport={'width': 1280, 'height': 800}); serveur(c, admin=False); pg = c.new_page()
         pg.goto(URL + '#/parcours'); pg.wait_for_selector('.top nav a')
-        check('élève : pas de lien « Admin » dans le menu', pg.locator('.top nav a', has_text='Admin').count() == 0)
+        check('élève : pas de lien « Admin » dans le menu', pg.locator('.top nav a[href="#/admin"]').count() == 0)
         pg.goto(URL + '#/admin'); pg.wait_for_timeout(800)
         check('élève : #/admin → « Espace réservé aux administrateurs »', 'réservé aux administrateurs' in pg.locator('main').inner_text())
         c.close()
@@ -33,7 +33,7 @@ with sync_playwright() as p:
         pg = c.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
         pg.goto(URL + '#/parcours'); pg.wait_for_selector('.top nav a')
         tag = 'autonome' if AUTONOME else 'administrateur'
-        link = pg.locator('.top nav a', has_text='Admin')
+        link = pg.locator('.top nav a[href="#/admin"]')
         check(f'{tag} ({w} px) : lien « Admin » dans le menu', link.count() == 1)
         link.click(); pg.wait_for_selector('.admin-doc h1')
         t = pg.locator('.admin-doc h1').inner_text(); n = pg.locator('.admin-doc h2').count()
