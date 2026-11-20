@@ -72,6 +72,20 @@ function open(k){
   d.querySelectorAll('.go').forEach(function(b){ b.onclick = function(){ go(k, b.dataset.mi, b.dataset.mode); }; });
 }
 window.__PS_FICHE__ = open;
+/* Bas du poste de pilotage pour les 8 appareils (20/11 20:53) : planche de bord (face), pylône central, plancher, parois basses.
+   Repère : œil du pilote (0,0,0), x vers la droite, y vers le haut, z vers l'arrière ; cx = axe de l'appareil. Cotes [ESTIMÉ]. */
+window.__PS_LOWER__ = function(g, k, cx, box, M){
+  var air = k === 'a320' || k === 'b777' || k === 'a350', heli = k === 'h125' || k === 'r44';
+  var W = k === 'b777' ? 1.45 : k === 'a350' ? 1.4 : k === 'a320' ? 1.3 : k === 's76' ? 0.95 : k === 'lj60' ? 0.85 : k === 'c172' ? 0.56 : k === 'r44' ? 0.62 : 0.72;
+  var gz = k === 'lj60' ? -0.78 : air || k === 's76' ? -0.95 : -0.72, y0 = k === 'c172' ? -0.29 : -0.35;
+  var face = M(k === 'b777' ? 0x2f2b28 : 0x2a2e33), ped = M(k === 'b777' ? 0x3b3631 : 0x3a4048), floor = M(0x1c1e21), wall = M(k === 'c172' ? 0x8c8577 : 0x30353b);
+  var yF = air ? -1.25 : -1.1;                                                        // plancher sous les pieds
+  box(g, 2 * W, y0 - yF, 0.06, face, cx, (y0 + yF) / 2, gz - 0.06);                  // face de la planche de bord, jusqu'au plancher
+  box(g, 2 * W + 0.1, 0.04, 2.4, floor, cx, yF, gz + 1.1);                          // plancher
+  [-1, 1].forEach(function(s){ box(g, 0.05, y0 - yF + 0.1, 2.4, wall, cx + s * W, (y0 + yF) / 2, gz + 1.1); });   // parois basses
+  if (!heli) box(g, air ? 0.5 : 0.3, 0.32, air ? 1.0 : 0.6, ped, cx, yF + 0.2, gz + (air ? 0.55 : 0.4));            // pylône central
+  else box(g, 0.22, 0.25, 0.45, ped, cx, yF + 0.15, gz + 0.3);                                                       // console centrale
+};
 /* Écran de départ (demande de l'auteur du 20/11 20:27) : reste affiché tant qu'on n'a pas touché « Démarrer » ; ensuite le
    choix de l'appareil. Pas d'écran de départ quand un vol est lancé directement (cours, parcours) ; jamais par-dessus un vol. */
 if (window.__PS_START__) {

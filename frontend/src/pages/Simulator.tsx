@@ -46,6 +46,9 @@ const prepare = (html: string, start = false) =>
     .replace('<h1>SIMULATEUR <b>PLANE TRAJECTORIES</b></h1>', '<h1>SIMULATEUR <b>COCKPIT SCHOOL</b></h1>')
     .replace('<h1>✈ PLANE TRAJECTORIES · Introduction</h1>', '<h1>✈ COCKPIT SCHOOL · Introduction</h1>')
     .replace('b.onclick=home; box.prepend(b); } }', "b.onclick=home; const ac=box.querySelector('.acad-b'); if(ac) ac.before(b); else box.prepend(b); } }")
+    // Bas du poste (demande de l'auteur du 20/11 20:53 : « vide sous les pieds ») : planche, pylône, plancher et parois basses
+    // sous la casquette, pour les 8 appareils ; visibles quand les écrans 2D sont masqués. Formes simplifiées, cotes [ESTIMÉ].
+    .replace("  try{ detail(g,k,cx); }catch(e){ console.warn('poste détaillé',e); }", "  try{ detail(g,k,cx); }catch(e){ console.warn('poste détaillé',e); } try{ window.__PS_LOWER__&&__PS_LOWER__(g,k,cx,box,M); }catch(e){ console.warn('bas du poste',e); }")
     .replace(/<\/body>(?![\s\S]*<\/body>)/, () => ficheScript(AIRCRAFT_IMAGES, start) + '</body>');
 
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free)|ac:[a-z0-9]+)$/;
