@@ -72,6 +72,20 @@ function open(k){
   d.querySelectorAll('.go').forEach(function(b){ b.onclick = function(){ go(k, b.dataset.mi, b.dataset.mode); }; });
 }
 window.__PS_FICHE__ = open;
+/* Fin du parcours (20/11 23:21) : une fois les dernières procédures faites (« Terminer »), tous les écrans se referment :
+   panneau plafond, pylône, carte, radio, documents, check-list, tablette, sous-titres de l'équipage, planche de bord 2D. */
+window.__PS_ENDALL__ = function(){
+  function off(id, btn){ var e = document.getElementById(id); if (e) e.hidden = true; var b = btn && document.getElementById(btn); if (b) b.classList.remove('on'); }
+  try { ovhPinned = false; } catch (e) {}
+  off('ovh', 'b-ovh'); off('ped', 'b-ped'); off('help');
+  var mw = document.getElementById('mapw'); if (mw && !mw.hidden) { var bm = document.getElementById('b-map'); if (bm) bm.click(); if (!mw.hidden) mw.hidden = true; }
+  try { if (typeof atcOpen === 'function') atcOpen(false); } catch (e) {}
+  try { if (window.DOCS && DOCS.cur && DOCS.cur()) DOCS.close(); } catch (e) {}
+  try { var ck = document.getElementById('ckl'); if (ck && !ck.hidden) ck.hidden = true; } catch (e) {}
+  ['ps-efb', 'ps-eq', 'ps-ta', 'ps-arrow'].forEach(function(id){ var e = document.getElementById(id); if (e) e.style.display = 'none'; });
+  try { if (!scrHidden) { var s = [].slice.call(document.querySelectorAll('#bar button')).find(function(b){ return /Masquer écrans/i.test(b.textContent); }); if (s) s.click(); } } catch (e) {}
+  try { var g = document.getElementById('guide'); if (g) g.classList.add('min'); } catch (e) {}
+};
 /* Bas du poste de pilotage pour les 8 appareils (20/11 20:53) : planche de bord (face), pylône central, plancher, parois basses.
    Repère : œil du pilote (0,0,0), x vers la droite, y vers le haut, z vers l'arrière ; cx = axe de l'appareil. Cotes [ESTIMÉ]. */
 window.__PS_LOWER__ = function(g, k, cx, box, M){

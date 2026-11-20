@@ -49,6 +49,8 @@ const prepare = (html: string, start = false) =>
     // Bas du poste (demande de l'auteur du 20/11 20:53 : « vide sous les pieds ») : planche, pylône, plancher et parois basses
     // sous la casquette, pour les 8 appareils ; visibles quand les écrans 2D sont masqués. Formes simplifiées, cotes [ESTIMÉ].
     .replace("  try{ detail(g,k,cx); }catch(e){ console.warn('poste détaillé',e); }", "  try{ detail(g,k,cx); }catch(e){ console.warn('poste détaillé',e); } try{ window.__PS_LOWER__&&__PS_LOWER__(g,k,cx,box,M); }catch(e){ console.warn('bas du poste',e); }")
+    // Fin du parcours (demande de l'auteur du 20/11 23:21) : après les dernières procédures, tous les écrans se referment
+    .replace("GD.on=false; renderGuide(); flash('Parcours terminé','am'); return;", "GD.on=false; renderGuide(); flash('Parcours terminé','am'); try{ window.__PS_ENDALL__&&__PS_ENDALL__(); }catch(e){} return;")
     .replace(/<\/body>(?![\s\S]*<\/body>)/, () => ficheScript(AIRCRAFT_IMAGES, start) + '</body>');
 
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free)|ac:[a-z0-9]+)$/;
