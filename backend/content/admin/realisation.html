@@ -166,6 +166,13 @@ La météo choisie produit de vrais messages METAR, marqués [SIMULÉ]. Tout ce 
 vent, rafales, givrage et sons. L'extension ajoute ce qui manquait : l'état de la piste et le freinage, la visibilité, la pluie et la neige
 à l'écran, la turbulence d'orage, la foudre et la voix de synthèse du pilote.</p>
 
+<p>Même méthode pour les extensions suivantes : <code>tourAvion.ts</code> (arrêts devant chaque point de la visite, flèches rouges,
+bilan rangé dans les documents, zones de danger des moteurs en marche) et <code>equipage.ts</code> (tablette de documents, toutes les
+annonces et check-lists de l'équipage en « question / réponse », annonces en direct comme « V1 » ou « minimums » d'après la vitesse et la
+hauteur réelles). Le choix de la météo agit aussi sur la <b>densité de l'air</b> : ρ = P / (R·T), avec la pression tirée du QNH et la
+température du METAR. Par temps chaud, l'air est moins dense : la portance et la poussée baissent, le décollage s'allonge. C'est de la
+physique, pas un effet visuel.</p>
+
 <h2 id="d-donnees">8. Les données : ne jamais rien inventer</h2>
 <p>Un outil de formation qui affiche une fausse fréquence ou une fausse masse maximale peut induire un élève en erreur. Chaque donnée porte
 donc un <b>statut</b> :</p>
