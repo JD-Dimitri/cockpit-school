@@ -16,7 +16,7 @@ export function Missions() {
   return (
     <section className="page">
       <h1>Missions</h1>
-      <p className="lead">Pour commencer une mission, passez par l'onglet <a href="#/parcours">Parcours</a> : choix de l'appareil, fiche de présentation, puis validation. Elles restent aussi accessibles depuis le <a href="#/simulateur">Simulateur</a>.</p>
+      <p className="lead">Pour commencer une mission, choisissez l'appareil dans le <a href="#/simulateur">Simulateur</a> (ou la page <a href="#/parcours">Parcours</a>) : choix de l'appareil, fiche de présentation, puis validation. Elles restent aussi accessibles depuis le <a href="#/simulateur">Simulateur</a>.</p>
       {GROUPS.map(([title, test]) => {
         const list = Object.entries(data).filter(([k, m]) => !used.has(k) && test(k, m));
         list.forEach(([k]) => used.add(k));

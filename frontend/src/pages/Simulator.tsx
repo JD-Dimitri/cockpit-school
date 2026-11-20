@@ -17,9 +17,11 @@ import { installRadioExt } from '../legacy-ext/radio';
 import { installMeteoExt } from '../legacy-ext/meteo';
 import { installTourExt } from '../legacy-ext/tourAvion';
 import { installEquipageExt } from '../legacy-ext/equipage';
+import { useData, type Aircraft, type Mission } from '../data';
+import { parcoursList, launchAction } from '../parcours';
 
 /** Retouches d'affichage du moteur (version autonome : posées dès le chargement, sans attendre). */
-const UI_CSS = '#intro .skip{display:none!important}#c-ac .ps-pick{outline:3px solid var(--cy);outline-offset:2px}#rtprop{bottom:calc(var(--barh,56px) + 18px)!important}';
+const UI_CSS = '#c-ac .ps-parc{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}#c-ac .ps-parc [data-go]{display:inline-block;padding:6px 9px;border-radius:8px;border:1px solid #3fd0ff;background:#0d2232;color:#fff;font:600 12px Inter,sans-serif;text-transform:none;letter-spacing:0;cursor:pointer}#c-ac .ps-parc [data-go].full{border-color:#e05ad8}#c-ac .ps-parc small{width:100%;opacity:.7;font-size:11px;text-transform:none}#intro .skip{display:none!important}#c-ac .ps-pick{outline:3px solid var(--cy);outline-offset:2px}#rtprop{bottom:calc(var(--barh,56px) + 18px)!important}';
 const UI_STYLE = '<style id="ps-ui">' + UI_CSS + '</style>';
 
 /** Indicatif radio propre à chaque appareil (F37) : le moteur d'origine donnait « SIMU 01 » au 777, à l'A350 et au C172.
@@ -120,6 +122,38 @@ export function Simulator({ action }: { action?: string }) {
   const loaded = useRef(false);
 
   /** Attend que le moteur soit prêt (≤ 30 s : téléphones lents, moteur de 4,8 Mo), puis lance l'action demandée. */
+  // PARC1 (demande de l'auteur du 20/11 20:01) : le contenu de « Parcours » dans le choix des aéronefs du simulateur, et moins de
+  // clics : sous chaque appareil, ses parcours ; un toucher lance directement le vol (guidé ou automatique pour le parcours complet).
+  const { data: missions } = useData<Record<string, Mission>>('missions');
+  const { data: acs } = useData<Record<string, Aircraft>>('aircraft');
+  const parc = useRef<Record<string, { key: string; n: string; full: boolean }[]>>({});
+  if (missions && acs && !Object.keys(parc.current).length) {
+    parcoursList(missions, acs).forEach((p) => p.aircraft.forEach((k) => (parc.current[k] ??= []).push({ key: p.key, n: p.mission.n, full: p.full })));
+  }
+  useEffect(() => {
+    const id = setInterval(() => {
+      try {
+        const d = frame.current?.contentDocument;
+        d?.querySelectorAll<HTMLElement>('#c-ac [data-ac]').forEach((card) => {
+          const k = card.dataset.ac!, L = parc.current[k];
+          if (!L || card.querySelector('.ps-parc')) return;
+          const box = d.createElement('span');
+          box.className = 'ps-parc';
+          box.innerHTML = '<small>Lancer directement :</small>' + L.map((p) => p.full
+            ? `<span role="button" tabindex="0" class="full" data-go="${launchAction(k, p.key, 'guide')}">▶ Parcours complet · guidé</span><span role="button" tabindex="0" class="full" data-go="${launchAction(k, p.key, 'auto')}">▶ Parcours complet · auto</span>`
+            : `<span role="button" tabindex="0" data-go="${launchAction(k, p.key, 'guide')}">▶ ${p.n.replace(/[<>&"]/g, '')}</span>`).join('');
+          box.querySelectorAll<HTMLElement>('[data-go]').forEach((b) => {
+            const go = (e: Event) => { e.stopPropagation(); e.preventDefault(); const a = b.dataset.go!;
+              if (location.hash === '#/simulateur/' + a) launch(a); else location.hash = '#/simulateur/' + a; };
+            b.addEventListener('click', go);
+            b.addEventListener('keydown', (e) => { if ((e as KeyboardEvent).key === 'Enter') go(e); });
+          });
+          card.appendChild(box);
+        });
+      } catch { /* cadre pas encore prêt */ }
+    }, 700);
+    return () => clearInterval(id);
+  }, []);
   const launch = (k: string) => {
     let tries = 0;
     const tick = () => {

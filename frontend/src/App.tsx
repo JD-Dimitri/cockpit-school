@@ -15,7 +15,6 @@ import { Admin } from './pages/Admin';
 
 const ROUTES = [
   { path: '', label: 'Accueil', el: () => <Home /> },
-  { path: 'parcours', label: 'Parcours', el: (p: string[]) => <Parcours mi={p[0]} ac={p[1]} /> },
   { path: 'simulateur', label: 'Simulateur', el: (p: string[]) => <Simulator action={p[0]} /> },
   { path: 'cours', label: 'Cours', el: (p: string[]) => <Courses part={p[0]} mod={p[1]} /> },
 ] as const;
@@ -38,6 +37,9 @@ const HIDDEN: Record<string, (p: string[]) => JSX.Element> = {
   aeroports: () => <Airports />,
   // Espace administrateur (20/11) : lien visible seulement pour un administrateur ; l'accès est contrôlé par le serveur.
   admin: () => <Admin />,
+  // Parcours : retiré du menu (demande de l'auteur, 20/11 20:01) ; son contenu est dans le choix des aéronefs du simulateur.
+  // La page reste ouverte par son adresse (liens existants, fiches des appareils).
+  parcours: (p) => <Parcours mi={p[0]} ac={p[1]} />,
   imprimer: (p) => <PrintCourse part={p[0]} mod={p[1] === 'auto' ? undefined : p[1]} auto={p.includes('auto')} />,
 };
 
