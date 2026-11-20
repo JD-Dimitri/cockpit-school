@@ -66,8 +66,9 @@ window.placeWalkCam = function(){
 var css = document.createElement('style');
 css.textContent = '#ps-arrow{position:fixed;left:0;top:0;width:0;height:0;pointer-events:none;z-index:64;display:none}'
  + '#ps-arrow svg{position:absolute;left:-60px;top:-60px;width:120px;height:120px;overflow:visible;filter:drop-shadow(0 0 3px #000)}'
+ + '@media (max-width:600px){#ps-arrow span{font-size:11px!important;max-width:46vw;overflow:hidden;text-overflow:ellipsis}}'
  + '#ps-arrow span{position:absolute;left:18px;top:24px;white-space:nowrap;background:#d7261e;color:#fff;font:700 13px/1.2 "Barlow Condensed",sans-serif;letter-spacing:.04em;padding:3px 7px;border-radius:4px}'
- + '#ps-ta{position:fixed;left:50%;bottom:120px;transform:translateX(-50%);z-index:65;width:min(560px,calc(100vw - 20px));background:#0b1520ee;border:1px solid #2b3d50;border-left:4px solid #d7261e;border-radius:10px;padding:8px 10px;color:#e8eef2;font:13px/1.35 Inter,sans-serif;display:none}'
+ + '#ps-ta{position:fixed;left:50%;bottom:var(--ps-ta-b,120px);transform:translateX(-50%);z-index:65;width:min(560px,calc(100vw - 20px));background:#0b1520ee;border:1px solid #2b3d50;border-left:4px solid #d7261e;border-radius:10px;padding:8px 10px;color:#e8eef2;font:13px/1.35 Inter,sans-serif;display:none}'
  + '.ps-hold{flex-wrap:wrap;gap:6px 8px;align-items:center}.ps-hold [hidden]{display:none!important}.ps-hold .ps-pt{flex:1 1 100%;font:700 14px "Barlow Condensed",sans-serif;letter-spacing:.04em}.ps-hold .bar{flex:1 1 120px;height:6px;background:#22313f;border-radius:3px;overflow:hidden}.ps-hold .bar i{display:block;height:100%;background:#d7261e}'
  + '.ps-hold button,.ps-bilan button{background:#132232;color:#fff;border:1px solid #2b3d50;border-radius:8px;padding:6px 10px;font:700 13px "Barlow Condensed",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}'
  + '.ps-hold button.go,.ps-bilan button.go{background:#1f8a4c;border-color:#3ddc84}'
@@ -110,6 +111,8 @@ ctl.innerHTML = '<b class="ps-pt"></b><span class="ps-left"></span><span class="
   + '<button type="button" class="go" data-ta="bilan">Bilan contrôle visuel</button>';
 document.body.appendChild(ctl);
 function decorate(){
+  // toujours juste au-dessus de la barre de boutons (sa hauteur change : 1 à 3 rangées selon l'écran)
+  try { var bar = document.getElementById('bar'); if (bar && bar.getBoundingClientRect().height > 0) ctl.style.setProperty('--ps-ta-b', Math.round(innerHeight - bar.getBoundingClientRect().top + 8) + 'px'); } catch (e) {}
   var pts = WALKPTS[ACK] || [], inWalk = typeof view !== 'undefined' && view === 'walk' && MI && $('menu').hidden;
   var left = Math.max(0, (TA.until - performance.now()) / 1000), done = seenN() >= pts.length && pts.length > 0;
   var holding = typeof AUTO !== 'undefined' && AUTO.on && left > 0 && TA.cur >= 0;

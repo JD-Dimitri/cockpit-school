@@ -151,7 +151,7 @@ window.__ps_live_now = live;   // tests : un passage immédiat
 /* ---------- 4. Affichage et voix ----------
    Sous-titres toujours affichés ; voix de synthèse seulement quand le son du simulateur est actif (bouton « 🔊 Son »). */
 var css = document.createElement('style');
-css.textContent = '#ps-eq{position:fixed;right:10px;top:70px;z-index:64;max-width:min(420px,calc(100vw - 20px));max-height:45vh;overflow:auto;background:#0b1520ee;border:1px solid #2b3d50;border-left:4px solid #3fd0ff;border-radius:10px;padding:8px 10px;color:#e8eef2;font:13px/1.4 Inter,sans-serif;display:none}'
+css.textContent = '#ps-eq{position:fixed;left:12px;top:118px;z-index:64;width:min(380px,calc(100vw - 24px));max-height:34vh;overflow:hidden;transition:opacity .4s;background:#0b1520ee;border:1px solid #2b3d50;border-left:4px solid #3fd0ff;border-radius:10px;padding:8px 10px;color:#e8eef2;font:13px/1.4 Inter,sans-serif;display:none}'
  + '#ps-eq b{font:700 12px "Barlow Condensed",sans-serif;letter-spacing:.12em;color:#3fd0ff;text-transform:uppercase}#ps-eq p{margin:4px 0}#ps-eq .w{color:#ffd166;font-weight:700}#ps-eq small{color:#8fa4b8}'
  + '#ps-eq button{float:right;background:none;border:0;color:#8fa4b8;font-size:18px;cursor:pointer;line-height:1;pointer-events:auto}'
  + '#ps-eq{pointer-events:none}'   // les sous-titres ne bloquent jamais les commandes situées dessous (panneau radio…) ; seul × reste cliquable
@@ -180,7 +180,20 @@ function head(title){
   box.style.display = 'block';
   box.innerHTML = '<button type="button" aria-label="Fermer" data-eqx>×</button><b>Équipage · ' + title + '</b><small> — ' + (audible() ? 'voix de synthèse' : 'son coupé : sous-titres') + '</small>';
 }
-function line(L){ var p = document.createElement('p');
+/* UX (revue du 20/11 15:37) : des sous-titres, pas un panneau. On ne garde à l'écran que les 2 dernières répliques ; la boîte
+   s'efface 8 s après la dernière ; sur téléphone elle se pose juste au-dessus de la barre de boutons (et du bandeau « Trajet réel »
+   s'il est affiché), sur ordinateur à gauche, sous le cadre des paramètres, là où le poste ne cache aucune commande. */
+function place(){
+  try { if (innerWidth >= 900) { box.style.top = '118px'; box.style.bottom = 'auto'; box.style.left = '12px'; return; }
+    var bar = document.getElementById('bar'), rt = document.getElementById('rtprop'), y = innerHeight;
+    if (bar && bar.getBoundingClientRect().height > 0) y = Math.min(y, bar.getBoundingClientRect().top);
+    if (rt && rt.getBoundingClientRect().height > 0 && rt.getBoundingClientRect().height < 200) y = Math.min(y, rt.getBoundingClientRect().top);
+    box.style.top = 'auto'; box.style.left = '8px'; box.style.bottom = Math.round(innerHeight - y + 8) + 'px'; } catch (e) {}
+}
+function fade(){ clearTimeout(EQ.fd); box.style.opacity = '1'; EQ.fd = setTimeout(function(){ if (!busy && !Q.length) { box.style.opacity = '0'; setTimeout(function(){ if (box.style.opacity === '0') box.style.display = 'none'; }, 450); } else fade(); }, 8000); }
+setInterval(function(){ if (box.style.display === 'block') place(); }, 500);
+function line(L){ var old = box.querySelectorAll('p'); for (var i = 0; i < old.length - 1; i++) old[i].remove();
+  place(); fade(); var p = document.createElement('p');
   p.innerHTML = '<span class="w">' + (L[0] === 'CDB' ? (twoCrew() ? 'Commandant (vous)' : 'Pilote (vous)') : 'Copilote') + ' :</span> « ' + L[1] + ' » <small>' + L[2] + '</small>';
   box.appendChild(p); box.scrollTop = box.scrollHeight; EQ.log.push([L[0], L[1]]); voice(L[0], L[1]); }
 var Q = [], busy = false;

@@ -19,7 +19,7 @@ import { installTourExt } from '../legacy-ext/tourAvion';
 import { installEquipageExt } from '../legacy-ext/equipage';
 
 /** Retouches d'affichage du moteur (version autonome : posées dès le chargement, sans attendre). */
-const UI_CSS = '#intro .skip{display:none!important}#c-ac .ps-pick{outline:3px solid var(--cy);outline-offset:2px}';
+const UI_CSS = '#intro .skip{display:none!important}#c-ac .ps-pick{outline:3px solid var(--cy);outline-offset:2px}#rtprop{bottom:calc(var(--barh,56px) + 18px)!important}';
 const UI_STYLE = '<style id="ps-ui">' + UI_CSS + '</style>';
 
 /** Indicatif radio propre à chaque appareil (F37) : le moteur d'origine donnait « SIMU 01 » au 777, à l'A350 et au C172.
