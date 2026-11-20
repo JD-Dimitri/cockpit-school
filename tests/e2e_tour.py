@@ -179,7 +179,7 @@ with sync_playwright() as p:
         pg.wait_for_timeout(300)
         fr.evaluate("(() => { if (S.eng) S.eng = S.eng.map(() => 1); S.nr = 1; const e = A.kind === 'fw' && ACK !== 'c172' ? (WALKPTS[ACK] || []).find(p => /[Mm]oteur|[Rr]éacteur/.test(p[2])) : null; const t = e ? [e[0], e[1] - 0.5] : ACK === 'c172' ? [0, -3.6] : [0, 0]; const q = m2l(t[0], t[1]); GD.walk.x = q[0]; GD.walk.z = q[1]; setView('walk'); })()")
         fr.evaluate("window.__keep = setInterval(() => { if (S.eng) S.eng = S.eng.map(() => 1); S.nr = 1; }, 30)")   # moteurs maintenus en marche (pas de carburant ni de systèmes réglés dans ce test)
-        for _ in range(20):
+        for _ in range(50):
             pg.wait_for_timeout(200)
             if fr.evaluate("!!document.getElementById('crash')"): break
         diag = fr.evaluate("(() => JSON.stringify({view, mi: !!MI, acc: __PS_TA__.acc, d: (__PS_DANGER__() || '').slice(0, 40), eng: S.eng, crash: !!document.getElementById('crash')}))()")

@@ -49,7 +49,7 @@ with sync_playwright() as p:
         sim = pg.locator('.ac .actions a.btn').first
         check(f'[{tag}] appareils : bouton « Simulateur » → écran de départ du simulateur, A350 choisi', sim.text_content().strip() == 'Simulateur ▸' and sim.get_attribute('href') == '#/simulateur/ac:a350', sim.get_attribute('href'))
         nav = [a.strip() for a in pg.locator('header nav a:not(.acct)').all_text_contents()]
-        check(f'[{tag}] menu : Parcours, Simulateur, Cours (Appareils, Missions, Aéroports retirés)', [n.upper() for n in nav] == ['PARCOURS', 'SIMULATEUR', 'COURS'], str(nav))
+        check(f'[{tag}] menu : Parcours, Simulateur, Cours (Appareils, Missions, Aéroports retirés)', [n.upper() for n in nav if n.upper() != 'ADMIN'] == ['PARCOURS', 'SIMULATEUR', 'COURS'], str(nav))   # « Admin » : seulement pour un administrateur (cas de la version autonome)
         bench = pg.locator('.bench').inner_text() if pg.locator('.bench').count() else ''
         check(f'[{tag}] appareils : décollage calculé par le modèle de vol (A350)', 'Passage des 35 ft' in bench and '[CALCULÉ]' in bench and 'kt' in bench, bench[:120])
         pg.click('.tabs a[href="#/appareils/s76"]'); pg.wait_for_timeout(400)
