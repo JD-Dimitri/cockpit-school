@@ -17,7 +17,7 @@ import { installRadioExt } from '../legacy-ext/radio';
 import { installMeteoExt } from '../legacy-ext/meteo';
 import { installTourExt } from '../legacy-ext/tourAvion';
 import { installEquipageExt } from '../legacy-ext/equipage';
-import { ficheScript } from '../legacy-ext/fiche';
+import { ficheScript, startEarly } from '../legacy-ext/fiche';
 import { AIRCRAFT_IMAGES } from '../aircraftImages';
 
 /** Retouches d'affichage du moteur (version autonome : posées dès le chargement, sans attendre). */
@@ -51,7 +51,8 @@ const prepare = (html: string, start = false) =>
     .replace("  try{ detail(g,k,cx); }catch(e){ console.warn('poste détaillé',e); }", "  try{ detail(g,k,cx); }catch(e){ console.warn('poste détaillé',e); } try{ window.__PS_LOWER__&&__PS_LOWER__(g,k,cx,box,M); }catch(e){ console.warn('bas du poste',e); }")
     // Fin du parcours (demande de l'auteur du 20/11 23:21) : après les dernières procédures, tous les écrans se referment
     .replace("GD.on=false; renderGuide(); flash('Parcours terminé','am'); return;", "GD.on=false; renderGuide(); flash('Parcours terminé','am'); try{ window.__PS_ENDALL__&&__PS_ENDALL__(); }catch(e){} return;")
-    .replace(/<\/body>(?![\s\S]*<\/body>)/, () => ficheScript(AIRCRAFT_IMAGES, start) + '</body>');
+    .replace(/<\/body>(?![\s\S]*<\/body>)/, () => ficheScript(AIRCRAFT_IMAGES, start) + '</body>')
+    .replace('<body>', () => '<body>' + (start ? startEarly() : ''));
 
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free)|ac:[a-z0-9]+)$/;
 
