@@ -104,7 +104,8 @@ with sync_playwright() as p:
         # TA2 · installation dans le poste : tablette + double contrôle
         fr.evaluate("(() => { AUTO.on = false; __PS_EQ__.played = {}; __PS_EQ__.last = ''; const e = document.getElementById('ps-efb'); if (e) e.remove(); })()")
         k = fr.evaluate("GD.steps.findIndex(s => /Monter à bord/.test(s.t))")
-        fr.evaluate(f"goStep({k})"); pg.wait_for_timeout(2500)
+        # goStep peut être retenu par la checklist (sous-étapes manquantes) : on se place alors directement sur l'étape
+        fr.evaluate(f"(() => {{ try {{ goStep({k}); }} catch (e) {{}} if (GD.i !== {k}) GD.i = {k}; const c = document.getElementById('ckl'); if (c) c.hidden = true; }})()"); pg.wait_for_timeout(2500)
         efb = fr.evaluate("(() => ({open: !!document.getElementById('ps-efb'), n: document.querySelectorAll('#ps-efb [data-efb]').length, all: DOCS.list().length}))()")
         check(f'{tag} : installation en poste → tablette avec tous les documents en tuiles', efb['open'] and efb['n'] == efb['all'] and efb['n'] >= 10, str(efb))
         if efb['open']:
@@ -119,13 +120,13 @@ with sync_playwright() as p:
         k = fr.evaluate("GD.steps.findIndex(s => /roulage/i.test(s.t))")
         if k < 0:   # hélicoptères : pas d'étape de roulage ; l'annonce de décollage est vérifiée à la place
             k = fr.evaluate("GD.steps.findIndex(s => /^Décollage/i.test(s.t))")
-            fr.evaluate(f"(() => {{ __PS_EQ__.last = ''; goStep({k}); }})()")
+            fr.evaluate(f"(() => {{ __PS_EQ__.last = ''; try {{ goStep({k}); }} catch (e) {{}} if (GD.i !== {k}) GD.i = {k}; const c = document.getElementById('ckl'); if (c) c.hidden = true; }})()")
             for _ in range(30):
                 pg.wait_for_timeout(1000); eq = fr.evaluate("__PS_EQ__.log.map(x => x[1]).join('\\n')")
                 if 'clear above and around' in eq: break
             check(f'{tag} : au décollage, annonce « dégagé au-dessus et autour »' + (' (commandant puis copilote)' if two else ''), 'clear above and around' in eq, eq[-200:])
         else:
-            fr.evaluate(f"(() => {{ __PS_EQ__.last = ''; goStep({k}); }})()")
+            fr.evaluate(f"(() => {{ __PS_EQ__.last = ''; try {{ goStep({k}); }} catch (e) {{}} if (GD.i !== {k}) GD.i = {k}; const c = document.getElementById('ckl'); if (c) c.hidden = true; }})()")
             want = 'Clear right.' if two else 'Clear left, clear right'
             for _ in range(90):
                 pg.wait_for_timeout(1000)

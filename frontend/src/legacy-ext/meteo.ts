@@ -25,7 +25,7 @@ if (window.__PS_METEO__ || typeof wxSet !== 'function' || typeof WXS === 'undefi
 /* ---------- 1. Scénarios météo ---------- */
 var PRESETS = [
   ['reel', 'Réel', 'METAR observés (en direct ou relevés)'],
-  ['sec', 'Sec', 'CAVOK, vent faible'],
+  ['sec', 'Soleil ☀️', 'CAVOK, ciel dégagé, vent faible'],
   ['nuageux', 'Nuageux', 'couches à 1 500 et 4 000 ft'],
   ['pluie', 'Pluie', 'pluie modérée, plafond 800 ft, piste mouillée'],
   ['brouillard', 'Brouillard', 'visibilité 200 m, ciel invisible'],
@@ -33,6 +33,7 @@ var PRESETS = [
   ['vent', 'Vent fort', '25 kt, rafales 40 kt'],
   ['orage', 'Orage', 'orage et pluie, cumulonimbus, rafales, foudre'],
   ['tempete', 'Tempête', 'orage violent, grêle, rafales 55 kt'],
+  ['ouragan', 'Ouragan', 'vent 75 kt, rafales 100 kt, pluie torrentielle : aucun vol possible'],
   ['givrage', 'Givrage', 'nuages à −4 °C, bruine verglaçante']
 ];
 var MET = { k: 'reel', real: null, lastStrike: 0, strikes: 0 };
@@ -59,6 +60,7 @@ function metarFor(icao, k){
   if (k === 'vent')      { w = D + '25G40KT'; cl = 'SCT030'; dp = T - 6; q -= 8; }
   if (k === 'orage')     { w = D + '18G35KT'; vis = '3000'; wx = 'TSRA'; cl = 'BKN012CB OVC030'; t = Math.max(T, 18); dp = t - 2; q -= 5; }
   if (k === 'tempete')   { w = D + '35G55KT'; vis = '1500'; wx = '+TSRAGR'; cl = 'BKN008CB OVC020'; t = Math.max(T, 16); dp = t - 1; q -= 18; }
+  if (k === 'ouragan')   { w = D + '75G100KT'; vis = '0800'; wx = '+TSRA'; cl = 'BKN005CB OVC015'; t = Math.max(T, 26); dp = t - 1; q -= 45; }
   if (k === 'givrage')   { w = D + '10KT'; vis = '3000'; wx = 'FZDZ'; cl = 'OVC006 OVC030'; t = -4; dp = -5; }
   var qq = icao[0] === 'K' ? 'A' + pad(Math.round(q / 33.8639 * 100), 4) : 'Q' + pad(q, 4);
   return ['METAR', icao, stamp(), w, vis, wx, cl, tmp(t) + '/' + tmp(Math.min(dp, t)), qq].filter(Boolean).join(' ');
@@ -84,6 +86,7 @@ function apply(k){
   WXS.ver++; try { ST.wxT = 0; } catch (e) {}
   var p = PRESETS.filter(function(x){ return x[0] === k; })[0];
   flash('Météo : ' + p[1] + (k === 'reel' ? '' : ' [SIMULÉ]') + ' — ATIS, vent, piste et sons mis à jour', 'am');
+  if (k === 'ouragan') setTimeout(function(){ flash('OURAGAN [SIMULÉ] : vent moyen 75 kt, rafales 100 kt, bien au-delà des limites de vent traversier de tous les appareils : aucun décollage ni atterrissage n\'est possible. Avions amarrés ou à l\'abri, aéroport fermé.', 'red'); }, 2700);
   try { localStorage.setItem('ps-meteo', k); } catch (e) {}
   if (typeof ATC !== 'undefined') { ATC.ver++; atcRender(true); }
 }
@@ -119,6 +122,18 @@ function rwyState(){
   return { c: 6, n: 'sèche', k: 1 };
 }
 window.__PS_RWY__ = rwyState;
+
+/* ---------- 2 bis. Densité de l'air réelle (température et pression du METAR) ----------
+   Le moteur d'origine calcule la densité de l'atmosphère type (ISA, 15 °C et 1 013 hPa au niveau de la mer). Ici :
+   ρ = P / (R·T) avec la pression ramenée par le QNH et la température ISA + ΔT (ΔT = écart du METAR à l'ISA, gardé en altitude),
+   ce que font les calculs de performances réels [CALCULÉ]. Par temps chaud ou en altitude, l'air est moins dense : portance et
+   poussée baissent, le décollage s'allonge ; par temps froid, l'inverse. Appliqué par la fonction de densité du moteur (retouche
+   faite au chargement, pages/Simulator.tsx). */
+function near200(){ var L = metNear(S.lat, S.lon)[0]; return L && L[0] < 200 ? L[1] : null; }
+window.__PS_RHOK__ = function(h){
+  try { var m = near200(); if (!m) return 1; var el = Math.max(0, elevAt(S.lat, S.lon)), Ti = isaT(Math.max(-500, h)), dT = (m.temp == null ? 15 : m.temp) - (isaT(el) - 273.15);
+    var k = ((m.qnh || 1013.25) / 1013.25) * (Ti / (Ti + dT)); return isFinite(k) && k > 0.5 && k < 1.5 ? k : 1; } catch (e) { return 1; }
+};
 var brk0 = window.brkEff;
 window.brkEff = function(){ var e = brk0(); return S && S.onGround ? e * rwyState().k : e; };
 
@@ -180,10 +195,20 @@ var gust0 = window.gustStep;
 window.gustStep = function(dt){
   gust0(dt);
   try { if (!MI || S.onGround) return; var m = metHere(); if (!m) return; var ts = (m.wx || []).some(function(s){ return /TS/.test(s); }), ag = (S.alt - elevAt(S.lat, S.lon)) / FT;
-    if (!ts || ag > 20000) return; var sw = /\+/.test((m.wx || []).join(' ')) ? 4.5 : 2.5;      // σw orage modéré à fort [ESTIMÉ]
+    if (!ts || ag > 20000) { MET.ws = null; return; } var sw = /\+/.test((m.wx || []).join(' ')) ? 4.5 : 2.5;      // σw orage modéré à fort [ESTIMÉ]
     var V = Math.max(S.V, 30), tau = Math.max(1, 300 / V), a = Math.exp(-dt / tau), kk = Math.sqrt(1 - a * a);
     MET.tw = (MET.tw || 0) * a + sw * kk * rndN(); MET.tu = (MET.tu || 0) * a + sw * 0.7 * kk * rndN();
-    GUST.w += MET.tw * kk; GUST.u += MET.tu * kk; } catch (e) {}
+    GUST.w += MET.tw * kk; GUST.u += MET.tu * kk;
+    /* micro-rafale (cisaillement de vent) sous un orage, en basse couche : d'abord un vent de face qui augmente (la vitesse
+       indiquée monte), puis un courant descendant et un vent arrière (la vitesse chute) sur ≈ 20 s. Ordres de grandeur des
+       micro-rafales documentées [ESTIMÉ ; principe : FAA AC 00-54, « Pilot Windshear Guide »]. */
+    if (ag > 80 && ag < 1500 && !MET.ws && performance.now() - (MET.wsLast || 0) > 180000 && Math.random() < dt / 60) { MET.ws = { t: 0 }; MET.wsLast = performance.now();
+      flash('WINDSHEAR AHEAD [SIMULÉ] : micro-rafale sous l\'orage — manœuvre de sortie : pleine poussée, ailes à plat, assiette vers l\'avertisseur de décrochage, configuration inchangée', 'red'); }
+    if (MET.ws) { var T = MET.ws.t += dt, f = /\+/.test((m.wx || []).join(' ')) ? 1.4 : 1;
+      if (T < 6) GUST.u += 7 * f * Math.sin(Math.PI * T / 6);                       // vent de face qui forcit
+      else if (T < 20) { var x = (T - 6) / 14; GUST.u -= 12 * f * Math.sin(Math.PI * x); GUST.w -= 5 * f * Math.sin(Math.PI * x); }   // vent arrière et descendance
+      else MET.ws = null; }
+  } catch (e) {}
 };
 
 /* ---------- 5. Radio en audio : voix de synthèse du pilote ---------- */

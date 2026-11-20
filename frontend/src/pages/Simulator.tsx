@@ -32,11 +32,14 @@ const SND_OLD = 'SND.panel=sndPanel;';
 const SND_NEW = 'SND.panel=sndPanel; SND.wxHere=wxHere; SND.lightning=lightning; SND.thunder=thunder;';
 /** TA1 : plus de bip de recul de véhicule (« signal sonore ») pendant la visite à pied. TA2 : documents du dossier de vol
  *  accessibles à la tablette (DOCS.D). Ajouts au chargement, fichier d'origine inchangé. */
+/** MET2 : densité de l'air réelle (température et QNH du METAR), voir legacy-ext/meteo.ts (__PS_RHOK__). */
+const RHO_OLD = 'const isaRho=h=>isaP(Math.max(-500,h))/(287.05*isaT(Math.max(-500,h)));';
+const RHO_NEW = 'const isaRho=h=>isaP(Math.max(-500,h))/(287.05*isaT(Math.max(-500,h)))*(window.__PS_RHOK__?window.__PS_RHOK__(h):1);';
 const BEEP_OLD = 'if(onApt&&walk&&t>ST.beepT){ ST.beepT=t+25+R()*40; beeper(); }';
 const DOCS_OLD = 'window.DOCS={ctx:()=>ctx(),';
 const DOCS_NEW = 'window.DOCS={D,ctx:()=>ctx(),';
 const prepare = (html: string) =>
-  html.replace('</head>', UI_STYLE + '</head>').replace(CSN_OLD, CSN_NEW).replace(SND_OLD, SND_NEW).replace(BEEP_OLD, '').replace(DOCS_OLD, DOCS_NEW);
+  html.replace('</head>', UI_STYLE + '</head>').replace(CSN_OLD, CSN_NEW).replace(SND_OLD, SND_NEW).replace(BEEP_OLD, '').replace(DOCS_OLD, DOCS_NEW).replace(RHO_OLD, RHO_NEW);
 
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free)|ac:[a-z0-9]+)$/;
 
