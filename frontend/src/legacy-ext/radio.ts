@@ -36,11 +36,16 @@ function routeStations(){
   (ATC.seq || []).concat(ATC.q || []).forEach(function(x){ if (x && x.st && !seen[x.st] && STN[x.st] && !STN[x.st].dl) { seen[x.st] = 1; out.push(x.st); } });
   return out;
 }
+/* Réponse différée fiable : minuterie ET vérification à chaque image (la minuterie seule était parfois retardée ou perdue
+   dans le cadre du moteur ; bouton « Répéter » sans réponse sur les avions, revue du 20/11). La première qui arrive l'emporte. */
+function later(fn, ms){ var due = performance.now() + ms, done = false;
+  function go(){ if (done) return; done = true; try { fn(); } catch (e) { console.error(e); } }
+  setTimeout(go, ms); (function chk(){ if (done) return; if (performance.now() >= due) go(); else requestAnimationFrame(chk); })(); }
 function sayAgain(){
   var m = lastAtc(), x = curX(), st = (m && stKey(m.st)) || (x && x.st) || ATC.curSt; if (!st) return;
   if (!radioPowered()) { flash('Radio non alimentée', 'am'); return; }
   atcLog('PIL', st, STN[st].n + ', ' + CSN() + ', say again', 'Répétez votre dernier message.');
-  setTimeout(function(){
+  later(function(){
     if (!m) { atcLog('SYS', null, 'Aucun message à répéter : le contrôle ne vous a encore rien transmis.'); return; }
     if (!hears(st)) { atcLog('SYS', null, 'Pas de réponse : ' + STN[st].n + ' écoute ' + fq(st) + '.'); return; }
     var cs = CSN(), body = m.en.indexOf(cs + ', ') === 0 ? m.en.slice(cs.length + 2) : m.en;   // indicatif dit une seule fois

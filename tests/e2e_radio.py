@@ -101,7 +101,7 @@ with sync_playwright() as p:
         check(f'{tag} : Standby annoncé', any(x == f'PIL|{cs}, standby' for x in log(fr)))
         last = [x for x in log(fr) if x.startswith('ATC|')][-1][4:]
         fr.click('#atc [data-x=again]')
-        for _ in range(30):   # réponse du contrôle après 1,4 à 2,2 s (délai aléatoire du moteur), plus la charge de la machine
+        for _ in range(100):   # réponse du contrôle après 1,4 à 2,2 s (délai aléatoire du moteur) ; rendu logiciel (swiftshader) de l'aéroport : plusieurs secondes par image
             pg.wait_for_timeout(200); L = log(fr)
             if any(x.startswith(f'ATC|{cs}, I say again') for x in L): break
         body = last[len(cs) + 2:] if last.startswith(cs + ', ') else last

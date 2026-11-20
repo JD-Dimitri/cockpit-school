@@ -220,6 +220,25 @@ function tick(){
 }
 setInterval(tick, 700);
 
+/* ---------- 4 bis. Conversations à trois : contrôle ↔ pilote ↔ copilote (demande de l'auteur du 20/11 19:20) ----------
+   Équipage à deux : après chaque message du contrôle, échange dans le poste avant le collationnement (règle du « pilot monitoring » qui
+   tient la radio et annonce l'instruction au « pilot flying », qui la confirme : AC 120-71B § 5.1.4, principe du double contrôle).
+   « Copilote radio » coché (ATC.co) : le copilote annonce, le commandant (vous) confirme, le copilote collationne.
+   Sinon vous tenez la radio : vous annoncez l'instruction, le copilote la vérifie. Pilote seul (C172, H125, R44) : pas d'échange. */
+function shortAtc(t){ t = String(t || '').replace(/^SIMU \d+, /, '').replace(/^F-[A-Z]+, /, ''); return t.length > 110 ? t.slice(0, 107) + '…' : t; }
+var log1 = window.atcLog;
+window.atcLog = function(who, st, en, fr){
+  log1.apply(this, arguments);
+  try { if (who !== 'ATC' || !twoCrew() || !en || /I say again|readback incorrect/.test(en)) return;
+    var s = shortAtc(en), f = shortAtc(fr || '');
+    var L = ATC.co
+      ? [['OPL', 'Captain, ' + s + ' Confirm?', 'Commandant, ' + (f || s) + ' Vous confirmez ?'], ['CDB', 'Confirmed, read it back.', 'Confirmé, collationnez.']]
+      : [['CDB', s, (f || s) + ' (annoncé au copilote)'], ['OPL', 'Checked.', 'Vérifié.']];
+    if (box.style.display !== 'block') head('radio');
+    Q = Q.concat(L); pump();
+  } catch (e) {}
+};
+
 /* ---------- 5. Le panneau Radio lance les conversations et check-lists ---------- */
 var atc0 = window.atcRender;
 window.atcRender = function(force){
