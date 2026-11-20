@@ -125,7 +125,7 @@ with sync_playwright() as p:
         check(f'{tag} : panneau Radio : rubrique « Équipage » avec les phases du vol', len(crew) >= 8 and any('☑' in c for c in crew), str(crew))
         n = fr.evaluate("""(() => { let n = 0; const sp = speechSynthesis.speak.bind(speechSynthesis); speechSynthesis.speak = () => { n++; };
           SND.on = false; __PS_EQ_PLAY__('bstart'); const a = n; SND.on = true; __PS_EQ_PLAY__('bstart'); window.__sp = sp; return {off: a}; })()""")
-        pg.wait_for_timeout(9000)
+        pg.wait_for_timeout(6000)
         txt = fr.locator('#ps-eq').inner_text(); spk = fr.evaluate("(() => { const k = speechSynthesis.speak; speechSynthesis.speak = window.__sp; SND.on = false; return 1; })()")
         ck_first = 'Before start checklist.' if two else ('Before start checklist.' if ac in ('a320',) else 'Avant mise en route checklist.')
         check(f'{tag} : check-list « avant mise en route » lue en question / réponse depuis le panneau Radio', ('checklist.' in txt.lower()) and (('Copilote' in txt) == two), txt[:240])
@@ -133,21 +133,22 @@ with sync_playwright() as p:
         if two and ac in ('a320', 'a350'):
             v = fr.evaluate("""(() => { const s0 = {g: S.onGround, V: S.V, thr: S.thr, f: ATC.flown}; S.onGround = true; ATC.flown = false; S.thr = 1;
               for (const kt of [40, 105, (LS.v1 || 140) + 1, (LS.vr || 145) + 1]) { S.V = (kt + 3) * 0.514444; S.alt = elevAt(S.lat, S.lon) + 3; __ps_live_now && __ps_live_now(); }
-              Object.assign(S, {onGround: s0.g, V: s0.V, thr: s0.thr}); ATC.flown = s0.f; return __PS_EQ__.log.map(x => x[1]).join(' | '); })()""")
+              Object.assign(S, {onGround: s0.g, V: s0.V, thr: s0.thr}); ATC.flown = s0.f; return 1; })()""")
+            pg.wait_for_timeout(500); v = fr.evaluate("__PS_EQ__.log.map(x => x[1]).join(' | ')")
             check(f'{tag} : annonces en direct au décollage : poussée, 100 kt, V1, rotation', all(k in v for k in ('Thrust set', 'One hundred knots', 'V1.', 'Rotate.')), v[-300:])
         # checklist (20/11 07:26-07:27) : étape avec documents → tablette sur ces documents ; étape sans document → l'étape s'ouvre
         fr.evaluate("(() => { const e = document.getElementById('ps-efb'); if (e) e.remove(); goStep(0); })()"); pg.wait_for_timeout(600)
         fr.evaluate("CKL.open()"); pg.wait_for_timeout(700)
         st = fr.locator('#ckl .st.ps-doc').first
         check(f'{tag} : checklist : l\'étape du dossier de vol est marquée « documents »', st.count() >= 1)
-        if st.count(): st.locator('b').click()
+        if st.count(): fr.evaluate("document.querySelector('#ckl .st.ps-doc b').click()")
         pg.wait_for_timeout(500)
         tab = fr.evaluate("(() => { const e = document.getElementById('ps-efb'); return e ? {h: e.querySelector('h5').textContent, n: e.querySelectorAll('.tiles')[0].children.length} : null; })()")
         check(f'{tag} : checklist : toucher l\'étape ouvre la tablette sur les documents de l\'étape', tab and 'Documents de l\'étape 0' in tab['h'] and tab['n'] >= 1 and fr.evaluate("document.getElementById('ckl').hidden"), str(tab))
         fr.evaluate("(() => { const e = document.getElementById('ps-efb'); if (e) e.remove(); CKL.open(); })()"); pg.wait_for_timeout(700)
         go = fr.evaluate("(() => { const s = [...document.querySelectorAll('#ckl .st.ps-go')].find(x => /^\\d+\\./.test(x.querySelector('b').textContent.trim())); return s ? +s.querySelector('b').textContent.trim().split('.')[0] : -1; })()")
         if go >= 0:
-            fr.locator('#ckl .st.ps-go b', has_text=f'{go}.').first.click(); pg.wait_for_timeout(800)
+            fr.evaluate(f"[...document.querySelectorAll('#ckl .st.ps-go b')].find(b => b.textContent.trim().startsWith('{go}.')).click()"); pg.wait_for_timeout(800)
             check(f'{tag} : checklist : étape sans document → l\'étape {go} s\'ouvre', fr.evaluate("GD.i") == go or not fr.evaluate("document.getElementById('ckl').hidden"), str(fr.evaluate("GD.i")))
         else: check(f'{tag} : checklist : au moins une étape sans document', False)
         check(f'{tag} : aucune erreur JavaScript', not errs, str(errs[:2]))

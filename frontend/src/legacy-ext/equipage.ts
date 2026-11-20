@@ -175,19 +175,25 @@ function line(L){ var p = document.createElement('p');
   p.innerHTML = '<span class="w">' + (L[0] === 'CDB' ? (twoCrew() ? 'Commandant (vous)' : 'Pilote (vous)') : 'Copilote') + ' :</span> « ' + L[1] + ' » <small>' + L[2] + '</small>';
   box.appendChild(p); box.scrollTop = box.scrollHeight; EQ.log.push([L[0], L[1]]); voice(L[0], L[1]); }
 var Q = [], busy = false;
-function say3(lines){ if (!lines || !lines.length) return; if (box.style.display !== 'block') head('annonces'); Q = Q.concat(lines); pump(); }
-function pump(){ if (busy || !Q.length) return; busy = true; var L = Q.shift(); line(L); setTimeout(function(){ busy = false; pump(); }, 900 + L[1].length * 30); }
-function play(ph){ var L = linesFor(ph); if (!L.length) return; head(ph.t); Q = Q.concat(L); EQ.playedK = ph.k; pump(); }
+function hush(){ try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {} }
+/* annonce en direct (V1, rotation, minima…) : prioritaire, elle remplace ce qui restait à dire */
+function say3(lines){ if (!lines || !lines.length) return; if (box.style.display !== 'block') head('annonces'); Q = lines.slice(); hush(); busy = false; clearTimeout(EQ.tm); pump(); }
+function pump(){ if (busy || !Q.length) return; busy = true; var L = Q.shift(); line(L); EQ.tm = setTimeout(function(){ busy = false; pump(); }, 900 + L[1].length * 30); }
+/* conversation lancée (panneau Radio ou étape du parcours) : elle remplace ce qui était en cours */
+function play(ph, keep){ var L = linesFor(ph); if (!L.length) return; if (!keep) { head(ph.t); Q = []; hush(); busy = false; clearTimeout(EQ.tm); } Q = Q.concat(L); EQ.playedK = ph.k; pump(); }
 window.__PS_EQ_PLAY__ = function(k){ var ph = P().filter(function(x){ return x.k === k; })[0]; if (ph) play(ph); };
 
 /* déclenchement par l'étape du parcours guidé */
 function cur(){ try { var s = GD.steps && GD.steps[GD.i]; return s ? (s.t || '') : ''; } catch (e) { return ''; } }
-function curPhase(){ var t = cur(), L = P(); for (var j = 0; j < L.length; j++) if (L[j].re.test(t)) return L[j]; return null; }
+function curPhases(){ var t = cur(); return P().filter(function(x){ return x.re.test(t); }); }
+function curPhase(){ return curPhases()[0] || null; }
 function tick(){
   try {
     if (!MI || !GD.on) return; var t = cur(), id = (MI.n || '') + '|' + ACK + '|' + t;
-    if (t && id !== EQ.last) { EQ.last = id; var ph = curPhase(); if (ph) { var k = (MI.n || '') + '|' + ACK + '|' + ph.k;
-      if (!EQ.played[k]) { EQ.played[k] = 1; if (ph.k === 'bord') { tabletOpen(); setTimeout(function(){ play(ph); }, 600); } else play(ph); } } }
+    if (t && id !== EQ.last) { EQ.last = id; var first = true;
+      // une étape du parcours peut couvrir plusieurs phases (ex. A320 : « Après mise en route, roulage ») : elles s'enchaînent
+      curPhases().forEach(function(ph){ var k = (MI.n || '') + '|' + ACK + '|' + ph.k; if (EQ.played[k]) return; EQ.played[k] = 1;
+        if (ph.k === 'bord') { tabletOpen(); setTimeout(function(){ play(ph); }, 600); } else { play(ph, !first); } first = false; }); }
   } catch (e) {}
 }
 setInterval(tick, 700);
