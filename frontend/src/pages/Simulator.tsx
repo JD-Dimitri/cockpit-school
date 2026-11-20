@@ -40,13 +40,13 @@ const RHO_NEW = 'const isaRho=h=>isaP(Math.max(-500,h))/(287.05*isaT(Math.max(-5
 const BEEP_OLD = 'if(onApt&&walk&&t>ST.beepT){ ST.beepT=t+25+R()*40; beeper(); }';
 const DOCS_OLD = 'window.DOCS={ctx:()=>ctx(),';
 const DOCS_NEW = 'window.DOCS={D,ctx:()=>ctx(),';
-const prepare = (html: string) =>
+const prepare = (html: string, start = false) =>
   html.replace('</head>', UI_STYLE + '</head>').replace(CSN_OLD, CSN_NEW).replace(SND_OLD, SND_NEW).replace(BEEP_OLD, '').replace(DOCS_OLD, DOCS_NEW).replace(RHO_OLD, RHO_NEW)
     // Nom du projet (décision de l'auteur du 20/11 18:46) et bouton Introduction au-dessus d'« Académie » (19:03), dès le chargement
     .replace('<h1>SIMULATEUR <b>PLANE TRAJECTORIES</b></h1>', '<h1>SIMULATEUR <b>COCKPIT SCHOOL</b></h1>')
     .replace('<h1>✈ PLANE TRAJECTORIES · Introduction</h1>', '<h1>✈ COCKPIT SCHOOL · Introduction</h1>')
     .replace('b.onclick=home; box.prepend(b); } }', "b.onclick=home; const ac=box.querySelector('.acad-b'); if(ac) ac.before(b); else box.prepend(b); } }")
-    .replace(/<\/body>(?![\s\S]*<\/body>)/, () => ficheScript(AIRCRAFT_IMAGES) + '</body>');
+    .replace(/<\/body>(?![\s\S]*<\/body>)/, () => ficheScript(AIRCRAFT_IMAGES, start) + '</body>');
 
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free)|ac:[a-z0-9]+)$/;
 
@@ -111,6 +111,8 @@ export function Simulator({ action }: { action?: string }) {
   // Le moteur est chargé en texte puis affiché par srcdoc (même origine) : les retouches d'affichage sont posées
   // avant son démarrage, sans course au chargement.
   const [doc, setDoc] = useState<string | null>(embedded ?? null);
+  // Écran de départ « Démarrer » seulement quand on ouvre le simulateur sans vol demandé (figé au premier affichage : pas de rechargement)
+  const startScreen = useRef(!(action && ACTION.test(action)));
   const [loadErr, setLoadErr] = useState<string | null>(null);
   useEffect(() => {
     if (embedded) return;
@@ -167,7 +169,7 @@ export function Simulator({ action }: { action?: string }) {
         <iframe
           ref={frame}
           title="Simulateur COCKPIT SCHOOL (moteur d'origine PLANE TRAJECTORIES)"
-          srcDoc={prepare(doc)}
+          srcDoc={prepare(doc, startScreen.current)}
           allow="fullscreen; microphone; autoplay"
           allowFullScreen
           onLoad={() => {

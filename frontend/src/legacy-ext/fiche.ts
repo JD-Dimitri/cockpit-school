@@ -72,6 +72,22 @@ function open(k){
   d.querySelectorAll('.go').forEach(function(b){ b.onclick = function(){ go(k, b.dataset.mi, b.dataset.mode); }; });
 }
 window.__PS_FICHE__ = open;
+/* Écran de départ (demande de l'auteur du 20/11 20:27) : reste affiché tant qu'on n'a pas touché « Démarrer » ; ensuite le
+   choix de l'appareil. Pas d'écran de départ quand un vol est lancé directement (cours, parcours) ; jamais par-dessus un vol. */
+if (window.__PS_START__) {
+  var sc = document.createElement('div'); sc.id = 'ps-start';
+  sc.innerHTML = '<div class="w"><h1>SIMULATEUR <b>COCKPIT SCHOOL</b></h1>'
+    + '<p>Choisissez un appareil : sa fiche vous le présente, puis vous choisissez votre vol (parcours guidé ou automatique, vol libre, mission, scénario). Modèles de vol simplifiés et cockpits reconstitués d’après la documentation publique : tout ce qui est calculé est <b>[SIMULÉ]</b>.</p>'
+    + '<button type="button" data-start>DÉMARRER ▸</button>'
+    + '<p class="n">Commandes : clavier (touche « ? » pour l’aide), manette de jeu, ou manches tactiles sur téléphone.</p></div>';
+  var sst = document.createElement('style');
+  sst.textContent = '#ps-start{position:fixed;inset:0;z-index:85;overflow:auto;background:radial-gradient(ellipse at 50% 30%,#0c1a2a,#03070c);display:flex;align-items:center;justify-content:center;padding:20px}'
+    + '#ps-start .w{max-width:720px;color:#e6f1fa;font:16px/1.5 Inter,system-ui,sans-serif}#ps-start h1{font-size:clamp(34px,9vw,64px);line-height:1.05;margin:0 0 14px;letter-spacing:.01em}#ps-start h1 b{color:#e05ad8}'
+    + '#ps-start p{opacity:.8}#ps-start .n{font-size:13px;opacity:.6;margin-top:16px}#ps-start [data-start]{margin-top:18px;padding:16px 30px;border:0;border-radius:12px;background:#b0309f;color:#fff;font:700 18px Inter,sans-serif;letter-spacing:.06em;cursor:pointer}';
+  document.head.appendChild(sst); document.body.appendChild(sc);
+  sc.querySelector('[data-start]').onclick = function(){ sc.remove(); try { var m = document.getElementById('menu'); if (m) m.scrollTop = 0; } catch (e) {} };
+  var w0 = setInterval(function(){ var m = document.getElementById('menu'); if (!document.getElementById('ps-start')) return clearInterval(w0); if (m && m.hidden) { sc.remove(); clearInterval(w0); } }, 300);
+}
 document.addEventListener('click', function(e){
   if (BYP || window.__PS_BYP__) return;
   var c = e.target && e.target.closest ? e.target.closest('#c-ac [data-ac]') : null; if (!c) return;
@@ -80,5 +96,5 @@ document.addEventListener('click', function(e){
 })();`;
 
 /** Texte à poser dans le document du moteur avant </body> (images des appareils fournies par la page). */
-export const ficheScript = (images: Record<string, string>): string =>
-  '<script>' + SCRIPT.replace('__IMG__', JSON.stringify(images).replace(/</g, '\\u003c')) + '</script>';
+export const ficheScript = (images: Record<string, string>, start = false): string =>
+  '<script>window.__PS_START__=' + (start ? 1 : 0) + ';' + SCRIPT.replace('__IMG__', JSON.stringify(images).replace(/</g, '\\u003c')) + '</script>';
