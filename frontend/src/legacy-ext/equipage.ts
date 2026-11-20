@@ -77,7 +77,7 @@ function play(x){
     var L = lines[i++], p = document.createElement('p');
     p.innerHTML = '<span class="w">' + (L[0] === 'CDB' ? 'Commandant (vous)' : 'Copilote') + ' :</span> « ' + L[1] + ' » <small>' + L[2] + '</small>';
     box.appendChild(p); EQ.log.push([x.k, L[0], L[1]]); say(L[0], L[1]);
-    setTimeout(next, 2600 + L[1].length * 45);
+    setTimeout(next, 1800 + L[1].length * 35);
   })();
   box.dataset.k = x.k;
 }
@@ -128,8 +128,16 @@ document.addEventListener('click', function(e){
 }, true);
 css.textContent += '#ckl .st.ps-doc,#ckl .st.ps-go{cursor:pointer}#ckl .st.ps-doc>b::after{content:"  📱 documents";font-weight:600;color:#3fd0ff;font-size:.85em}'
  + '#ckl .st.ps-go>b::after{content:"  ▸ ouvrir l\'étape";font-weight:600;color:#8fa4b8;font-size:.85em}';
-setInterval(function(){ try { document.querySelectorAll('#ckl .st').forEach(function(st){ var i = stepIdx(st); if (i < 0) return;
-  var d = docsOf(i).length > 0; st.classList.toggle('ps-doc', d); st.classList.toggle('ps-go', !d); }); } catch (e) {} }, 400);
+// le moteur redessine la checklist souvent : les marques sont reposées après chaque redessin
+function markCkl(){ try { document.querySelectorAll('#ckl .st:not(.ps-doc):not(.ps-go)').forEach(function(st){ var i = stepIdx(st); if (i < 0) return;
+  st.classList.add(docsOf(i).length > 0 ? 'ps-doc' : 'ps-go'); }); } catch (e) {} }
+var mo = new MutationObserver(markCkl);
+(function watch(){ var c = document.getElementById('ckl'); if (c) { mo.observe(c, { childList: true, subtree: true }); markCkl(); } else setTimeout(watch, 500); })();
+/* bouton permanent « 📱 Tablette » dans la barre du simulateur */
+function barBtn(){ if (document.getElementById('b-efb')) return; var d = document.getElementById('b-docs') || document.getElementById('b-menu'), bar = document.getElementById('bar'); if (!d && !bar) return;
+  var b = document.createElement('button'); b.type = 'button'; b.id = 'b-efb'; b.textContent = '📱 Tablette'; b.onclick = function(){ tabletOpen(); };
+  if (d) d.parentNode.insertBefore(b, d.nextSibling); else bar.appendChild(b); }
+setInterval(barBtn, 1000);
 })();`;
 
 export function installEquipageExt(frame: HTMLIFrameElement | null): boolean {

@@ -122,7 +122,6 @@ with sync_playwright() as p:
         # checklist (20/11 07:26-07:27) : étape avec documents → tablette sur ces documents ; étape sans document → l'étape s'ouvre
         fr.evaluate("(() => { const e = document.getElementById('ps-efb'); if (e) e.remove(); goStep(0); })()"); pg.wait_for_timeout(600)
         fr.evaluate("CKL.open()"); pg.wait_for_timeout(700)
-        print('   [diag ckl]', fr.evaluate("(() => { const c = document.getElementById('ckl'); return {hidden: c && c.hidden, disp: c && getComputedStyle(c).display, doc: document.querySelectorAll('#ckl .st.ps-doc').length, go: document.querySelectorAll('#ckl .st.ps-go').length, menu: !!document.getElementById('b-menu'), docs: !!document.getElementById('b-docs'), bar: !!document.getElementById('bar')}; })()"))
         st = fr.locator('#ckl .st.ps-doc').first
         check(f'{tag} : checklist : l\'étape du dossier de vol est marquée « documents »', st.count() >= 1)
         if st.count(): st.locator('b').click()
