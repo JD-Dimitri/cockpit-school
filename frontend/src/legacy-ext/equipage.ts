@@ -153,7 +153,8 @@ window.__ps_live_now = live;   // tests : un passage immédiat
 var css = document.createElement('style');
 css.textContent = '#ps-eq{position:fixed;right:10px;top:70px;z-index:64;max-width:min(420px,calc(100vw - 20px));max-height:45vh;overflow:auto;background:#0b1520ee;border:1px solid #2b3d50;border-left:4px solid #3fd0ff;border-radius:10px;padding:8px 10px;color:#e8eef2;font:13px/1.4 Inter,sans-serif;display:none}'
  + '#ps-eq b{font:700 12px "Barlow Condensed",sans-serif;letter-spacing:.12em;color:#3fd0ff;text-transform:uppercase}#ps-eq p{margin:4px 0}#ps-eq .w{color:#ffd166;font-weight:700}#ps-eq small{color:#8fa4b8}'
- + '#ps-eq button{float:right;background:none;border:0;color:#8fa4b8;font-size:18px;cursor:pointer;line-height:1}'
+ + '#ps-eq button{float:right;background:none;border:0;color:#8fa4b8;font-size:18px;cursor:pointer;line-height:1;pointer-events:auto}'
+ + '#ps-eq{pointer-events:none}'   // les sous-titres ne bloquent jamais les commandes situées dessous (panneau radio…) ; seul × reste cliquable
  + '#atc .ps-crew{margin-top:8px;border-top:1px solid #1d2f40;padding-top:6px}#atc .ps-crew b{display:block;font:700 12px "Barlow Condensed",sans-serif;letter-spacing:.12em;color:#3fd0ff;text-transform:uppercase;margin-bottom:4px}'
  + '#atc .ps-crew .row{display:flex;flex-wrap:wrap;gap:4px}#atc .ps-crew button{padding:3px 8px;font-size:12px}#atc .ps-crew button.now{border-color:#3ddc84;color:#3ddc84}'
  + '#ps-efb{position:fixed;inset:0;z-index:69;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px}'
