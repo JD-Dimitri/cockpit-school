@@ -119,6 +119,22 @@ with sync_playwright() as p:
         if two: check(f'{tag} : au roulage, « Clear left » (commandant) puis « Clear right » (copilote)', 'Clear left.' in eq and 'Clear right.' in eq and eq.index('Clear left.') < eq.index('Clear right.'), eq[-300:])
         else: check(f'{tag} : au roulage, « Clear left, clear right » annoncé par le pilote', 'Clear left, clear right' in eq, eq[-200:])
         check(f'{tag} : bouton « 📱 Tablette » dans la barre du simulateur', fr.locator('#b-efb').count() == 1)
+        # TA3 (20/11 08:22) : toutes les conversations et check-lists, lancées depuis le panneau Radio, audibles avec « Son »
+        fr.evaluate("(() => { hasPower = () => true; radioPowered = () => true; atcOpen(true); atcRender(true); })()"); pg.wait_for_timeout(400)
+        crew = [t.strip() for t in fr.locator('#atc .ps-crew [data-crew]').all_text_contents()]
+        check(f'{tag} : panneau Radio : rubrique « Équipage » avec les phases du vol', len(crew) >= 8 and any('☑' in c for c in crew), str(crew))
+        n = fr.evaluate("""(() => { let n = 0; const sp = speechSynthesis.speak.bind(speechSynthesis); speechSynthesis.speak = () => { n++; };
+          SND.on = false; __PS_EQ_PLAY__('bstart'); const a = n; SND.on = true; __PS_EQ_PLAY__('bstart'); window.__sp = sp; return {off: a}; })()""")
+        pg.wait_for_timeout(9000)
+        txt = fr.locator('#ps-eq').inner_text(); spk = fr.evaluate("(() => { const k = speechSynthesis.speak; speechSynthesis.speak = window.__sp; SND.on = false; return 1; })()")
+        ck_first = 'Before start checklist.' if two else ('Before start checklist.' if ac in ('a320',) else 'Avant mise en route checklist.')
+        check(f'{tag} : check-list « avant mise en route » lue en question / réponse depuis le panneau Radio', ('checklist.' in txt.lower()) and (('Copilote' in txt) == two), txt[:240])
+        check(f'{tag} : son coupé → sous-titres seulement, aucune voix', n['off'] == 0, str(n))
+        if two and ac in ('a320', 'a350'):
+            v = fr.evaluate("""(() => { const s0 = {g: S.onGround, V: S.V, thr: S.thr, f: ATC.flown}; S.onGround = true; ATC.flown = false; S.thr = 1;
+              for (const kt of [40, 105, (LS.v1 || 140) + 1, (LS.vr || 145) + 1]) { S.V = (kt + 3) * 0.514444; S.alt = elevAt(S.lat, S.lon) + 3; __ps_live_now && __ps_live_now(); }
+              Object.assign(S, {onGround: s0.g, V: s0.V, thr: s0.thr}); ATC.flown = s0.f; return __PS_EQ__.log.map(x => x[1]).join(' | '); })()""")
+            check(f'{tag} : annonces en direct au décollage : poussée, 100 kt, V1, rotation', all(k in v for k in ('Thrust set', 'One hundred knots', 'V1.', 'Rotate.')), v[-300:])
         # checklist (20/11 07:26-07:27) : étape avec documents → tablette sur ces documents ; étape sans document → l'étape s'ouvre
         fr.evaluate("(() => { const e = document.getElementById('ps-efb'); if (e) e.remove(); goStep(0); })()"); pg.wait_for_timeout(600)
         fr.evaluate("CKL.open()"); pg.wait_for_timeout(700)
