@@ -112,7 +112,7 @@ function metHere(){ var L = metNear(S.lat, S.lon)[0]; return L && L[0] < 30 ? L[
 function rwyState(){
   var m = metHere(); if (!m) return { c: 6, n: 'sèche', k: 1 };
   var wx = (m.wx || []).join(' ');
-  if (/FZ/.test(wx) || (/SN|RA|DZ/.test(wx) && m.temp <= 0 && /FZ|PL/.test(wx))) return { c: 1, n: 'glace', k: 0.25 };
+  if (/FZ(RA|DZ)/.test(wx) || (/PL/.test(wx) && m.temp <= 0)) return { c: 1, n: 'glace', k: 0.25 };   // pluie ou bruine verglaçante (le brouillard givrant FZFG ne glace pas la piste à lui seul)
   if (/SN|SG|PL/.test(wx)) return { c: 3, n: 'neige', k: 0.45 };
   if (/GR|GS/.test(wx) || /\+/.test(wx)) return { c: 2, n: 'eau stagnante', k: 0.4 };
   if (/RA|DZ|SH|TS/.test(wx)) return { c: 5, n: 'mouillée', k: 0.65 };

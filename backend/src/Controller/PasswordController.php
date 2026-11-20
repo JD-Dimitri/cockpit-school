@@ -45,6 +45,10 @@ final class PasswordController extends AbstractController
         if (!$limiter->create($request->getClientIp() ?? 'anon')->consume()->isAccepted()) {
             return $this->json(['message' => 'Trop de demandes. Réessayez dans quelques minutes.'], Response::HTTP_TOO_MANY_REQUESTS);
         }
+        // audit du 20/11 : JSON seulement (un formulaire d'un autre site envoie du texte ou un formulaire, refusé ici)
+        if ('json' !== $request->getContentTypeFormat()) {
+            return new JsonResponse(['message' => 'Format attendu : application/json.'], Response::HTTP_UNSUPPORTED_MEDIA_TYPE);
+        }
         $body = json_decode($request->getContent(), true);
         $email = \is_array($body) ? (string) ($body['email'] ?? '') : '';
         $user = $email !== '' ? $users->findOneByEmail($email) : null;
@@ -80,6 +84,10 @@ final class PasswordController extends AbstractController
         ValidatorInterface $validator,
         EntityManagerInterface $em,
     ): JsonResponse {
+        // audit du 20/11 : JSON seulement (un formulaire d'un autre site envoie du texte ou un formulaire, refusé ici)
+        if ('json' !== $request->getContentTypeFormat()) {
+            return new JsonResponse(['message' => 'Format attendu : application/json.'], Response::HTTP_UNSUPPORTED_MEDIA_TYPE);
+        }
         $body = json_decode($request->getContent(), true);
         $token = \is_array($body) ? (string) ($body['token'] ?? '') : '';
         $plain = \is_array($body) ? (string) ($body['password'] ?? '') : '';

@@ -1,0 +1,18 @@
+# Interface PLANE SIMULATOR en ligne (Apache, o2switch) — copié dans dist/.htaccess par « node build.mjs --prod ».
+# Audit de sécurité du 20/11/2026. À vérifier sur le serveur après la mise en ligne (ex. : curl -I https://cockpitschool.com/).
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), geolocation=(), microphone=(self)"
+  # HTTPS obligatoire une fois le certificat en place (o2switch : AutoSSL / Let's Encrypt)
+  Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
+</IfModule>
+# Pas de liste des fichiers d'un dossier
+Options -Indexes
+# HTTP → HTTPS
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>

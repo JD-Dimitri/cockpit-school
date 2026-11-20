@@ -23,7 +23,7 @@ def check(name, cond, detail=''):
 CASES = [('full-fw', 'a320', True, 1280), ('full-c172', 'c172', False, 390), ('full-rw', 's76', True, 1280), ('full-350', 'a350', True, 390)]
 if len(sys.argv) > 1: CASES = [c for c in CASES if c[1] in sys.argv[1:]]
 
-STEP = """((n) => { AUTO.on = true; AUTO.stage = 'act'; let i = 0; for (; i < n && !walkDone(); i++) { autoWalk(0.1); walkCheck(); if (__PS_TA__.cur >= 0 && performance.now() < __PS_TA__.until) break; } return {i, cur: __PS_TA__.cur, seen: GD.seen.size, n: (WALKPTS[ACK] || []).length}; })"""
+STEP = """((n) => { AUTO.on = true; AUTO.stage = 'act'; let i = 0; for (; i < n && GD.seen.size < (WALKPTS[ACK] || []).length; i++) { autoWalk(0.1); walkCheck(); if (__PS_TA__.cur >= 0 && performance.now() < __PS_TA__.until) break; } return {i, cur: __PS_TA__.cur, seen: GD.seen.size, n: (WALKPTS[ACK] || []).length}; })"""
 
 with sync_playwright() as p:
     for mi, ac, two, w in CASES:
@@ -80,7 +80,7 @@ with sync_playwright() as p:
             if fr.evaluate("__PS_TA__.cur >= 0 && /train/i.test(WALKPTS[ACK][__PS_TA__.cur][2]) && performance.now() < __PS_TA__.until"):
                 y = fr.evaluate("(() => { placeWalkCam(); return camera.position.y; })()")
                 gear_seen = gear_seen or y < 1.0
-            if fr.evaluate("walkDone()"): break
+            if r['seen'] >= r['n']: break
             fr.evaluate("__PS_TA__.until = 0")
         has_gear = fr.evaluate("(WALKPTS[ACK] || []).some(p => /train/i.test(p[2]))")
         check(f'{tag} : tous les points contrôlés ({r["seen"]}/{r["n"]})', r['seen'] == r['n'], str(r))
