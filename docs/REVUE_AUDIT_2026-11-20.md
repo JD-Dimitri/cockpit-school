@@ -18,6 +18,7 @@ l'ensemble de l'API Symfony pour la sécurité.
 | R7 | `pages/Simulator.tsx` | Cinq retouches du moteur au chargement (indicatifs, fonctions audio exposées, bip retiré, documents exposés) par remplacement de texte exact. Si le texte n'est plus trouvé, la retouche ne se fait pas en silence. | basse | à surveiller ; un test de chaque retouche existe (radio, météo, tour) |
 | R8 | `legacy-ext/meteo.ts` | Le scénario météo choisi est mémorisé (`localStorage`) et réappliqué à la séance suivante, avec un message. | info | voulu ; « Réel » le retire |
 | R9 | `engine/weather.ts` | Portage fidèle, y compris deux bizarreries de l'original, gardées pour la parité : le vent VRB compte pour 0 kt dans la moyenne, et le 1er champ à 4 chiffres est toujours pris pour la visibilité. | info | à revoir quand le module remplacera l'original |
+| R11 | `legacy-ext/equipage.ts` | La boîte des sous-titres de l'équipage recouvrait les boutons du panneau radio (test radio bloqué). | haute | **corrigé** : sous-titres transparents aux clics, seul × reste actif |
 | R10 | `backend/src/Command/AdminCreateCommand.php` | Mot de passe demandé masqué, règle identique à l'inscription, adresse normalisée en minuscules comme `User::setEmail`. | — | conforme |
 
 ## 2. Audit de sécurité
