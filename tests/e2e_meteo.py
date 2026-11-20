@@ -21,7 +21,7 @@ def check(name, cond, detail=''):
 CASES = [('full-fw', 'a320'), ('full-350', 'a350'), ('full-777-af', 'b777'), ('full-fw', 'lj60'), ('full-c172', 'c172'),
          ('full-rw', 'h125'), ('full-rw', 'r44'), ('full-rw', 's76')]
 if len(sys.argv) > 1: CASES = [c for c in CASES if c[1] in sys.argv[1:]]
-PRESETS = ['Réel', 'Sec', 'Nuageux', 'Pluie', 'Brouillard', 'Neige', 'Vent fort', 'Orage', 'Tempête', 'Givrage']
+PRESETS = ['Réel', 'Soleil ☀️', 'Nuageux', 'Pluie', 'Brouillard', 'Neige', 'Vent fort', 'Orage', 'Tempête', 'Ouragan', 'Givrage']
 
 def pick(fr, label):
     fr.evaluate("(() => { atcOpen(true); atcRender(true); const d = document.querySelector('#atc details.wxp'); if (d) d.open = true; })()")
@@ -57,7 +57,7 @@ with sync_playwright() as p:
         real = fr.evaluate("WXS.met[ATC.dep] ? WXS.met[ATC.dep].raw : null")
         fr.evaluate("(() => { atcOpen(true); atcRender(true); const d = document.querySelector('#atc details.wxp'); if (d) d.open = true; })()")
         labels = [t.strip() for t in fr.locator('#atc .wxpick button').all_text_contents()]
-        check(f'{tag} : 10 choix de météo dans le panneau radio', labels == PRESETS, str(labels))
+        check(f'{tag} : 11 choix de météo dans le panneau radio (dont Soleil et Ouragan)', labels == PRESETS, str(labels))
 
         # Pluie : METAR simulé, ATIS, piste mouillée, freinage, pluie à l'écran, son de pluie
         pick(fr, 'Pluie')
@@ -95,11 +95,29 @@ with sync_playwright() as p:
             return fr.evaluate("""(() => { const s0 = {g: S.onGround, a: S.alt, V: S.V}; S.onGround = false; S.alt = elevAt(S.lat, S.lon) + 3000 * FT; S.V = Math.max(S.V, 80);
               let s = 0, n = 0; for (let i = 0; i < 3000; i++) { gustStep(0.05); s += GUST.w * GUST.w; n++; }
               S.onGround = s0.g; S.alt = s0.a; S.V = s0.V; GUST.u = GUST.w = 0; return Math.sqrt(s / n); })()""")
-        s_sec, s_ts, s_tp = sigma('Sec'), sigma('Orage'), sigma('Tempête')
+        s_sec, s_ts, s_tp = sigma('Soleil'), sigma('Orage'), sigma('Tempête')
         check(f'{tag} : Orage et tempête → turbulence en vol plus forte que par temps sec', s_ts > s_sec + 0.5 and s_tp > s_ts, f'σw sec {s_sec:.2f}, orage {s_ts:.2f}, tempête {s_tp:.2f} m/s')
         ts = fr.evaluate("(() => ({raw: WXS.met[ATC.dep].raw, ts: SND.wxHere().ts, hail: SND.wxHere().hail}))()")
         check(f'{tag} : Tempête → METAR +TSRAGR CB, orage et grêle dans le moteur audio', '+TSRAGR' in ts['raw'] and 'CB' in ts['raw'] and ts['ts'] and ts['hail'], str(ts))
 
+        # MET2 · Ouragan : METAR, vols impossibles
+        pick(fr, 'Ouragan')
+        ou = fr.evaluate("(() => { const m = WXS.met[ATC.dep]; return {raw: m.raw, spd: m.spd, gust: m.gust, qnh: m.qnh}; })()")
+        check(f'{tag} : Ouragan → vent 75 kt rafales 100 kt, pluie torrentielle, dépression', ou['spd'] == 75 and ou['gust'] == 100 and '+TSRA' in ou['raw'] and ou['qnh'] < 980, str(ou))
+        # MET2 · densité de l'air réelle : moteur et extension d'accord, air froid plus dense que l'air chaud
+        def rho(label):
+            pick(fr, label)
+            return fr.evaluate("(() => { const h = elevAt(S.lat, S.lon); return {rho: isaRho(h), isa: isaP(h) / (287.05 * isaT(h)), k: __PS_RHOK__(h), T: WXS.met[ATC.dep].temp, q: WXS.met[ATC.dep].qnh}; })()")
+        rc, rh = rho('Neige'), rho('Tempête')
+        check(f'{tag} : densité de l\'air du moteur = ISA × correction METAR (température, QNH)', abs(rc['rho'] - rc['isa'] * rc['k']) < 1e-9 and abs(rh['rho'] - rh['isa'] * rh['k']) < 1e-9, f'{rc} {rh}')
+        check(f'{tag} : air froid (neige, {rc["T"]} °C) plus dense que l\'air chaud (tempête, {rh["T"]} °C)', rc['rho'] > rh['rho'] * 1.03, f"{rc['rho']:.4f} / {rh['rho']:.4f}")
+        # MET2 · micro-rafale sous l'orage : vent de face puis vent arrière et descendance
+        pick(fr, 'Orage')
+        ws = fr.evaluate("""(() => { const s0 = {g: S.onGround, a: S.alt, V: S.V}; S.onGround = false; S.alt = elevAt(S.lat, S.lon) + 800 * FT; S.V = Math.max(S.V, 75);
+          __PS_MET__.ws = {t: 0}; let up = 0, down = 0, wd = 0; for (let i = 0; i < 220; i++) { GUST.u = GUST.w = 0; gustStep(0.1); const t = __PS_MET__.ws ? __PS_MET__.ws.t : 99;
+            if (t < 6) up = Math.max(up, GUST.u); else if (t < 20) { down = Math.min(down, GUST.u); wd = Math.min(wd, GUST.w); } }
+          Object.assign(S, {onGround: s0.g, alt: s0.a, V: s0.V}); GUST.u = GUST.w = 0; return {up, down, wd, end: __PS_MET__.ws}; })()""")
+        check(f'{tag} : micro-rafale : vent de face puis vent arrière et courant descendant, puis fin', ws['up'] > 3 and ws['down'] < -6 and ws['wd'] < -2 and ws['end'] is None, str(ws))
         # Givrage : conditions givrantes dans la couche
         pick(fr, 'Givrage')
         ic = fr.evaluate("""(() => { const s0 = {g: S.onGround, a: S.alt}; S.onGround = false; S.alt = elevAt(S.lat, S.lon) + 1500 * FT;

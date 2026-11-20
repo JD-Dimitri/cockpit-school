@@ -167,6 +167,19 @@ with sync_playwright() as p:
             fr.evaluate(f"[...document.querySelectorAll('#ckl .st.ps-go b')].find(b => b.textContent.trim().startsWith('{go}.')).click()"); pg.wait_for_timeout(800)
             check(f'{tag} : checklist : étape sans document → l\'étape {go} s\'ouvre', fr.evaluate("GD.i") == go or not fr.evaluate("document.getElementById('ckl').hidden"), str(fr.evaluate("GD.i")))
         else: check(f'{tag} : checklist : au moins une étape sans document', False)
+        # MET2 · moteurs ou rotors en marche : personne près d'une zone de danger → accident ; loin → rien
+        dz = fr.evaluate("""(() => { const t0 = S.eng ? S.eng.slice() : null, nr0 = S.nr; setView('walk'); if (S.eng) S.eng = S.eng.map(() => 1); S.nr = 1; S.rpm = 2200;
+          const far = (() => { const q = m2l(0, 120); GD.walk.x = q[0]; GD.walk.z = q[1]; return __PS_DANGER__(); })();
+          const e = A.kind === 'fw' && ACK !== 'c172' ? (WALKPTS[ACK] || []).find(p => /[Mm]oteur|[Rr]éacteur/.test(p[2]) && !/[Cc]apot/.test(p[2])) : null;
+          const tgt = e ? [e[0], e[1] - 0.5] : ACK === 'c172' ? [0, -3.6] : [0, 0];
+          const q = m2l(tgt[0], tgt[1]); GD.walk.x = q[0]; GD.walk.z = q[1]; const near = __PS_DANGER__();
+          if (t0) S.eng = t0; S.nr = nr0; return {far, near}; })()""")
+        check(f'{tag} : moteur ou rotor en marche : personne dans la zone de danger → accident (« {(dz["near"] or "")[:40]}… »)', dz['near'] and not dz['far'], str(dz))
+        pg.wait_for_timeout(300)
+        fr.evaluate("(() => { if (S.eng) S.eng = S.eng.map(() => 1); S.nr = 1; const e = A.kind === 'fw' && ACK !== 'c172' ? (WALKPTS[ACK] || []).find(p => /[Mm]oteur|[Rr]éacteur/.test(p[2])) : null; const t = e ? [e[0], e[1] - 0.5] : ACK === 'c172' ? [0, -3.6] : [0, 0]; const q = m2l(t[0], t[1]); GD.walk.x = q[0]; GD.walk.z = q[1]; setView('walk'); })()")
+        pg.wait_for_timeout(700)
+        crash = fr.evaluate("(() => { const c = document.getElementById('crash'); const t = c ? c.innerText : ''; if (S.eng) S.eng = S.eng.map(() => 0); S.nr = 0; if (c) c.remove(); return t; })()")
+        check(f'{tag} : l\'accident est affiché (« ACCIDENT AU SOL »)', 'ACCIDENT AU SOL' in crash, crash[:120])
         check(f'{tag} : aucune erreur JavaScript', not errs, str(errs[:2]))
         b.close()
 

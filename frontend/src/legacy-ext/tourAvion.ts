@@ -168,6 +168,56 @@ function bilanValidate(){
   flash('Bilan contrôle visuel validé : rangé dans 📁 Documents (Appareil et équipage)', 'am');
   try { DOCS.open('walkcheck'); } catch (e) {}
 }
+
+/* ---------- 5. Moteurs en marche : zones de danger (MET2, demande de l'auteur du 20/11 08:41) ----------
+   Une personne près de l'entrée d'air d'un réacteur en marche est aspirée ; derrière, le souffle la projette. Hélice et rotors
+   tournants : zone interdite. Rayons et longueurs : ordres de grandeur au ralenti [ESTIMÉ] ; les valeurs exactes sont dans les
+   documents des constructeurs (Airbus « Aircraft Characteristics – Airport and Maintenance Planning », § 6-3 « Danger areas of the
+   engines » ; Boeing « Airplane Characteristics for Airport Planning », § 6) et dans le manuel de l'exploitant. Diamètres de rotor
+   [RÉFÉRENCÉ constructeurs] : S-76 13,41 m, H125 10,69 m, R44 10,06 m. */
+var DZ = { a320: { j: 1, rin: 4, lex: 45, hw: 4 }, a350: { j: 1, rin: 5.5, lex: 60, hw: 5 }, b777: { j: 1, rin: 6, lex: 60, hw: 5.5 }, lj60: { j: 1, rin: 2.5, lex: 25, hw: 2.5 },
+  c172: { prop: [0, -3.6], r: 2.6 }, s76: { rot: 6.7 }, h125: { rot: 5.35 }, r44: { rot: 5.03 } };
+function l2m(x, z){ var t = S.psi, c = Math.cos(t), s2 = Math.sin(t); return [x * c + z * s2, -x * s2 + z * c]; }
+function engOn(i){ return !!(S.eng && (S.eng[i] || (S.n2 && S.n2[i] > 0.05))); }
+function danger(){
+  var d = DZ[ACK]; if (!d || !GD.walk) return null; var m = l2m(GD.walk.x, GD.walk.z), x = m[0], z = m[1];
+  if (d.j) { var pts = (WALKPTS[ACK] || []).filter(function(p){ return /[Mm]oteur|[Rr]éacteur/.test(p[2]) && !/[Cc]apot/.test(p[2]); });
+    for (var i = 0; i < pts.length; i++) { var e = pts[i], on = engOn(e[0] < 0 ? 0 : 1); if (!on) continue; var dx = x - e[0], dz = z - e[1];
+      if (Math.hypot(dx, dz) < d.rin && dz < 2) return 'ASPIRÉ PAR L\'ENTRÉE D\'AIR du ' + e[2].toLowerCase() + ' en marche : à moins de ' + d.rin + ' m devant un réacteur, l\'aspiration emporte une personne.';
+      if (dz >= 2 && dz < d.lex && Math.abs(dx) < d.hw) return 'PROJETÉ PAR LE SOUFFLE du ' + e[2].toLowerCase() + ' en marche : derrière un réacteur, même au ralenti, le jet (plusieurs centaines de km/h près de la tuyère) renverse et projette sur des dizaines de mètres.'; } }
+  if (d.prop && S.eng && S.eng[0] && Math.hypot(x - d.prop[0], z - d.prop[1]) < d.r) return 'HAPPÉ PAR L\'HÉLICE en rotation : une hélice qui tourne est presque invisible ; on ne passe jamais dans son plan ni devant.';
+  if (d.rot && (S.nr || 0) > 0.05) { var tail = (WALKPTS[ACK] || []).filter(function(p){ return /queue|arrière|anticouple/i.test(p[2]); })[0];
+    if (tail && Math.hypot(x - tail[0], z - tail[1]) < 2.5) return 'HEURTÉ PAR LE ROTOR DE QUEUE en rotation : zone mortelle, on ne passe jamais derrière un hélicoptère rotor tournant.';
+    if (Math.hypot(x, z) < d.rot + 0.5) return 'ENTRÉE SOUS LE ROTOR EN ROTATION sans le signe du pilote : on n\'approche qu\'à l\'avant, dans le champ de vision du pilote, après son accord, en se baissant.'; }
+  return null;
+}
+setInterval(function(){
+  try { if (typeof view === 'undefined' || view !== 'walk' || !MI || TA.acc) return; var why = danger(); if (!why) return;
+    TA.acc = 1; showCrash('ACCIDENT AU SOL [SIMULÉ] — ' + why + ' Règle : moteurs ou rotors en marche, personne ne s\'approche des zones de danger ; le feu anticollision (BEACON) allumé signifie « moteurs en marche ou sur le point de démarrer ».');
+    setTimeout(function(){ TA.acc = 0; }, 8000);
+  } catch (e) {}
+}, 200);
+window.__PS_DANGER__ = danger;
+
+/* Atelier des systèmes : véhicule ou personne près d'un moteur au démarrage ou en marche → interdit, sinon accident */
+setInterval(function(){
+  try { var sa = window.SYSAT, root = document.getElementById('sysat'); if (!sa || !root || root.hidden) return; var st = sa.S; if (!st || !st.es || !st.act) return;
+    var svg = root.querySelector('svg.ac'); if (!svg) return;
+    for (var i = 0; i < st.es.length; i++) { if (!st.es[i]) continue; var r = svg.querySelector('[data-p="e' + (i + 1) + '"]'); if (!r) continue; var b = r.getBBox(), cx = b.x + b.width / 2, R = b.width * 1.6;
+      for (var id in st.act) { var a = st.act[id]; if (!a || /^(cdb|opl|cc|pnc|pax)/.test(id)) continue;   // équipage et passagers à bord
+        var dIn = Math.hypot(a.x - cx, a.y - b.y), behind = a.y > b.y + b.height && a.y < b.y + b.height * 7 && Math.abs(a.x - cx) < b.width * 1.2;
+        if ((dIn < R && a.y < b.y + b.height * 0.4) || behind) {
+          st.es[i] = 0; delete st.act[id];
+          var m = root.querySelector('#ps-acc'); if (!m) { m = document.createElement('div'); m.id = 'ps-acc'; m.setAttribute('role', 'alert'); root.appendChild(m); }
+          m.innerHTML = '<b>ACCIDENT AU SOL [SIMULÉ]</b><p>' + (a.l || id) + ' ' + (behind ? 'dans le souffle' : 'dans la zone d\'aspiration') + ' du moteur ' + (i + 1) + ' au démarrage ou en marche. Moteur coupé.</p>'
+            + '<p>Règle : avant la mise en route, tout véhicule (GPU, tracteur, bus) et toute personne sont hors des zones de danger des moteurs ; le mécanicien reste à l\'avant, relié par l\'interphone, dans le champ de vision du commandant.</p><button type="button" onclick="this.parentNode.remove()">Compris</button>';
+          return; } } }
+  } catch (e) {}
+}, 300);
+var cssA = document.createElement('style');
+cssA.textContent = '#ps-acc{position:absolute;left:50%;top:20%;transform:translateX(-50%);z-index:20;max-width:min(460px,92vw);background:#3b0d0d;border:2px solid #ff3b30;border-radius:12px;padding:12px 14px;color:#fff;font:14px/1.45 Inter,sans-serif;box-shadow:0 10px 40px #000}'
+ + '#ps-acc b{font:700 18px "Barlow Condensed",sans-serif;letter-spacing:.06em;color:#ff8a80}#ps-acc button{background:#ff3b30;color:#fff;border:0;border-radius:8px;padding:6px 14px;font:700 14px "Barlow Condensed",sans-serif;cursor:pointer}';
+document.head.appendChild(cssA);
 })();`;
 
 export function installTourExt(frame: HTMLIFrameElement | null): boolean {
