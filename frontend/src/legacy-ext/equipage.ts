@@ -48,7 +48,7 @@ var X = [
     one: [['CDB', 'One thousand, stabilized, continue.', 'Mille pieds, stabilisé, on continue.']] }
 ];
 var css = document.createElement('style');
-css.textContent = '#ps-eq{position:fixed;right:10px;top:70px;z-index:8;max-width:min(420px,calc(100vw - 20px));background:#0b1520ee;border:1px solid #2b3d50;border-left:4px solid #3fd0ff;border-radius:10px;padding:8px 10px;color:#e8eef2;font:13px/1.4 Inter,sans-serif;display:none}'
+css.textContent = '#ps-eq{position:fixed;right:10px;top:70px;z-index:64;max-width:min(420px,calc(100vw - 20px));background:#0b1520ee;border:1px solid #2b3d50;border-left:4px solid #3fd0ff;border-radius:10px;padding:8px 10px;color:#e8eef2;font:13px/1.4 Inter,sans-serif;display:none}'
  + '#ps-eq b{font:700 12px "Barlow Condensed",sans-serif;letter-spacing:.12em;color:#3fd0ff;text-transform:uppercase}#ps-eq p{margin:4px 0}#ps-eq .w{color:#ffd166;font-weight:700}#ps-eq small{color:#8fa4b8}'
  + '#ps-eq button{float:right;background:none;border:0;color:#8fa4b8;font-size:18px;cursor:pointer;line-height:1}'
  + '#ps-efb{position:fixed;inset:0;z-index:71;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px}'
@@ -95,8 +95,9 @@ setInterval(tick, 700);
 
 /* ---------- tablette de documents (EFB) ---------- */
 var ICON = { 'Plan de vol': '🗺️', 'Météo': '🌦️', 'Masse, centrage, carburant': '⚖️', 'Appareil et équipage': '🛠️', 'Cartes': '🧭' };
-function tabletOpen(){
+function tabletOpen(focus, label){
   var D = DOCS.D || {}, ids = DOCS.list(), cats = {};
+  focus = (focus || []).filter(function(id){ return D[id]; }); if (focus.length) cats['Documents de l\'étape ' + (label || '')] = focus.map(function(id){ return [id, D[id].t]; });
   ids.forEach(function(id){ var d = D[id]; if (!d) return; var c = d.cat || 'Documents'; (cats[c] = cats[c] || []).push([id, d.t]); });
   var m = document.getElementById('ps-efb'); if (m) m.remove();
   m = document.createElement('div'); m.id = 'ps-efb'; m.setAttribute('role', 'dialog'); m.setAttribute('aria-label', 'Tablette de documents de vol');
@@ -111,10 +112,24 @@ function tabletOpen(){
   });
 }
 window.__PS_EFB__ = tabletOpen;
-/* bouton permanent dans la barre du simulateur */
-function barBtn(){ if (document.getElementById('b-efb')) return; var d = document.getElementById('b-docs'); if (!d) return;
-  var b = document.createElement('button'); b.type = 'button'; b.id = 'b-efb'; b.textContent = '📱 Tablette'; b.onclick = tabletOpen; d.parentNode.insertBefore(b, d.nextSibling); }
-setInterval(barBtn, 1000);
+/* Checklist (demandes de l'auteur, 20/11 07:26 et 07:27) : toucher une étape
+   - qui comporte au moins un document (DOCS.forStep : dossier, devis de masse, carburant, FMS, roulage, approche…) → la
+     tablette s'ouvre sur les documents de cette étape (puis tous les autres) ; pour le briefing, consulter vaut « Dossier consulté » ;
+   - sinon → l'étape numérotée s'ouvre (goStep du moteur, avec ses propres contrôles des sous-étapes manquantes). */
+function stepIdx(st){ var b = st.querySelector('b'), m = b && /^(?:✓\s*)?(\d+)\./.exec(b.textContent.trim()); return m ? +m[1] : -1; }
+function docsOf(i){ try { return DOCS.forStep(GD.steps[i]) || []; } catch (e) { return []; } }
+document.addEventListener('click', function(e){
+  var st = e.target.closest && e.target.closest('#ckl .st'); if (!st || e.target.closest('button')) return;
+  var i = stepIdx(st); if (i < 0 || !GD.steps[i]) return;
+  var ids = docsOf(i), c = document.getElementById('ckl');
+  if (c) c.hidden = true;
+  if (ids.length) { if (/brief|dossier/i.test(GD.steps[i].t || '')) { try { GD.brief = true; } catch (er) {} } tabletOpen(ids, i + '. ' + GD.steps[i].t); }
+  else { try { goStep(i); } catch (er) {} }
+}, true);
+css.textContent += '#ckl .st.ps-doc,#ckl .st.ps-go{cursor:pointer}#ckl .st.ps-doc>b::after{content:"  📱 documents";font-weight:600;color:#3fd0ff;font-size:.85em}'
+ + '#ckl .st.ps-go>b::after{content:"  ▸ ouvrir l\'étape";font-weight:600;color:#8fa4b8;font-size:.85em}';
+setInterval(function(){ try { document.querySelectorAll('#ckl .st').forEach(function(st){ var i = stepIdx(st); if (i < 0) return;
+  var d = docsOf(i).length > 0; st.classList.toggle('ps-doc', d); st.classList.toggle('ps-go', !d); }); } catch (e) {} }, 400);
 })();`;
 
 export function installEquipageExt(frame: HTMLIFrameElement | null): boolean {

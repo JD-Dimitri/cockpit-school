@@ -133,6 +133,21 @@ export function Simulator({ action }: { action?: string }) {
     if (action && ACTION.test(action) && loaded.current) launch(action);
   }, [action]);
 
+  // Demande de l'auteur (20/11 07:49) : une fois le vol lancé (menu du moteur fermé), la bande du site (logo, Parcours,
+  // Simulateur, Cours, bandeau de démonstration) disparaît et laisse tout l'écran au simulateur ; elle revient avec le menu.
+  useEffect(() => {
+    const root = document.documentElement;
+    const t = setInterval(() => {
+      let vol = false;
+      try {
+        const m = frame.current?.contentDocument?.getElementById('menu');
+        vol = !!m && m.hidden;
+      } catch { /* moteur pas encore chargé */ }
+      root.classList.toggle('sim-vol', vol);
+    }, 400);
+    return () => { clearInterval(t); root.classList.remove('sim-vol'); };
+  }, []);
+
   return (
     <section className="sim">
       {loadErr && <p className="page err">Simulateur indisponible : {loadErr}</p>}

@@ -68,9 +68,10 @@ with sync_playwright() as p:
         name = fr.evaluate("WALKPTS[ACK][__PS_TA__.cur][2]")
         check(f'{tag} : flèche rouge vers la pièce contrôlée', arrow['d'] == 'block' and name in arrow['t'], f'{arrow} / {name}')
         pg.wait_for_timeout(1200)
-        nb = fr.locator('#g-wp [data-ta=next]:not([hidden])')
-        check(f'{tag} : compte à rebours et bouton « Point suivant ▸ »', nb.count() == 1 and 'min' in fr.locator('#g-wp .ps-hold').inner_text())
-        if nb.count(): nb.click()
+        nb = fr.locator('#ps-ta [data-ta=next]:not([hidden])')
+        check(f'{tag} : compte à rebours et bouton « Point suivant ▸ »', nb.count() == 1 and 'min' in fr.locator('#ps-ta').inner_text())
+        if nb.count():
+            nb.click()
         check(f'{tag} : « Point suivant ▸ » écourte l\'arrêt', fr.evaluate("__PS_TA__.until") == 0)
         # visite complète : chaque arrêt est écourté (comme « Point suivant »), la marche reprend jusqu'au point suivant
         gear_seen = False
@@ -82,19 +83,20 @@ with sync_playwright() as p:
             if fr.evaluate("walkDone()"): break
             fr.evaluate("__PS_TA__.until = 0")
         has_gear = fr.evaluate("(WALKPTS[ACK] || []).some(p => /train/i.test(p[2]))")
-        check(f'{tag} : tous les points contrôlés ({r["seen"]}/{r["n"]})', fr.evaluate("walkDone()"), str(r))
+        check(f'{tag} : tous les points contrôlés ({r["seen"]}/{r["n"]})', r['seen'] == r['n'], str(r))
         if has_gear: check(f'{tag} : devant un logement de train, vue accroupie vers le haut', gear_seen)
-        pg.wait_for_timeout(1300)
-        bil = fr.locator('#g-wp [data-ta=bilan]:not([hidden])')
-        check(f'{tag} : bouton « Bilan contrôle visuel » à la fin de la visite', bil.count() == 1)
-        if bil.count():
-            bil.click()
+        fr.evaluate("walkDone()"); pg.wait_for_timeout(1300)
+        bil = fr.locator('#ps-ta [data-ta=bilan]:not([hidden])')
+        check(f'{tag} : fin de visite : bilan ouvert tout seul, bouton « Bilan contrôle visuel » dans le bandeau', bil.count() == 1 and fr.locator('#ps-bilan').count() == 1)
+        check(f'{tag} : l\'étape n\'est pas terminée tant que le bilan n\'est pas validé', fr.evaluate("walkDone()") is False)
+        if fr.locator('#ps-bilan').count():
             rows = fr.locator('#ps-bilan tr').count() - 1
             check(f'{tag} : bilan : un rang par point, tous « Contrôlé »', rows == r['n'] and fr.locator('#ps-bilan td.ok, #ps-bilan td.ano').count() == r['n'], f'{rows}/{r["n"]}')
             fr.locator('#ps-bilan [data-ta=ok]').click()
             pg.wait_for_timeout(800)
             doc = fr.evaluate("(() => ({has: !!DOCS.D.walkcheck, cur: DOCS.cur(), txt: (document.getElementById('docv') || {}).innerText || ''}))()")
             check(f'{tag} : « Valider » → bilan rangé dans les documents et affiché', doc['has'] and doc['cur'] == 'walkcheck' and 'BILAN CONTRÔLE VISUEL' in doc['txt'], str({k: v for k, v in doc.items() if k != 'txt'}))
+            check(f'{tag} : bilan validé → étape de la visite terminée', fr.evaluate("walkDone()") is True)
             fr.evaluate("DOCS.close()")
 
         # TA2 · installation dans le poste : tablette + double contrôle
@@ -112,11 +114,27 @@ with sync_playwright() as p:
         if two: check(f'{tag} : double contrôle commandant / copilote à l\'installation', 'Commandant (vous)' in eq and 'Copilote' in eq and 'Documents on board' in eq, eq[:200])
         else: check(f'{tag} : appareil à un pilote : annonce du commandant seul, pas de copilote', 'Commandant (vous)' in eq and 'Copilote' not in eq, eq[:200])
         k = fr.evaluate("GD.steps.findIndex(s => /roulage/i.test(s.t))")
-        fr.evaluate(f"goStep({k})"); pg.wait_for_timeout(16000)
+        fr.evaluate(f"goStep({k})"); pg.wait_for_timeout(24000)
         eq = fr.locator('#ps-eq').inner_text()
         if two: check(f'{tag} : au roulage, « Clear left » (commandant) puis « Clear right » (copilote)', 'Clear left.' in eq and 'Clear right.' in eq and eq.index('Clear left.') < eq.index('Clear right.'), eq[-300:])
         else: check(f'{tag} : au roulage, « Clear left, clear right » annoncé par le pilote', 'Clear left, clear right' in eq, eq[-200:])
         check(f'{tag} : bouton « 📱 Tablette » dans la barre du simulateur', fr.locator('#b-efb').count() == 1)
+        # checklist (20/11 07:26-07:27) : étape avec documents → tablette sur ces documents ; étape sans document → l'étape s'ouvre
+        fr.evaluate("(() => { const e = document.getElementById('ps-efb'); if (e) e.remove(); goStep(0); })()"); pg.wait_for_timeout(600)
+        fr.evaluate("CKL.open()"); pg.wait_for_timeout(700)
+        print('   [diag ckl]', fr.evaluate("(() => { const c = document.getElementById('ckl'); return {hidden: c && c.hidden, disp: c && getComputedStyle(c).display, doc: document.querySelectorAll('#ckl .st.ps-doc').length, go: document.querySelectorAll('#ckl .st.ps-go').length, menu: !!document.getElementById('b-menu'), docs: !!document.getElementById('b-docs'), bar: !!document.getElementById('bar')}; })()"))
+        st = fr.locator('#ckl .st.ps-doc').first
+        check(f'{tag} : checklist : l\'étape du dossier de vol est marquée « documents »', st.count() >= 1)
+        if st.count(): st.locator('b').click()
+        pg.wait_for_timeout(500)
+        tab = fr.evaluate("(() => { const e = document.getElementById('ps-efb'); return e ? {h: e.querySelector('h5').textContent, n: e.querySelectorAll('.tiles')[0].children.length} : null; })()")
+        check(f'{tag} : checklist : toucher l\'étape ouvre la tablette sur les documents de l\'étape', tab and 'Documents de l\'étape 0' in tab['h'] and tab['n'] >= 1 and fr.evaluate("document.getElementById('ckl').hidden"), str(tab))
+        fr.evaluate("(() => { const e = document.getElementById('ps-efb'); if (e) e.remove(); CKL.open(); })()"); pg.wait_for_timeout(700)
+        go = fr.evaluate("(() => { const s = [...document.querySelectorAll('#ckl .st.ps-go')].find(x => /^\\d+\\./.test(x.querySelector('b').textContent.trim())); return s ? +s.querySelector('b').textContent.trim().split('.')[0] : -1; })()")
+        if go >= 0:
+            fr.locator('#ckl .st.ps-go b', has_text=f'{go}.').first.click(); pg.wait_for_timeout(800)
+            check(f'{tag} : checklist : étape sans document → l\'étape {go} s\'ouvre', fr.evaluate("GD.i") == go or not fr.evaluate("document.getElementById('ckl').hidden"), str(fr.evaluate("GD.i")))
+        else: check(f'{tag} : checklist : au moins une étape sans document', False)
         check(f'{tag} : aucune erreur JavaScript', not errs, str(errs[:2]))
         b.close()
 

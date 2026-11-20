@@ -26,7 +26,7 @@ function isGear(i){ var p = (WALKPTS[ACK] || [])[i]; return !!p && /train/i.test
 function seenN(){ return GD && GD.seen ? GD.seen.size : 0; }
 function nextIdx(){ var pts = WALKPTS[ACK] || [], i = 0; while (i < pts.length && GD.seen.has(i)) i++; return i; }
 function key(){ return (typeof MI !== 'undefined' && MI ? (MI.n || '') : '') + '|' + ACK; }
-function reset(){ TA.cur = -1; TA.until = 0; TA.t0 = {}; TA.dur = {}; TA.last = 0; TA.bilan = null; }
+function reset(){ TA.asked = 0; TA.cur = -1; TA.until = 0; TA.t0 = {}; TA.dur = {}; TA.last = 0; TA.bilan = null; }
 var walkBox0 = window.walkBox;
 window.walkBox = function(i){
   walkBox0(i);
@@ -46,6 +46,11 @@ window.autoWalk = function(dt){
   }
   auto0(dt * 0.6);   // marche plus lente (≈ 0,9 m/s au lieu de 1,5 m/s)
 };
+/* fin de visite : l'étape « Tous les points contrôlés » n'est validée qu'avec le bilan, si la visite a vraiment été faite à pied
+   (points atteints un par un) ; un saut d'étape (points cochés d'un coup) ne l'exige pas */
+function walked(){ var n = (WALKPTS[ACK] || []).length; return n > 0 && Object.keys(TA.t0).length >= n; }
+var done0 = window.walkDone;
+window.walkDone = function(){ var d = done0(); if (!d || !walked()) return d; if (!TA.bilan && !document.getElementById('ps-bilan') && !TA.asked) { TA.asked = 1; setTimeout(bilanOpen, 600); } return !!TA.bilan; };
 /* pause : le temps d'arrêt ne s'écoule pas */
 setInterval(function(){ try { if (typeof paused !== 'undefined' && paused && TA.until) TA.until += 500; } catch (e) {} }, 500);
 /* vue accroupie vers le haut devant un logement de train */
@@ -59,10 +64,11 @@ window.placeWalkCam = function(){
 
 /* ---------- 3. Flèches rouges vers la pièce à contrôler ---------- */
 var css = document.createElement('style');
-css.textContent = '#ps-arrow{position:fixed;left:0;top:0;width:0;height:0;pointer-events:none;z-index:6;display:none}'
+css.textContent = '#ps-arrow{position:fixed;left:0;top:0;width:0;height:0;pointer-events:none;z-index:64;display:none}'
  + '#ps-arrow svg{position:absolute;left:-60px;top:-60px;width:120px;height:120px;overflow:visible;filter:drop-shadow(0 0 3px #000)}'
  + '#ps-arrow span{position:absolute;left:18px;top:24px;white-space:nowrap;background:#d7261e;color:#fff;font:700 13px/1.2 "Barlow Condensed",sans-serif;letter-spacing:.04em;padding:3px 7px;border-radius:4px}'
- + '.ps-hold{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}.ps-hold [hidden]{display:none!important}.ps-hold .bar{flex:1 1 120px;height:6px;background:#22313f;border-radius:3px;overflow:hidden}.ps-hold .bar i{display:block;height:100%;background:#d7261e}'
+ + '#ps-ta{position:fixed;left:50%;bottom:120px;transform:translateX(-50%);z-index:65;width:min(560px,calc(100vw - 20px));background:#0b1520ee;border:1px solid #2b3d50;border-left:4px solid #d7261e;border-radius:10px;padding:8px 10px;color:#e8eef2;font:13px/1.35 Inter,sans-serif;display:none}'
+ + '.ps-hold{flex-wrap:wrap;gap:6px 8px;align-items:center}.ps-hold [hidden]{display:none!important}.ps-hold .ps-pt{flex:1 1 100%;font:700 14px "Barlow Condensed",sans-serif;letter-spacing:.04em}.ps-hold .bar{flex:1 1 120px;height:6px;background:#22313f;border-radius:3px;overflow:hidden}.ps-hold .bar i{display:block;height:100%;background:#d7261e}'
  + '.ps-hold button,.ps-bilan button{background:#132232;color:#fff;border:1px solid #2b3d50;border-radius:8px;padding:6px 10px;font:700 13px "Barlow Condensed",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}'
  + '.ps-hold button.go,.ps-bilan button.go{background:#1f8a4c;border-color:#3ddc84}'
  + '#ps-bilan{position:fixed;inset:0;z-index:72;background:#000a;display:flex;align-items:center;justify-content:center;padding:12px}'
@@ -97,24 +103,26 @@ function arrowTick(){
 setInterval(arrowTick, 100);
 
 /* ---------- 4. Compte à rebours, « Point suivant », « Bilan contrôle visuel » ---------- */
+/* bandeau propre à la visite, toujours visible (le panneau du guide peut être replié) ; structure fixe : les boutons ne sont
+   jamais recréés pendant le compte à rebours, ils restent cliquables */
+var ctl = document.createElement('div'); ctl.id = 'ps-ta'; ctl.className = 'ps-hold'; ctl.setAttribute('role', 'status');
+ctl.innerHTML = '<b class="ps-pt"></b><span class="ps-left"></span><span class="bar"><i></i></span><button type="button" data-ta="next">Point suivant ▸</button>'
+  + '<button type="button" class="go" data-ta="bilan">Bilan contrôle visuel</button>';
+document.body.appendChild(ctl);
 function decorate(){
-  var w = document.getElementById('g-wp'); if (!w) return;
-  var box = w.querySelector('.wbox'); if (!box) return;
-  var h = box.querySelector('.ps-hold');
-  if (!h) { h = document.createElement('div'); h.className = 'ps-hold';
-    // structure fixe (les boutons ne sont jamais recréés pendant le compte à rebours : ils restent cliquables)
-    h.innerHTML = '<span class="ps-left"></span><span class="bar"><i></i></span><button type="button" data-ta="next">Point suivant ▸</button>'
-      + '<button type="button" class="go" data-ta="bilan">Bilan contrôle visuel</button>';
-    box.appendChild(h); }
-  var pts = WALKPTS[ACK] || [], left = Math.max(0, (TA.until - performance.now()) / 1000), done = seenN() >= pts.length;
-  var holding = typeof AUTO !== 'undefined' && AUTO.on && left > 0;
-  var t = 'Contrôle en cours : ' + Math.floor(left / 60) + ' min ' + String(Math.floor(left % 60)).padStart(2, '0') + ' s';
-  var L = h.querySelector('.ps-left'); if (L.textContent !== t) L.textContent = t;
-  L.hidden = !holding; h.querySelector('.bar').hidden = !holding; h.querySelector('[data-ta=next]').hidden = !holding;
-  h.querySelector('.bar i').style.width = Math.round(100 * (1 - left / TA.hold)) + '%';
-  h.querySelector('[data-ta=bilan]').hidden = !done;
+  var pts = WALKPTS[ACK] || [], inWalk = typeof view !== 'undefined' && view === 'walk' && MI && $('menu').hidden;
+  var left = Math.max(0, (TA.until - performance.now()) / 1000), done = seenN() >= pts.length && pts.length > 0;
+  var holding = typeof AUTO !== 'undefined' && AUTO.on && left > 0 && TA.cur >= 0;
+  ctl.style.display = inWalk && (holding || done || TA.cur >= 0) ? 'flex' : 'none';
+  var P = ctl.querySelector('.ps-pt'), nm = TA.cur >= 0 && pts[TA.cur] ? (TA.cur + 1) + ' · ' + pts[TA.cur][2] : '';
+  if (P.textContent !== nm) P.textContent = nm;
+  var t = 'contrôle en cours : ' + Math.floor(left / 60) + ' min ' + String(Math.floor(left % 60)).padStart(2, '0') + ' s';
+  var L = ctl.querySelector('.ps-left'); if (L.textContent !== t) L.textContent = t;
+  L.hidden = !holding; ctl.querySelector('.bar').hidden = !holding; ctl.querySelector('[data-ta=next]').hidden = !holding;
+  ctl.querySelector('.bar i').style.width = Math.round(100 * (1 - left / TA.hold)) + '%';
+  ctl.querySelector('[data-ta=bilan]').hidden = !done;
 }
-setInterval(function(){ try { if (TA.cur >= 0) decorate(); } catch (e) {} }, 1000);
+setInterval(function(){ try { decorate(); } catch (e) {} }, 500);
 document.addEventListener('click', function(e){
   var b = e.target.closest && e.target.closest('[data-ta]'); if (!b) return;
   if (b.dataset.ta === 'next') { TA.until = 0; decorate(); }
@@ -156,6 +164,7 @@ function bilanValidate(){
         + '\n\nAnomalies : reportées au compte rendu matériel (tech log).\nVisa CDB : ' + ((c.crew && c.crew.cdb) || '________') + '\n[SIMULÉ] exercice pédagogique.' }; } };
   }
   var m = document.getElementById('ps-bilan'); if (m) m.remove();
+  decorate();
   flash('Bilan contrôle visuel validé : rangé dans 📁 Documents (Appareil et équipage)', 'am');
   try { DOCS.open('walkcheck'); } catch (e) {}
 }

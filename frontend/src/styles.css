@@ -239,6 +239,8 @@ a.card:hover { border-color: var(--cy); }
 .welcome .points { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 10px; }
 .welcome .points li { border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
 .welcome .points span { color: var(--mute); }
+/* vol en cours : tout l'écran au simulateur (20/11 07:49) */
+html.sim-vol .top, html.sim-vol .demo { display: none; }
 .demo { margin: 0; padding: 6px 16px; background: rgba(255, 176, 32, .12); color: #ffb020; font-size: 13px; text-align: center; }
 
 /* page Appareils : illustration de l'appareil */
