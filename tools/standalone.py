@@ -41,7 +41,11 @@ def main():
             'window.__PT_DATA__=JSON.parse(window.__PT_DATA__);'
             'window.__PT_LEGACY__=' + js_string(legacy) + ';'
             # pas de serveur, donc pas de connexion possible : version de démonstration (bandeau), pour les essais de l'auteur
-            'window.__PT_DEMO__=true;</script>\n')
+            'window.__PT_DEMO__=true;'
+            # espace Admin : documentation interne intégrée seulement dans ce fichier d'essai (en ligne : /api/admin/doc, ROLE_ADMIN)
+            'window.__PT_ADMIN_DOC__=' + js_string(json.dumps({'title': 'Comment ce projet a été réalisé ?',
+                'html': (ROOT / 'backend/content/admin/realisation.html').read_text(encoding='utf-8')}, ensure_ascii=False)) + ';'
+            'window.__PT_ADMIN_DOC__=JSON.parse(window.__PT_ADMIN_DOC__);</script>\n')
     html = html.replace('<script type="module" src="app.js"></script>',
                         boot + '<script type="module">' + app.replace('</script', '<\\/script') + '</script>')
     out.write_text(html, encoding='utf-8')

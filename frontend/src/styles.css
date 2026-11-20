@@ -74,6 +74,12 @@ a.card:hover { border-color: var(--cy); }
 .course .body img, .course .body svg { max-width: 100%; height: auto; }
 .course .body table { border-collapse: collapse; display: block; overflow-x: auto; }
 .course .body td, .course .body th { border: 1px solid var(--line); padding: 4px 8px; }
+/* documentation Admin : blocs de code et sommaire */
+.admin-doc pre { background: #0b1520; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-x: auto; font-size: 13px; line-height: 1.45; }
+.admin-doc code { font-size: 13px; }
+.admin-doc .toc { columns: 2 240px; padding-left: 20px; }
+.admin-doc .toc a { color: var(--cy); }
+.admin-doc h2 { margin-top: 36px; padding-top: 8px; border-top: 1px solid var(--line); }
 .quiz { margin-top: 28px; padding: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
 .quiz h3 { margin: 0 0 8px; font: 600 18px var(--cond); }
 .quiz fieldset { border: 0; padding: 0; margin: 0 0 16px; }

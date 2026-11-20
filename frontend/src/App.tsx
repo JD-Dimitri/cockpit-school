@@ -11,6 +11,7 @@ import { Traffic } from './pages/Traffic';
 import { Parcours } from './pages/Parcours';
 import { useUser, rememberNext } from './auth';
 import { Welcome } from './pages/Welcome';
+import { Admin } from './pages/Admin';
 
 const ROUTES = [
   { path: '', label: 'Accueil', el: () => <Home /> },
@@ -35,6 +36,8 @@ const HIDDEN: Record<string, (p: string[]) => JSX.Element> = {
   // Missions et Aéroports : retirés du menu aussi (demande de l'auteur, 19/11 18:36) ; pages gardées par leur adresse.
   missions: () => <Missions />,
   aeroports: () => <Airports />,
+  // Espace administrateur (20/11) : lien visible seulement pour un administrateur ; l'accès est contrôlé par le serveur.
+  admin: () => <Admin />,
   imprimer: (p) => <PrintCourse part={p[0]} mod={p[1] === 'auto' ? undefined : p[1]} auto={p.includes('auto')} />,
 };
 
@@ -89,6 +92,9 @@ export function App() {
             : user === null && (
                 <a href="#/inscription" aria-current={head === 'inscription' ? 'page' : undefined}>Créer un compte</a>
               )}
+          {user?.admin && (
+            <a href="#/admin" aria-current={head === 'admin' ? 'page' : undefined}>Admin</a>
+          )}
           <a className="acct" href="#/connexion" aria-current={head === 'connexion' ? 'page' : undefined}>
             {user ? '● ' + (user.name || user.email) : 'Connexion'}
           </a>

@@ -36,7 +36,9 @@ réseaux de roulage, textures du globe.
 | systèmes (électricité, hydraulique, carburant, APU) | `engine/systems/` | à faire |
 | pilote automatique et FMS | `engine/autopilot.ts` | à faire |
 | contrôle aérien et radio | `engine/atc.ts` | à faire (fréquences : validation de l'auteur) |
-| météo | `engine/weather.ts` | à faire |
+| météo : lecture des METAR, vent (surface, couche limite, altitude), QNH (`parseMetar`, `vecFrom`, `metNear`, `surfWind`, `windAt`, `windDirSpd`, `qnhAt`) | `engine/weather.ts` | ✔ identique (test de parité : 12 METAR, 186 valeurs de vent et de QNH, METAR réels puis modifiés) ; reste : rafales, ATIS, givrage, turbulence |
+| choix de la météo, état de piste, visibilité, précipitations, foudre, voix du pilote (F21) | `legacy-ext/meteo.ts` (extension du moteur d'origine) | ✔ ajouté (test `e2e_meteo.py`, 8 appareils) |
+| boutons radio Répéter, Standby, Radio ▾, Mayday / Pan-Pan (F37) | `legacy-ext/radio.ts` (extension du moteur d'origine) | ✔ ajouté (test `e2e_radio.py`, 8 appareils) |
 | rendu 3D (terrain, aéroports, appareils, poste) | `three/` | à faire (visionneuse d'appareils seulement) |
 | instruments (PFD, ND, ECAM) | `instruments/` | à faire |
 | parcours guidés, check-lists, examens | `pages/` + `engine/` | à faire |
@@ -55,5 +57,5 @@ autorotation). Écart : 0 sur environ 740 000 valeurs comparées, mêmes message
 ## Chantiers reportés au GO PRO (décision du 18/11/2026)
 
 F32 vues réelles (branche `v10.43-paysage`), F30 intérieurs, F10 QCM à 30 questions, F27 données réelles, F18 atelier A350,
-F9 suite (anomalies), modification 13, F33 vraies cartes, F35 poste photoréaliste, F21 radio / audio / météo,
-F23 connexion et PDF.
+F9 suite (anomalies), modification 13, F33 vraies cartes, F35 poste photoréaliste.
+Faits depuis : F23 connexion et PDF, F37 boutons radio, F21 météo et radio en audio (première version).
