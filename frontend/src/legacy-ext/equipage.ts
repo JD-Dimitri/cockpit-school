@@ -148,7 +148,15 @@ css.textContent = '#ps-eq{position:fixed;right:10px;top:70px;z-index:64;max-widt
  + '#ps-eq button{float:right;background:none;border:0;color:#8fa4b8;font-size:18px;cursor:pointer;line-height:1}'
  + '#atc .ps-crew{margin-top:8px;border-top:1px solid #1d2f40;padding-top:6px}#atc .ps-crew b{display:block;font:700 12px "Barlow Condensed",sans-serif;letter-spacing:.12em;color:#3fd0ff;text-transform:uppercase;margin-bottom:4px}'
  + '#atc .ps-crew .row{display:flex;flex-wrap:wrap;gap:4px}#atc .ps-crew button{padding:3px 8px;font-size:12px}#atc .ps-crew button.now{border-color:#3ddc84;color:#3ddc84}'
- + '#efb-x{}';
+ + '#ps-efb{position:fixed;inset:0;z-index:69;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px}'
+ + '#ps-efb .tab{background:#1b1f24;border:10px solid #0d0f12;border-radius:26px;box-shadow:0 10px 40px #000;width:min(760px,100%);max-height:92vh;display:flex;flex-direction:column;overflow:hidden}'
+ + '#ps-efb .scr{background:#eef2f6;color:#111;flex:1;overflow:auto;padding:12px;border-radius:12px}'
+ + '#ps-efb .bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;font:700 16px "Barlow Condensed",sans-serif;letter-spacing:.05em}'
+ + '#ps-efb .bar button{background:#1f2a36;color:#fff;border:0;border-radius:8px;padding:6px 12px;font:700 13px "Barlow Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}'
+ + '#ps-efb h5{margin:10px 2px 6px;font:700 12px "Barlow Condensed",sans-serif;letter-spacing:.12em;color:#3a5568;text-transform:uppercase}'
+ + '#ps-efb .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}'
+ + '#ps-efb .tiles button{min-height:72px;background:#fff;border:1px solid #c9d3dd;border-radius:10px;padding:8px;text-align:left;font:600 13px/1.25 Inter,sans-serif;color:#122;cursor:pointer;display:flex;flex-direction:column;gap:4px}'
+ + '#ps-efb .tiles button i{font-style:normal;font-size:20px}';
 document.head.appendChild(css);
 var box = document.createElement('div'); box.id = 'ps-eq'; box.setAttribute('role', 'log'); box.setAttribute('aria-live', 'polite'); document.body.appendChild(box);
 box.addEventListener('click', function(e){ if (e.target.closest('[data-eqx]')) box.style.display = 'none'; });
