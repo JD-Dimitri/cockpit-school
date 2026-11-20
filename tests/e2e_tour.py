@@ -70,9 +70,11 @@ with sync_playwright() as p:
         pg.wait_for_timeout(1200)
         nb = fr.locator('#ps-ta [data-ta=next]:not([hidden])')
         check(f'{tag} : compte à rebours et bouton « Point suivant ▸ »', nb.count() == 1 and 'min' in fr.locator('#ps-ta').inner_text())
+        prev = fr.evaluate("__PS_TA__.cur")
         if nb.count():
             nb.click()
-        check(f'{tag} : « Point suivant ▸ » écourte l\'arrêt', fr.evaluate("__PS_TA__.until") == 0)
+        after = fr.evaluate("({until: __PS_TA__.until, cur: __PS_TA__.cur})")
+        check(f'{tag} : « Point suivant ▸ » écourte l\'arrêt', after['until'] == 0 or after['cur'] != prev, str(after))
         # visite complète : chaque arrêt est écourté (comme « Point suivant »), la marche reprend jusqu'au point suivant
         gear_seen = False
         for _ in range(60):
@@ -100,6 +102,7 @@ with sync_playwright() as p:
             fr.evaluate("DOCS.close()")
 
         # TA2 · installation dans le poste : tablette + double contrôle
+        fr.evaluate("(() => { AUTO.on = false; __PS_EQ__.played = {}; __PS_EQ__.last = ''; const e = document.getElementById('ps-efb'); if (e) e.remove(); })()")
         k = fr.evaluate("GD.steps.findIndex(s => /Monter à bord/.test(s.t))")
         fr.evaluate(f"goStep({k})"); pg.wait_for_timeout(2500)
         efb = fr.evaluate("(() => ({open: !!document.getElementById('ps-efb'), n: document.querySelectorAll('#ps-efb [data-efb]').length, all: DOCS.list().length}))()")
@@ -112,12 +115,24 @@ with sync_playwright() as p:
         pg.wait_for_timeout(6000)
         eq = fr.locator('#ps-eq').inner_text()
         if two: check(f'{tag} : double contrôle commandant / copilote à l\'installation', 'Commandant (vous)' in eq and 'Copilote' in eq and 'Documents on board' in eq, eq[:200])
-        else: check(f'{tag} : appareil à un pilote : annonce du commandant seul, pas de copilote', 'Commandant (vous)' in eq and 'Copilote' not in eq, eq[:200])
+        else: check(f'{tag} : appareil à un pilote : annonce du pilote seul, pas de copilote', 'Pilote (vous)' in eq and 'Copilote' not in eq, eq[:200])
         k = fr.evaluate("GD.steps.findIndex(s => /roulage/i.test(s.t))")
-        fr.evaluate(f"goStep({k})"); pg.wait_for_timeout(24000)
-        eq = fr.locator('#ps-eq').inner_text()
-        if two: check(f'{tag} : au roulage, « Clear left » (commandant) puis « Clear right » (copilote)', 'Clear left.' in eq and 'Clear right.' in eq and eq.index('Clear left.') < eq.index('Clear right.'), eq[-300:])
-        else: check(f'{tag} : au roulage, « Clear left, clear right » annoncé par le pilote', 'Clear left, clear right' in eq, eq[-200:])
+        if k < 0:   # hélicoptères : pas d'étape de roulage ; l'annonce de décollage est vérifiée à la place
+            k = fr.evaluate("GD.steps.findIndex(s => /^Décollage/i.test(s.t))")
+            fr.evaluate(f"(() => {{ __PS_EQ__.last = ''; goStep({k}); }})()")
+            for _ in range(30):
+                pg.wait_for_timeout(1000); eq = fr.evaluate("__PS_EQ__.log.map(x => x[1]).join('\\n')")
+                if 'clear above and around' in eq: break
+            check(f'{tag} : au décollage, annonce « dégagé au-dessus et autour »' + (' (commandant puis copilote)' if two else ''), 'clear above and around' in eq, eq[-200:])
+        else:
+            fr.evaluate(f"(() => {{ __PS_EQ__.last = ''; goStep({k}); }})()")
+            want = 'Clear right.' if two else 'Clear left, clear right'
+            for _ in range(90):
+                pg.wait_for_timeout(1000)
+                eq = fr.evaluate("__PS_EQ__.log.map(x => x[1]).join('\\n')")
+                if want in eq: break
+            if two: check(f'{tag} : au roulage, « Clear left » (commandant) puis « Clear right » (copilote)', 'Clear left.' in eq and 'Clear right.' in eq and eq.index('Clear left.') < eq.index('Clear right.'), eq[-300:])
+            else: check(f'{tag} : au roulage, « Clear left, clear right » annoncé par le pilote', 'Clear left, clear right' in eq, eq[-200:])
         check(f'{tag} : bouton « 📱 Tablette » dans la barre du simulateur', fr.locator('#b-efb').count() == 1)
         # TA3 (20/11 08:22) : toutes les conversations et check-lists, lancées depuis le panneau Radio, audibles avec « Son »
         fr.evaluate("(() => { hasPower = () => true; radioPowered = () => true; atcOpen(true); atcRender(true); })()"); pg.wait_for_timeout(400)
@@ -132,7 +147,7 @@ with sync_playwright() as p:
         check(f'{tag} : son coupé → sous-titres seulement, aucune voix', n['off'] == 0, str(n))
         if two and ac in ('a320', 'a350'):
             v = fr.evaluate("""(() => { const s0 = {g: S.onGround, V: S.V, thr: S.thr, f: ATC.flown}; S.onGround = true; ATC.flown = false; S.thr = 1;
-              for (const kt of [40, 105, (LS.v1 || 140) + 1, (LS.vr || 145) + 1]) { S.V = (kt + 3) * 0.514444; S.alt = elevAt(S.lat, S.lon) + 3; __ps_live_now && __ps_live_now(); }
+              for (const kt of [40, 105, (LS.v1 || 140) + 1, (LS.vr || 145) + 1]) { S.V = (kt + 8) * 0.514444; S.alt = elevAt(S.lat, S.lon) + 3; __ps_live_now && __ps_live_now(); }
               Object.assign(S, {onGround: s0.g, V: s0.V, thr: s0.thr}); ATC.flown = s0.f; return 1; })()""")
             pg.wait_for_timeout(500); v = fr.evaluate("__PS_EQ__.log.map(x => x[1]).join(' | ')")
             check(f'{tag} : annonces en direct au décollage : poussée, 100 kt, V1, rotation', all(k in v for k in ('Thrust set', 'One hundred knots', 'V1.', 'Rotate.')), v[-300:])

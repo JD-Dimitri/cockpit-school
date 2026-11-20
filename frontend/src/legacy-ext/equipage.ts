@@ -75,7 +75,7 @@ function P(){ var two = twoCrew(), F = fw();
       ['CDB', 'Take-off data: please cross-check V1, VR, V2 and flap setting.', 'Données de décollage : contre-vérifie V1, VR, V2 et les volets.'],
       ['OPL', 'V1 ' + (LS.v1 || '') + ', VR ' + (LS.vr || '') + ', V2 ' + (LS.v2 || '') + '. Cross-checked.', 'V1 ' + (LS.v1 || '—') + ', VR ' + (LS.vr || '—') + ', V2 ' + (LS.v2 || '—') + ' : contre-vérifié.']],
      [['CDB', 'Take-off data checked against the performance computation.', 'Données de décollage vérifiées avec le calcul de performances.']]) },
-  { k: 'bstart', t: 'Avant mise en route', re: /Before Start|Avant la mise en route/i, L: [] },
+  { k: 'bstart', t: 'Avant mise en route', re: /Before Start|Avant la mise en route|Alimentation et feux|Alimentation électrique/i, L: [] },
   { k: 'start', t: 'Mise en route', re: /Démarrage/i, L: c([
       ['CDB', F ? 'Starting engine two.' : 'Starting engine.', F ? 'Démarrage du moteur 2.' : 'Démarrage du moteur.'],
       ['OPL', F ? 'N2 rising, oil pressure rising.' : 'NG rising, oil pressure rising.', F ? 'N2 qui monte, pression d\'huile qui monte.' : 'NG qui monte, pression d\'huile qui monte.'],
@@ -94,6 +94,11 @@ function P(){ var two = twoCrew(), F = fw();
       ['CDB', 'Runway ' + rwDep() + ' confirmed, heading checked.', 'Piste ' + rwDep() + ' confirmée, cap vérifié.'],
       ['OPL', 'Runway ' + rwDep() + ' confirmed. Approach path clear, runway clear.', 'Piste ' + rwDep() + ' confirmée. Trajectoire d\'approche dégagée, piste dégagée.']],
      [['CDB', 'Runway ' + rwDep() + ' confirmed. Approach path clear, runway clear.', 'Piste ' + rwDep() + ' confirmée. Trajectoire d\'approche dégagée, piste dégagée.']]) },
+  { k: 'takeoff', t: 'Décollage', re: /^Décollage/i, L: c([
+      ['CDB', F ? 'Before take-off checks complete. Taking off.' : 'Before take-off checks complete. Lifting off.', F ? 'Vérifications avant décollage terminées. Décollage.' : 'Vérifications avant décollage terminées. On décolle.'],
+      ['OPL', F ? 'Engine instruments green, runway clear.' : 'Engines green, rotor RPM one hundred percent, clear above and around.', F ? 'Instruments moteur au vert, piste dégagée.' : 'Moteurs au vert, régime rotor 100 %, dégagé au-dessus et autour.']],
+     [['CDB', F ? 'Before take-off checks complete. Engine green, runway clear. Taking off.' : 'Before take-off checks complete. Engine green, rotor RPM normal, clear above and around. Lifting off.',
+       F ? 'Vérifications avant décollage terminées. Moteur au vert, piste dégagée. Décollage.' : 'Vérifications avant décollage terminées. Moteur au vert, régime rotor normal, dégagé au-dessus et autour. On décolle.']]) },
   { k: 'cruise', t: 'Croisière', re: /Croisière/i, L: c([
       ['CDB', 'Fuel check: fuel on board against flight plan.', 'Contrôle carburant : carburant à bord comparé au plan de vol.'],
       ['OPL', 'Fuel checked, within plan.', 'Carburant vérifié, conforme au plan.']],
@@ -102,7 +107,10 @@ function P(){ var two = twoCrew(), F = fw();
       ['CDB', 'Approach briefing: runway ' + rwArr() + ', approach and minimums as published, missed approach as published.', 'Briefing arrivée : piste ' + rwArr() + ', approche et minima publiés, procédure d\'approche interrompue publiée.'],
       ['OPL', 'Briefing understood.', 'Briefing compris.']],
      [['CDB', 'Approach briefing: runway ' + rwArr() + ', minimums and missed approach as published.', 'Briefing arrivée : piste ' + rwArr() + ', minima et approche interrompue publiés.']]) },
-  { k: 'app', t: 'Approche', re: /Approche|approche/i, L: [] },
+  { k: 'app', t: 'Approche', re: /Approche|approche/i, L: c([
+      ['CDB', F ? 'Approach: landing configuration, speed checked.' : 'Approach: speed and rate of descent checked, landing site in sight.', F ? 'Approche : configuration d\'atterrissage, vitesse vérifiée.' : 'Approche : vitesse et taux de descente vérifiés, aire de poser en vue.'],
+      ['OPL', 'Checked. Clear to land.', 'Vérifié. Autorisé à atterrir.']],
+     [['CDB', F ? 'Approach: landing configuration, speed checked, cleared to land.' : 'Approach: speed and rate of descent checked, landing site in sight and clear.', F ? 'Approche : configuration d\'atterrissage, vitesse vérifiée, autorisé à atterrir.' : 'Approche : vitesse et taux de descente vérifiés, aire de poser en vue et dégagée.']]) },
   { k: 'after', t: 'Après l\'atterrissage', re: /Après l|vers le parking/i, L: [] },
   { k: 'park', t: 'Parking', re: /Parking et|Arrêt/i, L: [] },
   { k: 'secure', t: 'Sécurisation', re: /Sécurisation/i, L: [] }
