@@ -114,6 +114,15 @@ function unlockVoice(){
     if (window.SND && SND.ctx && SND.ctx.state === 'suspended') SND.ctx.resume();
     window.__PS_VOICE_OK__ = (window.__PS_VOICE_OK__ || 0) + 1; } catch (e) {}
 }
+/* Menu du simulateur (demandes de l'auteur du 20/11) : bouton « Introduction au projet et test de niveau » juste au-dessus de
+   « Académie » (19:03) ; nom du projet COCKPIT SCHOOL à la place de celui du moteur d'origine (18:56). */
+setInterval(function(){
+  try { var i = document.getElementById('m-intro'), a = document.querySelector('#menu .acad-b');
+    if (i && a && a.previousElementSibling !== i) a.before(i);
+    var h = document.querySelector('#menu h1 b'); if (h && h.textContent === 'PLANE TRAJECTORIES') h.textContent = 'COCKPIT SCHOOL';
+    document.querySelectorAll('h1').forEach(function(t){ if (t.textContent.indexOf('✈ PLANE TRAJECTORIES · Introduction') === 0) t.textContent = '✈ COCKPIT SCHOOL · Introduction'; });
+  } catch (e) {}
+}, 300);
 ['pointerdown', 'touchend', 'keydown'].forEach(function(ev){ document.addEventListener(ev, function f(){ unlockVoice(); if (window.__PS_VOICE_OK__ >= 3) document.removeEventListener(ev, f, true); }, true); });
 })();`;
 
