@@ -157,7 +157,7 @@ export function Simulator({ action }: { action?: string }) {
       {doc && (
         <iframe
           ref={frame}
-          title="Simulateur PLANE SIMULATOR (moteur d'origine PLANE SIMULATOR)"
+          title="Simulateur COCKPIT SCHOOL (moteur d'origine PLANE TRAJECTORIES)"
           srcDoc={prepare(doc)}
           allow="fullscreen; microphone; autoplay"
           allowFullScreen

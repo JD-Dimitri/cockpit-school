@@ -1,4 +1,4 @@
-# Récepteur ADS-B personnel (Raspberry Pi) → PLANE SIMULATOR
+# Récepteur ADS-B personnel (Raspberry Pi) → COCKPIT SCHOOL - PLANE SIMULATOR
 
 Le boîtier capte les messages ADS-B (1090 MHz) des avions autour de lui : position, altitude, vitesse, cap, indicatif.
 Il **n'enregistre pas les conversations radio**. Ces données arrivent dans la version Pro par `GET /api/trafic`,
@@ -38,8 +38,8 @@ TRAFIC_RECEPTEUR_JETON=<jeton secret>      # php -r 'echo bin2hex(random_bytes(2
 Sur le Pi :
 
 ```
-sudo mkdir -p /opt/plane-simulator
-sudo cp envoi_trafic.py /opt/plane-simulator/
+sudo mkdir -p /opt/cockpit-school
+sudo cp envoi_trafic.py /opt/cockpit-school/
 sudo tee /etc/default/envoi-trafic >/dev/null <<'FIN'
 SERVEUR=https://<adresse-du-site>
 JETON=<le même jeton>
@@ -47,7 +47,7 @@ SOURCE=/run/readsb/aircraft.json
 PERIODE=2
 FIN
 sudo chmod 600 /etc/default/envoi-trafic
-SERVEUR=… JETON=… python3 /opt/plane-simulator/envoi_trafic.py --une-fois   # essai : « envoyé : N appareils »
+SERVEUR=… JETON=… python3 /opt/cockpit-school/envoi_trafic.py --une-fois   # essai : « envoyé : N appareils »
 sudo cp envoi-trafic.service /etc/systemd/system/
 sudo systemctl enable --now envoi-trafic
 journalctl -u envoi-trafic -f                                                    # suivi

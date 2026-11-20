@@ -80,7 +80,7 @@ export function App() {
       <header className="top">
         <a className="brand" href="#/">
           <span className="mark" aria-hidden="true">✈</span>
-          <span>PLANE <em>SIMULATOR</em></span>
+          <span>COCKPIT <em>SCHOOL</em></span>
         </a>
         <nav aria-label="Navigation principale">
           {user

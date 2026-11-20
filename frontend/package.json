@@ -1,8 +1,8 @@
 {
-  "name": "plane-simulator-frontend",
+  "name": "cockpit-school-frontend",
   "private": true,
   "version": "0.1.0",
-  "description": "PLANE SIMULATOR — interface React + Three.js",
+  "description": "COCKPIT SCHOOL - PLANE SIMULATOR — interface React + Three.js",
   "type": "module",
   "scripts": {
     "build": "node build.mjs",

@@ -1,4 +1,4 @@
-# Interface PLANE SIMULATOR en ligne (Apache, o2switch) — copié dans dist/.htaccess par « node build.mjs --prod ».
+# Interface COCKPIT SCHOOL - PLANE SIMULATOR en ligne (Apache, o2switch) — copié dans dist/.htaccess par « node build.mjs --prod ».
 # Audit de sécurité du 20/11/2026. À vérifier sur le serveur après la mise en ligne (ex. : curl -I https://cockpitschool.com/).
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"

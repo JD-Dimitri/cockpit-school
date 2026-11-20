@@ -1,6 +1,6 @@
-# plane-simulator — PLANE SIMULATOR
+# cockpit-school — COCKPIT SCHOOL - PLANE SIMULATOR
 
-FATS Pro — Flight and Trajectories Simulator | Symfony, React, TypeScript & Three.js
+COCKPIT SCHOOL - PLANE SIMULATOR — école de pilotage et simulateur de vol | Symfony, React, TypeScript & Three.js
 
 Version Pro du simulateur [PLANE TRAJECTORIES](https://github.com/JD-Dimitri/plane-trajectories-simulator) : former un élève
 de zéro jusqu'à la licence de pilote, et au-delà. La version gratuite (fichier HTML unique) continue d'exister sans régression.

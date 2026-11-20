@@ -1,4 +1,4 @@
-# Architecture — PLANE SIMULATOR
+# Architecture — COCKPIT SCHOOL - PLANE SIMULATOR
 
 ## Vue d'ensemble
 
