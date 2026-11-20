@@ -140,9 +140,10 @@ with sync_playwright() as p:
         crew = [t.strip() for t in fr.locator('#atc .ps-crew [data-crew]').all_text_contents()]
         check(f'{tag} : panneau Radio : rubrique « Équipage » avec les phases du vol', len(crew) >= 8 and any('☑' in c for c in crew), str(crew))
         n = fr.evaluate("""(() => { let n = 0; const sp = speechSynthesis.speak.bind(speechSynthesis); speechSynthesis.speak = () => { n++; };
-          SND.on = false; __PS_EQ_PLAY__('bstart'); const a = n; SND.on = true; __PS_EQ_PLAY__('bstart'); window.__sp = sp; return {off: a}; })()""")
+          window.__eq0 = __PS_EQ__.log.length; SND.on = false; __PS_EQ_PLAY__('bstart'); const a = n; SND.on = true; __PS_EQ_PLAY__('bstart'); window.__sp = sp; return {off: a}; })()""")
         pg.wait_for_timeout(6000)
-        txt = fr.locator('#ps-eq').inner_text(); spk = fr.evaluate("(() => { const k = speechSynthesis.speak; speechSynthesis.speak = window.__sp; SND.on = false; return 1; })()")
+        # la boîte n'affiche que les 2 dernières répliques (UX1) : on lit le journal complet de la conversation
+        txt = fr.evaluate("(() => { const L = __PS_EQ__.log; return L.slice(window.__eq0 || 0).map(x => (x[0] === 'CDB' ? 'Commandant' : 'Copilote') + ' : ' + x[1]).join('\\n'); })()"); spk = fr.evaluate("(() => { const k = speechSynthesis.speak; speechSynthesis.speak = window.__sp; SND.on = false; return 1; })()")
         ck_first = 'Before start checklist.' if two else ('Before start checklist.' if ac in ('a320',) else 'Avant mise en route checklist.')
         check(f'{tag} : check-list « avant mise en route » lue en question / réponse depuis le panneau Radio', ('checklist.' in txt.lower()) and (('Copilote' in txt) == two), txt[:240])
         check(f'{tag} : son coupé → sous-titres seulement, aucune voix', n['off'] == 0, str(n))
@@ -181,8 +182,9 @@ with sync_playwright() as p:
         for _ in range(20):
             pg.wait_for_timeout(200)
             if fr.evaluate("!!document.getElementById('crash')"): break
+        diag = fr.evaluate("(() => JSON.stringify({view, mi: !!MI, acc: __PS_TA__.acc, d: (__PS_DANGER__() || '').slice(0, 40), eng: S.eng, crash: !!document.getElementById('crash')}))()")
         crash = fr.evaluate("(() => { clearInterval(window.__keep); const c = document.getElementById('crash'); const t = c ? c.innerText : ''; if (S.eng) S.eng = S.eng.map(() => 0); S.nr = 0; if (c) c.remove(); return t; })()")
-        check(f'{tag} : l\'accident est affiché (« ACCIDENT AU SOL »)', 'ACCIDENT AU SOL' in crash, crash[:120])
+        check(f'{tag} : l\'accident est affiché (« ACCIDENT AU SOL »)', 'ACCIDENT AU SOL' in crash, crash[:120] + ' ' + diag)
         check(f'{tag} : aucune erreur JavaScript', not errs, str(errs[:2]))
         b.close()
 
