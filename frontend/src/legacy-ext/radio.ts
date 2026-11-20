@@ -95,6 +95,26 @@ window.atcRender = function(force){
   var R = reasons();
   p.querySelectorAll('[data-em]').forEach(function(b){ b.onclick = function(){ declare(R[+b.dataset.em]); atcRender(true); }; });
 };
+
+/* Son sur téléphone (demande de l'auteur du 20/11 17:33 : « je n'entends pas les conversations de la radio en mode mobile »).
+   1) Le bouton « Son » rend audibles toutes les conversations : la voix du contrôleur suit « Son » (la case « Voix du
+      contrôleur » reste disponible pour la couper seule).
+   2) Les navigateurs des téléphones (Safari surtout) ne laissent parler la voix de synthèse qu'après un premier son lancé
+      par un toucher de l'écran ; nos répliques partent après un délai, elles étaient donc bloquées. Au premier toucher, on
+      prononce un texte vide (volume 0) et on réveille le son de la page ; ensuite les répliques passent. Chrome sur Android
+      met parfois la voix en pause : elle est relancée régulièrement. */
+var SON0 = null;
+setInterval(function(){
+  try { var on = !!(window.SND && SND.on); if (on !== SON0) { if (SON0 !== null || on) ATC.voice = on; SON0 = on; ATC.ver++; }
+    if (window.speechSynthesis && speechSynthesis.paused) speechSynthesis.resume(); } catch (e) {}
+}, 400);
+function unlockVoice(){
+  try { if (window.speechSynthesis) { var u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u); speechSynthesis.resume(); }
+    if (typeof AUD !== 'undefined') { AUD = AUD || new (window.AudioContext || window.webkitAudioContext)(); if (AUD.state === 'suspended') AUD.resume(); }
+    if (window.SND && SND.ctx && SND.ctx.state === 'suspended') SND.ctx.resume();
+    window.__PS_VOICE_OK__ = (window.__PS_VOICE_OK__ || 0) + 1; } catch (e) {}
+}
+['pointerdown', 'touchend', 'keydown'].forEach(function(ev){ document.addEventListener(ev, function f(){ unlockVoice(); if (window.__PS_VOICE_OK__ >= 3) document.removeEventListener(ev, f, true); }, true); });
 })();`;
 
 /** Ajoute les boutons au moteur chargé dans le cadre (même origine : servi par l'API ou intégré en srcdoc). */
