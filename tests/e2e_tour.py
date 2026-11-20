@@ -178,7 +178,9 @@ with sync_playwright() as p:
         pg.wait_for_timeout(300)
         fr.evaluate("(() => { if (S.eng) S.eng = S.eng.map(() => 1); S.nr = 1; const e = A.kind === 'fw' && ACK !== 'c172' ? (WALKPTS[ACK] || []).find(p => /[Mm]oteur|[Rr]éacteur/.test(p[2])) : null; const t = e ? [e[0], e[1] - 0.5] : ACK === 'c172' ? [0, -3.6] : [0, 0]; const q = m2l(t[0], t[1]); GD.walk.x = q[0]; GD.walk.z = q[1]; setView('walk'); })()")
         fr.evaluate("window.__keep = setInterval(() => { if (S.eng) S.eng = S.eng.map(() => 1); S.nr = 1; }, 30)")   # moteurs maintenus en marche (pas de carburant ni de systèmes réglés dans ce test)
-        pg.wait_for_timeout(900)
+        for _ in range(20):
+            pg.wait_for_timeout(200)
+            if fr.evaluate("!!document.getElementById('crash')"): break
         crash = fr.evaluate("(() => { clearInterval(window.__keep); const c = document.getElementById('crash'); const t = c ? c.innerText : ''; if (S.eng) S.eng = S.eng.map(() => 0); S.nr = 0; if (c) c.remove(); return t; })()")
         check(f'{tag} : l\'accident est affiché (« ACCIDENT AU SOL »)', 'ACCIDENT AU SOL' in crash, crash[:120])
         check(f'{tag} : aucune erreur JavaScript', not errs, str(errs[:2]))
