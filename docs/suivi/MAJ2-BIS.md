@@ -177,3 +177,23 @@ Moment (jour avec soleil / nuit) + vent (calme, vent, tempête, ouragan) + ciel 
 
 ### TA4 — Visite de contrôle visuel : regard qui balaie, logements de train ouverts (20/11/2026 23:59)
 Regard qui balaie chaque pièce pendant l'arrêt ; trains : trappes ouvertes, vue debout au centre sous le logement, intérieur modélisé (roues, jambe, vérins, câbles, flexibles), tous les trains, tous les appareils.
+
+## Nouvelles demandes — 21/11/2026
+
+### SON-APT — Ambiance d'aéroport (09:04)
+À FAIRE. Supprimer totalement oiseaux et grillons par retouches exactes dans prepare() de Simulator.tsx, sans modifier legacy/plane-trajectories.html. Vérifier une occurrence unique par chaîne. Extension Web Audio : APU selon son état et la proximité de la queue, GPU conservé, véhicules de piste toutes les 30 à 90 s, distantJet toutes les 40 à 90 s, démarrages voisins occasionnels, ventilation et fond d'aéroport. Conserver météo et bouton Son. Nuit plus calme, hélistations moins fréquentées. Atténuer pendant les arrêts de 3 min. Huit appareils ; tests e2e_tour, PC et téléphone.
+
+### SON-EMB — Montée à bord et passagers (09:14)
+À FAIRE. Extension ambianceBord.ts : pas de l'équipage selon escalier, passerelle ou marchepied ; portes, galley, cockpit, sièges et ceintures. Pour avions de ligne et Learjet : foule synthétique proportionnelle au manifeste, bagages, coffres, murmures, accueil et annonces par voix de synthèse identifiées. Spatialisation PannerNode et atténuation porte cockpit fermée. Réutiliser P.pax si pertinent ; éviter les centaines de sources audio. Bouton Son ; radio intelligible ; tests e2e_tour et e2e_meteo sur PC et téléphone.
+
+### CV-VISÉE — Caméra et contrôle visuel (09:06)
+À FAIRE. Corriger le ciblage de tous les points des huit appareils dans tourAvion.ts : caméra à hauteur d'œil environ 1,7 m ou accroupie aux trains, position et orientation vers le centre 3D réel de la pièce, y compris pièces hautes et éloignées. Flèche #ps-arrow projetée sur la pièce, indicateur de bord si hors champ et recentrage doux. Bouton Contrôle visuel dans les vues visite, extérieure et dessus : balayage lent propre à chaque pièce, zones nommées, pause au toucher, lien vers CV-3D. Tests projection dans l'écran et écart flèche/cible environ 40 px, 1366x768 et 390x844, e2e_tour.
+
+### CV-3D — Analyse interactive des structures (09:02)
+À FAIRE APRÈS CV + TRP. Flèche et étiquette cliquables (souris, toucher, Entrée) ; fenêtre à deux onglets : vue réaliste depuis le sol sans démontage, anomalies simulées et décisions ; vue théorique en coupe/éclatée rotative et zoomable, composants nommés. Couvrir moteurs, aubes, trains, ailes, empennages, sondes, hélice et rotors. Prototypes : GE90-115B du B777 et train principal A320, validation de l'auteur avant généralisation aux huit appareils. Modèles fournis, procéduraux ou sous licences commerciales compatibles vérifiées ; aucun achat sans accord. Statuts [RÉFÉRENCÉ], [SCHÉMATIQUE], [ESTIMÉ], [SIMULÉ]. Chargement différé et mode léger mobile. Pause du compte à rebours pendant l'analyse ; fermeture X/Échap ; tests e2e_tour, rotation, zoom, performances et résolutions PC/mobile.
+
+### QV1-AVIONS — Réalisme 3D procédural (09:09 ; décision 09:11)
+À FAIRE AVEC QV1. DÉCISION AUTEUR : améliorer gratuitement les modèles Three.js existants, sans achat de modèles 3D. Moteur legacy intact ; retouches prepare() ou extension modelesHQ.ts. Géométrie lissée et enrichie (nacelles, fuselage, carénages, ailes, empennages, hublots, portes, sondes, feux) ; trains détaillés liés à TRP ; matériaux PBR, textures générées ou CC0, HDRI CC0, ACES, sRGB, ombres et occlusion selon performances. Livrées fictives. Modes léger téléphone et haute qualité PC ; mesurer FPS et mémoire. Prototype B777 sous aile gauche, captures avant/après puis validation de l'auteur avant généralisation aux huit appareils. Corriger la désynchronisation guide point 7 / bandeau point 6 ; ajouter contrôle e2e_tour. Tests e2e_front, e2e_tour et parité du vol. A350 inchangé sans validation.
+
+### I18N — Internationalisation (09:14 ; précision 09:44)
+REPORTÉ À LA VERSION PRO — NE PAS DÉVELOPPER MAINTENANT. Langues : français, anglais, italien, allemand, arabe (RTL), chinois mandarin simplifié (zh-CN), hindi en devanagari (hi), puis autres. Prévoir bouton drapeau, react-i18next ou équivalent, traductions des interfaces, cours, QCM et PDF, polices adaptées et synthèse vocale multilingue. Radio ATC en anglais avec sous-titres traduits.
