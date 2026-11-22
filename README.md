@@ -1,7 +1,10 @@
 # cockpit-school — COCKPIT SCHOOL - PLANE SIMULATOR
 
 COCKPIT SCHOOL - PLANE SIMULATOR — école de pilotage et simulateur de vol | Symfony, React, TypeScript & Three.js
-
+<p align="center">
+  <img src="frontend/assets/appareils/b777.webp" alt="Boeing 777-300ER — illustration du simulateur COCKPIT SCHOOL" width="720">
+  <br><em>Illustration générée, pas une photo.</em>
+</p>
 Version Pro du simulateur [PLANE TRAJECTORIES](https://github.com/JD-Dimitri/plane-trajectories-simulator) : former un élève
 de zéro jusqu'à la licence de pilote, et au-delà. La version gratuite (fichier HTML unique) continue d'exister sans régression.
 
