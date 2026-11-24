@@ -260,5 +260,7 @@ html.sim-vol .top, html.sim-vol .demo { display: none; }
 @media (max-width: 700px) { .sim-calc-window { inset: 0; width: auto; height: auto; border-radius: 0; } }
 .sim-calc-window .cc-root { --cc-accent: #3fd0ff; }
 .cours-calc { margin-left: 8px; }
-.lang-toggle { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 10px; border: 1px solid rgba(255,255,255,.25); border-radius: 18px; background: transparent; color: inherit; font: 600 13px var(--cond, inherit); cursor: pointer; }
+.lang-toggle { position: fixed; top: 4px; right: 4px; z-index: 1100; /* 1 mm du bord (≈ 4 px), toujours au même endroit (24/11/2026) */ display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 10px; border: 1px solid rgba(255,255,255,.25); border-radius: 18px; background: transparent; color: inherit; font: 600 13px var(--cond, inherit); cursor: pointer; }
 .lang-toggle img { border-radius: 50%; }
+
+html.sim-vol .lang-toggle { display: none; } /* pendant le vol, l'écran est au simulateur */
