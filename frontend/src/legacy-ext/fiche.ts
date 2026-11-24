@@ -78,6 +78,16 @@ window.__PS_FICHE__ = open;
 /* Vol en cours (menu fermé) signalé à la page, qui masque la bande du site (C12) ; fonctionne sans accès au cadre (24/11/2026) */
 var VOL0 = null;
 setInterval(function(){ try { var m = document.getElementById('menu'), v = !!(m && m.hidden); if (v !== VOL0) { VOL0 = v; parent.postMessage({ type: 'ps-vol', vol: v }, '*'); } } catch (e) {} }, 400);
+/* Voix plus posées (demande de l'auteur du 24/11/2026 19:25) : dialogues pilote / copilote / contrôle (selon la position de
+   l'avion) à vitesse normale et posée. Toutes les voix de synthèse passent ici (moteur et extensions) : vitesse ramenée
+   entre 0,85 et 0,95 (avant : 0,97 à 1,12), hauteur de voix (rôle) inchangée. */
+try {
+  if (window.speechSynthesis && !speechSynthesis.__psRate) {
+    var sp0 = speechSynthesis.speak.bind(speechSynthesis);
+    speechSynthesis.speak = function(u){ try { if (u && u.text && u.text.trim()) u.rate = Math.max(0.85, Math.min(0.95, (u.rate || 1) * 0.88)); } catch (e) {} return sp0(u); };
+    speechSynthesis.__psRate = true;
+  }
+} catch (e) {}
 var CALCP = false;
 window.__PS_CALC__ = function(){
   var auto = false; try { auto = !!(AUTO && AUTO.on); } catch (e) {}

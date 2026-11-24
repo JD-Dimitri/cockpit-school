@@ -56,6 +56,8 @@ const prepare = (html: string, start = false) =>
     .replace('<body>', () => '<body>' + (start ? startEarly() : ''))
     // « Calculs du vol » renommé « Formulaires de calculs du vol » (demande de l'auteur du 24/11/2026 17:53)
     .replaceAll('Calculs du vol', 'Formulaires de calculs du vol')
+    // Voix de synthèse externe éventuelle (TTSX) : même débit posé que les autres voix (24/11/2026)
+    .replace("rate:rateV||1.05,voice:'glassy'", "rate:rateV||0.92,voice:'glassy'")
     // Calculateur visible aussi dans la barre réduite du téléphone (sinon rangé sous « ⋯ Plus »), 24/11/2026
     .replace("const KEEP=['b-back','b-menu','b-pause','b-auto','b-jump','b-more','b-scr'];", "const KEEP=['b-back','b-menu','b-pause','b-calcx','b-auto','b-jump','b-more','b-scr'];")
     // Calculateur (24/11/2026) : bouton dans la barre du simulateur, juste après « Pause »

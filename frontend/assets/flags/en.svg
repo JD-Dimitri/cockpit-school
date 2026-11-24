@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Union Flag Institute land ratio 5:3; diagonal widths 3:2:1 and central cross 6 with 2-unit edging; Pantone screen equivalents. -->
+  <defs>
+    <clipPath id="disc"><circle cx="32" cy="32" r="32"/></clipPath>
+  </defs>
+  <g clip-path="url(#disc)">
+    <rect x="0" y="0" width="64" height="64" fill="#012169"/>
+    <path d="M -21.33333 0 L 85.33333 64" fill="none" stroke="#FFFFFF" stroke-width="12.8"/>
+    <path d="M -21.33333 64 L 85.33333 0" fill="none" stroke="#FFFFFF" stroke-width="12.8"/>
+    <path d="M -22.43092 1.82932 L 30.90241 33.82932" fill="none" stroke="#C8102E" stroke-width="4.26667"/>
+    <path d="M 33.09759 30.17068 L 86.43092 62.17068" fill="none" stroke="#C8102E" stroke-width="4.26667"/>
+    <path d="M -20.23574 65.82932 L 33.09759 33.82932" fill="none" stroke="#C8102E" stroke-width="4.26667"/>
+    <path d="M 30.90241 30.17068 L 84.23574 -1.82932" fill="none" stroke="#C8102E" stroke-width="4.26667"/>
+    <rect x="0" y="21.33333" width="64" height="21.33333" fill="#FFFFFF"/>
+    <rect x="21.33333" y="0" width="21.33333" height="64" fill="#FFFFFF"/>
+    <rect x="0" y="25.6" width="64" height="12.8" fill="#C8102E"/>
+    <rect x="25.6" y="0" width="12.8" height="64" fill="#C8102E"/>
+  </g>
+  <circle cx="32" cy="32" r="31.5" fill="none" stroke="#d0d5dc" stroke-width="1"/>
+</svg>

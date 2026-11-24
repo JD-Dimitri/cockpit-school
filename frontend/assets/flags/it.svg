@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Equal thirds; Pantone textile 17-6153 / 11-0601 / 18-1662, approximate sRGB. -->
+  <defs>
+    <clipPath id="disc"><circle cx="32" cy="32" r="32"/></clipPath>
+  </defs>
+  <g clip-path="url(#disc)">
+    <rect x="0" y="0" width="21.33334" height="64" fill="#008C45"/>
+    <rect x="21.33333" y="0" width="21.33334" height="64" fill="#F4F5F0"/>
+    <rect x="42.66667" y="0" width="21.33334" height="64" fill="#CD212A"/>
+  </g>
+  <circle cx="32" cy="32" r="31.5" fill="none" stroke="#d0d5dc" stroke-width="1"/>
+</svg>

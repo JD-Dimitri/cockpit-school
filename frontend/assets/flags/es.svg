@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Royal Decrees 1511/1977 and 441/1981; 1:2:1 bands, screen colour approximations; no arms. -->
+  <defs>
+    <clipPath id="disc"><circle cx="32" cy="32" r="32"/></clipPath>
+  </defs>
+  <g clip-path="url(#disc)">
+    <rect x="0" y="0" width="64" height="64" fill="#AA151B"/>
+    <rect x="0" y="16" width="64" height="32" fill="#F1BF00"/>
+  </g>
+  <circle cx="32" cy="32" r="31.5" fill="none" stroke="#d0d5dc" stroke-width="1"/>
+</svg>
