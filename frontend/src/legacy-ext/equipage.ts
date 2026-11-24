@@ -215,7 +215,7 @@ function tick(){
     if (t && id !== EQ.last) { EQ.last = id; var first = true;
       // une étape du parcours peut couvrir plusieurs phases (ex. A320 : « Après mise en route, roulage ») : elles s'enchaînent
       curPhases().forEach(function(ph){ var k = (MI.n || '') + '|' + ACK + '|' + ph.k; if (EQ.played[k]) return; EQ.played[k] = 1;
-        if (ph.k === 'bord') { tabletOpen(); setTimeout(function(){ play(ph); }, 600); } else { play(ph, !first); } first = false; }); }
+        play(ph, ph.k === 'bord' ? false : !first); /* tablette : seulement par le bouton « 📱 Tablette » (24/11/2026 20:40) */ first = false; }); }
   } catch (e) {}
 }
 setInterval(tick, 700);
@@ -284,10 +284,11 @@ document.addEventListener('click', function(e){
   var i = stepIdx(st); if (i < 0 || !GD.steps[i]) return;
   var ids = docsOf(i), c = document.getElementById('ckl');
   if (c) c.hidden = true;
-  if (ids.length) { if (/brief|dossier/i.test(GD.steps[i].t || '')) { try { GD.brief = true; } catch (er) {} } tabletOpen(ids, i + '. ' + GD.steps[i].t); }
-  else { try { goStep(i); } catch (er) {} }
+  /* Demande de l'auteur (24/11/2026 20:40) : la tablette s'ouvre STRICTEMENT par le bouton « 📱 Tablette » ;
+     la check-list mène toujours à l'étape (remplace la règle C11 du 20/11 : étape avec documents → tablette). */
+  try { goStep(i); } catch (er) {}
 }, true);
-css.textContent += '#ckl .st.ps-doc,#ckl .st.ps-go{cursor:pointer}#ckl .st.ps-doc>b::after{content:"  📱 documents";font-weight:600;color:#3fd0ff;font-size:.85em}'
+css.textContent += '#ckl .st.ps-doc,#ckl .st.ps-go{cursor:pointer}'
  + '#ckl .st.ps-go>b::after{content:"  ▸ ouvrir l\'étape";font-weight:600;color:#8fa4b8;font-size:.85em}';
 // le moteur redessine la checklist souvent : les marques sont reposées après chaque redessin
 function markCkl(){ try { document.querySelectorAll('#ckl .st:not(.ps-doc):not(.ps-go)').forEach(function(st){ var i = stepIdx(st); if (i < 0) return;

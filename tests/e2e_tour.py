@@ -106,8 +106,11 @@ with sync_playwright() as p:
         k = fr.evaluate("GD.steps.findIndex(s => /Monter à bord/.test(s.t))")
         # goStep peut être retenu par la checklist (sous-étapes manquantes) : on se place alors directement sur l'étape
         fr.evaluate(f"(() => {{ try {{ goStep({k}); }} catch (e) {{}} if (GD.i !== {k}) GD.i = {k}; const c = document.getElementById('ckl'); if (c) c.hidden = true; }})()"); pg.wait_for_timeout(2500)
+        # 24/11 20:40 : la tablette s'ouvre STRICTEMENT par le bouton « 📱 Tablette » (plus d'ouverture automatique)
+        check(f'{tag} : installation en poste → pas de tablette ouverte automatiquement', not fr.evaluate("!!document.getElementById('ps-efb') && getComputedStyle(document.getElementById('ps-efb')).display !== 'none'"))
+        fr.evaluate("document.getElementById('b-efb').click()"); pg.wait_for_timeout(500)
         efb = fr.evaluate("(() => ({open: !!document.getElementById('ps-efb'), n: document.querySelectorAll('#ps-efb [data-efb]').length, all: DOCS.list().length}))()")
-        check(f'{tag} : installation en poste → tablette avec tous les documents en tuiles', efb['open'] and efb['n'] == efb['all'] and efb['n'] >= 10, str(efb))
+        check(f'{tag} : bouton « 📱 Tablette » → tablette avec tous les documents en tuiles', efb['open'] and efb['n'] == efb['all'] and efb['n'] >= 10, str(efb))
         if efb['open']:
             fr.locator('#ps-efb [data-efb=techlog]').click()
             pg.wait_for_timeout(500)
@@ -153,21 +156,12 @@ with sync_playwright() as p:
               Object.assign(S, {onGround: s0.g, V: s0.V, thr: s0.thr}); ATC.flown = s0.f; return 1; })()""")
             pg.wait_for_timeout(500); v = fr.evaluate("__PS_EQ__.log.map(x => x[1]).join(' | ')")
             check(f'{tag} : annonces en direct au décollage : poussée, 100 kt, V1, rotation', all(k in v for k in ('Thrust set', 'One hundred knots', 'V1.', 'Rotate.')), v[-300:])
-        # checklist (20/11 07:26-07:27) : étape avec documents → tablette sur ces documents ; étape sans document → l'étape s'ouvre
-        fr.evaluate("(() => { const e = document.getElementById('ps-efb'); if (e) e.remove(); goStep(0); })()"); pg.wait_for_timeout(600)
+        # checklist (24/11 20:40) : toucher une étape mène TOUJOURS à l'étape, jamais à la tablette
+        fr.evaluate("(() => { const e = document.getElementById('ps-efb'); if (e) e.remove(); goStep(3); })()"); pg.wait_for_timeout(600)
         fr.evaluate("CKL.open()"); pg.wait_for_timeout(700)
-        st = fr.locator('#ckl .st.ps-doc').first
-        check(f'{tag} : checklist : l\'étape du dossier de vol est marquée « documents »', st.count() >= 1)
-        if st.count(): fr.evaluate("document.querySelector('#ckl .st.ps-doc b').click()")
-        pg.wait_for_timeout(500)
-        tab = fr.evaluate("(() => { const e = document.getElementById('ps-efb'); return e ? {h: e.querySelector('h5').textContent, n: e.querySelectorAll('.tiles')[0].children.length} : null; })()")
-        check(f'{tag} : checklist : toucher l\'étape ouvre la tablette sur les documents de l\'étape', tab and 'Documents de l\'étape 0' in tab['h'] and tab['n'] >= 1 and fr.evaluate("document.getElementById('ckl').hidden"), str(tab))
-        fr.evaluate("(() => { const e = document.getElementById('ps-efb'); if (e) e.remove(); CKL.open(); })()"); pg.wait_for_timeout(700)
-        go = fr.evaluate("(() => { const s = [...document.querySelectorAll('#ckl .st.ps-go')].find(x => /^\\d+\\./.test(x.querySelector('b').textContent.trim())); return s ? +s.querySelector('b').textContent.trim().split('.')[0] : -1; })()")
-        if go >= 0:
-            fr.evaluate(f"[...document.querySelectorAll('#ckl .st.ps-go b')].find(b => b.textContent.trim().startsWith('{go}.')).click()"); pg.wait_for_timeout(800)
-            check(f'{tag} : checklist : étape sans document → l\'étape {go} s\'ouvre', fr.evaluate("GD.i") == go or not fr.evaluate("document.getElementById('ckl').hidden"), str(fr.evaluate("GD.i")))
-        else: check(f'{tag} : checklist : au moins une étape sans document', False)
+        fr.evaluate("(() => { const b = [...document.querySelectorAll('#ckl .st b')].find(x => /^(?:✓\\s*)?0\\./.test(x.textContent.trim())); if (b) b.click(); })()"); pg.wait_for_timeout(800)
+        ck = fr.evaluate("JSON.stringify({i: GD.i, tab: !!document.getElementById('ps-efb')})")
+        check(f'{tag} : checklist : toucher l\'étape 0 (dossier de vol) ouvre l\'étape, pas la tablette', '"i":0' in ck and '"tab":false' in ck, ck)
         # MET2 · moteurs ou rotors en marche : personne près d'une zone de danger → accident ; loin → rien
         dz = fr.evaluate("""(() => { const t0 = S.eng ? S.eng.slice() : null, nr0 = S.nr; setView('walk'); if (S.eng) S.eng = S.eng.map(() => 1); S.nr = 1; S.rpm = 2200;
           const far = (() => { const q = m2l(0, 120); GD.walk.x = q[0]; GD.walk.z = q[1]; return __PS_DANGER__(); })();
