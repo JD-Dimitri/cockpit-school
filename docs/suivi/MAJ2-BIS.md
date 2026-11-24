@@ -177,3 +177,8 @@ Moment (jour avec soleil / nuit) + vent (calme, vent, tempête, ouragan) + ciel 
 
 ### TA4 — Visite de contrôle visuel : regard qui balaie, logements de train ouverts (20/11/2026 23:59)
 Regard qui balaie chaque pièce pendant l'arrêt ; trains : trappes ouvertes, vue debout au centre sous le logement, intérieur modélisé (roues, jambe, vérins, câbles, flexibles), tous les trains, tous les appareils.
+
+### État au 24/11/2026 19:30 (branche `calc-convert`, `d38d815`, non fusionnée)
+- FAIT et testé : calculateur (CALC1, e2e_calc 26/26), « Formulaires de calculs du vol », bande masquée en vol sur téléphone (BANDE2), voix posées (VOIX2) ; non-régression front 48/48, parcours 36/36, tour 114/114.
+- **I18N** (demandé « go » le 24/11 19:27) : drapeaux et sélecteur rangés ; RESTE : traduction complète (site, moteur, cours, QCM, PDF, documents) en 10 langues ; à confier à ChatGPT depuis `calc-convert` ou à reprendre après la réinitialisation de vendredi.
+- Fusion : `calc-convert` + `f21-meteo` + travail local de ChatGPT (`develop-modifications-20261121`, non envoyé) → à faire au point avec ChatGPT.
