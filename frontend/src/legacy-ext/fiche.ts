@@ -75,6 +75,9 @@ window.__PS_FICHE__ = open;
 /* Calculateur (24/11/2026) : bouton « 🧮 Calculatrice » de la barre ; la page affiche le module par-dessus le simulateur.
    Mode automatique (observation) → version « cours » ; vol libre et mode guidé → version « simulateur » et pause du vol,
    reprise à la fermeture (seulement si c'est le calculateur qui a mis en pause). Échange par messages (sans accès au cadre). */
+/* Vol en cours (menu fermé) signalé à la page, qui masque la bande du site (C12) ; fonctionne sans accès au cadre (24/11/2026) */
+var VOL0 = null;
+setInterval(function(){ try { var m = document.getElementById('menu'), v = !!(m && m.hidden); if (v !== VOL0) { VOL0 = v; parent.postMessage({ type: 'ps-vol', vol: v }, '*'); } } catch (e) {} }, 400);
 var CALCP = false;
 window.__PS_CALC__ = function(){
   var auto = false; try { auto = !!(AUTO && AUTO.on); } catch (e) {}

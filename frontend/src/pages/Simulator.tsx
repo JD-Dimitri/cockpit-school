@@ -56,6 +56,8 @@ const prepare = (html: string, start = false) =>
     .replace('<body>', () => '<body>' + (start ? startEarly() : ''))
     // « Calculs du vol » renommé « Formulaires de calculs du vol » (demande de l'auteur du 24/11/2026 17:53)
     .replaceAll('Calculs du vol', 'Formulaires de calculs du vol')
+    // Calculateur visible aussi dans la barre réduite du téléphone (sinon rangé sous « ⋯ Plus »), 24/11/2026
+    .replace("const KEEP=['b-back','b-menu','b-pause','b-auto','b-jump','b-more','b-scr'];", "const KEEP=['b-back','b-menu','b-pause','b-calcx','b-auto','b-jump','b-more','b-scr'];")
     // Calculateur (24/11/2026) : bouton dans la barre du simulateur, juste après « Pause »
     .replace('<button type="button" id="b-pause">Pause</button>', '<button type="button" id="b-pause">Pause</button> <button type="button" id="b-calcx" title="Calculatrice, convertisseurs et formules de pilotage" onclick="window.__PS_CALC__&&__PS_CALC__()">🧮 Calculatrice</button>');
 
@@ -130,6 +132,9 @@ export function Simulator({ action }: { action?: string }) {
   useEffect(() => {
     const on = (e: MessageEvent) => {
       if (e.source === frame.current?.contentWindow && e.data?.type === 'ps-calc-open') setCalc(e.data.variant === 'cours' ? 'cours' : 'simulateur');
+      // Bande du site masquée en vol (C12) : signal envoyé par le moteur lui-même (l'aperçu de fichier sur téléphone
+      // n'autorise pas la page à lire le cadre du moteur ; 24/11/2026)
+      if (e.source === frame.current?.contentWindow && e.data?.type === 'ps-vol') document.documentElement.classList.toggle('sim-vol', !!e.data.vol);
     };
     window.addEventListener('message', on);
     return () => window.removeEventListener('message', on);
@@ -173,12 +178,11 @@ export function Simulator({ action }: { action?: string }) {
   useEffect(() => {
     const root = document.documentElement;
     const t = setInterval(() => {
-      let vol = false;
+      // lecture directe quand elle est permise ; sinon (aperçu de fichier sur téléphone) le message « ps-vol » du moteur décide
       try {
-        const m = frame.current?.contentDocument?.getElementById('menu');
-        vol = !!m && m.hidden;
-      } catch { /* moteur pas encore chargé */ }
-      root.classList.toggle('sim-vol', vol);
+        const d = frame.current?.contentDocument, m = d?.getElementById('menu');
+        if (m) root.classList.toggle('sim-vol', m.hidden);
+      } catch { /* cadre non lisible : rien à faire ici */ }
     }, 400);
     return () => { clearInterval(t); root.classList.remove('sim-vol'); };
   }, []);
