@@ -282,11 +282,11 @@ function docsOf(i){ try { return DOCS.forStep(GD.steps[i]) || []; } catch (e) { 
 document.addEventListener('click', function(e){
   var st = e.target.closest && e.target.closest('#ckl .st'); if (!st || e.target.closest('button')) return;
   var i = stepIdx(st); if (i < 0 || !GD.steps[i]) return;
-  var ids = docsOf(i), c = document.getElementById('ckl');
-  if (c) c.hidden = true;
+  /* le panneau reste ouvert (règle du 24/11 20:56) */
   /* Demande de l'auteur (24/11/2026 20:40) : la tablette s'ouvre STRICTEMENT par le bouton « 📱 Tablette » ;
      la check-list mène toujours à l'étape (remplace la règle C11 du 20/11 : étape avec documents → tablette). */
   try { goStep(i); } catch (er) {}
+  setTimeout(function(){ try { CKL.open(); } catch (er) {} }, 80);
 }, true);
 css.textContent += '#ckl .st.ps-doc,#ckl .st.ps-go{cursor:pointer}'
  + '#ckl .st.ps-go>b::after{content:"  ▸ ouvrir l\'étape";font-weight:600;color:#8fa4b8;font-size:.85em}';

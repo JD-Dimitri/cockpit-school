@@ -58,9 +58,14 @@ const prepare = (html: string, start = false) =>
     .replaceAll('Calculs du vol', 'Formulaires de calculs du vol')
     // Voix de synthèse externe éventuelle (TTSX) : même débit posé que les autres voix (24/11/2026)
     .replace("rate:rateV||1.05,voice:'glassy'", "rate:rateV||0.92,voice:'glassy'")
-    // Check-list (demande de l'auteur du 24/11/2026 20:53) : « Faire » ne ferme plus le panneau ; l'action est faite, le panneau
-    // se met à jour et montre la sous-étape manquante suivante. « Y aller → » (commande à manipuler soi-même) ferme toujours.
-    .replace("function gotoItem(m){ close(); const [l,c,a,sel]=m.it;", "function gotoItem(m){ const [l,c,a,sel]=m.it; if(sel||!a) close(); else setTimeout(()=>{ try{ const nx=document.querySelector('#ckl .it.miss'); if(nx) nx.scrollIntoView({block:'center'}); }catch(e){} },60);")
+    // Check-list (demandes de l'auteur du 24/11/2026 20:53 et 20:56) : « Faire » et « Y aller → » ne ferment plus le panneau ;
+    // il se met à jour et montre la sous-étape manquante suivante.
+    .replace("function gotoItem(m){ close(); const [l,c,a,sel]=m.it;", "function gotoItem(m){ const [l,c,a,sel]=m.it; setTimeout(()=>{ try{ const nx=document.querySelector('#ckl .it.miss'); if(nx) nx.scrollIntoView({block:'center'}); }catch(e){} },60);")
+    // Règle de l'auteur (24/11/2026 20:56) : le panneau Checklist reste TOUJOURS ouvert, sauf clic sur ✕ (ou « Fermer »)
+    .replace("if(e.target===p) return close();", "if(e.target===p) return;")
+    .replace("if(b.dataset.nx!=null){ close(); try{ goStep(GD.i+1); }catch(er){} return; }", "if(b.dataset.nx!=null){ try{ goStep(GD.i+1); }catch(er){} setTimeout(()=>{ try{ CKL.open(); }catch(er){} },80); return; }")
+    .replace("if(m) gotoItem(m); else close(); return; }", "if(m) gotoItem(m); return; }")
+    .replace("const f=PEND; PEND=null; close(); if(f){", "const f=PEND; PEND=null; setTimeout(()=>{ try{ CKL.open(); }catch(er){} },120); if(f){")
     // Calculateur visible aussi dans la barre réduite du téléphone (sinon rangé sous « ⋯ Plus »), 24/11/2026
     .replace("const KEEP=['b-back','b-menu','b-pause','b-auto','b-jump','b-more','b-scr'];", "const KEEP=['b-back','b-menu','b-pause','b-calcx','b-auto','b-jump','b-more','b-scr'];")
     // Calculateur (24/11/2026) : bouton dans la barre du simulateur, juste après « Pause »
