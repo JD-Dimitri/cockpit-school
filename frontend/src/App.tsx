@@ -12,6 +12,8 @@ import { Parcours } from './pages/Parcours';
 import { useUser, rememberNext } from './auth';
 import { Welcome } from './pages/Welcome';
 import { Admin } from './pages/Admin';
+import { useLang } from './i18n';
+import { LangToggle } from './components/LangToggle';
 
 const ROUTES = [
   { path: '', label: 'Accueil', el: () => <Home /> },
@@ -72,10 +74,11 @@ export function App() {
   }, [guest, open, head]);
   const hidden = HIDDEN[head];
   const route = ROUTES.find((x) => x.path === head) ?? ROUTES[0];
+  const [, t] = useLang();
   const full = !!user && !hidden && route.path === 'simulateur';
   let body: JSX.Element;
-  if (user === undefined) body = <p className="page">Chargement…</p>;
-  else if (guest) body = head === '' ? <Welcome /> : open && hidden ? hidden(rest) : <p className="page">Connexion requise…</p>;
+  if (user === undefined) body = <p className="page">{t('loading')}</p>;
+  else if (guest) body = head === '' ? <Welcome /> : open && hidden ? hidden(rest) : <p className="page">{t('login.required')}</p>;
   else body = hidden ? hidden(rest) : route.el(rest);
   return (
     <div className={full ? 'shell full' : head === 'imprimer' ? 'shell printing' : 'shell'}>
@@ -84,32 +87,32 @@ export function App() {
           <span className="mark" aria-hidden="true">✈</span>
           <span>COCKPIT <em>SCHOOL</em></span>
         </a>
-        <nav aria-label="Navigation principale">
+        <nav aria-label={t('nav.aria')}>
           {user
             ? ROUTES.slice(1).map((x) => (
                 <a key={x.path} href={'#/' + x.path} aria-current={x.path === route.path && !hidden ? 'page' : undefined}>
-                  {x.label}
+                  {x.path === 'simulateur' ? t('nav.simulateur') : x.path === 'cours' ? t('nav.cours') : x.label}
                 </a>
               ))
             : user === null && (
-                <a href="#/inscription" aria-current={head === 'inscription' ? 'page' : undefined}>Créer un compte</a>
+                <a href="#/inscription" aria-current={head === 'inscription' ? 'page' : undefined}>{t('nav.signup')}</a>
               )}
           {user?.admin && (
-            <a href="#/admin" aria-current={head === 'admin' ? 'page' : undefined}>Admin</a>
+            <a href="#/admin" aria-current={head === 'admin' ? 'page' : undefined}>{t('nav.admin')}</a>
           )}
           <a className="acct" href="#/connexion" aria-current={head === 'connexion' ? 'page' : undefined}>
-            {user ? '● ' + (user.name || user.email) : 'Connexion'}
+            {user ? '● ' + (user.demo ? t('demo.user') : user.name || user.email) : t('nav.login')}
           </a>
+          <LangToggle />
         </nav>
       </header>
       {user?.demo && !full && (
-        <p className="demo" role="note">Version de démonstration hors ligne (sans compte), réservée aux essais. En ligne, le simulateur et les cours s'ouvrent après connexion.</p>
+        <p className="demo" role="note">{t('demo')}</p>
       )}
       <main id="contenu">{body}</main>
       {!full && (
         <footer className="foot">
-          Simulateur pédagogique : ne pas utiliser pour la navigation réelle. Données : statuts [RÉFÉRENCÉ] / [ESTIMÉ] / [SIMULÉ]
-          affichés là où elles servent.
+          {t('foot')}
         </footer>
       )}
     </div>
