@@ -72,6 +72,19 @@ function open(k){
   d.querySelectorAll('.go').forEach(function(b){ b.onclick = function(){ go(k, b.dataset.mi, b.dataset.mode); }; });
 }
 window.__PS_FICHE__ = open;
+/* Calculateur (24/11/2026) : bouton « 🧮 Calculatrice » de la barre ; la page affiche le module par-dessus le simulateur.
+   Mode automatique (observation) → version « cours » ; vol libre et mode guidé → version « simulateur » et pause du vol,
+   reprise à la fermeture (seulement si c'est le calculateur qui a mis en pause). Échange par messages (sans accès au cadre). */
+var CALCP = false;
+window.__PS_CALC__ = function(){
+  var auto = false; try { auto = !!(AUTO && AUTO.on); } catch (e) {}
+  if (!auto) { try { if (!paused) { var bp = document.getElementById('b-pause'); if (bp) { bp.click(); CALCP = true; } } } catch (e) {} }
+  try { parent.postMessage({ type: 'ps-calc-open', variant: auto ? 'cours' : 'simulateur' }, '*'); } catch (e) {}
+};
+window.addEventListener('message', function(e){
+  if (!e.data || e.data.type !== 'ps-calc-closed') return;
+  if (CALCP) { CALCP = false; try { if (paused) { var bp = document.getElementById('b-pause'); if (bp) bp.click(); } } catch (x) {} }
+});
 /* Fin du parcours (20/11 23:21) : une fois les dernières procédures faites (« Terminer »), tous les écrans se referment :
    panneau plafond, pylône, carte, radio, documents, check-list, tablette, sous-titres de l'équipage, planche de bord 2D. */
 window.__PS_ENDALL__ = function(){

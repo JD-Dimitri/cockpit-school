@@ -19,6 +19,7 @@ import { installTourExt } from '../legacy-ext/tourAvion';
 import { installEquipageExt } from '../legacy-ext/equipage';
 import { ficheScript, startEarly } from '../legacy-ext/fiche';
 import { AIRCRAFT_IMAGES } from '../aircraftImages';
+import { CalcPanel } from '../components/CalcPanel';
 
 /** Retouches d'affichage du moteur (version autonome : posées dès le chargement, sans attendre). */
 const UI_CSS = '#intro .skip{display:none!important}#c-ac .ps-pick{outline:3px solid var(--cy);outline-offset:2px}#rtprop{bottom:calc(var(--barh,56px) + 18px)!important}';
@@ -52,7 +53,11 @@ const prepare = (html: string, start = false) =>
     // Fin du parcours (demande de l'auteur du 20/11 23:21) : après les dernières procédures, tous les écrans se referment
     .replace("GD.on=false; renderGuide(); flash('Parcours terminé','am'); return;", "GD.on=false; renderGuide(); flash('Parcours terminé','am'); try{ window.__PS_ENDALL__&&__PS_ENDALL__(); }catch(e){} return;")
     .replace(/<\/body>(?![\s\S]*<\/body>)/, () => ficheScript(AIRCRAFT_IMAGES, start) + '</body>')
-    .replace('<body>', () => '<body>' + (start ? startEarly() : ''));
+    .replace('<body>', () => '<body>' + (start ? startEarly() : ''))
+    // « Calculs du vol » renommé « Formulaires de calculs du vol » (demande de l'auteur du 24/11/2026 17:53)
+    .replaceAll('Calculs du vol', 'Formulaires de calculs du vol')
+    // Calculateur (24/11/2026) : bouton dans la barre du simulateur, juste après « Pause »
+    .replace('<button type="button" id="b-pause">Pause</button>', '<button type="button" id="b-pause">Pause</button> <button type="button" id="b-calcx" title="Calculatrice, convertisseurs et formules de pilotage" onclick="window.__PS_CALC__&&__PS_CALC__()">🧮 Calculatrice</button>');
 
 const ACTION = /^(auto|guide|exam|brief|sys:[a-z0-9]+(:[a-z0-9]+)?|doc:[a-z0-9-]+|go:[a-z0-9]+:[a-z0-9-]+:(guide|auto|free)|ac:[a-z0-9]+)$/;
 
@@ -120,6 +125,16 @@ export function Simulator({ action }: { action?: string }) {
   // Écran de départ « Démarrer » seulement quand on ouvre le simulateur sans vol demandé (figé au premier affichage : pas de rechargement)
   const startScreen = useRef(!(action && ACTION.test(action)));
   const [loadErr, setLoadErr] = useState<string | null>(null);
+  // Calculateur : version demandée par le moteur (« simulateur » ou « cours » selon le mode), null = fermé
+  const [calc, setCalc] = useState<null | 'cours' | 'simulateur'>(null);
+  useEffect(() => {
+    const on = (e: MessageEvent) => {
+      if (e.source === frame.current?.contentWindow && e.data?.type === 'ps-calc-open') setCalc(e.data.variant === 'cours' ? 'cours' : 'simulateur');
+    };
+    window.addEventListener('message', on);
+    return () => window.removeEventListener('message', on);
+  }, []);
+  const closeCalc = () => { setCalc(null); try { frame.current?.contentWindow?.postMessage({ type: 'ps-calc-closed' }, '*'); } catch { /* moteur fermé */ } };
   useEffect(() => {
     if (embedded) return;
     apiAvailable()
@@ -170,6 +185,7 @@ export function Simulator({ action }: { action?: string }) {
 
   return (
     <section className="sim">
+      {calc && <CalcPanel variant={calc} onClose={closeCalc} />}
       {loadErr && <p className="page err">Simulateur indisponible : {loadErr}</p>}
       {doc && (
         <iframe

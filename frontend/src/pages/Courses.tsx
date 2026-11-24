@@ -1,4 +1,16 @@
 import { useState } from 'react';
+import { CalcPanel } from '../components/CalcPanel';
+
+// Calculateur version « cours » (24/11/2026) : formules, mini-cours, annexes, exemples et exercices corrigés
+function CoursCalc() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button type="button" className="btn cours-calc" onClick={() => setOpen(true)}>🧮 Calculatrice et formules</button>
+      {open && <CalcPanel variant="cours" onClose={() => setOpen(false)} />}
+    </>
+  );
+}
 import type React from 'react';
 import DOMPurify from 'dompurify';
 import { type Quiz } from '../data';
@@ -71,7 +83,7 @@ export function Courses({ part, mod }: { part?: string; mod?: string }) {
     const i = P.mods.indexOf(M), prev = P.mods[i - 1], next = P.mods[i + 1];
     return (
       <article className="page course">
-        <p className="crumb"><a href="#/cours">Cours</a> › <a href={'#/cours/' + P.id}>{P.n}</a></p>
+        <p className="crumb"><a href="#/cours">Cours</a> › <a href={'#/cours/' + P.id}>{P.n}</a> <CoursCalc /></p>
         <div className="titlebar">
           <h1>{M.t}</h1>
           <PdfButton part={P.id} mod={M.id} label="PDF du module" />
@@ -106,6 +118,7 @@ export function Courses({ part, mod }: { part?: string; mod?: string }) {
     <section className="page">
       <h1>Cours</h1>
       <p className="lead">Trois cycles, du plus simple au plus exigeant. Chaque module et chaque partie se téléchargent en PDF, avec les exercices et leurs corrigés.</p>
+      <p><CoursCalc /></p>
       {P ? partBlock(P) : cycles.map((c) => (
         <section key={c.id} className="cycle" aria-labelledby={'cycle-' + c.id}>
           <h2 id={'cycle-' + c.id}>{c.title}</h2>

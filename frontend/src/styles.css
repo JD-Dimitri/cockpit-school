@@ -253,3 +253,10 @@ html.sim-vol .top, html.sim-vol .demo { display: none; }
 .cycle { border-top: 1px solid var(--line); margin-top: 26px; padding-top: 6px; }
 .cycle > h2 { font: 700 24px var(--cond); letter-spacing: .04em; text-transform: uppercase; color: var(--cy); margin-bottom: 2px; }
 .cycle h3 { margin: 14px 0 0; }
+
+/* Calculateur (module calc-convert, 24/11/2026) : fenêtre à droite sur ordinateur, plein écran sur téléphone */
+.sim-calc-window { position: fixed; right: 16px; top: 16px; width: 380px; height: min(680px, calc(100vh - 32px)); z-index: 1000;
+  border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, .55); pointer-events: auto; }
+@media (max-width: 700px) { .sim-calc-window { inset: 0; width: auto; height: auto; border-radius: 0; } }
+.sim-calc-window .cc-root { --cc-accent: #3fd0ff; }
+.cours-calc { margin-left: 8px; }
