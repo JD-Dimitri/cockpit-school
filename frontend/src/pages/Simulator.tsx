@@ -58,6 +58,9 @@ const prepare = (html: string, start = false) =>
     .replaceAll('Calculs du vol', 'Formulaires de calculs du vol')
     // Voix de synthèse externe éventuelle (TTSX) : même débit posé que les autres voix (24/11/2026)
     .replace("rate:rateV||1.05,voice:'glassy'", "rate:rateV||0.92,voice:'glassy'")
+    // Check-list (demande de l'auteur du 24/11/2026 20:53) : « Faire » ne ferme plus le panneau ; l'action est faite, le panneau
+    // se met à jour et montre la sous-étape manquante suivante. « Y aller → » (commande à manipuler soi-même) ferme toujours.
+    .replace("function gotoItem(m){ close(); const [l,c,a,sel]=m.it;", "function gotoItem(m){ const [l,c,a,sel]=m.it; if(sel||!a) close(); else setTimeout(()=>{ try{ const nx=document.querySelector('#ckl .it.miss'); if(nx) nx.scrollIntoView({block:'center'}); }catch(e){} },60);")
     // Calculateur visible aussi dans la barre réduite du téléphone (sinon rangé sous « ⋯ Plus »), 24/11/2026
     .replace("const KEEP=['b-back','b-menu','b-pause','b-auto','b-jump','b-more','b-scr'];", "const KEEP=['b-back','b-menu','b-pause','b-calcx','b-auto','b-jump','b-more','b-scr'];")
     // Calculateur (24/11/2026) : bouton dans la barre du simulateur, juste après « Pause »
