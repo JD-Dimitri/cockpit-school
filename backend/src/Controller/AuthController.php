@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,7 +42,16 @@ final class AuthController extends AbstractController
         ValidatorInterface $validator,
         EntityManagerInterface $em,
         Security $security,
+        #[Autowire(service: 'limiter.register')] RateLimiterFactory $limiter,
     ): JsonResponse {
+        // audit du 20/11 : 5 inscriptions par heure et par adresse IP
+        if (!$limiter->create($request->getClientIp() ?? 'anon')->consume()->isAccepted()) {
+            return $this->json(['message' => 'Trop de tentatives. Réessayez plus tard.'], Response::HTTP_TOO_MANY_REQUESTS);
+        }
+        // audit du 20/11 : JSON seulement (un formulaire d'un autre site envoie du texte ou un formulaire, refusé ici)
+        if ('json' !== $request->getContentTypeFormat()) {
+            return new JsonResponse(['message' => 'Format attendu : application/json.'], Response::HTTP_UNSUPPORTED_MEDIA_TYPE);
+        }
         $body = json_decode($request->getContent(), true);
         if (!\is_array($body)) {
             return $this->json(['message' => 'Requête invalide.'], Response::HTTP_BAD_REQUEST);

@@ -1,7 +1,10 @@
-# plane-simulator — PLANE SIMULATOR
+# cockpit-school — COCKPIT SCHOOL - PLANE SIMULATOR
 
-FATS Pro — Flight and Trajectories Simulator | Symfony, React, TypeScript & Three.js
-
+COCKPIT SCHOOL - PLANE SIMULATOR — école de pilotage et simulateur de vol | Symfony, React, TypeScript & Three.js
+<p align="center">
+  <img src="frontend/assets/appareils/b777.webp" alt="Boeing 777-300ER — illustration du simulateur COCKPIT SCHOOL" width="720">
+  <br><em>Illustration générée, pas une photo.</em>
+</p>
 Version Pro du simulateur [PLANE TRAJECTORIES](https://github.com/JD-Dimitri/plane-trajectories-simulator) : former un élève
 de zéro jusqu'à la licence de pilote, et au-delà. La version gratuite (fichier HTML unique) continue d'exister sans régression.
 
@@ -43,8 +46,9 @@ php -S localhost:8000 -t public          # ou symfony serve
 vendor/bin/phpunit                       # tests de l'API (comptes, mot de passe, PDF, données)
 ```
 
-Mise en ligne (o2switch) : le dossier `backend/public/` est la racine du site ; on y copie **seulement** `index.html`,
-`app.js` et `app.css` de `frontend/dist/`. **Ne pas copier `legacy/` ni `data/`** : en ligne, le moteur du simulateur et
+Mise en ligne (o2switch) : le dossier `backend/public/` est la racine du site. Construire avec `node build.mjs --prod`
+(sans `legacy/` ni `data/`, avec un `.htaccess` d'en-têtes de sécurité et de passage en HTTPS), puis copier `index.html`,
+`app.js`, `app.css` et `.htaccess` de `frontend/dist/`. Revue et audit de sécurité : `docs/REVUE_AUDIT_2026-11-20.md`. **Ne pas copier `legacy/` ni `data/`** : en ligne, le moteur du simulateur et
 les données sont servis par l'API (`/api/moteur`, `/api/data/…`) aux seuls comptes connectés (F41). L'interface appelle
 l'API sur le même domaine (`/api/...`). La version autonome (`tools/standalone.py`) est une démonstration hors ligne
 pour les essais : elle contient tout, sans connexion, et ne doit pas être publiée sur le site.

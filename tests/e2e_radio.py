@@ -100,10 +100,14 @@ with sync_playwright() as p:
         fr.click('#atc [data-x=stby]')
         check(f'{tag} : Standby annoncé', any(x == f'PIL|{cs}, standby' for x in log(fr)))
         last = [x for x in log(fr) if x.startswith('ATC|')][-1][4:]
-        fr.click('#atc [data-x=again]'); pg.wait_for_timeout(2600)
-        L = log(fr)
+        fr.evaluate('paused = true')   # rendu logiciel (swiftshader) de l'aéroport : les minuteries passent après les images ; simulation en pause pendant l'échange (la radio ne dépend pas du vol)
+        fr.click('#atc [data-x=again]')
+        for _ in range(100):   # réponse du contrôle après 1,4 à 2,2 s (délai aléatoire du moteur) ; rendu logiciel (swiftshader) de l'aéroport : plusieurs secondes par image
+            pg.wait_for_timeout(200); L = log(fr)
+            if any(x.startswith(f'ATC|{cs}, I say again') for x in L): break
         body = last[len(cs) + 2:] if last.startswith(cs + ', ') else last
         check(f'{tag} : Répéter → « say again » puis message répété à l\'identique, indicatif dit une seule fois', any(x.endswith(', say again') for x in L) and any(x == f'ATC|{cs}, I say again, {body}' for x in L), str(L[-2:]))
+        fr.evaluate('paused = false')
         # comme l'élève : code transpondeur affiché (bouton du panneau) avant de collationner, si le contrôle en a donné un
         fr.evaluate("atcRender(true)")
         if fr.locator('#atc [data-a=sq]').count(): fr.click('#atc [data-a=sq]'); fr.evaluate("atcRender(true)")

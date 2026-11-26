@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- FlaggAnO 1996, equal thirds; federal visual identity RGB palette. -->
+  <defs>
+    <clipPath id="disc"><circle cx="32" cy="32" r="32"/></clipPath>
+  </defs>
+  <g clip-path="url(#disc)">
+    <rect x="0" y="0" width="64" height="21.33334" fill="#000000"/>
+    <rect x="0" y="21.33333" width="64" height="21.33334" fill="#FF0000"/>
+    <rect x="0" y="42.66667" width="64" height="21.33334" fill="#FFCC00"/>
+  </g>
+  <circle cx="32" cy="32" r="31.5" fill="none" stroke="#d0d5dc" stroke-width="1"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Act 127/1999: sun diameter 3/5 of flag height; approximate crimson sRGB. -->
+  <defs>
+    <clipPath id="disc"><circle cx="32" cy="32" r="32"/></clipPath>
+  </defs>
+  <g clip-path="url(#disc)">
+    <rect x="0" y="0" width="64" height="64" fill="#FFFFFF"/>
+    <circle cx="32" cy="32" r="19.2" fill="#BC002D"/>
+  </g>
+  <circle cx="32" cy="32" r="31.5" fill="none" stroke="#d0d5dc" stroke-width="1"/>
+</svg>

@@ -35,7 +35,7 @@ with sync_playwright() as p:
         b, c = ctx_for(p, W, H); pg = c.new_page(); errs = []
         pg.on('pageerror', lambda e: errs.append(str(e)))
         pg.goto(URL + '#/parcours'); pg.wait_for_selector('.pcard')
-        check(f'[{tag}] menu : onglet « Parcours »', pg.locator('nav a[href="#/parcours"]').count() == 1)
+        check(f'[{tag}] menu : plus d\'onglet « Parcours » (contenu dans le choix des aéronefs du simulateur, 20/11 20:01)', pg.locator('nav a[href="#/parcours"]').count() == 0)
         cards = pg.locator('.pcard'); n = cards.count()
         logos_ok = all(cards.nth(i).locator('.logos img').count() >= 1 for i in range(n))
         check(f'[{tag}] {n} parcours, chacun avec les vignettes de ses appareils', n >= 20 and logos_ok, str(n))

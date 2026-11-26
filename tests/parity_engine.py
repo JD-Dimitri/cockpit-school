@@ -51,6 +51,34 @@ JS = r'''([cases]) => {
   return res;
 }'''
 
+METARS = ['METAR KJFK 021851Z 21010KT 10SM FEW050 SCT250 14/04 A3025 RMK AO2 SLP244 T01390039',
+          'METAR LFPG 030200Z 21006KT CAVOK 07/06 Q1019 NOSIG', 'LFPG 131400Z 24015G25KT 9999 BKN030 12/08 Q1008',
+          'SPECI FMEE 200540Z AUTO VRB03KT 0200 FG VV001 08/08 Q1012', 'METAR LFPO 200540Z 21035G55KT 180V240 1500 +TSRAGR BKN008CB OVC020 M02/M03 Q0995',
+          'METAR KJFK 200540Z 21012KT 1/2SM -FZDZ OVC006 M04/M05 A2992', 'METAR LFPB 200540Z 05010MPS 3000 SHRA FEW020TCU 18/ Q1015',
+          'METAR LFPN 200540Z 27020KMH 9999 NSC 22/10 Q1020', 'METAR KTEB 200540Z 00000KT 3SM BR CLR 05/04 A3001 R22/1200FT', 'pas un metar', 'METAR', '']
+WX_JS = r'''([metars, pts, alts]) => {
+  const canon = o => JSON.stringify(o, (k, v) => v && typeof v === 'object' && !Array.isArray(v) ? Object.keys(v).sort().reduce((r, x) => (r[x] = v[x], r), {}) : v);
+  const res = {}; let n = 0, bad = 0;
+  for (const m of metars) { n++; if (canon(parseMetar(m)) !== canon(PRO.parseMetar(m))) bad++; }
+  res.parseMetar = [n, bad ? Infinity : 0];
+  const cx = () => ({ met: WXS.met, apts: APTS, upper: WXS.upper, elevAt });
+  const cmp = (name, a, b) => { const A = [a].flat(Infinity), B = [b].flat(Infinity); let w = 0;
+    if (A.length !== B.length) return Infinity; A.forEach((x, i) => { const d = Math.abs(x - B[i]) / Math.max(1, Math.abs(x)); if (!(d <= w)) w = d; }); return w; };
+  const run = (tag) => { for (const fn of ['surfWind', 'windAt', 'qnhAt', 'metNear']) { let w = res[fn] ? res[fn][1] : 0, k = res[fn] ? res[fn][0] : 0;
+      for (const [la, lo] of pts) for (const h of (fn === 'windAt' ? alts : [0])) {
+        const a = fn === 'windAt' ? windAt(la, lo, h) : fn === 'metNear' ? metNear(la, lo).map(x => x[0]) : window[fn](la, lo);
+        const b = fn === 'windAt' ? PRO.windAt(la, lo, h, cx()) : fn === 'metNear' ? PRO.metNear(la, lo, cx()).map(x => x[0]) : PRO[fn](la, lo, cx());
+        w = Math.max(w, cmp(fn, a, b)); k++; }
+      res[fn] = [k, w]; } };
+  run('samples');
+  // mêmes calculs avec d'autres METAR (rafales, vent variable, altimètre en pouces) et un vent en altitude modifié
+  metars.slice(2, 9).forEach(m => wxSet(m)); WXS.upper.dir = 300; WXS.upper.spd = 110; WXS.upper.fl = 360;
+  run('modifiés');
+  let w = 0, k = 0; for (const v of [[3, 4], [-10, 2], [0, 0], [7.5, -7.5]]) { w = Math.max(w, cmp('windDirSpd', windDirSpd(v), PRO.windDirSpd(v))); k++; }
+  res.windDirSpd = [k, w];
+  return res;
+}'''
+
 with sync_playwright() as p:
     b = p.chromium.launch(args=['--use-gl=swiftshader', '--enable-unsafe-swiftshader'])
     pg = b.new_page()
@@ -61,6 +89,8 @@ with sync_playwright() as p:
     pg.wait_for_timeout(1500)
     pg.add_script_tag(path=str(bundle))
     res = pg.evaluate(JS, [cases])
+    # Météo (module « MÉTÉO RÉELLE ») : mêmes METAR lus de la même façon, mêmes vents et QNH à toutes les positions
+    res.update(pg.evaluate(WX_JS, [METARS, pts, alts]))
     b.close()
 
 ok = 0

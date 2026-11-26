@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- MOIS construction: D=27; nominal flag 3D by 2D; trigrams length D/2, bar D/12, gap D/24; exact diagonal angles; screen palette approximate. -->
+  <defs>
+    <clipPath id="disc"><circle cx="32" cy="32" r="32"/></clipPath>
+  </defs>
+  <g clip-path="url(#disc)">
+    <rect x="0" y="0" width="64" height="64" fill="#FFFFFF"/>
+    <g transform="translate(32 32) rotate(33.69007)">
+      <circle cx="0" cy="0" r="13.5" fill="#0047A0"/>
+      <path d="M -13.5 0 A 13.5 13.5 0 0 1 13.5 0 A 6.75 6.75 0 0 0 0 0 A 6.75 6.75 0 0 1 -13.5 0 Z" fill="#CD2E3A"/>
+    </g>
+    <g transform="translate(32 32) rotate(213.69007)">
+      <rect x="20.25" y="-6.75" width="2.25" height="13.5" fill="#000000"/>
+      <rect x="23.625" y="-6.75" width="2.25" height="13.5" fill="#000000"/>
+      <rect x="27" y="-6.75" width="2.25" height="13.5" fill="#000000"/>
+    </g>
+    <g transform="translate(32 32) rotate(-33.69007)">
+      <rect x="20.25" y="-6.75" width="2.25" height="6.1875" fill="#000000"/>
+      <rect x="20.25" y="0.5625" width="2.25" height="6.1875" fill="#000000"/>
+      <rect x="23.625" y="-6.75" width="2.25" height="13.5" fill="#000000"/>
+      <rect x="27" y="-6.75" width="2.25" height="6.1875" fill="#000000"/>
+      <rect x="27" y="0.5625" width="2.25" height="6.1875" fill="#000000"/>
+    </g>
+    <g transform="translate(32 32) rotate(146.30993)">
+      <rect x="20.25" y="-6.75" width="2.25" height="13.5" fill="#000000"/>
+      <rect x="23.625" y="-6.75" width="2.25" height="6.1875" fill="#000000"/>
+      <rect x="23.625" y="0.5625" width="2.25" height="6.1875" fill="#000000"/>
+      <rect x="27" y="-6.75" width="2.25" height="13.5" fill="#000000"/>
+    </g>
+    <g transform="translate(32 32) rotate(33.69007)">
+      <rect x="20.25" y="-6.75" width="2.25" height="6.1875" fill="#000000"/>
+      <rect x="20.25" y="0.5625" width="2.25" height="6.1875" fill="#000000"/>
+      <rect x="23.625" y="-6.75" width="2.25" height="6.1875" fill="#000000"/>
+      <rect x="23.625" y="0.5625" width="2.25" height="6.1875" fill="#000000"/>
+      <rect x="27" y="-6.75" width="2.25" height="6.1875" fill="#000000"/>
+      <rect x="27" y="0.5625" width="2.25" height="6.1875" fill="#000000"/>
+    </g>
+  </g>
+  <circle cx="32" cy="32" r="31.5" fill="none" stroke="#d0d5dc" stroke-width="1"/>
+</svg>

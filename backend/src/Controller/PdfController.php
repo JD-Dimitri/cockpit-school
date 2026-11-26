@@ -62,7 +62,7 @@ final class PdfController extends AbstractController
         $dompdf->setPaper('A4');
         $dompdf->render();
 
-        $file = 'PLANE-SIMULATOR-'.preg_replace('/[^A-Za-z0-9]+/', '-', iconv('UTF-8', 'ASCII//TRANSLIT', $title) ?: $part).'.pdf';
+        $file = 'COCKPIT-SCHOOL-'.preg_replace('/[^A-Za-z0-9]+/', '-', iconv('UTF-8', 'ASCII//TRANSLIT', $title) ?: $part).'.pdf';
 
         return new Response($dompdf->output(), Response::HTTP_OK, [
             'Content-Type' => 'application/pdf',

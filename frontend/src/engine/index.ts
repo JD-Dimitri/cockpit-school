@@ -3,3 +3,4 @@ export * from './geo';
 export * from './atmosphere';
 export * from './flight';
 export * from './bench';
+export * from './weather';

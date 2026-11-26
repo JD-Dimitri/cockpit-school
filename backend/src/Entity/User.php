@@ -116,7 +116,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /** Données publiques renvoyées à l'interface : jamais le mot de passe ni les rôles. */
     public function toArray(): array
     {
-        return ['email' => $this->email, 'name' => $this->name];
+        // « admin » : l'interface affiche le lien « Admin » ; l'accès réel reste contrôlé par le serveur (ROLE_ADMIN).
+        return ['email' => $this->email, 'name' => $this->name, 'admin' => \in_array('ROLE_ADMIN', $this->getRoles(), true)];
     }
 
     public function eraseCredentials(): void

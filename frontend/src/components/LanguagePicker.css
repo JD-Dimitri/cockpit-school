@@ -1,0 +1,61 @@
+.cs-language-picker {
+  position: relative;
+  display: inline-flex;
+  color-scheme: light dark;
+  font-family: inherit;
+  flex: 0 0 auto;
+}
+.cs-language-picker__trigger {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.cs-language-picker img { display: block; flex: none; }
+.cs-language-picker__trigger:focus-visible,
+.cs-language-picker__option:focus-visible {
+  outline: 2px solid #1683eb;
+  outline-offset: 2px;
+}
+.cs-language-picker__list {
+  position: absolute;
+  z-index: 100;
+  inset-inline-end: 0;
+  top: calc(100% + 6px);
+  width: max-content;
+  min-width: 168px;
+  max-width: min(240px, 90vw);
+  max-height: min(440px, 65vh);
+  overflow: auto;
+  margin: 0;
+  padding: 5px;
+  border: 1px solid #d0d5dc;
+  border-radius: 10px;
+  list-style: none;
+  background: var(--cs-language-background, Canvas);
+  color: var(--cs-language-color, CanvasText);
+  box-sizing: border-box;
+  direction: ltr;
+}
+.cs-language-picker__option {
+  display: grid;
+  grid-template-columns: 24px 1fr 16px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  min-height: 40px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.cs-language-picker__option > span[lang] { justify-self: start; }
+.cs-language-picker__option:hover,
+.cs-language-picker__option[aria-selected="true"] {
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}

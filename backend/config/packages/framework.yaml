@@ -13,6 +13,11 @@ framework:
             policy: sliding_window
             limit: 5
             interval: '15 minutes'
+        # audit du 20/11 : création de comptes limitée (robots, inscriptions en masse)
+        register:
+            policy: sliding_window
+            limit: 5
+            interval: '1 hour'
     mailer:
         dsn: '%env(MAILER_DSN)%'
 
@@ -24,3 +29,11 @@ when@test:
         validation:
             not_compromised_password:
                 enabled: false   # pas d'appel réseau pendant les tests
+        # limite des inscriptions en mémoire pendant les tests : remise à zéro à chaque requête (noyau redémarré),
+        # sauf dans SecurityHeadersTest qui garde le même noyau pour vérifier la limite
+        rate_limiter:
+            register:
+                policy: sliding_window
+                limit: 5
+                interval: '1 hour'
+                cache_pool: cache.array

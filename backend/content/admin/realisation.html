@@ -1,0 +1,309 @@
+<p class="lead">Ce document répond à une seule question : <b>comment ce projet a-t-il été réalisé ?</b> Il est écrit pour un développeur web
+junior qui connaît HTML, CSS, JavaScript et un peu de PHP, mais <b>pas la 3D</b>, et qui démarre une activité digitale à son compte.
+Chaque partie dit ce qui a été fait, pourquoi, et ce qu'il faut en retenir pour ses propres projets.</p>
+
+<ol class="toc">
+<li><a href="#" data-to="d-but">Le but et les deux produits</a></li>
+<li><a href="#" data-to="d-methode">La méthode de travail</a></li>
+<li><a href="#" data-to="d-archi">L'architecture : qui fait quoi</a></li>
+<li><a href="#" data-to="d-3d">La 3D expliquée depuis zéro</a></li>
+<li><a href="#" data-to="d-vol">La physique du vol</a></li>
+<li><a href="#" data-to="d-legacy">Faire vivre l'ancien moteur dans le nouveau site</a></li>
+<li><a href="#" data-to="d-meteo-radio">Météo et radio : étendre sans casser</a></li>
+<li><a href="#" data-to="d-donnees">Les données : ne jamais rien inventer</a></li>
+<li><a href="#" data-to="d-comptes">Comptes, sécurité et espace Admin</a></li>
+<li><a href="#" data-to="d-cours">Les cours, les exercices et les PDF</a></li>
+<li><a href="#" data-to="d-tests">Les tests : prouver que ça marche</a></li>
+<li><a href="#" data-to="d-autonome">La version autonome (un seul fichier)</a></li>
+<li><a href="#" data-to="d-trafic">Le trafic aérien réel et le Raspberry Pi</a></li>
+<li><a href="#" data-to="d-ia">Travailler avec une IA</a></li>
+<li><a href="#" data-to="d-entreprise">Le volet entrepreneurial</a></li>
+<li><a href="#" data-to="d-commandes">Les commandes à connaître</a></li>
+<li><a href="#" data-to="d-glossaire">Glossaire</a></li>
+</ol>
+
+<h2 id="d-but">1. Le but et les deux produits</h2>
+<p>Le but est pédagogique : <b>former un apprenant à l'aéronautique, du niveau zéro jusqu'au brevet de pilote et au-delà</b>. Toutes les
+décisions du projet sont jugées sur ce but. Une fonction jolie mais qui n'apprend rien passe après une fonction simple qui fait comprendre
+un vrai principe du vol.</p>
+<table>
+<tr><th>Produit</th><th>Forme</th><th>Rôle</th></tr>
+<tr><td><b>PLANE TRAJECTORIES</b> (gratuit)</td><td>un seul fichier HTML d'environ 3 Mo, sans serveur</td><td>la vitrine : s'ouvre partout, même hors ligne, sur téléphone</td></tr>
+<tr><td><b>COCKPIT SCHOOL - PLANE SIMULATOR</b> (Pro)</td><td>site React + API Symfony + base MySQL</td><td>le produit : comptes, cours complets, PDF, trafic réel, évolutions</td></tr>
+</table>
+<p>La version gratuite a été construite d'abord. La version Pro a été lancée ensuite (le « GO PRO »), en reprenant <b>tout</b> le travail
+existant au lieu de repartir de zéro.</p>
+<div class="box"><b class="t">À retenir</b>Commencez par une version simple qui marche et qu'on peut montrer. On la transforme ensuite en produit,
+sans jeter ce qui fonctionne.</div>
+
+<h2 id="d-methode">2. La méthode de travail</h2>
+<ul>
+<li><b>Un journal des demandes.</b> Chaque demande est notée avec sa date et son texte exact dans <code>MAJ-2.md</code> (tout : fait et à faire).
+Le fichier <code>MAJ2-BIS.md</code> ne garde que ce qui reste à faire. Une demande terminée y est retirée et marquée « FAITE » dans MAJ-2, avec
+le numéro du commit.</li>
+<li><b>Des raccourcis</b> pour aller vite : « -> » (à traiter après le travail en cours), « vs » (version autonome à tester), « jp » (jauge
+d'avancement), « c » (continuer), « jlf » (finir sans s'arrêter).</li>
+<li><b>Des branches Git.</b> Le travail non testé va sur une branche à part (<code>f21-meteo</code>, <code>f37-radio-v2</code>…). Il n'arrive
+sur <code>main</code> qu'une fois tous les tests au vert.</li>
+<li><b>Pas de régression.</b> Chaque ajout est vérifié sur les 8 appareils, sur ordinateur et sur téléphone, en version servie et en version
+autonome.</li>
+<li><b>Des décisions réservées à l'auteur</b> : le nom de domaine, les fréquences radio, les procédures d'approche, les caractéristiques de
+l'A350, les sources de trafic et leurs licences. L'outil peut proposer, mais ne décide jamais à la place du propriétaire du projet.</li>
+</ul>
+<div class="box"><b class="t">À retenir</b>Un projet qui avance vite a besoin d'une trace écrite : demandes, décisions, état. C'est ce qui permet
+de reprendre le travail le lendemain, ou de le confier à quelqu'un d'autre.</div>
+
+<h2 id="d-archi">3. L'architecture : qui fait quoi</h2>
+<pre>
+ Navigateur de l'élève                         Serveur (o2switch)
+ ┌───────────────────────────────┐            ┌──────────────────────────────┐
+ │ Interface React + TypeScript  │  JSON      │ API Symfony 7.4 (PHP 8.2+)   │
+ │  • pages : Parcours, Cours…   │ ─────────▶ │  • comptes, connexion        │
+ │  • Three.js : la 3D           │ ◀───────── │  • données /api/data/…       │
+ │  • moteur du vol (iframe)     │  cookie    │  • moteur, PDF, trafic       │
+ └───────────────────────────────┘ de session │  • base MySQL (Doctrine)     │
+                                               └──────────────────────────────┘
+</pre>
+<ul>
+<li><b>Le frontend</b> (<code>frontend/</code>) est en React 19 et TypeScript. Il est compilé par <b>esbuild</b>, un outil très rapide qui
+transforme le TypeScript et le JSX en un seul fichier <code>app.js</code>. Le routage passe par l'ancre de l'URL (<code>#/cours/…</code>), ce qui
+évite toute configuration serveur.</li>
+<li><b>Le backend</b> (<code>backend/</code>) est une <b>API</b> Symfony : il ne renvoie pas de pages, seulement du JSON (ou un PDF).
+Il garde les comptes, contrôle les accès et sert les données.</li>
+<li><b>Les données</b> (<code>data/*.json</code>) : appareils, aéroports, missions, cours. Elles ont été extraites automatiquement du moteur
+d'origine, sans rien recopier à la main.</li>
+<li><b>Le moteur d'origine</b> (<code>legacy/</code>) : le simulateur de la version gratuite, utilisé tel quel pendant que ses morceaux sont
+réécrits un par un (voir la partie 6).</li>
+</ul>
+<p><b>Pourquoi séparer le frontend et l'API ?</b> Chaque partie a un seul métier. L'API pourra servir plus tard une application mobile,
+et l'interface pourra changer sans toucher à la sécurité. Le serveur, lui, est le seul juge de qui a le droit de voir quoi.</p>
+
+<h2 id="d-3d">4. La 3D expliquée depuis zéro</h2>
+<p>La 3D dans un navigateur passe par <b>WebGL</b>, une interface de très bas niveau qui dessine des triangles avec la carte graphique.
+Personne n'écrit du WebGL à la main pour un projet comme celui-ci. On utilise <b>Three.js</b>, une bibliothèque qui donne des objets simples à
+manipuler. Il suffit de cinq notions :</p>
+<table>
+<tr><th>Notion</th><th>Ce que c'est</th><th>Équivalent « web »</th></tr>
+<tr><td><b>Scène</b></td><td>le monde : tout ce qui existe</td><td>le DOM</td></tr>
+<tr><td><b>Caméra</b></td><td>l'œil : sa position, sa direction, son angle de vue</td><td>la fenêtre du navigateur</td></tr>
+<tr><td><b>Maillage</b> (mesh)</td><td>un objet : une <b>géométrie</b> (la forme, faite de triangles) + un <b>matériau</b> (la couleur, la brillance)</td><td>un élément HTML + son CSS</td></tr>
+<tr><td><b>Lumière</b></td><td>soleil, lumière ambiante : sans elle, tout est noir</td><td>—</td></tr>
+<tr><td><b>Rendu</b></td><td>le dessin de la scène vue par la caméra, environ 60 fois par seconde</td><td>le rafraîchissement de l'écran</td></tr>
+</table>
+<p>Le plus petit programme Three.js possible : un cube qui tourne.</p>
+<pre><code>import * as THREE from 'three';
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 1000);
+camera.position.z = 3;                                  // l'œil recule de 3 unités
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);         // un &lt;canvas&gt; dans la page
+const cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: 0x3ad0ff }));
+scene.add(cube, new THREE.AmbientLight(0xffffff, 0.4));
+const sun = new THREE.DirectionalLight(0xffffff, 1); sun.position.set(2, 3, 4); scene.add(sun);
+function boucle() {                                     // la « boucle de rendu »
+  requestAnimationFrame(boucle);                        // le navigateur rappelle boucle() à chaque image
+  cube.rotation.y += 0.01;                              // on modifie le monde…
+  renderer.render(scene, camera);                       // …puis on le redessine
+}
+boucle();</code></pre>
+<p>Tout le simulateur repose sur ce schéma : <b>à chaque image</b>, on calcule la nouvelle position de l'avion (la physique), on déplace les
+objets et la caméra, puis on redessine.</p>
+<h3>Les techniques utilisées dans le projet</h3>
+<ul>
+<li><b>Des avions faits de formes simples.</b> Pas de gros fichiers 3D téléchargés : chaque appareil est assemblé avec des cylindres, des
+sphères et des formes extrudées. Le fichier reste léger et s'ouvre sur un téléphone.</li>
+<li><b>L'origine flottante.</b> La Terre est immense : à des millions de mètres de l'origine, les nombres à virgule de la carte graphique perdent
+en précision et l'image tremble. Le monde est donc recentré en permanence sur l'avion, qui reste près du point (0, 0, 0).</li>
+<li><b>Des textures dessinées dans un <code>&lt;canvas&gt;</code></b> : marquages de piste, écrans du poste de pilotage. On dessine en 2D, puis on
+« colle » le dessin sur un objet 3D.</li>
+<li><b>Le brouillard de la scène</b> (<code>scene.fog</code>) : au-delà d'une distance, les objets se fondent dans une couleur. C'est ce qui
+donne la profondeur, et c'est ce que la météo « Brouillard » réduit à 200 m.</li>
+<li><b>Les sprites</b> : des images toujours tournées vers la caméra (feux de piste, halos). Elles coûtent très peu cher à dessiner.</li>
+<li><b>Le poste de pilotage interactif</b> : on lance un « rayon » depuis le doigt ou la souris (<code>Raycaster</code>) pour savoir quel
+instrument a été touché, puis on l'ouvre en grand.</li>
+</ul>
+<div class="box"><b class="t">À retenir</b>La 3D, c'est une scène, une caméra, des objets et une boucle qui redessine. Commencez par le cube
+qui tourne, puis ajoutez une chose à la fois. Sur téléphone, comptez les triangles et les textures : la performance fait partie du design.</div>
+
+<h2 id="d-vol">5. La physique du vol</h2>
+<p>À chaque pas de temps (une fraction de seconde), le moteur applique les lois de Newton à l'avion :</p>
+<ul>
+<li><b>quatre forces</b> : portance (les ailes), poids (la masse), poussée (les moteurs), traînée (la résistance de l'air) ;</li>
+<li><b>l'atmosphère type</b> (ISA) : la densité de l'air baisse avec l'altitude, et donc la portance et la poussée aussi ;</li>
+<li><b>le vent</b> : il s'ajoute à la vitesse de l'avion et décide de la vitesse sol et de la dérive ;</li>
+<li><b>les commandes</b> : manche, palonnier, manettes, volets, train, freins, et le pilote automatique.</li>
+</ul>
+<p>Ce moteur a été <b>réécrit en TypeScript</b> (<code>frontend/src/engine/flight.ts</code>). Pour prouver que la réécriture ne change rien,
+12 vols complets sont rejoués pas à pas dans l'ancien et dans le nouveau moteur. Les résultats doivent être identiques, avec un écart nul
+(<code>tests/parity_flight.py</code>). C'est un <b>test de parité</b>.</p>
+<div class="box"><b class="t">À retenir</b>Quand on réécrit un morceau critique, on garde l'ancien et on compare les deux sur les mêmes entrées.
+Si les sorties sont identiques, on peut remplacer sans crainte.</div>
+
+<h2 id="d-legacy">6. Faire vivre l'ancien moteur dans le nouveau site</h2>
+<p>Réécrire d'un coup un simulateur de près de 3 Mo de code serait risqué et long, et il ne marcherait pas pendant des mois. Le choix a été
+de <b>garder l'ancien moteur en marche</b> et de le remplacer <b>module par module</b> (la « migration progressive », parfois appelée
+<i>strangler fig</i>).</p>
+<ul>
+<li>L'onglet « Simulateur » charge le moteur d'origine dans une <b>iframe</b> (une page dans la page), avec <code>srcdoc</code>. En ligne, le
+code du moteur est servi par l'API, et seulement aux comptes connectés.</li>
+<li>React lui envoie des ordres simples par l'adresse, par exemple <code>#/simulateur/go:a320:full-fw</code> pour lancer tel parcours avec
+tel appareil.</li>
+<li>Chaque module réécrit en TypeScript est vérifié par un test de parité avant de remplacer l'original.</li>
+</ul>
+
+<h2 id="d-meteo-radio">7. Météo et radio : étendre sans casser</h2>
+<p>Les boutons radio (Répéter, Standby, Radio ▾, Mayday / Pan-Pan) et le choix de la météo n'ont pas été codés <b>dans</b> le moteur
+d'origine. Ce sont des <b>extensions</b> (<code>frontend/src/legacy-ext/radio.ts</code> et <code>meteo.ts</code>) injectées dans l'iframe une
+fois le moteur prêt. Elles « enveloppent » ses fonctions :</p>
+<pre><code>const freinageOrigine = window.brkEff;            // on garde la fonction du moteur…
+window.brkEff = function () {                     // …et on la remplace par une version qui l'appelle
+  const e = freinageOrigine();
+  return S.onGround ? e * etatDePiste().k : e;    // piste mouillée : ×0,65 ; neige : ×0,45 ; glace : ×0,25 [ESTIMÉ]
+};</code></pre>
+<p>C'est le principe du <b>décorateur</b> : on ajoute un comportement sans réécrire l'original, et on peut le retirer à tout moment.
+La météo choisie produit de vrais messages METAR, marqués [SIMULÉ]. Tout ce que le moteur tirait déjà du METAR suit tout seul : ATIS,
+vent, rafales, givrage et sons. L'extension ajoute ce qui manquait : l'état de la piste et le freinage, la visibilité, la pluie et la neige
+à l'écran, la turbulence d'orage, la foudre et la voix de synthèse du pilote.</p>
+
+<p>Même méthode pour les extensions suivantes : <code>tourAvion.ts</code> (arrêts devant chaque point de la visite, flèches rouges,
+bilan rangé dans les documents, zones de danger des moteurs en marche) et <code>equipage.ts</code> (tablette de documents, toutes les
+annonces et check-lists de l'équipage en « question / réponse », annonces en direct comme « V1 » ou « minimums » d'après la vitesse et la
+hauteur réelles). Le choix de la météo agit aussi sur la <b>densité de l'air</b> : ρ = P / (R·T), avec la pression tirée du QNH et la
+température du METAR. Par temps chaud, l'air est moins dense : la portance et la poussée baissent, le décollage s'allonge. C'est de la
+physique, pas un effet visuel.</p>
+
+<h2 id="d-donnees">8. Les données : ne jamais rien inventer</h2>
+<p>Un outil de formation qui affiche une fausse fréquence ou une fausse masse maximale peut induire un élève en erreur. Chaque donnée porte
+donc un <b>statut</b> :</p>
+<table>
+<tr><th>Statut</th><th>Sens</th><th>Exemple</th></tr>
+<tr><td>[OFFICIEL] / [RÉFÉRENCÉ]</td><td>publié par une source identifiée</td><td>poussée de l'A350 (certificat EASA), fréquences (AirNav, SIA)</td></tr>
+<tr><td>[OBSERVÉ]</td><td>mesuré dans la réalité</td><td>METAR réels, trafic reçu par l'antenne</td></tr>
+<tr><td>[CALCULÉ]</td><td>obtenu par un calcul à partir de données sourcées</td><td>distance de décollage du banc d'essai</td></tr>
+<tr><td>[ESTIMÉ]</td><td>ordre de grandeur raisonnable, sans source exacte</td><td>coefficients de freinage sur piste mouillée</td></tr>
+<tr><td>[SIMULÉ]</td><td>fabriqué pour l'exercice</td><td>météo choisie, indicatif « SIMU 350 », cellules orageuses</td></tr>
+</table>
+<p>Quelques règles sont fixes : aucune voix réelle d'équipage n'est fabriquée, aucune image d'accident ou de victime n'est utilisée, et les
+marques des compagnies sont fictives (Aéralis, Vectra…).</p>
+
+<h2 id="d-comptes">9. Comptes, sécurité et espace Admin</h2>
+<ul>
+<li><b>Mots de passe</b> : jamais stockés en clair. Symfony les hache avec l'algorithme « auto » (aujourd'hui bcrypt ou argon2).</li>
+<li><b>Session</b> : un cookie <code>HttpOnly</code> posé par le serveur. Le JavaScript de la page ne peut pas le lire, ce qui limite les vols de
+session.</li>
+<li><b>Limitation des tentatives</b> : 5 essais de connexion par adresse et par IP en 15 minutes.</li>
+<li><b>Mot de passe oublié</b> : un lien à usage unique, valable 1 h (SymfonyCasts ResetPasswordBundle). La réponse est la même que l'adresse
+existe ou non, pour ne pas révéler qui est inscrit.</li>
+<li><b>Contrôle d'accès côté serveur</b> (<code>security.yaml</code>, <code>access_control</code>) : sans compte, l'API refuse les données, le
+moteur et les PDF. Masquer un bouton dans React ne protège rien, car n'importe qui peut appeler l'API directement.</li>
+<li><b>Espace Admin</b> : rôle <code>ROLE_ADMIN</code>. La route <code>/api/admin/…</code> répond 401 sans compte, 403 pour un élève et 200 pour un
+administrateur. Le premier administrateur est créé en ligne de commande, et le mot de passe est tapé au clavier, masqué :</li>
+</ul>
+<pre><code>php bin/console app:admin:create vous@cockpitschool.com</code></pre>
+<div class="box"><b class="t">À retenir</b>La sécurité se décide sur le serveur. Le navigateur appartient à l'utilisateur, et tout ce qui s'y
+trouve peut être lu ou modifié.</div>
+
+<h2 id="d-cours">10. Les cours, les exercices et les PDF</h2>
+<ul>
+<li>Trois cycles : <b>Cours 0</b> (sciences utiles : 7 thèmes, 210 exercices), <b>Cours I · Initiation</b> (76 modules), <b>Cours II ·
+Confirmé</b> (niveau ATPL : 14 modules, 280 exercices).</li>
+<li>Les exercices sont écrits <b>en Python</b> (<code>tools/cours/</code>). La bonne réponse est <b>calculée</b> par le programme, pas tapée à la
+main. Un contrôle (<code>assert</code>) refuse un exercice dont deux options seraient identiques. <code>python3 tools/cours/build.py</code>
+produit les fichiers JSON lus par le site.</li>
+<li>Les PDF : générés par le serveur (dompdf), ou à défaut par l'impression du navigateur (<code>#/imprimer/…</code>).</li>
+</ul>
+<div class="box"><b class="t">À retenir</b>Quand un contenu contient des calculs, générez-le par un programme qui fait les calculs : une erreur
+de frappe dans un corrigé fait perdre la confiance d'un élève.</div>
+
+<h2 id="d-tests">11. Les tests : prouver que ça marche</h2>
+<table>
+<tr><th>Type</th><th>Outil</th><th>Ce qu'il vérifie</th></tr>
+<tr><td>De bout en bout (e2e)</td><td>Playwright (Python) : un vrai navigateur piloté par un script</td><td>on clique comme un élève : parcours, radio, météo, comptes, PDF, sur ordinateur et téléphone</td></tr>
+<tr><td>Parité</td><td>Playwright + Node</td><td>le moteur réécrit donne exactement les mêmes résultats que l'original</td></tr>
+<tr><td>Serveur</td><td>PHPUnit</td><td>chaque route de l'API : réponses, refus d'accès, validation</td></tr>
+</table>
+<p>Pour tester l'interface sans serveur Symfony, un <b>serveur simulé</b> (<code>tests/serveur_simule.py</code>) répond comme les vrais
+contrôleurs. Il ne remplace pas les tests PHPUnit. Une règle est fixe : <b>on ne remplace jamais une vraie dépendance par un faux pour
+déclarer un test réussi</b>. Les tests PHPUnit sont écrits, mais ils n'ont pas encore été exécutés : les bibliothèques PHP (Packagist)
+étaient inaccessibles dans l'environnement de développement. Ils seront lancés lors de l'installation chez o2switch.</p>
+
+<h2 id="d-autonome">12. La version autonome (un seul fichier)</h2>
+<p><code>tools/standalone.py</code> fabrique un seul fichier HTML d'environ 4,5 Mo. Il contient le CSS, le JavaScript, Three.js, toutes les
+données et le moteur d'origine. Ce fichier s'ouvre sur un téléphone sans connexion : c'est le moyen le plus rapide de faire relire une
+version. Il est en <b>« démonstration hors ligne »</b> (tout est ouvert, avec un bandeau) et ne doit <b>jamais être publié</b> sur le site.</p>
+
+<h2 id="d-trafic">13. Le trafic aérien réel et le Raspberry Pi</h2>
+<p>Les avions envoient en permanence leur position par radio (ADS-B, 1 090 MHz). Un <b>Raspberry Pi</b> (un petit ordinateur à bas prix), une
+clé radio et une antenne suffisent à les recevoir. Le script <code>tools/recepteur/</code> envoie ces positions à l'API, avec un jeton secret,
+au format compressé gzip. L'API peut aussi interroger OpenSky Network et Flightradar24. <b>Aucune source n'est active par défaut</b> : il faut
+choisir les sources, vérifier leurs conditions d'utilisation et souscrire les abonnements nécessaires. Ce choix reste à l'auteur.</p>
+
+<h2 id="d-ia">14. Travailler avec une IA</h2>
+<ul>
+<li>L'IA écrit du code, rédige et teste. <b>L'auteur fixe le but, valide et décide.</b></li>
+<li>Les demandes sont précises et notées. Chaque livraison est vérifiée par des tests et par une version autonome que l'auteur ouvre
+lui-même.</li>
+<li>Les commits portent le nom de l'auteur. La responsabilité du produit reste humaine.</li>
+<li>Une IA peut se tromper. Dans ce projet, les tests ont révélé de vraies erreurs : un indicatif répété deux fois, la mauvaise tour de
+contrôle interrogée (deux tours de Kennedy portent le même nom), un réglage de brouillard qui cassait l'affichage. Toutes ont été
+corrigées <b>parce que</b> les tests existaient.</li>
+</ul>
+<div class="box"><b class="t">À retenir</b>Une IA est un excellent accélérateur, à condition de garder la méthode : un but clair, un journal,
+des tests, des validations humaines.</div>
+
+<h2 id="d-entreprise">15. Le volet entrepreneurial</h2>
+<ul>
+<li><b>Le modèle</b> : une version gratuite qui attire (PLANE TRAJECTORIES) et une version Pro avec comptes, qui pourra être payante.</li>
+<li><b>Le nom de domaine</b> : <b>cockpitschool.com</b>, choisi par l'auteur le 20/11/2026 (planesimulator.com et flapsone.com étaient déjà
+pris). L'achat se fait chez un bureau d'enregistrement (o2switch ou un autre).</li>
+<li><b>L'hébergement</b> : o2switch, un hébergeur mutualisé français qui accepte PHP, MySQL et Composer. Vérifiez sur leur site les versions
+de PHP proposées et le prix en vigueur.</li>
+<li><b>Les coûts à prévoir</b> : domaine, hébergement, matériel du récepteur (Raspberry Pi), abonnements éventuels aux données de trafic,
+licences des images.</li>
+<li><b>Le droit</b> : images (les illustrations générées et les photos de référence n'ont pas toutes la même licence), données de trafic
+(conditions de chaque fournisseur), marques (pas de logos de constructeurs ni de compagnies réelles), données personnelles des élèves
+(RGPD : mentions légales, politique de confidentialité, droit à l'effacement à mettre en place avant l'ouverture).</li>
+<li><b>Avant la mise en ligne</b> : installer Symfony chez o2switch, lancer PHPUnit, créer l'administrateur, configurer l'envoi d'e-mails
+(lien de réinitialisation), mettre en place des sauvegardes de la base, publier les mentions légales.</li>
+</ul>
+<div class="box"><b class="t">À retenir</b>Un produit numérique ne se résume pas au code : domaine, hébergement, droit, sauvegardes et support
+font partie du travail, et ont un coût à prévoir dès le départ.</div>
+
+<h2 id="d-commandes">16. Les commandes à connaître</h2>
+<pre><code># interface : compilation (depuis frontend/)
+npm install
+node build.mjs                      # produit frontend/dist/
+
+# version autonome (un seul fichier, pour les essais)
+python3 tools/standalone.py cockpit-school-autonome.html
+
+# cours : régénérer les exercices (réponses recalculées)
+python3 tools/cours/build.py
+
+# tests d'interface (serveur local sur frontend/dist)
+python3 -m http.server 8766 --directory frontend/dist
+FRONT_URL=http://localhost:8766/ python3 tests/e2e_front.py
+
+# serveur Symfony (depuis backend/, chez o2switch ou en local)
+composer install
+php bin/console doctrine:migrations:migrate
+php bin/console app:admin:create vous@cockpitschool.com
+php bin/phpunit</code></pre>
+
+<h2 id="d-glossaire">17. Glossaire</h2>
+<table>
+<tr><th>Terme</th><th>Définition</th></tr>
+<tr><td>API</td><td>programme qui répond à des requêtes par des données (ici en JSON), sans pages HTML</td></tr>
+<tr><td>esbuild</td><td>outil qui compile le TypeScript et le JSX en JavaScript lisible par le navigateur</td></tr>
+<tr><td>WebGL / Three.js</td><td>dessin 3D par la carte graphique / bibliothèque qui le rend simple</td></tr>
+<tr><td>Maillage, géométrie, matériau</td><td>un objet 3D = sa forme (triangles) + son aspect</td></tr>
+<tr><td>Boucle de rendu</td><td>fonction rappelée à chaque image pour mettre à jour puis redessiner la scène</td></tr>
+<tr><td>Iframe, srcdoc</td><td>page incluse dans une autre ; srcdoc donne directement son contenu HTML</td></tr>
+<tr><td>Test de parité</td><td>comparaison des résultats de l'ancien et du nouveau code sur les mêmes entrées</td></tr>
+<tr><td>e2e (de bout en bout)</td><td>test qui pilote un vrai navigateur comme un utilisateur</td></tr>
+<tr><td>METAR / ATIS</td><td>message météo d'aérodrome / message enregistré diffusé aux pilotes (piste, vent, QNH…)</td></tr>
+<tr><td>ADS-B</td><td>position diffusée par radio par les avions, captable avec une antenne</td></tr>
+<tr><td>ROLE_ADMIN</td><td>rôle Symfony qui donne accès à l'espace administrateur</td></tr>
+<tr><td>RGPD</td><td>règlement européen sur la protection des données personnelles</td></tr>
+</table>

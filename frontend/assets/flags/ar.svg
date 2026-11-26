@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- UAE Government Media Office: 2:1 flag, hoist 1/4, equal bands. Reference 128 x 64 shifted left 16; published RGB including white 225. -->
+  <defs>
+    <clipPath id="disc"><circle cx="32" cy="32" r="32"/></clipPath>
+  </defs>
+  <g clip-path="url(#disc)">
+    <rect x="0" y="0" width="64" height="21.33334" fill="#00843D"/>
+    <rect x="0" y="21.33333" width="64" height="21.33334" fill="#E1E1E1"/>
+    <rect x="0" y="42.66667" width="64" height="21.33334" fill="#000000"/>
+    <rect x="0" y="0" width="16" height="64" fill="#C8102E"/>
+  </g>
+  <circle cx="32" cy="32" r="31.5" fill="none" stroke="#d0d5dc" stroke-width="1"/>
+</svg>

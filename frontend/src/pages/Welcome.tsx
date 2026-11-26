@@ -14,7 +14,7 @@ export function Welcome() {
     <section className="page welcome">
       <h1>Apprendre à piloter, du premier cours au métier de pilote</h1>
       <p className="lead">
-        PLANE SIMULATOR est une école de pilotage en ligne : cours, parcours guidés et simulateur de vol.
+        COCKPIT SCHOOL - PLANE SIMULATOR est une école de pilotage en ligne : cours, parcours guidés et simulateur de vol.
         Créez votre compte pour y accéder.
       </p>
       <div className="cta">

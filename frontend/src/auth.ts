@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 const API = 'api/';
 
-export interface User { email: string; name: string; demo?: boolean }
+export interface User { email: string; name: string; demo?: boolean; admin?: boolean }
 export type ApiResult<T = unknown> = { ok: true; data: T } | { ok: false; status: number; message: string };
 
 async function call<T>(path: string, body?: unknown): Promise<ApiResult<T>> {
@@ -51,6 +51,7 @@ export const auth = {
   register: (name: string, email: string, password: string) => call<User>('register', { name, email, password }),
   forgot: (email: string) => call<{ message: string }>('password/forgot', { email }),
   reset: (token: string, password: string) => call<{ message: string }>('password/reset', { token, password }),
+  adminDoc: () => call<{ title: string; html: string }>('admin/doc'),
 };
 
 /** Règle de mot de passe, identique côté serveur (Assert\Length(min: 10) + PasswordStrength). */
@@ -63,14 +64,15 @@ export function passwordProblem(p: string): string | null {
 type Listener = (u: User | null) => void;
 const listeners = new Set<Listener>();
 declare global {
-  interface Window { __PT_DEMO__?: boolean }
+  interface Window { __PT_DEMO__?: boolean; __PT_ADMIN_DOC__?: { title: string; html: string } }
 }
 /**
  * Version autonome (fichier unique, sans serveur) : aucune connexion possible. Elle est construite en
  * « démonstration hors ligne » (window.__PT_DEMO__) pour les essais de l'auteur : tout y est ouvert, avec un bandeau.
  * Le site en ligne, lui, n'ouvre le simulateur et les contenus qu'après connexion (contrôle fait par le serveur).
  */
-const DEMO: User = { email: '', name: 'Démonstration hors ligne', demo: true };
+// La démonstration hors ligne (fichier de l'auteur, jamais publié) ouvre aussi l'espace Admin pour qu'il puisse le relire.
+const DEMO: User = { email: '', name: 'Démonstration hors ligne', demo: true, admin: true };
 let current: User | null | undefined = window.__PT_DEMO__ ? DEMO : undefined;
 
 /** Page demandée avant la connexion : on y revient une fois connecté. */

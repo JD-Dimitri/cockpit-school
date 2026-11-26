@@ -1,0 +1,410 @@
+/*
+ * Styles du widget Calculatrice / Convertisseur.
+ * Tout est confiné sous .cc-root et toutes les classes sont préfixées "cc-" :
+ * rien ne fuit vers le projet hôte, et ses classes (.display, .panel...) ne touchent pas le widget.
+ * Rendu à l'échelle 1/2 ; textes à 11 px minimum.
+ * Personnalisation : surcharger les variables --cc-* sur .cc-root depuis le projet hôte.
+ */
+.cc-root {
+  --cc-bg: #000;
+  --cc-surface: #1f1f1f;
+  --cc-surface-2: #2b2b2b;
+  --cc-text: #f2f2f2;
+  --cc-muted: #8c8c8c;
+  --cc-accent: #ff7f27;
+  --cc-good: #4caf50;
+  --cc-warning: #f5b041;
+  --cc-critical: #ef5350;
+  --cc-radius: 14px;
+  --cc-pad-top: 6px;
+  --cc-header-h: 40px;
+  /* Unité de texte fixe : indépendante de la taille de police du projet hôte (html { font-size }) */
+  --cc-u: 16px;
+
+  /* Le widget remplit son conteneur ; 480 px de haut minimum s'il n'en reçoit pas */
+  height: 100%;
+  min-height: 480px;
+  container-type: size;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--cc-bg);
+  color: var(--cc-text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: var(--cc-u);
+  line-height: 1.3;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remise à zéro : neutralise les styles globaux du projet hôte (button, *, input...) */
+.cc-root,
+.cc-root *,
+.cc-root *::before,
+.cc-root *::after {
+  box-sizing: border-box;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-shadow: none;
+}
+
+.cc-root button {
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  box-shadow: none;
+  text-align: center;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.cc-root button:focus-visible,
+.cc-root input:focus-visible,
+.cc-root select:focus-visible { outline: 2px solid var(--cc-accent); outline-offset: 2px; }
+.cc-root h2, .cc-root p, .cc-root ul, .cc-root dl { margin: 0; }
+
+.cc-root .cc-app {
+  width: 100%;
+  max-width: 480px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--cc-pad-top) 8px 8px;
+}
+
+/* ---------- En-tête et onglets ---------- */
+.cc-root .cc-topbar { display: flex; align-items: center; justify-content: space-between; height: var(--cc-header-h); flex: none; }
+.cc-root .cc-tabs { display: flex; gap: 10px; }
+.cc-root .cc-tab { font-size: calc(0.8 * var(--cc-u)); font-weight: 600; color: var(--cc-muted); padding: 2px 0; transition: color 0.15s; }
+.cc-root .cc-tab.cc-active { color: var(--cc-text); }
+.cc-root .cc-actions { display: flex; gap: 2px; }
+.cc-root .cc-icon-btn { display: inline-flex; padding: 4px; border-radius: 50%; color: var(--cc-text); }
+.cc-root .cc-icon-btn:hover { background: var(--cc-surface); }
+.cc-root .cc-content { flex: 1; min-height: 0; display: flex; flex-direction: column; position: relative; overflow-y: auto; }
+
+/* ---------- Calculatrice ---------- */
+.cc-root .cc-calculator { flex: 1; display: flex; flex-direction: column; outline: none; }
+.cc-root .cc-display {
+  /* Moitié haute du widget pour le calcul : le clavier commence au milieu */
+  flex: none;
+  height: calc(50cqh - var(--cc-pad-top) - var(--cc-header-h));
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 8px 4px 12px;
+  text-align: right;
+}
+.cc-root .cc-expression { font-weight: 500; line-height: 1.1; word-break: break-all; }
+.cc-root .cc-expression.cc-large { font-size: calc(2 * var(--cc-u)); }
+.cc-root .cc-expression.cc-medium { font-size: calc(1.5 * var(--cc-u)); }
+.cc-root .cc-expression.cc-small { font-size: calc(1 * var(--cc-u)); }
+.cc-root .cc-preview { font-size: calc(1.1 * var(--cc-u)); color: var(--cc-muted); margin-top: 4px; min-height: calc(1.3 * var(--cc-u)); }
+.cc-root .cc-preview.cc-error { color: var(--cc-critical); font-size: calc(0.7 * var(--cc-u)); }
+
+.cc-root .cc-keypad { display: grid; gap: 6px; }
+.cc-root .cc-keypad.cc-sci { grid-template-columns: repeat(5, 1fr); }
+.cc-root .cc-keypad.cc-basic { grid-template-columns: repeat(4, 1fr); }
+.cc-root .cc-key {
+  aspect-ratio: 2.3;
+  border-radius: var(--cc-radius);
+  background: var(--cc-surface);
+  font-size: calc(0.95 * var(--cc-u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.1s, transform 0.05s;
+  user-select: none;
+}
+.cc-root .cc-keypad.cc-basic .cc-key { aspect-ratio: 2; font-size: calc(1.05 * var(--cc-u)); }
+.cc-root .cc-key:active { transform: scale(0.96); filter: brightness(1.4); }
+.cc-root .cc-key.cc-sci { color: #cfcfcf; font-size: calc(0.725 * var(--cc-u)); }
+.cc-root .cc-key.cc-accent { color: var(--cc-accent); font-size: calc(1.05 * var(--cc-u)); }
+.cc-root .cc-key.cc-equals { background: var(--cc-accent); color: #fff; font-size: calc(1.1 * var(--cc-u)); }
+.cc-root .cc-key.cc-on { background: var(--cc-accent); color: #fff; }
+
+/* ---------- Historique ---------- */
+.cc-root .cc-sheet { position: absolute; inset: 0; background: var(--cc-bg); display: flex; flex-direction: column; z-index: 1; }
+.cc-root .cc-sheet-head { display: flex; justify-content: space-between; align-items: center; }
+.cc-root .cc-sheet-head h2 { font-size: calc(0.8 * var(--cc-u)); }
+.cc-root .cc-history { list-style: none; padding: 0; margin: 6px 0; overflow-y: auto; flex: 1; }
+.cc-root .cc-history button {
+  width: 100%;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 4px;
+  border-bottom: 1px solid var(--cc-surface-2);
+  font-size: calc(0.7 * var(--cc-u));
+}
+.cc-root .cc-link-btn { color: var(--cc-accent); padding: 6px; }
+
+/* ---------- Grille du convertisseur (centrée verticalement) ---------- */
+.cc-root .cc-tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px 4px;
+  margin-block: auto;
+  padding-bottom: var(--cc-header-h);
+}
+.cc-root .cc-tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 2px;
+  border-radius: 10px;
+  color: #d9d9d9;
+  font-size: calc(0.7 * var(--cc-u));
+  text-align: center;
+}
+.cc-root .cc-tool:hover { background: var(--cc-surface); }
+.cc-root .cc-tool:active { transform: scale(0.97); }
+
+/* ---------- Panneaux de conversion ---------- */
+.cc-root .cc-panel-head { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
+.cc-root .cc-panel-head h2 { font-size: calc(0.75 * var(--cc-u)); }
+.cc-root .cc-form { display: flex; flex-direction: column; gap: 8px; }
+.cc-root .cc-field { display: flex; flex-direction: column; gap: 4px; }
+.cc-root .cc-field > span { color: var(--cc-muted); font-size: calc(0.7 * var(--cc-u)); }
+.cc-root input,
+.cc-root select {
+  width: 100%;
+  margin: 0;
+  font: inherit;
+  font-size: calc(0.7 * var(--cc-u));
+  color: var(--cc-text);
+  background: var(--cc-surface);
+  border: 1px solid var(--cc-surface-2);
+  border-radius: 7px;
+  padding: 7px 8px;
+  height: auto;
+  box-shadow: none;
+  color-scheme: dark;
+}
+.cc-root .cc-input-wrap { position: relative; }
+.cc-root .cc-input-wrap em { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-style: normal; color: var(--cc-muted); font-size: calc(0.7 * var(--cc-u)); }
+.cc-root .cc-swap { align-self: center; padding: 5px; border-radius: 50%; background: var(--cc-surface-2); color: var(--cc-accent); display: inline-flex; }
+
+.cc-root .cc-result {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 9px;
+  background: var(--cc-surface);
+  border-radius: 9px;
+  font-size: calc(0.75 * var(--cc-u));
+  transition: opacity 0.2s;
+}
+.cc-root .cc-result strong { font-size: calc(0.95 * var(--cc-u)); color: var(--cc-accent); word-break: break-word; }
+.cc-root .cc-result.cc-error,
+.cc-root p.cc-error { color: var(--cc-critical); font-size: calc(0.75 * var(--cc-u)); }
+.cc-root .cc-loading { opacity: 0.55; }
+
+.cc-root .cc-summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 8px;
+  padding: 9px;
+  background: var(--cc-surface);
+  border-radius: 9px;
+  font-size: calc(0.75 * var(--cc-u));
+}
+.cc-root .cc-summary dt { color: var(--cc-muted); }
+.cc-root .cc-summary dd { margin: 0; text-align: right; font-weight: 600; }
+.cc-root .cc-summary dd.cc-big { font-size: calc(0.8 * var(--cc-u)); color: var(--cc-accent); }
+.cc-root .cc-summary .cc-row { display: contents; }
+.cc-root .cc-summary.cc-mono dd { font-family: ui-monospace, 'Cascadia Code', Consolas, monospace; word-break: break-all; }
+
+.cc-root .cc-segmented { display: flex; background: var(--cc-surface); border-radius: 7px; padding: 2px; }
+.cc-root .cc-segmented button { flex: 1; padding: 5px 3px; border-radius: 5px; color: var(--cc-muted); font-size: calc(0.7 * var(--cc-u)); }
+.cc-root .cc-segmented button.cc-active { background: var(--cc-surface-2); color: var(--cc-text); font-weight: 600; }
+
+.cc-root .cc-badge { align-self: flex-start; padding: 3px 6px; border-radius: 999px; font-weight: 600; }
+.cc-root .cc-badge.cc-good { background: color-mix(in srgb, var(--cc-good) 22%, transparent); color: var(--cc-good); }
+.cc-root .cc-badge.cc-warning { background: color-mix(in srgb, var(--cc-warning) 22%, transparent); color: var(--cc-warning); }
+.cc-root .cc-badge.cc-critical { background: color-mix(in srgb, var(--cc-critical) 22%, transparent); color: var(--cc-critical); }
+
+.cc-root .cc-muted { color: var(--cc-muted); }
+.cc-root .cc-small { font-size: calc(0.7 * var(--cc-u)); }
+
+/* Widget étroit (moins de 380 px) : touches plus compactes */
+@container (max-width: 380px) {
+  .cc-root .cc-keypad { gap: 4px; }
+  .cc-root .cc-key { font-size: calc(0.8 * var(--cc-u)); }
+  .cc-root .cc-key.cc-sci { font-size: calc(0.7 * var(--cc-u)); }
+  .cc-root .cc-tab { font-size: calc(0.7 * var(--cc-u)); }
+}
+
+/* ===================== Onglet Aviation ===================== */
+.cc-root .cc-av { display: flex; flex-direction: column; gap: 8px; padding-bottom: 16px; }
+.cc-root .cc-av-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.cc-root .cc-av-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--cc-surface-2);
+  color: var(--cc-muted);
+  font-size: calc(0.7 * var(--cc-u));
+}
+.cc-root .cc-av-chip.cc-active { border-color: var(--cc-accent); color: var(--cc-accent); }
+.cc-root .cc-av-disclaimer,
+.cc-root .cc-av-intro { color: var(--cc-muted); font-size: calc(0.7 * var(--cc-u)); }
+.cc-root .cc-av-intro { color: var(--cc-text); line-height: 1.45; }
+.cc-root .cc-av-search { font-size: calc(0.7 * var(--cc-u)); }
+.cc-root .cc-av-h3 {
+  margin: 8px 0 4px;
+  font-size: calc(0.75 * var(--cc-u));
+  font-weight: 700;
+  color: var(--cc-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.cc-root .cc-av-h4 { margin: 10px 0 4px; font-size: calc(0.75 * var(--cc-u)); font-weight: 700; }
+.cc-root .cc-av-list { display: flex; flex-direction: column; gap: 6px; }
+
+/* Carte d'une formule */
+.cc-root .cc-av-card,
+.cc-root .cc-av-annex { background: var(--cc-surface); border-radius: 9px; padding: 8px 10px; }
+.cc-root .cc-av-card.cc-open { outline: 1px solid var(--cc-surface-2); }
+.cc-root .cc-av-card-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-align: left;
+  font-size: calc(0.75 * var(--cc-u));
+  font-weight: 600;
+}
+.cc-root .cc-av-card-title { flex: 1; }
+.cc-root .cc-av-tag {
+  font-size: calc(0.7 * var(--cc-u));
+  font-weight: 500;
+  color: var(--cc-accent);
+  border: 1px solid var(--cc-accent);
+  border-radius: 999px;
+  padding: 0 6px;
+}
+.cc-root .cc-av-chevron { color: var(--cc-muted); font-size: calc(0.9 * var(--cc-u)); width: 14px; text-align: center; }
+.cc-root .cc-av-formula {
+  margin: 6px 0 0;
+  padding: 6px 8px;
+  background: var(--cc-bg);
+  border-radius: 6px;
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: calc(0.7 * var(--cc-u));
+  color: var(--cc-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.cc-root .cc-av-card-body { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.cc-root .cc-av-vars { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; font-size: calc(0.7 * var(--cc-u)); }
+.cc-root .cc-av-vars .cc-row { display: contents; }
+.cc-root .cc-av-vars dt { font-family: ui-monospace, Consolas, monospace; color: var(--cc-accent); }
+.cc-root .cc-av-vars dd { margin: 0; color: var(--cc-muted); }
+.cc-root .cc-av-mini,
+.cc-root .cc-av-p { font-size: calc(0.72 * var(--cc-u)); line-height: 1.5; }
+.cc-root .cc-av-p { margin: 0 0 6px; }
+.cc-root .cc-av-deepen {
+  align-self: flex-start;
+  color: var(--cc-accent);
+  font-size: calc(0.7 * var(--cc-u));
+  font-weight: 600;
+  padding: 4px 0;
+  text-align: left;
+}
+
+/* Calculateur */
+.cc-root .cc-av-calc { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--cc-surface-2); padding-top: 8px; }
+.cc-root .cc-av-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.cc-root .cc-av-field { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.cc-root .cc-av-field.cc-wide { grid-column: 1 / -1; }
+.cc-root .cc-av-field > span { font-size: calc(0.7 * var(--cc-u)); color: var(--cc-muted); line-height: 1.2; }
+.cc-root .cc-av-field input,
+.cc-root .cc-av-field select { padding: 5px 7px; background: var(--cc-bg); }
+.cc-root .cc-av-results { display: flex; flex-direction: column; gap: 3px; }
+.cc-root .cc-av-res { display: flex; justify-content: space-between; gap: 8px; font-size: calc(0.7 * var(--cc-u)); }
+.cc-root .cc-av-res span { color: var(--cc-muted); }
+.cc-root .cc-av-res strong { text-align: right; }
+.cc-root .cc-av-res.cc-main span { color: var(--cc-text); }
+.cc-root .cc-av-res.cc-main strong { color: var(--cc-accent); font-size: calc(0.9 * var(--cc-u)); }
+
+/* Exemples, exercices, corrections */
+.cc-root .cc-av-examples,
+.cc-root .cc-av-exercises { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.cc-root .cc-av-example,
+.cc-root .cc-av-exercise { font-size: calc(0.72 * var(--cc-u)); line-height: 1.45; }
+.cc-root .cc-av-example { background: var(--cc-surface); border-radius: 9px; padding: 8px 10px; border-left: 3px solid var(--cc-accent); }
+.cc-root .cc-av-exercise { border-bottom: 1px solid var(--cc-surface-2); padding-bottom: 8px; }
+.cc-root .cc-av-example-head { color: var(--cc-accent); margin-bottom: 2px; }
+.cc-root .cc-av-link { color: var(--cc-accent); font-size: calc(0.7 * var(--cc-u)); padding: 4px 0; text-align: left; }
+.cc-root .cc-av-solution { margin-top: 4px; padding: 6px 8px; background: var(--cc-bg); border-radius: 6px; }
+.cc-root .cc-av-solution ol { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 2px; }
+.cc-root .cc-av-answer { margin-top: 6px; }
+.cc-root .cc-av-answer strong { color: var(--cc-accent); font-weight: 600; }
+
+/* Étapes du vol */
+.cc-root .cc-av-phases { display: flex; flex-direction: column; gap: 6px; }
+.cc-root .cc-av-phase {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  text-align: left;
+  background: var(--cc-surface);
+  border-radius: 9px;
+  padding: 9px 10px;
+}
+.cc-root .cc-av-phase:hover { background: var(--cc-surface-2); }
+.cc-root .cc-av-phase-no {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--cc-accent);
+  color: #fff;
+  font-size: calc(0.7 * var(--cc-u));
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cc-root .cc-av-phase-text { display: flex; flex-direction: column; gap: 3px; font-size: calc(0.72 * var(--cc-u)); line-height: 1.4; }
+.cc-root .cc-av-phase-text strong { font-size: calc(0.78 * var(--cc-u)); }
+.cc-root .cc-av-phase-text small { font-size: calc(0.7 * var(--cc-u)); }
+
+/* Annexes */
+.cc-root .cc-av-annexes { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; border-top: 1px solid var(--cc-surface-2); padding-top: 6px; }
+
+/* Avion / hélicoptère */
+.cc-root .cc-av-tag.cc-both { color: var(--cc-muted); border-color: var(--cc-surface-2); }
+.cc-root .cc-av-tag.cc-helico { color: #7cc4ff; border-color: #7cc4ff; }
+.cc-root .cc-av-phase-text .cc-av-tag { margin-left: 4px; vertical-align: 1px; }
+.cc-root .cc-av-same { font-size: calc(0.7 * var(--cc-u)); color: var(--cc-muted); font-style: italic; }
+.cc-root .cc-av-specifics {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--cc-accent) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cc-accent) 30%, transparent);
+  font-size: calc(0.7 * var(--cc-u));
+  line-height: 1.45;
+}
+.cc-root .cc-av-specifics-title { font-weight: 700; color: var(--cc-accent); }
+.cc-root .cc-av-specifics b { color: var(--cc-text); }
+.cc-root .cc-av-scope { font-size: calc(0.7 * var(--cc-u)); color: var(--cc-muted); line-height: 1.45; }
+.cc-root .cc-av-scope strong { color: var(--cc-text); }
