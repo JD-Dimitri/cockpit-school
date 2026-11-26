@@ -119,7 +119,7 @@ window.FULLOF = function(k){ var f = FO ? FO(k) : ((AC[k] || A).kind === 'fw' ? 
 function vol(cat){ try { if (!window.SND) return 1; if (!SND.on) return 0; var v = SND.vol || {}; return (v.master == null ? 1 : v.master) * (v[cat] == null ? 1 : v[cat]); } catch (e) { return 1; } }
 if (window.speechSynthesis && !speechSynthesis.__ps){
   var sp = speechSynthesis.speak.bind(speechSynthesis);
-  speechSynthesis.speak = function(u){ try { var k = vol('vox'); if (k <= 0) return; u.volume = Math.min(1, (u.volume == null ? 1 : u.volume) * k); } catch (e) {} return sp(u); };
+  speechSynthesis.speak = function(u){ try { var k = vol('vox'); u.volume = Math.max(0, Math.min(1, (u.volume == null ? 1 : u.volume) * k)); } catch (e) {} return sp(u); };   // toujours prononcé (volume 0 si coupé) : les enchaînements qui attendent la fin de la phrase continuent
   speechSynthesis.__ps = 1;
 }
 var BAC = window.BaseAudioContext || window.AudioContext, dd = BAC && Object.getOwnPropertyDescriptor(BAC.prototype, 'destination');
