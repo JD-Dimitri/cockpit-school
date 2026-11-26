@@ -37,7 +37,7 @@ const opts = {
   minify: !watch,
   sourcemap: true,
   jsx: 'automatic',
-  loader: { '.svg': 'text', '.webp': 'dataurl' },
+  loader: { '.svg': 'text', '.webp': 'dataurl', '.txt': 'text' },
   define: { 'process.env.NODE_ENV': watch ? '"development"' : '"production"' },
   nodePaths: process.env.NODE_DIRS ? [process.env.NODE_DIRS] : [],
   alias: process.env.THREE_PATH ? { three: process.env.THREE_PATH } : {},

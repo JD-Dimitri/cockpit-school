@@ -19,6 +19,8 @@ import { installTourExt } from '../legacy-ext/tourAvion';
 import { installEquipageExt } from '../legacy-ext/equipage';
 import { ficheScript, startEarly } from '../legacy-ext/fiche';
 import { installTempsExt } from '../legacy-ext/temps';
+import { installCabineExt } from '../legacy-ext/cabine';
+import { installCarteExt } from '../legacy-ext/carte';
 import { AIRCRAFT_IMAGES } from '../aircraftImages';
 import { CalcPanel } from '../components/CalcPanel';
 
@@ -74,6 +76,12 @@ const prepare = (html: string, start = false) =>
     // TPS1 : le rythme choisi (×1 à ×64) n'est plus écrasé par l'accélération automatique (legacy-ext/temps.ts)
     .replace("if(rate!==want&&!window.RT_LOCK){ rate=want; rateUI(); }", "if(rate!==want&&!window.RT_LOCK&&!window.DUR_ON){ rate=want; rateUI(); }")
     .replace("if(rate!==want&&AUTO.on&&!window.RT_LOCK){ rate=want; rateUI(); }", "if(rate!==want&&AUTO.on&&!window.RT_LOCK&&!window.DUR_ON){ rate=want; rateUI(); }")
+    // CAB2 (26/11/2026 13:05) : sièges repérés (12A…) pour placer les passagers du manifeste, crochet de construction,
+    // position dans l'allée modifiable (legacy-ext/cabine.ts) ; liste nominative lisible sans modifier la feuille ouverte
+    .replace("else lay.xs.forEach(s=>{ if(s.l) seats.push({x:s.x,z,sw,cls}); });", "else lay.xs.forEach(s=>{ if(s.l) seats.push({x:s.x,z,sw,cls,id:r.r+s.l}); });")
+    .replace("back:!d.small, rows:rowsZ, n:seats.length, w:W, len};\n  built=k; }", "back:!d.small, rows:rowsZ, n:seats.length, w:W, len};\n  built=k; try{ window.__CAB_ONBUILD__&&__CAB_ONBUILD__(k,seats,floor,g,d); }catch(e){} }")
+    .replace("window.CABIN={G,build,cam:()=>CAM,pos:()=>pos};", "window.CABIN={G,build,cam:()=>CAM,pos:()=>pos,setPos:v=>{ pos=v; }};")
+    .replace("let CREW=Object.assign({},DEF);", "let CREW=Object.assign({},DEF); window.PAXOF=k=>{ try{ k=KEYOF(k); let saved={}; try{ saved=JSON.parse(localStorage.getItem('sa-crew-'+k)||(k==='a320'?localStorage.getItem('sa-crew'):null)||'{}'); }catch(e){} return sanitize(Object.assign(defFor(k),saved),k).paxl||''; }catch(e){ return ''; } };")
     // TPS1 : sons de l'atelier et des dialogues reliés au mélangeur (Général, Poste / cabine)
     .replace("A.m=x.createGain(); A.m.gain.value=0; A.m.connect(x.destination);", "A.m=x.createGain(); A.m.gain.value=0; A.m.connect((window.__PS_AUBUS__&&__PS_AUBUS__(x))||x.destination);")
     .replace("if(b.dataset.nx!=null){ close(); try{ goStep(GD.i+1); }catch(er){} return; }", "if(b.dataset.nx!=null){ try{ goStep(GD.i+1); }catch(er){} setTimeout(()=>{ try{ CKL.open(); }catch(er){} },80); return; }")
@@ -228,7 +236,7 @@ export function Simulator({ action }: { action?: string }) {
             // F21 : choix de la météo et ses effets (piste, visibilité, précipitations, orage, foudre), voix du pilote
             // TA1 : tour avion (arrêts, flèches rouges, bilan) ; TA2 : tablette de documents et double contrôle de l'équipage
             const ext = () => {
-              const f = frame.current, ok = [installRadioExt(f), installMeteoExt(f), installTourExt(f), installEquipageExt(f), installTempsExt(f)];
+              const f = frame.current, ok = [installRadioExt(f), installMeteoExt(f), installTourExt(f), installEquipageExt(f), installTempsExt(f), installCabineExt(f), installCarteExt(f)];
               if (ok.includes(false) && ++nx < 150) setTimeout(ext, 200);
             };
             ext();
