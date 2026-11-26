@@ -18,6 +18,7 @@ import { installMeteoExt } from '../legacy-ext/meteo';
 import { installTourExt } from '../legacy-ext/tourAvion';
 import { installEquipageExt } from '../legacy-ext/equipage';
 import { ficheScript, startEarly } from '../legacy-ext/fiche';
+import { installTempsExt } from '../legacy-ext/temps';
 import { AIRCRAFT_IMAGES } from '../aircraftImages';
 import { CalcPanel } from '../components/CalcPanel';
 
@@ -60,9 +61,21 @@ const prepare = (html: string, start = false) =>
     .replace("rate:rateV||1.05,voice:'glassy'", "rate:rateV||0.92,voice:'glassy'")
     // Check-list (demandes de l'auteur du 24/11/2026 20:53 et 20:56) : « Faire » et « Y aller → » ne ferment plus le panneau ;
     // il se met à jour et montre la sous-étape manquante suivante.
-    .replace("function gotoItem(m){ close(); const [l,c,a,sel]=m.it;", "function gotoItem(m){ const [l,c,a,sel]=m.it; setTimeout(()=>{ try{ const nx=document.querySelector('#ckl .it.miss'); if(nx) nx.scrollIntoView({block:'center'}); }catch(e){} },60);")
+    .replace("function gotoItem(m){ close(); const [l,c,a,sel]=m.it;", "function gotoItem(m){ const [l,c,a,sel]=m.it; try{ if(m.i>=0&&m.i!==GD.i&&typeof goStep==='function'){ goStep(m.i); setTimeout(()=>{ try{ CKL.open(); }catch(e){} },150); } }catch(e){} ")
+    // « Y aller → » / « Faire » sur une sous-étape d'une autre étape : le guide passe d'abord à cette étape (demande du 26/11/2026 10:21)
     // Règle de l'auteur (24/11/2026 20:56) : le panneau Checklist reste TOUJOURS ouvert, sauf clic sur ✕ (ou « Fermer »)
     .replace("if(e.target===p) return close();", "if(e.target===p) return;")
+    // TPS1 (demandes de l'auteur du 26/11/2026 10:12) : la check-list ne « saute » plus (PC et téléphone) : hauteur fixe, position de
+    // lecture conservée à chaque mise à jour, déplacement seulement quand l'étape change ; « Faire » fait l'action et, si l'étape en
+    // cours est alors complète, lance aussitôt l'étape suivante.
+    .replace("p.innerHTML=`<div class=\"w ${bad?'bad':''}\">", "const _bd0=p.querySelector('.bd'), _y=_bd0?_bd0.scrollTop:0, _keep=!p.hidden&&p.dataset.mode==='guide'&&p._si===GD.i; p.innerHTML=`<div class=\"w ${bad?'bad':''}\">")
+    .replace("p.dataset.mode='guide'; p.hidden=false; setTimeout(()=>{ const c=p.querySelector('.st.cur'); c&&c.scrollIntoView({block:'center'}); },30); }", "p.dataset.mode='guide'; p.hidden=false; const _bd=p.querySelector('.bd'); if(_keep){ if(_bd) _bd.scrollTop=_y; } else { p._si=GD.i; setTimeout(()=>{ const c=p.querySelector('.st.cur'); if(c&&_bd) _bd.scrollTop=Math.max(0,c.getBoundingClientRect().top-_bd.getBoundingClientRect().top+_bd.scrollTop-_bd.clientHeight*0.2); },30); } }")
+    .replace("rec(); flash('Fait : '+l,'am'); refresh(); }", "rec(); flash('Fait : '+l,'am'); try{ if(m.i===GD.i&&GD.i<GD.steps.length-1&&(GD.steps[GD.i].items||[]).every((it,j)=>DONE.has(key(GD.i,j))||chk(it))) goStep(GD.i+1); }catch(e){} refresh(); setTimeout(()=>{ try{ CKL.open(); }catch(e){} },120); }")
+    // TPS1 : le rythme choisi (×1 à ×64) n'est plus écrasé par l'accélération automatique (legacy-ext/temps.ts)
+    .replace("if(rate!==want&&!window.RT_LOCK){ rate=want; rateUI(); }", "if(rate!==want&&!window.RT_LOCK&&!window.DUR_ON){ rate=want; rateUI(); }")
+    .replace("if(rate!==want&&AUTO.on&&!window.RT_LOCK){ rate=want; rateUI(); }", "if(rate!==want&&AUTO.on&&!window.RT_LOCK&&!window.DUR_ON){ rate=want; rateUI(); }")
+    // TPS1 : sons de l'atelier et des dialogues reliés au mélangeur (Général, Poste / cabine)
+    .replace("A.m=x.createGain(); A.m.gain.value=0; A.m.connect(x.destination);", "A.m=x.createGain(); A.m.gain.value=0; A.m.connect((window.__PS_AUBUS__&&__PS_AUBUS__(x))||x.destination);")
     .replace("if(b.dataset.nx!=null){ close(); try{ goStep(GD.i+1); }catch(er){} return; }", "if(b.dataset.nx!=null){ try{ goStep(GD.i+1); }catch(er){} setTimeout(()=>{ try{ CKL.open(); }catch(er){} },80); return; }")
     .replace("if(m) gotoItem(m); else close(); return; }", "if(m) gotoItem(m); return; }")
     .replace("const f=PEND; PEND=null; close(); if(f){", "const f=PEND; PEND=null; setTimeout(()=>{ try{ CKL.open(); }catch(er){} },120); if(f){")
@@ -215,7 +228,7 @@ export function Simulator({ action }: { action?: string }) {
             // F21 : choix de la météo et ses effets (piste, visibilité, précipitations, orage, foudre), voix du pilote
             // TA1 : tour avion (arrêts, flèches rouges, bilan) ; TA2 : tablette de documents et double contrôle de l'équipage
             const ext = () => {
-              const f = frame.current, ok = [installRadioExt(f), installMeteoExt(f), installTourExt(f), installEquipageExt(f)];
+              const f = frame.current, ok = [installRadioExt(f), installMeteoExt(f), installTourExt(f), installEquipageExt(f), installTempsExt(f)];
               if (ok.includes(false) && ++nx < 150) setTimeout(ext, 200);
             };
             ext();
