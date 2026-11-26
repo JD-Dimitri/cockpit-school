@@ -12,7 +12,7 @@ import { Parcours } from './pages/Parcours';
 import { useUser, rememberNext } from './auth';
 import { Welcome } from './pages/Welcome';
 import { Admin } from './pages/Admin';
-import { useLang } from './i18n';
+import { dirOf, useLang } from './i18n';
 import { LangToggle } from './components/LangToggle';
 
 const ROUTES = [
@@ -74,7 +74,7 @@ export function App() {
   }, [guest, open, head]);
   const hidden = HIDDEN[head];
   const route = ROUTES.find((x) => x.path === head) ?? ROUTES[0];
-  const [, t] = useLang();
+  const [lang, t] = useLang();
   const full = !!user && !hidden && route.path === 'simulateur';
   let body: JSX.Element;
   if (user === undefined) body = <p className="page">{t('loading')}</p>;
@@ -85,7 +85,7 @@ export function App() {
       <header className="top">
         <a className="brand" href="#/">
           <span className="mark" aria-hidden="true">✈</span>
-          <span>COCKPIT <em>SCHOOL</em></span>
+          <span className="brand-name">COCKPIT <em>SCHOOL</em></span>
         </a>
         <nav aria-label={t('nav.aria')}>
           {user
@@ -107,11 +107,11 @@ export function App() {
         </nav>
       </header>
       {user?.demo && !full && (
-        <p className="demo" role="note">{t('demo')}</p>
+        <p className="demo" role="note" dir={dirOf(lang)}>{t('demo')}</p>
       )}
       <main id="contenu">{body}</main>
       {!full && (
-        <footer className="foot">
+        <footer className="foot" dir={dirOf(lang)}>
           {t('foot')}
         </footer>
       )}
