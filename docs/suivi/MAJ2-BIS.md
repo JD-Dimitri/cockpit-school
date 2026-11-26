@@ -159,6 +159,10 @@ Le détail des éléments à adapter (architecture et dépôt, connexion et comp
 - F9 suite : anomalies aux autres étapes ;
 - modification 13.
 
+## Commande **TRADTOT** — traduire tout le projet (à exécuter quand l'auteur écrira « tradtot », règle donnée le 26/11/2026 18:38)
+**Règle** : quand l'auteur écrit **tradtot**, on traduit **tout** le projet dans les 10 langues du sélecteur (fr, en, de, it, es, zh, ja, ko, hi, ar ; l'arabe de droite à gauche), et pas seulement l'en-tête et les accueils (étape 2 du 26/11). Constat de l'auteur : en anglais, l'écran du simulateur reste en français (titre, Introduction, Académie, Atelier, heure de départ, modes guidé et automatique, fiches des appareils, ligne directrice, bandeau de reprise du vol).
+Périmètre, dans cet ordre : 1) pages du site (cours, appareils, aéroports, admin, connexion, inscription, fiches, imprimer) ; 2) écran d'accueil du simulateur et ses menus ; 3) moteur en vol (check-lists, étapes, panneaux, alarmes, messages, bulles, glossaire) ; 4) contrôle aérien affiché (la phraséologie parlée reste en anglais OACI) ; 5) Académie, QCM et test de positionnement ; 6) PDF et documents. Statut des traductions : [ESTIMÉ] tant qu'un locuteur natif ne les a pas relues. Rien de supprimé : le français reste la langue de référence et le repli.
+
 ## Restant connu
 - Options en attente de l'auteur (légendes de cabine, réalisme du cockpit, message pour un instructeur), puis bilan, version Pro et imagerie satellite. Voir `A_FINIR.md`, points 3 à 5. Les points 1 et 2 de `A_FINIR.md` sont **faits** : V10.28 et V10.33.
 - Coordination : ChatGPT dispose aussi des documents de bascule jusqu'au 22/11. Il faut éviter que deux assistants modifient le même dépôt en même temps.

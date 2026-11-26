@@ -18,6 +18,7 @@ import { installMeteoExt } from '../legacy-ext/meteo';
 import { installTourExt } from '../legacy-ext/tourAvion';
 import { installEquipageExt } from '../legacy-ext/equipage';
 import { ficheScript, startEarly } from '../legacy-ext/fiche';
+import { patchNiveau } from '../legacy-ext/niveau';
 import { installTempsExt } from '../legacy-ext/temps';
 import { installCabineExt } from '../legacy-ext/cabine';
 import { installCarteExt } from '../legacy-ext/carte';
@@ -45,7 +46,7 @@ const BEEP_OLD = 'if(onApt&&walk&&t>ST.beepT){ ST.beepT=t+25+R()*40; beeper(); }
 const DOCS_OLD = 'window.DOCS={ctx:()=>ctx(),';
 const DOCS_NEW = 'window.DOCS={D,ctx:()=>ctx(),';
 const prepare = (html: string, start = false) =>
-  html.replace('</head>', UI_STYLE + '</head>').replace(CSN_OLD, CSN_NEW).replace(SND_OLD, SND_NEW).replace(BEEP_OLD, '').replace(DOCS_OLD, DOCS_NEW).replace(RHO_OLD, RHO_NEW)
+  patchNiveau(html).replace('</head>', UI_STYLE + '</head>').replace(CSN_OLD, CSN_NEW).replace(SND_OLD, SND_NEW).replace(BEEP_OLD, '').replace(DOCS_OLD, DOCS_NEW).replace(RHO_OLD, RHO_NEW)
     // Nom du projet (décision de l'auteur du 20/11 18:46) et bouton Introduction au-dessus d'« Académie » (19:03), dès le chargement
     .replace('<h1>SIMULATEUR <b>PLANE TRAJECTORIES</b></h1>', '<h1>SIMULATEUR <b>COCKPIT SCHOOL</b></h1>')
     .replace('<h1>✈ PLANE TRAJECTORIES · Introduction</h1>', '<h1>✈ COCKPIT SCHOOL · Introduction</h1>')
