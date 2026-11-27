@@ -277,3 +277,7 @@ html.sim-vol .top, html.sim-vol .demo { display: none; }
 @media (min-width: 761px) { .top { padding-right: 56px; } } /* place du drapeau fixe : il ne recouvre plus le menu */
 
 html.sim-vol .lang-toggle { display: none; } /* pendant le vol, l'écran est au simulateur */
+/* Formules en tête des corrections (27/11/2026) */
+.fx { display: block; margin: 0 0 4px; padding: 4px 8px; border-left: 3px solid #38bdf8; background: #0b2130; color: #bae6fd; border-radius: 4px; line-height: 1.45; }
+.fx b { color: #7dd3fc; }
+@media print { .fx { background: none; color: #000; border-left-color: #000; } .fx b { color: #000; } }

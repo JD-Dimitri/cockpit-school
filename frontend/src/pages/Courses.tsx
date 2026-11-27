@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { withFormules } from '../formules';
 import { CalcPanel } from '../components/CalcPanel';
 
 // Calculateur version « cours » (24/11/2026) : formules, mini-cours, annexes, exemples et exercices corrigés
@@ -64,7 +65,7 @@ function QuizBlock({ quiz }: { quiz: Quiz[] }) {
               </label>
             );
           })}
-          {ans[i] != null && q.why && <p className="why" dangerouslySetInnerHTML={safe(q.why)} />}
+          {ans[i] != null && q.why && <p className="why" dangerouslySetInnerHTML={safe(withFormules(q.q, q.why))} />}
         </fieldset>
       ))}
       {done === quiz.length && <p className="score">Score : {ok} / {quiz.length}</p>}

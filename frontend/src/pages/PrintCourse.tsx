@@ -5,6 +5,7 @@
  */
 import { useEffect } from 'react';
 import DOMPurify from 'dompurify';
+import { withFormules } from '../formules';
 import { useCourses, allParts } from '../courses';
 import { useData, type Module, type Part } from '../data';
 
@@ -38,7 +39,7 @@ function ModuleBlock({ m }: { m: Module }) {
               {quiz.map((q, i) => (
                 <li key={i}>
                   <b>{LETTERS[q.c]}. {q.o[q.c]}</b>
-                  {q.why && <span dangerouslySetInnerHTML={safe(' — ' + q.why)} />}
+                  {q.why && <span dangerouslySetInnerHTML={safe(' — ' + withFormules(q.q, q.why))} />}
                 </li>
               ))}
             </ol>

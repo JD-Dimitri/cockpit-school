@@ -21,6 +21,7 @@ import { ficheScript, startEarly } from '../legacy-ext/fiche';
 import { patchNiveau } from '../legacy-ext/niveau';
 import { installTempsExt } from '../legacy-ext/temps';
 import { installCabineExt } from '../legacy-ext/cabine';
+import { installFormulesExt } from '../legacy-ext/formules-ext';
 import { installCarteExt } from '../legacy-ext/carte';
 import { AIRCRAFT_IMAGES } from '../aircraftImages';
 import { CalcPanel } from '../components/CalcPanel';
@@ -237,7 +238,7 @@ export function Simulator({ action }: { action?: string }) {
             // F21 : choix de la météo et ses effets (piste, visibilité, précipitations, orage, foudre), voix du pilote
             // TA1 : tour avion (arrêts, flèches rouges, bilan) ; TA2 : tablette de documents et double contrôle de l'équipage
             const ext = () => {
-              const f = frame.current, ok = [installRadioExt(f), installMeteoExt(f), installTourExt(f), installEquipageExt(f), installTempsExt(f), installCabineExt(f), installCarteExt(f)];
+              const f = frame.current, ok = [installRadioExt(f), installMeteoExt(f), installTourExt(f), installEquipageExt(f), installTempsExt(f), installCabineExt(f), installCarteExt(f), installFormulesExt(f)];
               if (ok.includes(false) && ++nx < 150) setTimeout(ext, 200);
             };
             ext();

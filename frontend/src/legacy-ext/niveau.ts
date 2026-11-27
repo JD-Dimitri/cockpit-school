@@ -65,7 +65,7 @@ const ALL_NEW =
   "const SECT=(L,X,t)=>{ const a=Math.floor(L.length/3), b=Math.floor(2*L.length/3), mid=L.slice(a,b), km=new Set(PICK(mid,6)), kx=new Set(PICK(X,14)); return [...mid.filter(q=>km.has(q)),...L.slice(b),...X.filter(q=>kx.has(q))].map(q=>q.concat(t)); };\n" +
   "const BUILD=()=>[...SECT(MATH,XM,'m'),...SECT(AERO,XA,'a')];\n" +
   "const T={i:0,ans:[]}, ALL=()=>SEL||(SEL=BUILD()); const NM=()=>ALL().filter(q=>q[4]==='m').length, NA=()=>ALL().filter(q=>q[4]==='a').length;\n" +
-  "window.__PS_NIV2__={XM,XA,ALL:()=>ALL(),reset:()=>{ SEL=null; }};";
+  "window.__PS_NIV2__={XM,XA,MATH,AERO,CULT:(typeof CULT!=='undefined'?CULT:null),ALL:()=>ALL(),reset:()=>{ SEL=null; }};";
 const LVL_OLD = "const LVL=q=>{ const L=q[4]==='m'?MATH:AERO, k=L.findIndex(x=>x[0]===q[0]), r=k/L.length; return r<1/3?'facile':r<2/3?'moyen':'difficile'; };";
 const LVL_NEW = "const LVL=q=>{ const L=q[4]==='m'?MATH:AERO, k=L.findIndex(x=>x[0]===q[0]); if(k<0) return 'expert'; const r=k/L.length; return r<1/3?'facile':r<2/3?'moyen':'difficile'; };";
 const TEST_OLD = 'function test(i,ans){ T.i=i; T.ans=ans;';
